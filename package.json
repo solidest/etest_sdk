@@ -1,0 +1,28 @@
+{
+  "name": "etest_sdk",
+  "version": "1.0.0",
+  "description": "sdk for etest",
+  "main": "index.js",
+  "scripts": {
+    "build:parser": "node src/parser/build.js",
+    "test:parser": "node src/parser/build.js && node test/parsertest/test.js",
+    "test": "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solidest/etest_sdk.git"
+  },
+  "keywords": [
+    "etest",
+    "sdk"
+  ],
+  "author": "solidest",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/solidest/etest_sdk/issues"
+  },
+  "homepage": "https://github.com/solidest/etest_sdk#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
