@@ -20,7 +20,7 @@ class SdkApi {
     }
 
     //开始执行程序
-    run(proj_path, src_path, vars, option, callback) {
+    start(proj_path, src_path, vars, option, callback) {
         let asts = parser.getRunAstList(proj_path, src_path);
         this.xfn('start', {asts: asts, vars: vars, option: option}, callback);
     }

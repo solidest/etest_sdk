@@ -38,7 +38,7 @@ api.xfn('pong', null, (res) => {
 });
 
 console.log('-> run pong');
-api.run('test/parsertest', 'etlTest.etl', null, null, (res) => {
+api.start('test/parsertest', 'etlTest.etl', null, null, (res) => {
     console.log('<-', res);
 })
 
