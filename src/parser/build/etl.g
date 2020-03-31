@@ -151,5 +151,5 @@
             ]
         ]
     },
-    "moduleInclude": "\n\n    function newBlock(type, from, to) {\n      return { kind: type, from: from, to: to };\n    }\n\n    function newUsing(str, id) {\n      return { kind: 'using', ref: eval(str), pkg: id };\n    }\n\n    function newList(item) {\n      return item ? [item] : [];\n    }\n\n    function joinList(list, item) {\n      if(list && item) {\n        list.push(item);\n      }\n      return list;\n    }\n\n    function getRef(str) {\n      let s = eval(str);\n      if(s && s.endsWith(\".lua\")) {\n        return s;\n      }\n      return null;\n    }\n"
+    "moduleInclude": "\n\n    function newBlock(type, from, to) {\n      return { kind: type, from: from, to: to };\n    }\n\n    function newUsing(str, id) {\n      return { kind: 'using', ref: eval(str), pkg: id };\n    }\n\n    function newList(item) {\n      return item ? [item] : [];\n    }\n\n    function joinList(list, item) {\n      if(list && item) {\n        list.push(item);\n      }\n      return list;\n    }\n\n"
 }

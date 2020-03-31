@@ -75,13 +75,6 @@ let include_main = `
       return list;
     }
 
-    function getRef(str) {
-      let s = eval(str);
-      if(s && s.endsWith(".lua")) {
-        return s;
-      }
-      return null;
-    }
 `
 
 let lex_etx = {
