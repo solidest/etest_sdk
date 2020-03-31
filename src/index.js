@@ -22,7 +22,12 @@ class SdkApi {
     //开始执行程序
     start(proj_path, src_path, vars, option, callback) {
         let asts = parser.getRunAstList(proj_path, src_path);
-        this.xfn('start', {asts: asts, vars: vars, option: option}, callback);
+        if(!asts || asts.length===0) {
+            return;
+        }
+        asts[0].vars = vars;
+        asts[0].option = option;
+        this.xfn('start', asts, callback);
     }
 
 }
