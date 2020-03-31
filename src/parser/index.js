@@ -19,7 +19,6 @@ function getEtlAst(proj_path, src_path, refs) {
     kind: 'etl',
     apath_src: src_apath,
     rpath_src: src_rpath,
-    refs: [],
     script_lua: null,
     script_etx: null,
   }
@@ -39,10 +38,12 @@ function getEtlAst(proj_path, src_path, refs) {
       }
     } else if (a.kind === 'using') {  //添加引用的文件到refs里
       let ap = path.resolve(adir, a.ref);
-      let rp = path.relative(proj_apath, ap);
-      if(!rp.startsWith('.')) {
-        ast.refs.push({pkg: a.pkg, ref: rp});
-        refs.push(ap);
+      refs.push(ap);
+
+      let rp = path.relative(src_apath, ap);
+      //TODO replace using statement
+      if(!rp) {
+        
       }
     }
   }
