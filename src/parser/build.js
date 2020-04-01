@@ -19,6 +19,7 @@ let lex_main = {
     ["<%lua", "this.pushState('lua'); return 'BLOCK_BEGIN_LUA'"],
     ["<%", "this.pushState('etl'); return 'BLOCK_BEGIN_ETL'"],
     [["lua", "etl"], "%>", "this.popState(); return 'BLOCK_END'"],
+    [["*"], "\\r\\n", "/*return 'NEWLINE'*/"],
     [["*"], "\\n", "/*return 'NEWLINE'*/"],
     [["*"], ".", "/*return 'ANY_OTHER'*/"],
   ],
@@ -346,7 +347,7 @@ let operators = [
   node parser/build.js && syntax-cli -m slr1 -g parser/build/etx.g --tokenize -f parser/test/etxTest.etx --loc
 
   语法分析
-  node parser/build.js && syntax-cli -m slr1 -g parser/build/etx.g -o parser/etxParser.js --loc && syntax-cli -m slr1 -g parser/build/etx.g -f parser/test/etxTest.etx --loc
+  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etx.g -o src/parser/etxParser.js --loc && syntax-cli -m slr1 -g src/parser/build/etx.g -f test/parsertest/etxTest.etx --loc
 
 */
 
@@ -367,10 +368,10 @@ fs.writeFileSync(path.join(__dirname, 'build/etx.g'), JSON.stringify({lex: lex_e
   node parser/build.js && syntax-cli --lex parser/build/etl_lex.g --tokenize -f parser/test/etlTest.etl --loc
 
   包含语法时的词法检查
-  node parser/build.js && syntax-cli -m slr1 -g parser/build/etl.g --tokenize -f parser/test/etlTest.etl --loc
+  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g --tokenize -f test/parsertest/etlTest.etl --loc
 
   语法分析
-  node parser/build.js && syntax-cli -m slr1 -g parser/build/etl.g -o parser/etlParser.js --loc && syntax-cli -m slr1 -g parser/build/etl.g -f parser/test/etlTest.etl --loc
+  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g -o src/parser/etlParser.js --loc && syntax-cli -m slr1 -g src/parser/build/etl.g -f test/parsertest/etlTest.etl --loc
 */
 
 

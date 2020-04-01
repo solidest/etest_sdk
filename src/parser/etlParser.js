@@ -120,9 +120,10 @@ const lexRules = [[/^\/\*[^*]*\*+([^\/][^*]*\*+)*\//, function() { /*return 'COM
 [/^<%lua/, function() { this.pushState('lua'); return 'BLOCK_BEGIN_LUA' }],
 [/^<%/, function() { this.pushState('etl'); return 'BLOCK_BEGIN_ETL' }],
 [/^%>/, function() { this.popState(); return 'BLOCK_END' }],
+[/^\r\n/, function() { /*return 'NEWLINE'*/ }],
 [/^\n/, function() { /*return 'NEWLINE'*/ }],
 [/^./, function() { /*return 'ANY_OTHER'*/ }]];
-const lexRulesByConditions = {"INITIAL":[4,5,6,7,8,9,10,12,13],"etl":[0,1,4,5,11,12,13],"lua":[2,3,4,5,11,12,13]};
+const lexRulesByConditions = {"INITIAL":[4,5,6,7,8,9,10,12,13,14],"etl":[0,1,4,5,11,12,13,14],"lua":[2,3,4,5,11,12,13,14]};
 
 const EOF_TOKEN = {
   type: EOF,
@@ -582,13 +583,6 @@ const yyparse = {
       return list;
     }
 
-    function getRef(str) {
-      let s = eval(str);
-      if(s && s.endsWith(".lua")) {
-        return s;
-      }
-      return null;
-    }
 
 
 function unexpectedToken(token) {

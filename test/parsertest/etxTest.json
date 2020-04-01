@@ -2,14 +2,14 @@
     {
         "kind": "protocol",
         "name": "prot_name",
-        "name_from": 256,
-        "name_to": 265,
+        "name_from": 272,
+        "name_to": 281,
         "seglist": [
             {
                 "kind": "segment",
                 "name": "seg_name",
-                "name_from": 284,
-                "name_to": 292,
+                "name_from": 301,
+                "name_to": 309,
                 "props": [
                     {
                         "kind": "prop",
@@ -18,18 +18,18 @@
                             "kind": "string",
                             "value": ""
                         },
-                        "name_from": 295,
-                        "name_to": 301,
-                        "value_from": 303,
-                        "value_to": 305
+                        "name_from": 312,
+                        "name_to": 318,
+                        "value_from": 320,
+                        "value_to": 322
                     }
                 ]
             },
             {
                 "kind": "segment",
                 "name": "seg_name",
-                "name_from": 324,
-                "name_to": 332,
+                "name_from": 342,
+                "name_to": 350,
                 "props": [
                     {
                         "kind": "prop",
@@ -38,10 +38,10 @@
                             "kind": "string",
                             "value": "int8"
                         },
-                        "name_from": 335,
-                        "name_to": 341,
-                        "value_from": 343,
-                        "value_to": 349
+                        "name_from": 353,
+                        "name_to": 359,
+                        "value_from": 361,
+                        "value_to": 367
                     }
                 ]
             },
@@ -52,8 +52,8 @@
                     {
                         "kind": "segment",
                         "name": "dfhhh",
-                        "name_from": 394,
-                        "name_to": 399,
+                        "name_from": 414,
+                        "name_to": 419,
                         "props": [
                             {
                                 "kind": "prop",
@@ -62,30 +62,30 @@
                                     "kind": "string",
                                     "value": ""
                                 },
-                                "name_from": 402,
-                                "name_to": 408,
-                                "value_from": 410,
-                                "value_to": 412
+                                "name_from": 422,
+                                "name_to": 428,
+                                "value_from": 430,
+                                "value_to": 432
                             }
                         ]
                     }
                 ],
-                "name_from": 369,
-                "name_to": 371
+                "name_from": 388,
+                "name_to": 390
             }
         ]
     },
     {
         "kind": "protocol",
         "name": "aaa",
-        "name_from": 494,
-        "name_to": 497,
+        "name_from": 522,
+        "name_to": 525,
         "seglist": [
             {
                 "kind": "segment",
                 "name": "df",
-                "name_from": 516,
-                "name_to": 518,
+                "name_from": 545,
+                "name_to": 547,
                 "props": [
                     {
                         "kind": "prop",
@@ -94,18 +94,18 @@
                             "kind": "string",
                             "value": "int8"
                         },
-                        "name_from": 521,
-                        "name_to": 527,
-                        "value_from": 529,
-                        "value_to": 535
+                        "name_from": 550,
+                        "name_to": 556,
+                        "value_from": 558,
+                        "value_to": 564
                     }
                 ]
             },
             {
                 "kind": "segment",
                 "name": "seg_name",
-                "name_from": 554,
-                "name_to": 562,
+                "name_from": 584,
+                "name_to": 592,
                 "props": [
                     {
                         "kind": "prop",
@@ -114,18 +114,18 @@
                             "kind": "string",
                             "value": "int8"
                         },
-                        "name_from": 565,
-                        "name_to": 571,
-                        "value_from": 573,
-                        "value_to": 579
+                        "name_from": 595,
+                        "name_to": 601,
+                        "value_from": 603,
+                        "value_to": 609
                     }
                 ]
             },
             {
                 "kind": "segment",
                 "name": "seg_a",
-                "name_from": 598,
-                "name_to": 603,
+                "name_from": 629,
+                "name_to": 634,
                 "props": [
                     {
                         "kind": "prop",
@@ -134,18 +134,18 @@
                             "kind": "string",
                             "value": "int8"
                         },
-                        "name_from": 606,
-                        "name_to": 612,
-                        "value_from": 614,
-                        "value_to": 620
+                        "name_from": 637,
+                        "name_to": 643,
+                        "value_from": 645,
+                        "value_to": 651
                     }
                 ]
             },
             {
                 "kind": "segment",
                 "name": "seg_dfs",
-                "name_from": 639,
-                "name_to": 646,
+                "name_from": 671,
+                "name_to": 678,
                 "props": [
                     {
                         "kind": "prop",
@@ -154,18 +154,18 @@
                             "kind": "string",
                             "value": ""
                         },
-                        "name_from": 649,
-                        "name_to": 655,
-                        "value_from": 657,
-                        "value_to": 659
+                        "name_from": 681,
+                        "name_to": 687,
+                        "value_from": 689,
+                        "value_to": 691
                     }
                 ]
             },
             {
                 "kind": "segment",
                 "name": "seg_dfs",
-                "name_from": 678,
-                "name_to": 685,
+                "name_from": 711,
+                "name_to": 718,
                 "props": [
                     {
                         "kind": "prop",
@@ -174,10 +174,10 @@
                             "kind": "string",
                             "value": ""
                         },
-                        "name_from": 688,
-                        "name_to": 694,
-                        "value_from": 696,
-                        "value_to": 698
+                        "name_from": 721,
+                        "name_to": 727,
+                        "value_from": 729,
+                        "value_to": 731
                     }
                 ]
             }
@@ -186,14 +186,14 @@
     {
         "kind": "protocol",
         "name": "prot_name",
-        "name_from": 721,
-        "name_to": 730,
+        "name_from": 757,
+        "name_to": 766,
         "seglist": [
             {
                 "kind": "segment",
                 "name": "seg_name",
-                "name_from": 749,
-                "name_to": 757,
+                "name_from": 786,
+                "name_to": 794,
                 "props": [
                     {
                         "kind": "prop",
@@ -202,10 +202,10 @@
                             "kind": "string",
                             "value": "int8"
                         },
-                        "name_from": 760,
-                        "name_to": 766,
-                        "value_from": 768,
-                        "value_to": 774
+                        "name_from": 797,
+                        "name_to": 803,
+                        "value_from": 805,
+                        "value_to": 811
                     }
                 ]
             },
@@ -216,8 +216,8 @@
                     {
                         "kind": "segment",
                         "name": "dsf",
-                        "name_from": 820,
-                        "name_to": 823,
+                        "name_from": 859,
+                        "name_to": 862,
                         "props": [
                             {
                                 "kind": "prop",
@@ -226,16 +226,16 @@
                                     "kind": "string",
                                     "value": "int8"
                                 },
-                                "name_from": 826,
-                                "name_to": 832,
-                                "value_from": 834,
-                                "value_to": 840
+                                "name_from": 865,
+                                "name_to": 871,
+                                "value_from": 873,
+                                "value_to": 879
                             }
                         ]
                     }
                 ],
-                "name_from": 794,
-                "name_to": 797
+                "name_from": 832,
+                "name_to": 835
             },
             {
                 "kind": "oneof",
@@ -249,8 +249,8 @@
                     {
                         "kind": "segment",
                         "name": "seg_name",
-                        "name_from": 894,
-                        "name_to": 902,
+                        "name_from": 936,
+                        "name_to": 944,
                         "props": [
                             {
                                 "kind": "prop",
@@ -259,10 +259,10 @@
                                     "kind": "string",
                                     "value": "int8"
                                 },
-                                "name_from": 905,
-                                "name_to": 911,
-                                "value_from": 913,
-                                "value_to": 919
+                                "name_from": 947,
+                                "name_to": 953,
+                                "value_from": 955,
+                                "value_to": 961
                             },
                             {
                                 "kind": "prop",
@@ -288,25 +288,25 @@
                                         }
                                     ]
                                 },
-                                "name_from": 921,
-                                "name_to": 925,
-                                "value_from": 927,
-                                "value_to": 963
+                                "name_from": 963,
+                                "name_to": 967,
+                                "value_from": 969,
+                                "value_to": 1005
                             }
                         ]
                     },
                     {
                         "kind": "segment",
                         "name": "seg_2",
-                        "name_from": 986,
-                        "name_to": 991,
+                        "name_from": 1029,
+                        "name_to": 1034,
                         "props": []
                     },
                     {
                         "kind": "segment",
                         "name": "seg3",
-                        "name_from": 1015,
-                        "name_to": 1019,
+                        "name_from": 1059,
+                        "name_to": 1063,
                         "props": [
                             {
                                 "kind": "prop",
@@ -315,10 +315,10 @@
                                     "kind": "string",
                                     "value": "int8"
                                 },
-                                "name_from": 1039,
-                                "name_to": 1045,
-                                "value_from": 1047,
-                                "value_to": 1053
+                                "name_from": 1084,
+                                "name_to": 1090,
+                                "value_from": 1092,
+                                "value_to": 1098
                             },
                             {
                                 "kind": "prop",
@@ -355,10 +355,10 @@
                                         ]
                                     }
                                 },
-                                "name_from": 1072,
-                                "name_to": 1081,
-                                "value_from": 1083,
-                                "value_to": 1122
+                                "name_from": 1118,
+                                "name_to": 1127,
+                                "value_from": 1129,
+                                "value_to": 1168
                             },
                             {
                                 "kind": "prop",
@@ -384,10 +384,10 @@
                                         ]
                                     }
                                 },
-                                "name_from": 1140,
-                                "name_to": 1148,
-                                "value_from": 1150,
-                                "value_to": 1169
+                                "name_from": 1187,
+                                "name_to": 1195,
+                                "value_from": 1197,
+                                "value_to": 1216
                             },
                             {
                                 "kind": "prop",
@@ -396,18 +396,18 @@
                                     "kind": "number",
                                     "value": 39087
                                 },
-                                "name_from": 1187,
-                                "name_to": 1196,
-                                "value_from": 1198,
-                                "value_to": 1204
+                                "name_from": 1235,
+                                "name_to": 1244,
+                                "value_from": 1246,
+                                "value_to": 1252
                             }
                         ]
                     },
                     {
                         "kind": "segment",
                         "name": "seg4",
-                        "name_from": 1239,
-                        "name_to": 1243,
+                        "name_from": 1289,
+                        "name_to": 1293,
                         "props": [
                             {
                                 "kind": "prop",
@@ -416,16 +416,16 @@
                                     "kind": "string",
                                     "value": "int8"
                                 },
-                                "name_from": 1246,
-                                "name_to": 1252,
-                                "value_from": 1254,
-                                "value_to": 1260
+                                "name_from": 1296,
+                                "name_to": 1302,
+                                "value_from": 1304,
+                                "value_to": 1310
                             }
                         ]
                     }
                 ],
-                "exp_from": 867,
-                "exp_to": 870
+                "exp_from": 908,
+                "exp_to": 911
             },
             {
                 "kind": "when",
@@ -439,8 +439,8 @@
                     {
                         "kind": "segment",
                         "name": "seg_name",
-                        "name_from": 1313,
-                        "name_to": 1321,
+                        "name_from": 1366,
+                        "name_to": 1374,
                         "props": [
                             {
                                 "kind": "prop",
@@ -449,10 +449,10 @@
                                     "kind": "string",
                                     "value": "int8"
                                 },
-                                "name_from": 1324,
-                                "name_to": 1330,
-                                "value_from": 1332,
-                                "value_to": 1338
+                                "name_from": 1377,
+                                "name_to": 1383,
+                                "value_from": 1385,
+                                "value_to": 1391
                             },
                             {
                                 "kind": "prop",
@@ -464,16 +464,16 @@
                                         "len"
                                     ]
                                 },
-                                "name_from": 1340,
-                                "name_to": 1343,
-                                "value_from": 1345,
-                                "value_to": 1353
+                                "name_from": 1393,
+                                "name_to": 1396,
+                                "value_from": 1398,
+                                "value_to": 1406
                             }
                         ]
                     }
                 ],
-                "exp_from": 1286,
-                "exp_to": 1289
+                "exp_from": 1338,
+                "exp_to": 1341
             },
             {
                 "kind": "oneof",
@@ -487,8 +487,8 @@
                     {
                         "kind": "segment",
                         "name": "seg_name",
-                        "name_from": 1407,
-                        "name_to": 1415,
+                        "name_from": 1463,
+                        "name_to": 1471,
                         "props": [
                             {
                                 "kind": "prop",
@@ -497,16 +497,16 @@
                                     "kind": "string",
                                     "value": "int8"
                                 },
-                                "name_from": 1418,
-                                "name_to": 1424,
-                                "value_from": 1426,
-                                "value_to": 1432
+                                "name_from": 1474,
+                                "name_to": 1480,
+                                "value_from": 1482,
+                                "value_to": 1488
                             }
                         ]
                     }
                 ],
-                "exp_from": 1380,
-                "exp_to": 1383
+                "exp_from": 1435,
+                "exp_to": 1438
             },
             {
                 "kind": "oneof",
@@ -525,8 +525,8 @@
                     }
                 },
                 "seglist": null,
-                "exp_from": 1459,
-                "exp_to": 1472
+                "exp_from": 1517,
+                "exp_to": 1530
             },
             {
                 "kind": "when",
@@ -540,8 +540,8 @@
                     {
                         "kind": "segment",
                         "name": "seg_name",
-                        "name_from": 1527,
-                        "name_to": 1535,
+                        "name_from": 1589,
+                        "name_to": 1597,
                         "props": [
                             {
                                 "kind": "prop",
@@ -550,16 +550,16 @@
                                     "kind": "string",
                                     "value": "int8"
                                 },
-                                "name_from": 1538,
-                                "name_to": 1544,
-                                "value_from": 1546,
-                                "value_to": 1552
+                                "name_from": 1600,
+                                "name_to": 1606,
+                                "value_from": 1608,
+                                "value_to": 1614
                             }
                         ]
                     }
                 ],
-                "exp_from": 1500,
-                "exp_to": 1503
+                "exp_from": 1561,
+                "exp_to": 1564
             }
         ]
     }
