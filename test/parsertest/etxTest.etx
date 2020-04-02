@@ -1,9 +1,3 @@
-
-
-  local demo = require ( './demo.lua' )  
- local demo2 = require("./other/demo.lua") 
-
-<%
     //注释是这样的
     /*
         这是多行注释///
@@ -46,6 +40,7 @@
             }
             segment seg4 { parser: 'int8' }
         }
+
         oneof(exp) {
             segment seg_name { parser: 'int8' }
         }
@@ -53,31 +48,3 @@
 
         }
     }
-
-%>
-
-local demo = require("../demo") 
-   local demo2 = require("./other/demo") 
-
-<%lua
-    --%>
-
-    function a(b, c)
-        b++;
-        return b + c;
-    end
-
-    "./etlTest.lua"
-
-    "afd.lua"
-    ""
-    "dfs/dsf"
-
-
-    a>9
-    
-    --[[
-        <% %>
-        <%lua "dsf"
-    --]]
-%>

@@ -33,6 +33,13 @@ function getEtlAst(proj_path, src_path, refs) {
     if (a.kind === 'block_etx' || a.kind === 'block_lua') {
       let script = newContent.slice(0, a.from) + text.slice(a.from, a.to) + newContent.slice(a.to);
       if (a.kind === 'block_lua') {
+        for(let u of el_list) {
+          if(u.kind !== 'using') {
+            continue;
+          }
+          let requ = text.substring(u.from, u.to);
+          script = script.substr(0, u.from) + requ + script.substr(u.to);
+        }
         ast.script_lua = script;
       } else if (a.kind === 'block_etx') {
         ast.script_etx = etxParser.parse(script);
@@ -40,12 +47,6 @@ function getEtlAst(proj_path, src_path, refs) {
     } else if (a.kind === 'using') {  //添加引用的文件到refs里
       let ap = path.resolve(adir, a.ref);
       refs.push(ap);
-
-      let rp = path.relative(src_apath, ap);
-      //TODO replace using statement
-      if(!rp) {
-        
-      }
     }
   }
   return ast;
@@ -116,7 +117,6 @@ function getRefAstList(proj_path, asts, refs) {
 
 //构建完整的运行时ast
 function getRunAstList(proj_path, src_path, asts) {
-  console.log(src_path)
   if(src_path.endsWith('.etl')) {
     let refs = [];
     let ast = getEtlAst(proj_path, src_path, refs);

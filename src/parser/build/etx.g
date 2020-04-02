@@ -46,10 +46,6 @@
                 "return 'SEGMENT'"
             ],
             [
-                "when",
-                "return 'WHEN'"
-            ],
-            [
                 "oneof",
                 "return 'ONEOF'"
             ],
@@ -250,14 +246,6 @@
             ]
         ],
         "branch": [
-            [
-                "WHEN ( exp ) { }",
-                "$$ = newProtBranch('when', $exp, null, @exp);"
-            ],
-            [
-                "WHEN ( exp ) { protocol_element_list }",
-                "$$ = newProtBranch('when', $exp, $protocol_element_list, @exp);"
-            ],
             [
                 "ONEOF ( exp ) { }",
                 "$$ = newProtBranch('oneof', $exp, null, @exp);"

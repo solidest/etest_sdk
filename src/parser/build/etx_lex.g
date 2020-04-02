@@ -45,10 +45,6 @@
             "return 'SEGMENT'"
         ],
         [
-            "when",
-            "return 'WHEN'"
-        ],
-        [
             "oneof",
             "return 'ONEOF'"
         ],

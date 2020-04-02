@@ -80,12 +80,12 @@
                 "return '='"
             ],
             [
-                "(",
-                "return 'LEFT_'"
+                "\\(",
+                "return '('"
             ],
             [
-                ")",
-                "return 'RIGHT_'"
+                "\\)",
+                "return ')'"
             ],
             [
                 [
@@ -123,7 +123,7 @@
         ],
         "etl_element": [
             [
-                "LOCAL ID = REQUIRE LEFT_ str RIGHT_",
+                "LOCAL ID = REQUIRE ( str )",
                 "$$ = newUsing($str, $ID, @1.startOffset, @7.endOffset)"
             ],
             [

@@ -20,8 +20,8 @@ let lex_main = {
     ["<%", "this.pushState('etl'); return 'BLOCK_BEGIN_ETL'"],
     [["lua", "etl"], "%>", "this.popState(); return 'BLOCK_END'"],
     ["=", "return '='"],
-    ["(", "return 'LEFT_'"],
-    [")", "return 'RIGHT_'"],
+    ["\\(", "return '('"],
+    ["\\)", "return ')'"],
     [["*"], "\\r\\n", "/*return 'NEWLINE'*/"],
     [["*"], "\\n", "/*return 'NEWLINE'*/"],
     [["*"], ".", "/*return 'ANY_OTHER'*/"],
@@ -36,7 +36,7 @@ let bnf_main = {
   ],
 
   etl_element: [
-    ["LOCAL ID = REQUIRE LEFT_ str RIGHT_", "$$ = newUsing($str, $ID, @1.startOffset, @7.endOffset)"],
+    ["LOCAL ID = REQUIRE ( str )", "$$ = newUsing($str, $ID, @1.startOffset, @7.endOffset)"],
     ["block", "$$ = $block"],
   ],
 
@@ -94,7 +94,6 @@ let lex_etx = {
     ["program", "return 'PROGRAM'"],
     ["segments", "return 'SEGMENTS'"],
     ["segment", "return 'SEGMENT'"],
-    ["when", "return 'WHEN'"],
     ["oneof", "return 'ONEOF'"],
     ["0[xX][0-9a-fA-F]+", "return 'NUMBER_HEX'"],
     ["[0-9]+(?:\\.[0-9]+)?", "return 'NUMBER'"],
@@ -155,8 +154,6 @@ let bnf_etx = {
   ],
 
   branch: [
-    ["WHEN ( exp ) { }", "$$ = newProtBranch('when', $exp, null, @exp);"],
-    ["WHEN ( exp ) { protocol_element_list }", "$$ = newProtBranch('when', $exp, $protocol_element_list, @exp);"],
     ["ONEOF ( exp ) { }", "$$ = newProtBranch('oneof', $exp, null, @exp);"],
     ["ONEOF ( exp ) { protocol_element_list }", "$$ = newProtBranch('oneof', $exp, $protocol_element_list, @exp);"],
   ],

@@ -79,12 +79,12 @@
             "return '='"
         ],
         [
-            "(",
-            "return 'LEFT_'"
+            "\\(",
+            "return '('"
         ],
         [
-            ")",
-            "return 'RIGHT_'"
+            "\\)",
+            "return ')'"
         ],
         [
             [

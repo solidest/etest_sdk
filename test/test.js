@@ -70,7 +70,7 @@ api.start('test/parsertest', 'etlTest.etl', ['vars'], {op1: 'ab'}, (res) => {
 
     setTimeout(()=>{
         console.log('-> run lua');
-        api.start('test', 'demo.lua', ['vars'], {op1: 'ab'}, (res) => {
+        api.start('test', 'parsertest/test.lua', ['vars'], {op1: 'ab'}, (res) => {
             console.log('<-run lua', res);
         });
     }, 15000);
