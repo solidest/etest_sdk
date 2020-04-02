@@ -17,6 +17,7 @@ function getEtlAst(proj_path, src_path, refs) {
 
   let ast = {
     kind: 'etl',
+    proj_apath: proj_apath,
     apath_src: src_apath,
     rpath_src: src_rpath,
     script_lua: null,
@@ -63,6 +64,7 @@ function getSrcAst(kind, proj_path, src_path) {
   let text = fs.readFileSync(src_apath, "utf8");
   return {
     kind: kind,
+    proj_apath: proj_apath,
     apath_src: src_apath,
     rpath_src: src_rpath,
     script: text

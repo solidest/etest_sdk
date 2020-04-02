@@ -1,3 +1,4 @@
+const path = require("path");
 const RpcTask = require('./rpctask');
 const parser = require('./parser')
 
@@ -17,6 +18,12 @@ class SdkApi {
     //数据服务器api
     dfn(method, params, callback) {
         this._db.sendTask({method: method, params: params}, callback);
+    }
+
+    //创建执行环境
+    makeenv(proj_path, callback) {
+        let proj_apath = path.isAbsolute(proj_path) ? proj_path : path.resolve(proj_path);
+        this.xfn('makeenv', {proj_apath: proj_apath, protos: "aa", devices: null}, callback);
     }
 
     //开始执行程序

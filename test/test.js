@@ -12,6 +12,11 @@ api.xfn('state', null, (res) => {
     console.log('<-', res);
 });
 
+console.log('-> makeenv');
+api.makeenv("test/parsertest", (res) => {
+    console.log('<-', res);
+});
+
 console.log('-> state');
 api.xfn('state', null, (res) => {
     console.log('<-', res);
