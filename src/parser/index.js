@@ -114,15 +114,21 @@ function getRefAstList(proj_path, asts, refs) {
   }
 }
 
-
 //构建完整的运行时ast
 function getRunAstList(proj_path, src_path, asts) {
-  let refs = [];
-  let ast = getEtlAst(proj_path, src_path, refs);
-  asts = asts || [];
-  asts.push(ast);
-  getRefAstList(proj_path, asts, refs);
-  return asts;
+  console.log(src_path)
+  if(src_path.endsWith('.etl')) {
+    let refs = [];
+    let ast = getEtlAst(proj_path, src_path, refs);
+    asts = asts || [];
+    asts.push(ast);
+    getRefAstList(proj_path, asts, refs);
+    return asts;    
+  } else if(src_path.endsWith('.lua')) {
+    let ast = getSrcAst('lua', proj_path, src_path);
+    return [ast];
+  }
+  return null;
 }
 
 module.exports = {

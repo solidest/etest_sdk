@@ -42,8 +42,8 @@ api.xfn('pong', null, (res) => {
     console.log('<-', res);
 });
 
-console.log('-> run program');
-api.start('test/parsertest', 'etlTest.etl', null, null, (res) => {
+console.log('-> run etl');
+api.start('test/parsertest', 'etlTest.etl', ['vars'], {op1: 'ab'}, (res) => {
     console.log('<-', res);
 
     console.log('key', res.result);
@@ -67,6 +67,14 @@ api.start('test/parsertest', 'etlTest.etl', null, null, (res) => {
     api.xfn('readcmd', {key: res.result}, (res) => {
         console.log('<-', res);
     });
+
+    setTimeout(()=>{
+        console.log('-> run lua');
+        api.start('test', 'demo.lua', ['vars'], {op1: 'ab'}, (res) => {
+            console.log('<-run lua', res);
+        });
+    }, 15000);
+    
 });
 
 console.log('-> stop');

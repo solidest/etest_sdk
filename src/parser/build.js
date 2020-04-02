@@ -13,12 +13,15 @@ let lex_main = {
     [["lua"], "--[^\\n]*", "/*return 'COMMENT_LINE'*/"],
     [["*"], "\\\"([^\\\\\\n\"]|\\\\.)*\\\"", "return 'STRING_TRIPLE'"],
     [["*"], "'([^\\\\\\n']|\\\\.)*'", "return 'STRING_SINGLE'"],
-    ["using", "return 'USING'"],
-    ["as", "return 'AS'"],
+    ["local", "return 'LOCAL'"],
+    ["require", "return 'REQUIRE'"],
     ["[a-zA-Z_][a-zA-Z0-9_]*", "return 'ID'"],
     ["<%lua", "this.pushState('lua'); return 'BLOCK_BEGIN_LUA'"],
     ["<%", "this.pushState('etl'); return 'BLOCK_BEGIN_ETL'"],
     [["lua", "etl"], "%>", "this.popState(); return 'BLOCK_END'"],
+    ["=", "return '='"],
+    ["(", "return 'LEFT_'"],
+    [")", "return 'RIGHT_'"],
     [["*"], "\\r\\n", "/*return 'NEWLINE'*/"],
     [["*"], "\\n", "/*return 'NEWLINE'*/"],
     [["*"], ".", "/*return 'ANY_OTHER'*/"],
@@ -33,7 +36,7 @@ let bnf_main = {
   ],
 
   etl_element: [
-    ["USING str AS ID", "$$ = newUsing($str, $ID)"],
+    ["LOCAL ID = REQUIRE LEFT_ str RIGHT_", "$$ = newUsing($str, $ID, @1.startOffset, @7.endOffset)"],
     ["block", "$$ = $block"],
   ],
 
@@ -61,8 +64,8 @@ let include_main = `
       return { kind: type, from: from, to: to };
     }
 
-    function newUsing(str, id) {
-      return { kind: 'using', ref: eval(str), pkg: id };
+    function newUsing(str, id, from, to) {
+      return { kind: 'using', ref: eval(str), pkg: id, from: from, to: to };
     }
 
     function newList(item) {
@@ -359,13 +362,13 @@ fs.writeFileSync(path.join(__dirname, 'build/etx.g'), JSON.stringify({lex: lex_e
 /* EST
 
   build
-  node parser/build.js && syntax-cli -m slr1 -g parser/build/etl.g -o parser/etlParser.js --loc
+  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g -o src/parser/etlParser.js --loc
 
   语法验证
-  node parser/build.js && syntax-cli -m slr1 -g parser/build/etl.g --validate
+  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g --validate
 
   不包含语法时的词法检查
-  node parser/build.js && syntax-cli --lex parser/build/etl_lex.g --tokenize -f parser/test/etlTest.etl --loc
+  node src/parser/build.js && syntax-cli --lex src/parser/build/etl_lex.g --tokenize -f test/parsertest/etlTest.etl --loc
 
   包含语法时的词法检查
   node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g --tokenize -f test/parsertest/etlTest.etl --loc

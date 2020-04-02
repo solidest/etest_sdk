@@ -48,12 +48,12 @@
                 "return 'STRING_SINGLE'"
             ],
             [
-                "using",
-                "return 'USING'"
+                "local",
+                "return 'LOCAL'"
             ],
             [
-                "as",
-                "return 'AS'"
+                "require",
+                "return 'REQUIRE'"
             ],
             [
                 "[a-zA-Z_][a-zA-Z0-9_]*",
@@ -74,6 +74,18 @@
                 ],
                 "%>",
                 "this.popState(); return 'BLOCK_END'"
+            ],
+            [
+                "=",
+                "return '='"
+            ],
+            [
+                "(",
+                "return 'LEFT_'"
+            ],
+            [
+                ")",
+                "return 'RIGHT_'"
             ],
             [
                 [
@@ -111,8 +123,8 @@
         ],
         "etl_element": [
             [
-                "USING str AS ID",
-                "$$ = newUsing($str, $ID)"
+                "LOCAL ID = REQUIRE LEFT_ str RIGHT_",
+                "$$ = newUsing($str, $ID, @1.startOffset, @7.endOffset)"
             ],
             [
                 "block",
@@ -158,5 +170,5 @@
             ]
         ]
     },
-    "moduleInclude": "\n\n    function newBlock(type, from, to) {\n      return { kind: type, from: from, to: to };\n    }\n\n    function newUsing(str, id) {\n      return { kind: 'using', ref: eval(str), pkg: id };\n    }\n\n    function newList(item) {\n      return item ? [item] : [];\n    }\n\n    function joinList(list, item) {\n      if(list && item) {\n        list.push(item);\n      }\n      return list;\n    }\n\n"
+    "moduleInclude": "\n\n    function newBlock(type, from, to) {\n      return { kind: type, from: from, to: to };\n    }\n\n    function newUsing(str, id, from, to) {\n      return { kind: 'using', ref: eval(str), pkg: id, from: from, to: to };\n    }\n\n    function newList(item) {\n      return item ? [item] : [];\n    }\n\n    function joinList(list, item) {\n      if(list && item) {\n        list.push(item);\n      }\n      return list;\n    }\n\n"
 }

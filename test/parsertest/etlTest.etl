@@ -1,12 +1,7 @@
 
-using "./adsf/sdf.etl" as f
-using '../adsf.etl' as f
-using "" as pkg
-using "./etlTest copy.etl" as a
 
-using "other/etlTestOther.etl" as other
-
-using "./other/demo.lua" as demo
+local demo = require ( './demo' )
+local demo2 = require("./other/demo")
 
 <%
     //注释是这样的
@@ -23,7 +18,7 @@ using "./other/demo.lua" as demo
     }
 
     /*
-        这是多行注释///
+        这是多行注释/// 
         *** 多行注释
     */
     protocol aaa {
@@ -66,9 +61,8 @@ using "./other/demo.lua" as demo
 
 %>
 
-
-using "./adsf/sdf.etl" as dd
-using '../adsf.etl' as s2
+local demo = require("../demo")
+local demo2 = require("./other/demo")
 
 <%lua
     --%>

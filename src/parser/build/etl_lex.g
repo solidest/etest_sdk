@@ -47,12 +47,12 @@
             "return 'STRING_SINGLE'"
         ],
         [
-            "using",
-            "return 'USING'"
+            "local",
+            "return 'LOCAL'"
         ],
         [
-            "as",
-            "return 'AS'"
+            "require",
+            "return 'REQUIRE'"
         ],
         [
             "[a-zA-Z_][a-zA-Z0-9_]*",
@@ -73,6 +73,18 @@
             ],
             "%>",
             "this.popState(); return 'BLOCK_END'"
+        ],
+        [
+            "=",
+            "return '='"
+        ],
+        [
+            "(",
+            "return 'LEFT_'"
+        ],
+        [
+            ")",
+            "return 'RIGHT_'"
         ],
         [
             [
