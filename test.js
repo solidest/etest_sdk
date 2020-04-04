@@ -60,11 +60,14 @@ function readOut() {
             onError(id, err);
             return;
         }
-        if(res && res.catalog) {
+        if(res && res.length>0) {
             onRecved(' ', res);
-            if(res.catalog=='system' && res.kind=='exit') {
-                process.exit(0);
+            for(let r of res) {
+                if(r.catalog=='system' && r.kind=='exit') {
+                    process.exit(0);
+                }
             }
+            
         }
     });
 }
