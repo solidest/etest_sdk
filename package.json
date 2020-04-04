@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:parser": "node src/parser/build.js",
-    "test": "node test.js",
+    "start": "node test.js start",
     "stop": "node test.js stop",
     "state": "node test.js state"
   },

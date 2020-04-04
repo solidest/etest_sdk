@@ -2,6 +2,6 @@
 
 function entry(vars, option)
     print("Hello World1")
-    print(vars, option)
+    print('vars:', vars, 'option:', option)
     exit()
 end
