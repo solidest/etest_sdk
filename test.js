@@ -5,7 +5,6 @@ let api = new SdkApi('stbox', 1210);
 let proj = 'test/proj_protocol_test';
 let entry = 'program/test1.lua';
 
-
 let run_id = null;
 let timer = null;
 function onSended(id, info) {
@@ -64,10 +63,11 @@ function readOut() {
             onRecved(' ', res);
             for(let r of res) {
                 if(r.catalog=='system' && r.kind=='exit') {
-                    process.exit(0);
+                    setTimeout(()=>{
+                        process.exit(0);
+                    }, 1000);
                 }
             }
-            
         }
     });
 }
@@ -97,7 +97,7 @@ if(argv == 'state') {
     
 } else {
     makeEnv(proj);
-    startRun(proj, entry, null, null);
+    startRun(proj, entry, {var1: "demo_v1"}, /*{op1: "demo_op1"}*/null);
     timer = setInterval(readOut, 40);   
 }
 

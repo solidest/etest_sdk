@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build:parser": "node src/parser/build.js",
-    "test:parser": "node src/parser/build.js && node test/parsertest/test.js",
-    "test": "node test/test.js"
+    "test": "node test.js",
+    "stop": "node test.js stop",
+    "state": "node test.js state"
   },
   "repository": {
     "type": "git",

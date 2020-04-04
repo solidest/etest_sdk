@@ -13,6 +13,10 @@ dist
 server/dist
 docs/.vuepress/dist
 
+bin/
+logs/
+runs/
+
 *.zip
 *.vsix
 
