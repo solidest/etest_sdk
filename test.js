@@ -59,13 +59,28 @@ function readOut() {
             onError(id, err);
             return;
         }
+
         if(res && res.length>0) {
-            onRecved(' ', res);
             for(let r of res) {
-                if(r.catalog=='system' && r.kind=='exit') {
-                    setTimeout(()=>{
-                        process.exit(0);
-                    }, 1000);
+                if(r.catalog === 'system') {
+                    switch (r.kind) {
+                        case 'exit': {
+                            setTimeout(()=>{
+                                process.exit(0);
+                            }, 1000);
+                            break;
+                        }
+                        case 'print': {
+                            onRecved(' ', r.value);
+                            break;
+                        }
+                    
+                        default:
+                            onRecved('?', r);
+                            break;
+                    }
+                } else {
+                    onRecved('?', r);
                 }
             }
         }
