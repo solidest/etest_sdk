@@ -1,6 +1,9 @@
 {
     "Lua.diagnostics.globals": [
         "entry",
-        "exit"
+        "exit",
+        "verify",
+        "__vars",
+        "__option",
     ]
 }

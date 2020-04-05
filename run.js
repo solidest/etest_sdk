@@ -1,22 +1,42 @@
+
 const SdkApi = require('./sdk');
+
+/*
+    api: sdk对象
+    proj: 项目文件夹路径，与当前目录的相对路径
+    entry: 包含entry函数的执行文件，与proj的相对路径
+    _vars: 输入给entry的参数值
+    _option: 输入给entry的自定义选项
+*/
 
 let api = new SdkApi('stbox', 1210);
 let proj = 'test/proj_protocol_test';
-let entry = 'program/test1.lua';
+let entry = 'program/demo1.lua';
+let _vars = {
+    var1: "demo_v1",
+    var2: 99
+};
+let _option = null;
 
+
+//run demo
 let run_id = null;
 let timer = null;
 
 function onSended(id, info) {
-    console.log(id + " ->", info);
+    console.log('\x1B[90m%s\x1B[39m', id + " -> " + info);
 }
 
 function onRecved(id, info) {
-    console.log(id + " <-", info);
+    console.log('\x1B[90m%s\x1B[39m', id + " <- " + info);
 }
 
-function onError(id, info) {
-    console.error('\x1B[31m%s\x1B[39m', id + " <- " + info);
+function onPrint(info) {
+    console.log('  <- ' + info);
+}
+
+function onError(info, id) {
+    console.error('\x1B[31m%s\x1B[39m', (id ? id : ' ') + ' <- ' + info);
     if (timer) {
         clearInterval(timer);
         timer = null;
@@ -24,9 +44,13 @@ function onError(id, info) {
     process.exit(0);
 }
 
+function onWarn(info) {
+    console.error('\x1B[33m%s\x1B[39m', '  <- ' + info);
+}
+
 function callback(err, res, id) {
     if (err) {
-        return onError(id, err.message ? err.message : err);
+        return onError(err.message ? err.message : err, id);
     }
     return onRecved(id, res);
 }
@@ -72,17 +96,26 @@ function readOut() {
                         }
 
                         case 'print': {
-                            onRecved(' ', r.value);
+                            onPrint(r.value);
                             break;
                         }
 
+                        case 'verifyFail': {
+                            onWarn(r.value);
+                            break;
+                        }
+                        case 'assertFail':
                         case 'error': {
-                            onError(' ', r.value);
+                            if (r && r.value) {
+                                onError(r.value);
+                            } else {
+                                onError(JSON.stringify(r));
+                            }
                             break;
                         }
 
                         default:
-                            onRecved('?', r);
+                            onRecved('?', typeof r == 'object' ? JSON.stringify(r) : r);
                             break;
                     }
                 } else {
@@ -119,9 +152,7 @@ if (argv == 'state') {
 } else if (argv == 'start') {
     makeEnv(proj);
 
-    startRun(proj, entry, {
-        var1: "demo_v1"
-    }, /*{op1: "demo_op1"}*/ null);
-    
+    startRun(proj, entry, _vars, _option);
+
     timer = setInterval(readOut, 40);
 }
