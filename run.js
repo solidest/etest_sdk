@@ -23,6 +23,14 @@ let _option = null;
 let run_id = null;
 let timer = null;
 
+function exit() {
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+    process.exit(0);
+}
+
 function onSended(id, info) {
     console.log('\x1B[90m%s\x1B[39m', id + " -> " + info);
 }
@@ -37,11 +45,7 @@ function onPrint(info) {
 
 function onError(info, id) {
     console.error('\x1B[31m%s\x1B[39m', (id ? id : ' ') + ' <- ' + info);
-    if (timer) {
-        clearInterval(timer);
-        timer = null;
-    }
-    process.exit(0);
+    // setTimeout(exit, 3000);
 }
 
 function onWarn(info) {
@@ -88,10 +92,16 @@ function readOut() {
             for (let r of res) {
                 if (r.catalog === 'system') {
                     switch (r.kind) {
+                        case 'entry': {
+                            console.log('')
+                            onRecved(' ', 'entry > ' + r.value + '\n');
+                            break;
+                        }
+
                         case 'exit': {
-                            setTimeout(() => {
-                                process.exit(0);
-                            }, 1000);
+                            console.log('')
+                            onRecved(' ', 'exit > ' + r.value + '\n')
+                            exit();
                             break;
                         }
 
