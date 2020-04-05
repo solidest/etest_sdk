@@ -2,7 +2,7 @@
 function Test_assert_verify(a)
     --verify assert
     verify(a>0, '???')
-    assert(a>0, '???')
+    assert(a>0)
     verify(a==0, '验证失败，继续执行')
     assert(a==0, '断言失败，退出执行')
 end
@@ -21,15 +21,30 @@ function Test_hex_buf()
     local strbuf2 = string.hex(strbuf1)
     print('strhex: ', strbuf2)
     assert(str == strbuf2)
-    exit()
+end
+
+function Test_delay()
+    print('delay 2s')
+    delay(2000)
+    print('delay 3s')
+    delay(3000)
 end
 
 function entry(vars, option)
-    local i1 = 1;
+    print('\n::test print::')
     Test_print(vars, option)
+
+    print('\n::test string.hex string.buf::')
     Test_hex_buf()
+
+    print('\n::test delay::')
+    Test_delay()
+
+    print('\n::test assert verify::')
+    local i1 = 1;
     Test_assert_verify(i1)
     
+    exit()
 end
 
 
