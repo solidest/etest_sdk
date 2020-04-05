@@ -3,6 +3,7 @@
         "entry",
         "exit",
         "verify",
-        "delay"
+        "delay",
+        "now"
     ]
 }
