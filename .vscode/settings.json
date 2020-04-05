@@ -3,8 +3,6 @@
         "entry",
         "exit",
         "verify",
-        "__vars",
-        "__option",
         "delay"
     ]
 }
