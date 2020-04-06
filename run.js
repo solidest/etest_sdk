@@ -11,6 +11,7 @@ const SdkApi = require('./sdk');
 
 let api = new SdkApi('stbox', 1210);
 let proj = 'test/proj_etl_test';
+// let entry = 'program/hello_world.lua';
 let entry = 'program/test_api.lua';
 let _vars = {
     var1: "demo_v1",
