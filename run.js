@@ -100,7 +100,7 @@ function readOut() {
 
                         case 'exit': {
                             console.log('')
-                            onRecved(' ', 'exit > ' + r.value + '\n')
+                            onRecved(' ', `exit > ${r.value} (${Math.round(r.time/1000000000)}s)\n`)
                             exit();
                             break;
                         }
