@@ -669,8 +669,10 @@ const yyparse = {
         value: exp,
         name_from: id_loc.startOffset,
         name_to: id_loc.endOffset,
+        name_line: id_loc.startLine,
         value_from: exp_loc.startOffset,
         value_to: exp_loc.endOffset,
+        value_line: exp_loc.startLine,
       }
     }
 
@@ -681,6 +683,7 @@ const yyparse = {
         seglist: seglist,
         exp_from: exp_loc.startOffset,
         exp_to: exp_loc.endOffset,
+        exp_line: exp_loc.startLine,
       }
     }
 
@@ -691,6 +694,7 @@ const yyparse = {
         seglist: seglist,
         name_from: name_loc.startOffset,
         name_to: name_loc.endOffset,
+        name_line: name_loc.startLine,
       }
     }
 
@@ -700,6 +704,7 @@ const yyparse = {
         name: name,
         name_from: name_loc.startOffset,
         name_to: name_loc.endOffset,
+        name_line: name_loc.startLine,
       }
       res[body_name] = body;
       return res;

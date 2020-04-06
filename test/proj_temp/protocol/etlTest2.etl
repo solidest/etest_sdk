@@ -1,20 +1,16 @@
 
 
-  local demo = require ( './demo.lua' )  
- local demo2 = require("./other/demo.lua") 
-
-<%
     //注释是这样的
     /*
         这是多行注释///
         *** 多行注释
     */
-    protocol prot_name {
+    protocol prot_name1c {
         segment _1 {}
-        segment seg_name { parser: '' }
+        segment seg_name { parser: 'float' }
         segment seg_name { parser: 'int8' }
         segments df {
-            segment dfhhh { parser: "" }
+            segment dfhhh { parser: "double" }
         }
     }
 
@@ -22,15 +18,15 @@
         这是多行注释/// 
         *** 多行注释
     */
-    protocol aaa {
+    protocol aaab {
         segment df { parser: 'int8' }
         segment seg_name { parser: 'int8' }
         segment seg_a { parser: 'int8' }
-        segment seg_dfs { parser: "" }
-        segment seg_dfs { parser: "" }
+        segment seg_dfs { parser: "string" }
+        segment seg_dfs { parser: "double" }
     }
 
-    protocol prot_name {
+    protocol prot_namea {
         segment seg_name { parser: 'int8' }
         segments sdf {
             segment dsf { parser: 'int8' }
@@ -53,31 +49,3 @@
 
         }
     }
-
-%>
-
-local demo = require("../demo") 
-   local demo2 = require("./other/demo") 
-
-<%lua
-    --%>
-
-    function a(b, c)
-        b++;
-        return b + c;
-    end
-
-    "./etlTest.lua"
-
-    "afd.lua"
-    ""
-    "dfs/dsf"
-
-
-    a>9
-    
-    --[[
-        <% %>
-        <%lua "dsf"
-    --]]
-%>

@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
+//etl
 let lex_main = {
   startConditions: {
     etl: 1,
@@ -81,6 +82,95 @@ let include_main = `
 
 `
 
+/* ETL
+
+  build
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etl.g -o sdk/parser/etlParser.js --loc
+
+  语法验证
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etl.g --validate
+
+  不包含语法时的词法检查
+  node sdk/parser/build.js && syntax-cli --lex sdk/parser/build/etl_lex.g --tokenize -f test/parsertest/etlTest.etl --loc
+
+  包含语法时的词法检查
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etl.g --tokenize -f test/parsertest/etlTest.etl --loc
+
+  语法分析
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etl.g -o sdk/parser/etlParser.js --loc && syntax-cli -m slr1 -g sdk/parser/build/etl.g -f test/parsertest/etlTest.etl --loc
+*/
+
+
+// segtype
+let lex_segtype = {
+  rules: [
+    ["uint", "return 'UINT'" ],
+    ["int", "return 'INT'" ],
+    ["float", "return 'FLOAT'"],
+    ["double", "return 'DOUBLE'"],
+    ["string", "return 'STRING'"],
+    ["(6[0-4])|([1-5][0-9])|([1-9])", "return 'LEN'"],
+    [">", "return '>'"],
+    ["<", "return '<'"],
+    ["!", "return '!'"],
+    ["&", "return '&'"],
+    ["\\s+", ""],
+  ],
+}
+
+let bnf_segtype = {
+
+  segtype: [
+    ["basetype", "$$ = $basetype;"],
+    ["basetype byteorder", "$basetype.order = $byteorder; $$=$basetype;"],
+    ["strtype", "$$ = $strtype;"],
+    ["strtype byteorder", "$strtype.order = $byteorder; $$=$strtype;"],
+    ["basetype encode", "$basetype.encode = $encode; $$=$basetype;"],
+    ["basetype byteorder encode", "$basetype.encode = $encode; $basetype.order = $byteorder; $$=$basetype;"],
+    ["basetype encode byteorder", "$basetype.encode = $encode; $basetype.order = $byteorder; $$=$basetype;"],
+  ],
+
+  basetype: [
+    ["INT LEN", "$$ = {type: 'integer', bitcount: eval($LEN), signed: true}"],
+    ["UINT LEN", "$$ = {type: 'integer', bitcount: eval($LEN), signed: false}"],
+    ["FLOAT", "$$ = {type: 'float'}"],
+    ["DOUBLE", "$$ = {type: 'double'}"],
+  ],
+
+  strtype: [
+    ["STRING", "$$ = {type: 'string'}"],
+  ],
+
+  byteorder: [
+    [">", "$$ = 'bigorder'"],
+    ["<", "$$ = 'smallorder'"],
+  ],
+
+  encode: [
+    ["&", "$$ = 'complement'"],
+    ["!", "$$ = 'inversion'"],
+  ]
+}
+
+/* segment
+
+  build
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/segtype.g -o sdk/parser/segParser.js --loc
+
+  语法验证
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/segtype.g --validate
+
+  不包含语法时的词法检查
+  node sdk/parser/build.js && syntax-cli --lex sdk/parser/build/segtype_lex.g --tokenize -p "int8"
+
+  包含语法时的词法检查
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/segtype.g --tokenize -p "double>"
+
+  语法分析
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/segtype.g -o sdk/parser/segParser.js && syntax-cli -m slr1 -g sdk/parser/build/segtype.g -p "string>"
+*/
+
+// lex
 let lex_etx = {
   rules: [
     ["\\/\\*[^*]*\\*+([^\\/][^*]*\\*+)*\\/", "/*return 'COMMENT_BLOCK'*/" ],
@@ -245,7 +335,6 @@ let bnf_etx = {
 
 }
 
-
 let include_etx = `
 
     function newList(item) {
@@ -285,8 +374,10 @@ let include_etx = `
         value: exp,
         name_from: id_loc.startOffset,
         name_to: id_loc.endOffset,
+        name_line: id_loc.startLine,
         value_from: exp_loc.startOffset,
         value_to: exp_loc.endOffset,
+        value_line: exp_loc.startLine,
       }
     }
 
@@ -297,6 +388,7 @@ let include_etx = `
         seglist: seglist,
         exp_from: exp_loc.startOffset,
         exp_to: exp_loc.endOffset,
+        exp_line: exp_loc.startLine,
       }
     }
 
@@ -307,6 +399,7 @@ let include_etx = `
         seglist: seglist,
         name_from: name_loc.startOffset,
         name_to: name_loc.endOffset,
+        name_line: name_loc.startLine,
       }
     }
 
@@ -316,6 +409,7 @@ let include_etx = `
         name: name,
         name_from: name_loc.startOffset,
         name_to: name_loc.endOffset,
+        name_line: name_loc.startLine,
       }
       res[body_name] = body;
       return res;
@@ -347,7 +441,7 @@ let operators = [
   node parser/build.js && syntax-cli -m slr1 -g parser/build/etx.g --tokenize -f parser/test/etxTest.etx --loc
 
   语法分析
-  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etx.g -o src/parser/etxParser.js --loc && syntax-cli -m slr1 -g src/parser/build/etx.g -f test/parsertest/etxTest.etx --loc
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g -o sdk/parser/etxParser.js --loc && syntax-cli -m slr1 -g sdk/parser/build/etx.g -f test/proj_temp/etxTest.etx --loc
 
 */
 
@@ -355,24 +449,8 @@ fs.writeFileSync(path.join(__dirname, 'build/etl_lex.g'), JSON.stringify(lex_mai
 fs.writeFileSync(path.join(__dirname, 'build/etl.g'), JSON.stringify({lex: lex_main, bnf: bnf_main, moduleInclude: include_main}, null, 4));
 fs.writeFileSync(path.join(__dirname, 'build/etx_lex.g'), JSON.stringify(lex_etx, null, 4));
 fs.writeFileSync(path.join(__dirname, 'build/etx.g'), JSON.stringify({lex: lex_etx, operators: operators, bnf: bnf_etx, moduleInclude: include_etx}, null, 4));
-
-/* EST
-
-  build
-  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g -o src/parser/etlParser.js --loc
-
-  语法验证
-  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g --validate
-
-  不包含语法时的词法检查
-  node src/parser/build.js && syntax-cli --lex src/parser/build/etl_lex.g --tokenize -f test/parsertest/etlTest.etl --loc
-
-  包含语法时的词法检查
-  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g --tokenize -f test/parsertest/etlTest.etl --loc
-
-  语法分析
-  node src/parser/build.js && syntax-cli -m slr1 -g src/parser/build/etl.g -o src/parser/etlParser.js --loc && syntax-cli -m slr1 -g src/parser/build/etl.g -f test/parsertest/etlTest.etl --loc
-*/
+fs.writeFileSync(path.join(__dirname, 'build/segtype_lex.g'), JSON.stringify(lex_segtype, null, 4));
+fs.writeFileSync(path.join(__dirname, 'build/segtype.g'), JSON.stringify({lex: lex_segtype, bnf: bnf_segtype}, null, 4));
 
 
 
