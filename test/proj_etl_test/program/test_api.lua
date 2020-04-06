@@ -23,10 +23,15 @@ function Test_hex_buf()
     print(':: test string.hex && string.buf ::')
     local str1 = 'FA E2 98 E6 AC DF 3D';
     local strbuf = string.buf(str1)
-    verify(#strbuf == 7)
+    if not verify(#strbuf == 7) then
+        print(#strbuf)
+    end
 
     local str2 = string.hex(strbuf)
-    verify(str1 == str2)
+    if not verify(str1 == str2) then
+        print(str2)
+    end
+    
     print(':: ok ::\n')
 end
 
