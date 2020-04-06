@@ -5,15 +5,12 @@
         这是多行注释///
         *** 多行注释
     */
-    protocol prot_namef {
+    protocol prot_name1c {
         segment _1 {}
-        segment seg_name { parser: {
-            pack: abc,
-            unpack: efg
-        } }
+        segment seg_name { parser: 'float' }
         segment seg_name { parser: 'int8' }
         segments df {
-            segment dfhhh { parser: "int9>!" }
+            segment dfhhh { parser: "double" }
         }
     }
 
@@ -21,18 +18,18 @@
         这是多行注释/// 
         *** 多行注释
     */
-    protocol aaa1 {
+    protocol aaab {
         segment df { parser: 'int8' }
-        segment seg_name { parser: 'int8', autovalue: a+9>this.b }
+        segment seg_name { parser: 'int8' }
         segment seg_a { parser: 'int8' }
-        segment seg_dfs { parser: "float>", repeated: this.a/3, autovalue:(this.c*8)-8 }
-        segment seg_dfs { parser: "double!" }
+        segment seg_dfs { parser: "string" }
+        segment seg_dfs { parser: "double" }
     }
 
-    protocol prot_name21 {
+    protocol prot_namea {
         segment seg_name { parser: 'int8' }
         segments sdf {
-            segment dsf { parser: 'string<' }
+            segment dsf { parser: 'int8' }
         }
         oneof(exp) {
             segment seg_name { parser: 'int8', autovalue: ["aaa", 123, 'bbb', %FFAFE ae 2445%] }
@@ -43,13 +40,12 @@
                 repeated: bytesize(this.seg9),
                 autovalue: 0x98AF
             }
-            segment seg4 { parser: 'string' }
+            segment seg4 { parser: 'int8' }
         }
         oneof(exp) {
-            segment seg_name { parser: 'double > !' }
+            segment seg_name { parser: 'int8' }
         }
         oneof(this.token==9) {
 
         }
     }
-

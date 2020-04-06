@@ -1,6 +1,8 @@
-const path = require("path");
+const path = require('path');
+const fs = require('fs');
 const RpcTask = require('./rpctask');
 const parser = require('./parser')
+const protocols = require('./protocols')
 
 class SdkApi {
     constructor(ip, port) {
@@ -22,7 +24,13 @@ class SdkApi {
     makeenv(proj_path, callback) {
         try {
             let proj_apath = path.isAbsolute(proj_path) ? proj_path : path.resolve(proj_path);
-            return this._xfn('makeenv', {proj_apath: proj_apath, protos: "aa", devices: null}, callback);
+            let protos = protocols(path.join(proj_apath, 'protocol'));
+            let xtra_path = path.join(proj_apath, 'protocol', 'xtra.lua');
+            let xtra = null;
+            if(fs.existsSync(xtra_path)) {
+                xtra = fs.readFileSync(xtra_path, 'utf8');
+            }
+            return this._xfn('makeenv', {proj_apath: proj_apath, protos: protos, proto_xtra: xtra, devices: null}, callback);
         } catch (error) {
             if(callback) {
                 callback(error);

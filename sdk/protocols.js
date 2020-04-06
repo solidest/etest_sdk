@@ -28,10 +28,10 @@ function getEtls(pf, results) {
 }
 
 //分析解析器字符串
-function getStrSegType(seg, pser, vp, file) {
+function getSegStrType(seg, pser, vp, file) {
     try {
         let ast = segparser.parse(vp);
-        seg.seg_type = ast.type;
+        seg.kind = ast.type;
         if(ast.bitcount) {
             seg.bitcount = ast.bitcount;
             seg.signed = ast.signed;
@@ -49,7 +49,7 @@ function getStrSegType(seg, pser, vp, file) {
 }
 
 //分析自定义解析器
-function getArrSegType(seg, pser, props, file) {
+function getSegArrType(seg, pser, props, file) {
     let pack = props.find(it=>it.name==='pack');
     if(pack) {
         let v = pack.value;
@@ -75,9 +75,29 @@ function getArrSegType(seg, pser, props, file) {
     if(!seg.pack && !seg.unpack) {
         throw new Error(`"parser"属性设置错误(${file} : ${pser.value_line||''})`);
     }
-    seg.seg_type = "string";
+    seg.kind = "string";
 
     return;
+}
+
+const _porps_dels = [
+    'name_from',
+    'name_to',
+    'name_line',
+    'exp_from',
+    'exp_to',
+    'exp_line',
+    'props',
+    'parser'
+]
+
+//清除多余的属性
+function clearprops(o) {
+    for(let pn of _porps_dels) {
+        if(o[pn]) {
+            delete o[pn]
+        }
+    }
 }
 
 const _props_nams = [
@@ -87,47 +107,51 @@ const _props_nams = [
 ];
 
 //检查属性名称是否都在有效范围内
-function checkSegProps(props, file) {
-    for(let p of props) {
-        if(!_props_nams.includes(p.name)) {
-            throw new Error(`无法识别的属性"${p.name}" (${file} : ${p.name_line||''})`)
+function checkSegProps(seg, file) {
+    if(seg.kind !== 'nil') {
+        for(let p of seg.props) {
+            if(!_props_nams.includes(p.name)) {
+                throw new Error(`无法识别的属性"${p.name}" (${file} : ${p.name_line||''})`)
+            } else {
+                seg[p.name] = p.value;
+            }
         }
     }
+    clearprops(seg);
 }
 
 //解析一个实体字段的解析器类型
 function parseSegType(file, seg) {
     if(seg.kind==="segment") {
         if(!seg.props || seg.props.length===0) {
-            seg.seg_type = "nil";
-            return;
+            seg.kind = "nil";
+            return checkSegProps(seg, file);
         }
-
-        checkSegProps(seg.props, file);
 
         let pser = seg.props.find(it=>it.name==='parser');
         if(!pser) {
             throw new Error(`"parser"属性未设置(${file} : ${pser.value_line||''})`);
         }
-
-
         if(pser.value.kind === 'string') {
-            return getStrSegType(seg, pser, pser.value.value, file);
+            getSegStrType(seg, pser, pser.value.value, file);
         } else if(pser.value instanceof Array) {
-            return getArrSegType(seg, pser, pser.value, file);
+            getSegArrType(seg, pser, pser.value, file);
         } else {
-            console.log('ERR parser.kind', typeof pser.value, pser)
+            throw new Error('ERR parser.kind : ' + typeof pser.value, pser)
         }
+        return checkSegProps(seg, file);
 
     } else if(seg.kind==='protocol' || seg.kind==='seggroup' || seg.kind==='oneof') {
         if(!seg.seglist || seg.seglist.length==0) {
+            clearprops(seg);
             return;
         }
         for(let sg of seg.seglist) {
             parseSegType(file, sg);
         }
+        clearprops(seg);
     } else {
-        console.log('ERR seg.kind', seg.kind)
+        throw new Error('ERR seg.kind : ' + seg.kind)
     }
 }
 
@@ -161,7 +185,11 @@ function parseProtocols(pf) {
     }
     let asts = [];
     for(let f of files) {
-        parseProtocol(f, asts, pf);
+        try {
+            parseProtocol(f, asts, pf);
+        } catch (error) {
+            throw new Error(`解析文件"${path.relative(pf, f)}"出错: ${error.message}`)
+        }
     }
     for(let p of asts) {
         parseSegType(p.src, p);

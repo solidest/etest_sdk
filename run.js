@@ -55,7 +55,7 @@ function onWarn(info) {
 
 function callback(err, res, id) {
     if (err) {
-        return onError(err.message ? err.message : err, id);
+        return onError(err.message||err, id);
     }
     return onRecved(id, res);
 }
@@ -63,7 +63,7 @@ function callback(err, res, id) {
 //创建环境 proj_path: 项目文件夹路径
 function makeEnv(proj_path) {
     let id = api.makeenv(proj_path, callback);
-    onSended(id, 'makeenv');
+    onSended(id || ' ', 'makeenv');
 }
 
 //执行测试 proj_path: 项目文件夹路径，run_file: 执行入口文件, vars: 输入参数取值, option: 自定义选项
@@ -75,7 +75,7 @@ function startRun(proj_path, run_file, vars, option) {
             run_id = res;
         }
     });
-    onSended(id, 'start');
+    onSended(id || ' ', 'start');
 }
 
 //读取执行输出
@@ -144,7 +144,7 @@ if (argv == 'state') {
         callback(err, res, id);
         process.exit(0);
     });
-    onSended(id, 'state');
+    onSended(id || ' ', 'state');
 } else if (argv == 'stop') {
     let id = api.state((err, res, id) => {
         callback(err, res, id);
@@ -153,12 +153,12 @@ if (argv == 'state') {
                 callback(err, res, id);
                 process.exit(0);
             });
-            onSended(id, 'stop');
+            onSended(id || ' ', 'stop');
         } else {
             process.exit(0);
         }
     });
-    onSended(id, 'state');
+    onSended(id || ' ', 'state');
 
 } else if (argv == 'start') {
     makeEnv(proj);

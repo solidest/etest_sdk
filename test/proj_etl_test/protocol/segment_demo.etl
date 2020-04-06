@@ -1,0 +1,9 @@
+protocol prot1 {
+    segment a {
+        parser: 'string',
+        autovalue: % AF B3 76 EB C9 %
+    }
+    segment b {
+        parser: "uint16 >"
+    }
+}

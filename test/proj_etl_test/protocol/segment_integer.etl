@@ -1,5 +1,0 @@
-protocol prot1 {
-    sengment a {
-        parser: 'i8 > !'
-    }
-}
