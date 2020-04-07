@@ -3,7 +3,7 @@
 
 const net = require('net');
 
-const magic = 0xbaddad;
+const magic = 0x7777;
 
 //打包解包
 class Frame {
@@ -87,7 +87,7 @@ class Frame {
                 return null;
             }
         }
-        if(first.readInt32BE(0)!==magic) {
+        if(first.readInt16BE(2)!==magic) {
             throw new Error('json rpc error');
         }
         return this._unpack(first.readInt32BE(4) + 8);
