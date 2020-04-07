@@ -3,7 +3,7 @@ const SdkApi = require('./sdk');
 
 /*
     api: sdk对象
-    proj: 项目文件夹路径，与当前目录的相对路径
+    proj: 项目文件夹路径，与当前目录的相对路
     entry: 包含entry函数的执行文件，与proj的相对路径
     _vars: 输入给entry的参数值
     _option: 输入给entry的自定义选项

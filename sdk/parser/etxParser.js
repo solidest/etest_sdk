@@ -125,7 +125,7 @@ const productions = [[-1,1,(_1,_1loc) => { __loc = yyloc(_1loc, _1loc);__ = _1 }
 [16,3,(_1,_2,_3,_1loc,_2loc,_3loc) => { __loc = yyloc(_1loc, _3loc);__ = joinKindList(_1, _3); }],
 [17,1,(_1,_1loc) => { __loc = yyloc(_1loc, _1loc);__ = {kind: 'string', value: eval(yytext)}; }],
 [17,1,(_1,_1loc) => { __loc = yyloc(_1loc, _1loc);__ = {kind: 'string', value: eval(yytext)}; }],
-[17,1,(_1,_1loc) => { __loc = yyloc(_1loc, _1loc);__ = {kind: 'strhex',  value: yytext}; }]];
+[17,1,(_1,_1loc) => { __loc = yyloc(_1loc, _1loc);__ = {kind: 'strhex',  value: yytext.replace(/%/g, '')}; }]];
 
 /**
  * Encoded tokens map.

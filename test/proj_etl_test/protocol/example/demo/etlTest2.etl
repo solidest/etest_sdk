@@ -32,7 +32,7 @@
             segment dsf { parser: 'int8' }
         }
         oneof(exp) {
-            segment seg_name { parser: 'int8', autovalue: ["aaa", 123, 'bbb', %FFAFE ae 2445%] }
+            segment seg_name { parser: 'int8' }
             segment seg_2 {}
             segment seg3 { 
                 parser: 'int8', 

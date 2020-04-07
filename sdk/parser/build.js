@@ -330,7 +330,7 @@ let bnf_etx = {
   str: [
     ["STRING_TRIPLE", "$$ = {kind: 'string', value: eval(yytext)};"],
     ["STRING_SINGLE", "$$ = {kind: 'string', value: eval(yytext)};"],
-    ["STRING_HEX", "$$ = {kind: 'strhex',  value: yytext};"],
+    ["STRING_HEX", "$$ = {kind: 'strhex',  value: yytext.replace(/%/g, '')};"],
   ],
 
 }
