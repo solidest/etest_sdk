@@ -1,0 +1,699 @@
+[{
+    "kind": "protocol",
+    "name": "prot_namef",
+    "seglist": [{
+        "kind": "nil",
+        "name": "_1"
+    }, {
+        "kind": "string",
+        "name": "seg_name",
+        "pack": "abc",
+        "unpack": "efg"
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "seggroup",
+        "name": "df",
+        "seglist": [{
+            "kind": "integer",
+            "name": "dfhhh",
+            "bitcount": 9,
+            "signed": true,
+            "encode": "inversion",
+            "order": "bigorder"
+        }]
+    }],
+    "src": "example/demo/etlTest.etl"
+}, {
+    "kind": "protocol",
+    "name": "aaa1",
+    "seglist": [{
+        "kind": "integer",
+        "name": "df",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true,
+        "autovalue": {
+            "kind": "gt",
+            "left": {
+                "kind": "add",
+                "left": {
+                    "kind": "pid",
+                    "list": ["a"]
+                },
+                "right": {
+                    "kind": "number",
+                    "value": 9
+                }
+            },
+            "right": {
+                "kind": "pid",
+                "list": ["this", "b"]
+            }
+        }
+    }, {
+        "kind": "integer",
+        "name": "seg_a",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "float",
+        "name": "seg_dfs",
+        "order": "bigorder",
+        "repeated": {
+            "kind": "divide",
+            "left": {
+                "kind": "pid",
+                "list": ["this", "a"]
+            },
+            "right": {
+                "kind": "number",
+                "value": 3
+            }
+        },
+        "autovalue": {
+            "kind": "subtract",
+            "left": {
+                "kind": "multiply",
+                "left": {
+                    "kind": "pid",
+                    "list": ["this", "c"]
+                },
+                "right": {
+                    "kind": "number",
+                    "value": 8
+                }
+            },
+            "right": {
+                "kind": "number",
+                "value": 8
+            }
+        }
+    }, {
+        "kind": "double",
+        "name": "seg_dfs",
+        "encode": "inversion"
+    }],
+    "src": "example/demo/etlTest.etl"
+}, {
+    "kind": "protocol",
+    "name": "prot_name21",
+    "seglist": [{
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "seggroup",
+        "name": "sdf",
+        "seglist": [{
+            "kind": "string",
+            "name": "dsf",
+            "order": "smallorder"
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "pid",
+            "list": ["exp"]
+        },
+        "seglist": [{
+            "kind": "integer",
+            "name": "seg_name",
+            "bitcount": 8,
+            "signed": true,
+            "autovalue": {
+                "kind": "array",
+                "list": [{
+                    "kind": "string",
+                    "value": "aaa"
+                }, {
+                    "kind": "number",
+                    "value": 123
+                }, {
+                    "kind": "string",
+                    "value": "bbb"
+                }, {
+                    "kind": "strhex",
+                    "value": "%FFAFE ae 2445%"
+                }]
+            }
+        }, {
+            "kind": "nil",
+            "name": "seg_2"
+        }, {
+            "kind": "integer",
+            "name": "seg3",
+            "bitcount": 8,
+            "signed": true,
+            "autovalue": {
+                "kind": "number",
+                "value": 39087
+            },
+            "repeated": {
+                "kind": "fn_call",
+                "pname": {
+                    "kind": "pid",
+                    "list": ["bytesize"]
+                },
+                "args": {
+                    "kind": "array",
+                    "list": [{
+                        "kind": "pid",
+                        "list": ["this", "seg9"]
+                    }]
+                }
+            }
+        }, {
+            "kind": "string",
+            "name": "seg4"
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "pid",
+            "list": ["exp"]
+        },
+        "seglist": [{
+            "kind": "double",
+            "name": "seg_name",
+            "encode": "inversion",
+            "order": "bigorder"
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "eq_eq",
+            "left": {
+                "kind": "pid",
+                "list": ["this", "token"]
+            },
+            "right": {
+                "kind": "number",
+                "value": 9
+            }
+        },
+        "seglist": null
+    }],
+    "src": "example/demo/etlTest.etl"
+}, {
+    "kind": "protocol",
+    "name": "prot_namee",
+    "seglist": [{
+        "kind": "nil",
+        "name": "_1"
+    }, {
+        "kind": "double",
+        "name": "seg_name"
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "seggroup",
+        "name": "df",
+        "seglist": [{
+            "kind": "integer",
+            "name": "dfhhh",
+            "bitcount": 8,
+            "signed": false,
+            "order": "bigorder"
+        }]
+    }],
+    "src": "example/demo/etlTest2.etl"
+}, {
+    "kind": "protocol",
+    "name": "aaa23",
+    "seglist": [{
+        "kind": "integer",
+        "name": "df",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "integer",
+        "name": "seg_a",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "integer",
+        "name": "seg_dfs",
+        "bitcount": 64,
+        "signed": false,
+        "encode": "inversion",
+        "order": "bigorder"
+    }, {
+        "kind": "integer",
+        "name": "seg_dfs",
+        "bitcount": 1,
+        "signed": true
+    }],
+    "src": "example/demo/etlTest2.etl"
+}, {
+    "kind": "protocol",
+    "name": "prot_name3g",
+    "seglist": [{
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "seggroup",
+        "name": "sdf",
+        "seglist": [{
+            "kind": "integer",
+            "name": "dsf",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "pid",
+            "list": ["exp"]
+        },
+        "seglist": [{
+            "kind": "integer",
+            "name": "seg_name",
+            "bitcount": 8,
+            "signed": true,
+            "autovalue": {
+                "kind": "array",
+                "list": [{
+                    "kind": "string",
+                    "value": "aaa"
+                }, {
+                    "kind": "number",
+                    "value": 123
+                }, {
+                    "kind": "string",
+                    "value": "bbb"
+                }, {
+                    "kind": "strhex",
+                    "value": "%FFAFE ae 2445%"
+                }]
+            }
+        }, {
+            "kind": "nil",
+            "name": "seg_2"
+        }, {
+            "kind": "integer",
+            "name": "seg3",
+            "bitcount": 8,
+            "signed": true,
+            "autovalue": {
+                "kind": "number",
+                "value": 39087
+            },
+            "repeated": {
+                "kind": "fn_call",
+                "pname": {
+                    "kind": "pid",
+                    "list": ["bytesize"]
+                },
+                "args": {
+                    "kind": "array",
+                    "list": [{
+                        "kind": "pid",
+                        "list": ["this", "seg9"]
+                    }]
+                }
+            }
+        }, {
+            "kind": "integer",
+            "name": "seg4",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "pid",
+            "list": ["exp"]
+        },
+        "seglist": [{
+            "kind": "integer",
+            "name": "seg_name",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "eq_eq",
+            "left": {
+                "kind": "pid",
+                "list": ["this", "token"]
+            },
+            "right": {
+                "kind": "number",
+                "value": 9
+            }
+        },
+        "seglist": null
+    }],
+    "src": "example/demo/etlTest2.etl"
+}, {
+    "kind": "protocol",
+    "name": "aaa2",
+    "seglist": [{
+        "kind": "nil",
+        "name": "_1"
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 9,
+        "signed": false
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "seggroup",
+        "name": "df",
+        "seglist": [{
+            "kind": "string",
+            "name": "dfhhh",
+            "unpack": "fds"
+        }]
+    }],
+    "src": "example/etlTest.etl"
+}, {
+    "kind": "protocol",
+    "name": "aaa3",
+    "seglist": [{
+        "kind": "float",
+        "name": "df"
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "integer",
+        "name": "seg_a",
+        "bitcount": 12,
+        "signed": true,
+        "encode": "inversion",
+        "order": "bigorder"
+    }, {
+        "kind": "float",
+        "name": "seg_dfs",
+        "order": "bigorder"
+    }, {
+        "kind": "double",
+        "name": "seg_dfs",
+        "encode": "inversion"
+    }],
+    "src": "example/etlTest.etl"
+}, {
+    "kind": "protocol",
+    "name": "prot_name43",
+    "seglist": [{
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "seggroup",
+        "name": "sdf",
+        "seglist": [{
+            "kind": "integer",
+            "name": "dsf",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "pid",
+            "list": ["exp"]
+        },
+        "seglist": [{
+            "kind": "integer",
+            "name": "seg_name",
+            "bitcount": 8,
+            "signed": true,
+            "encode": "inversion",
+            "order": "bigorder",
+            "autovalue": {
+                "kind": "array",
+                "list": [{
+                    "kind": "string",
+                    "value": "aaa"
+                }, {
+                    "kind": "number",
+                    "value": 123
+                }, {
+                    "kind": "string",
+                    "value": "bbb"
+                }, {
+                    "kind": "strhex",
+                    "value": "%FFAFE ae 2445%"
+                }]
+            }
+        }, {
+            "kind": "nil",
+            "name": "seg_2"
+        }, {
+            "kind": "integer",
+            "name": "seg3",
+            "bitcount": 8,
+            "signed": true,
+            "autovalue": {
+                "kind": "number",
+                "value": 39087
+            },
+            "repeated": {
+                "kind": "fn_call",
+                "pname": {
+                    "kind": "pid",
+                    "list": ["bytesize"]
+                },
+                "args": {
+                    "kind": "array",
+                    "list": [{
+                        "kind": "pid",
+                        "list": ["this", "seg9"]
+                    }]
+                }
+            }
+        }, {
+            "kind": "integer",
+            "name": "seg4",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "pid",
+            "list": ["exp"]
+        },
+        "seglist": [{
+            "kind": "integer",
+            "name": "seg_name",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "eq_eq",
+            "left": {
+                "kind": "pid",
+                "list": ["this", "token"]
+            },
+            "right": {
+                "kind": "number",
+                "value": 9
+            }
+        },
+        "seglist": null
+    }],
+    "src": "example/etlTest.etl"
+}, {
+    "kind": "protocol",
+    "name": "prot_name1c",
+    "seglist": [{
+        "kind": "nil",
+        "name": "_1"
+    }, {
+        "kind": "float",
+        "name": "seg_name"
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "seggroup",
+        "name": "df",
+        "seglist": [{
+            "kind": "double",
+            "name": "dfhhh"
+        }]
+    }],
+    "src": "example/etlTest2.etl"
+}, {
+    "kind": "protocol",
+    "name": "aaab",
+    "seglist": [{
+        "kind": "integer",
+        "name": "df",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "integer",
+        "name": "seg_a",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "string",
+        "name": "seg_dfs"
+    }, {
+        "kind": "double",
+        "name": "seg_dfs"
+    }],
+    "src": "example/etlTest2.etl"
+}, {
+    "kind": "protocol",
+    "name": "prot_namea",
+    "seglist": [{
+        "kind": "integer",
+        "name": "seg_name",
+        "bitcount": 8,
+        "signed": true
+    }, {
+        "kind": "seggroup",
+        "name": "sdf",
+        "seglist": [{
+            "kind": "integer",
+            "name": "dsf",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "pid",
+            "list": ["exp"]
+        },
+        "seglist": [{
+            "kind": "integer",
+            "name": "seg_name",
+            "bitcount": 8,
+            "signed": true,
+            "autovalue": {
+                "kind": "array",
+                "list": [{
+                    "kind": "string",
+                    "value": "aaa"
+                }, {
+                    "kind": "number",
+                    "value": 123
+                }, {
+                    "kind": "string",
+                    "value": "bbb"
+                }, {
+                    "kind": "strhex",
+                    "value": "%FFAFE ae 2445%"
+                }]
+            }
+        }, {
+            "kind": "nil",
+            "name": "seg_2"
+        }, {
+            "kind": "integer",
+            "name": "seg3",
+            "bitcount": 8,
+            "signed": true,
+            "autovalue": {
+                "kind": "number",
+                "value": 39087
+            },
+            "repeated": {
+                "kind": "fn_call",
+                "pname": {
+                    "kind": "pid",
+                    "list": ["bytesize"]
+                },
+                "args": {
+                    "kind": "array",
+                    "list": [{
+                        "kind": "pid",
+                        "list": ["this", "seg9"]
+                    }]
+                }
+            }
+        }, {
+            "kind": "integer",
+            "name": "seg4",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "pid",
+            "list": ["exp"]
+        },
+        "seglist": [{
+            "kind": "integer",
+            "name": "seg_name",
+            "bitcount": 8,
+            "signed": true
+        }]
+    }, {
+        "kind": "oneof",
+        "exp": {
+            "kind": "eq_eq",
+            "left": {
+                "kind": "pid",
+                "list": ["this", "token"]
+            },
+            "right": {
+                "kind": "number",
+                "value": 9
+            }
+        },
+        "seglist": null
+    }],
+    "src": "example/etlTest2.etl"
+}, {
+    "kind": "protocol",
+    "name": "prot1",
+    "seglist": [{
+        "kind": "string",
+        "name": "a",
+        "autovalue": {
+            "kind": "strhex",
+            "value": "% AF B3 76 EB C9 %"
+        }
+    }, {
+        "kind": "integer",
+        "name": "b",
+        "bitcount": 16,
+        "signed": false,
+        "order": "bigorder"
+    }],
+    "src": "segment_demo.etl"
+}]

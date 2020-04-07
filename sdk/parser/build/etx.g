@@ -452,7 +452,7 @@
             ],
             [
                 "STRING_HEX",
-                "$$ = {kind: 'strhex',  value: yytext};"
+                "$$ = {kind: 'strhex',  value: yytext.replace(/%/g, '')};"
             ]
         ]
     },
