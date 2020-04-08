@@ -1,8 +1,16 @@
 
 # ETestDev开发手册
 
+
 ## Outer Api
 ETest与外部交互使用的API，主要目的是供UI程序集成时使用
+
+#### protocol
+
+- 全局表对象
+- 表内的元素是所有项目内定义的协议
+- key值为协议名称
+- value值为协议解析器对应的C语言对象
 
 #### makeenv
 
@@ -59,6 +67,22 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 返回测试程序自启动至当前时长
 - 默认返回时长单位是 ms
 - 输入可选字符串参数 'ms' 或 'us' 或 'ns' 指定时长单位
+
+#### message
+
+- 用指定协议的创建消息
+- 第二个可选参数用于初始化消息内容
+
+#### pack
+
+- pack(msg) 将消息打包
+- pack(protocol.xxx, data) 使用指定协议打包数据
+- 返回值是打包后的buffer
+
+#### unpack
+
+- unpack(protocol.xxx, buffer) 使用指定协议解包buffer
+- 返回解包后的结果数据
 
 #### error
 

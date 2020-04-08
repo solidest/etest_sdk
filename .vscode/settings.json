@@ -4,6 +4,10 @@
         "exit",
         "verify",
         "delay",
-        "now"
+        "now",
+        "protocol",
+        "message",
+        "pack",
+        "unpack"
     ]
 }

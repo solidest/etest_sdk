@@ -10,8 +10,8 @@ const SdkApi = require('./sdk');
 */
 
 let api = new SdkApi('etest', 1210);
-let proj = 'test/proj_etl_test';
-let entry = 'program/hello_world.lua';
+let proj = 'test/proj_dev_temp';
+let entry = 'program/protocol_api_test.lua';
 // let entry = 'program/test_api.lua';
 // let entry = 'program/demo.lua';
 let _vars = {
