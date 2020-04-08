@@ -6,6 +6,7 @@
   "scripts": {
     "build:parser": "node sdk/parser/build.js",
     "start": "node run.js start",
+    "dev": "node dev.js start",
     "stop": "node run.js stop",
     "state": "node run.js state",
     "test": "node test.js"
