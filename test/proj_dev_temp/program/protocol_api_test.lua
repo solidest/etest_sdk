@@ -68,13 +68,34 @@ function Test_string()
     print(data2)
 end
 
+function Test_segments_mathequal()
+    local p = { x = 888.32324, y= -234.3893}
+    local data1 = { token = 0x55aa, point = p}
+    local data2 = unpack(protocol.prot_point, pack(protocol.prot_point, data1));
+    assert(math.isequal(data2.point.x, data1.point.x))
+    assert(math.isequal(data2.point.y, data1.point.y))
+    print('Test_segments_mathequal ok')
+end
+
+function Test_oneof_exp()
+    local data1 = {type=2, x=1.11, y=2.22, z=3.33}
+    local data2 = unpack(protocol.prot_oneof, pack(protocol.prot_oneof, data1))
+    assert(data2.z==nil)
+    data1.type = 3
+    data2 = unpack(protocol.prot_oneof, pack(protocol.prot_oneof, data1))
+    assert(math.isequal(data1.z, data2.z))
+    print('Test_oneof_exp ok')
+end
+
 function entry(vars, option)
-    -- print("Hello World!", vars, option)
+    print("Hello World!", vars, option)
     -- Test_protocol()
     -- Test_message()
     -- Test_pack_message()
     -- Test_pack_unpack()
     -- Test_segment_array()
-    Test_string()
+    -- Test_string()
+    -- Test_segments_mathequal()
+    Test_oneof_exp()
     exit()
 end

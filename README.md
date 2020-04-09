@@ -191,3 +191,9 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 
 ### math库
 
+#### math.isequal(f1, f2, is_double)
+
+- 判定两个浮点数是否相等
+- 第三个可选参数为布尔型，true：double方式比较， false：float方式比较
+- 默认按float方式比较
+

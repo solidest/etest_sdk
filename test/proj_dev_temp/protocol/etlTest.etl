@@ -22,6 +22,26 @@
         segment str1 { parser: 'string', length: 4 }
         segment str2 { parser: 'string', endwith: '\\0' }
         segment str3 { parser: 'string' }
+    }
 
+    protocol prot_point {
+        segment token { parser: 'uint32' }
+        segments point {
+            segment x { parser: 'float' }
+            segment y { parser: 'float' }
+        }
+    }
+
+    protocol prot_oneof {
+        segment type { parser: 'int8' }
+        oneof(this.type==2) {
+            segment x { parser: 'float' }
+            segment y { parser: 'float' }
+        }
+        oneof(this.type*2*3-1==17) {
+            segment x { parser: 'float' }
+            segment y { parser: 'float' }
+            segment z { parser: 'float' }
+        }
     }
 
