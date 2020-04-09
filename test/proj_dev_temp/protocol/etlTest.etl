@@ -45,3 +45,57 @@
         }
     }
 
+    protocol prot_debug {
+        segment seg_14 { parser: 'uint14'}
+        segment seg_2 { parser: 'uint2'}
+    }
+
+     protocol prot_12 {
+        segment seg_1 { parser: 'uint1' }
+        segment seg_2 { parser: 'uint2' }
+
+        segment seg_3 { parser: 'uint3' }
+        segment seg_4 { parser: 'uint4' }
+
+        segment seg_5 { parser: 'uint5' }
+        segment seg_6 { parser: 'uint6' }
+
+        segment seg_7 { parser: 'uint7' }
+
+        segment seg_8 { parser: 'uint8' }
+        segment seg_9 { parser: 'uint9' }
+
+        segment seg_10 { parser: 'uint10' }
+        segment seg_11 { parser: 'uint11' }
+
+        segment seg_12 { parser: 'uint12' }
+        segment seg_13 { parser: 'uint13' }
+
+        segment seg_14 { parser: 'uint14'}
+        segment seg_15 { parser: 'uint15' }
+        segment seg_16 { parser: 'uint16' }
+        segment seg_17 { parser: 'uint17' }
+        segment seg_18 { parser: 'uint18' }
+
+        segment seg_19 { parser: 'uint19' }
+        segment seg_20 { parser: 'uint20' }
+
+        segment seg_21 { parser: 'uint21' }
+        segment seg_22 { parser: 'uint22' }
+
+        segment seg_23 { parser: 'uint23' }
+
+        segment seg_24 { parser: 'uint24' }
+        segment seg_25 { parser: 'uint25' }
+
+        segment seg_26 { parser: 'uint26' }
+        segment seg_27 { parser: 'uint27' }
+
+        segment seg_28 { parser: 'uint28' }
+        segment seg_29 { parser: 'uint29' }
+
+        segment seg_30 { parser: 'uint30' }
+        segment seg_31 { parser: 'uint31' }
+        segment seg_32 { parser: 'uint32' }
+    }
+

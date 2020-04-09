@@ -1,10 +1,10 @@
 
 function Test_pack_unpack()
 
-    local data_send = {seg_1 = -111, seg_2 = 89}
+    local data_send = {seg_1 = -111, seg_2 = 189}
     local buf = pack(protocol.prot_1, data_send)
 
-    local lua_buf = string.pack('i4i2', -111, 89)
+    local lua_buf = string.pack('i4i2', -111, 189)
     assert(lua_buf == buf)
 
     local data_recv = unpack(protocol.prot_1, buf)
@@ -87,7 +87,33 @@ function Test_oneof_exp()
     print('Test_oneof_exp ok')
 end
 
+-- 验证uint随机值
+function Unit_S_pro()
+    local data_send = {seg_15=32768,seg_17=131072,seg_14=16383,seg_18=26144}
+    local buf = pack(protocol.prot_12, data_send)
+    local data_recv = unpack(protocol.prot_12, buf)
+    print(data_recv.seg_14, data_send.seg_14)
+    print(data_recv)
+    assert(
+        data_recv.seg_14 == data_send.seg_14 
+    and data_recv.seg_15 == data_send.seg_15 
+    and data_recv.seg_17 == data_send.seg_17 
+    and data_recv.seg_18 == data_send.seg_18
+    ) 
+end
+
+function Test_debug()
+    local data1 = { seg_14=16383, seg_2=1}
+    local buf = pack(protocol.prot_debug, data1)
+    print(string.hex(buf))
+    local data2 = unpack(protocol.prot_debug, buf)
+    print(data1)
+    print(data2)
+end
+
 function entry(vars, option)
+    -- Test_debug()
+    Unit_S_pro()
     -- print("Hello World!", vars, option)
     -- Test_protocol()
     -- Test_message()
@@ -96,6 +122,6 @@ function entry(vars, option)
     -- Test_segment_array()
     -- Test_string()
     -- Test_segments_mathequal()
-    Test_oneof_exp()
+    -- Test_oneof_exp()
     exit()
 end
