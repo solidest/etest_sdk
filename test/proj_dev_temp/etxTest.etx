@@ -5,7 +5,7 @@
     */
     protocol prot_name {
         segment _1 {}
-        segment seg_name { parser: '' }
+        segment seg_name[100] { parser: '' }
         segment seg_name { parser: 'int8' }
         segments df {
             segment dfhhh { parser: "" }
@@ -45,6 +45,7 @@
             segment seg_name { parser: 'int8' }
         }
         oneof(this.token==9) {
-
+            segment sega [10] {}
+            segment segb[ this.a*8] { parser: 'int9', autovalue: 100}
         }
     }

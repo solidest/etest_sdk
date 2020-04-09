@@ -16,7 +16,7 @@ function Test_pack_unpack()
 end
 
 function Test_pack_message()
-    local msg1 = message(protocol.prot_1, {seg_1=0xAF})
+    local msg1 = message(protocol.prot_1, {seg_1=0xAF} )
     local msg2 = message(protocol.prot_1)
     msg2.seg_1 = 175;
     local buf = pack(msg1)
@@ -43,11 +43,38 @@ function Test_protocol()
     end 
 end
 
+function Test_segment_array()
+    local data1 = {}
+    data1.seg_1 = {true, false, true, false, 1, 0, true, false}
+    data1.seg_2 = {7.88, -9.44, 268888}
+    data1.seg_3 = 9999.88889
+    local buf = pack(protocol.prot_2, data1)
+    print(string.hex(buf))
+    local data2 = unpack(protocol.prot_2, buf)
+    print(data1, '\n', data2)
+end
+
+function Test_string()
+    local data1 = {}
+    data1.str1 = "abcd"
+    data1.str2 = "FSDDSFiou*789320!@#$%"
+    data1.str3 = "的房间看了都放假了"
+    data1.len = #data1.str2
+    print(data1.str2)
+
+    local data2 = unpack(protocol.prot_str, pack(protocol.prot_str, data1))
+    assert(data1.str1 == data2.str1)
+    assert(data1.str2 == data2.str2)
+    print(data2)
+end
+
 function entry(vars, option)
     -- print("Hello World!", vars, option)
-    Test_protocol()
-    Test_message()
-    Test_pack_message()
-    Test_pack_unpack()
+    -- Test_protocol()
+    -- Test_message()
+    -- Test_pack_message()
+    -- Test_pack_unpack()
+    -- Test_segment_array()
+    Test_string()
     exit()
 end

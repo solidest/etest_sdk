@@ -7,6 +7,8 @@
     "build:parser": "node sdk/parser/build.js",
     "start": "node run.js start",
     "dev": "node dev.js start",
+    "devstop": "node dev.js stop",
+    "devstate": "node dev.js state",
     "stop": "node run.js stop",
     "state": "node run.js state",
     "test": "node test.js"

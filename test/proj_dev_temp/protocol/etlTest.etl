@@ -10,8 +10,18 @@
         segment seg_2 { parser: 'int16' }
     }
 
-     protocol prot_2 {
-        segment seg_1 { parser: 'uint8' }
-        segment seg_1 { parser: 'float' }
+    protocol prot_2 {
+        segment seg_1[8] { parser: 'uint1', autovalue: 1 }
+        segment seg_2[3] { parser: 'float <' }
+        segment seg__ { }
+        segment seg_3 { parser: 'double' }
+    }
+
+    protocol prot_str {
+        segment len { parser: 'uint8' }
+        segment str1 { parser: 'string', length: 4 }
+        segment str2 { parser: 'string', endwith: '\\0' }
+        segment str3 { parser: 'string' }
+
     }
 
