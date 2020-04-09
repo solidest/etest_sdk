@@ -55,7 +55,7 @@ ETL代码文件的根级元素包括以下类型：
 
 - 举例：设置协议段 seg_1 的解析属性为32位整型解析
 
-> ` segment seg_1 { parse: "int32", ... }`
+> ` segment seg_1 { parser: "int32", ... }`
 
 ## protocol 协议描述
 
