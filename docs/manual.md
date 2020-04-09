@@ -1,7 +1,7 @@
 
 # ETestDev开发手册
 
-## Outer Api
+## Outer API
 ETest与外部交互使用的API，主要目的是供UI程序集成时使用
 
 #### makeenv
@@ -24,7 +24,7 @@ ETest与外部交互使用的API，主要目的是供UI程序集成时使用
 
 - 读取执行器的输出数据
 
-## Inner Api
+## Inner API
 
 ETest内部执行用到的API，主要目的是开发测试程序时使用
 
