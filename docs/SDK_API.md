@@ -1,6 +1,4 @@
 
-# ETestDev开发手册
-
 ## Outer API
 ETest与外部交互使用的API，主要目的是供UI程序集成时使用
 
