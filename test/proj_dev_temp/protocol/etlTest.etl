@@ -20,7 +20,7 @@
     protocol prot_str {
         segment len { parser: 'uint8' }
         segment str1 { parser: 'string', length: 4 }
-        segment str2 { parser: 'string', endwith: '\\0' }
+        segment str2 { parser: 'string', endwith: '$' }
         segment str3 { parser: 'string' }
     }
 

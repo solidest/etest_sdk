@@ -1,0 +1,6 @@
+
+    protocol prot_name {
+        oneof(a*b*c-1>0) {
+            segment a{}
+        }
+    }

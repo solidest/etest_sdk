@@ -57,8 +57,8 @@ end
 function Test_string()
     local data1 = {}
     data1.str1 = "abcd"
-    data1.str2 = "FSDDSFiou*789320!@#$%"
-    data1.str3 = "的房间看了都放假了"
+    data1.str2 = "FSDDSFiou*789320!@#33%"
+    data1.str3 = "的房间看了都放假了ffd"
     data1.len = #data1.str2
     print(data1.str2)
 
@@ -88,7 +88,7 @@ function Test_oneof_exp()
 end
 
 function entry(vars, option)
-    print("Hello World!", vars, option)
+    -- print("Hello World!", vars, option)
     -- Test_protocol()
     -- Test_message()
     -- Test_pack_message()

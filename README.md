@@ -73,6 +73,7 @@ ETL代码文件的根级元素包括以下类型：
 
 - 于协议打包时，如果协议段没有显示赋值，将自动使用autovalue属性值
 
+#### string类型的属性 length endwith
 
 ### segments 协议段分组
 

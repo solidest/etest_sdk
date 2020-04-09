@@ -282,34 +282,22 @@ let bnf_etx = {
     ["object_like", "$$ = $object_like;"],
     ["NOT exp", "$$ = {kind: 'not', exp: $exp};"],
     ["- exp", "$$ = {kind: 'uminus', exp: $exp};", { "prec": "UMINUS" }],
-    ["exp_compare", "$$ = $exp_compare;"],
-    ["exp_calc", "$$ = $exp_calc;"],
-    ["exp_bin", "$$ = $exp_bin;"],
-    ["( exp )", "$$ = $exp;"],
-    ["[ ]", "$$ = newKindList('array', null);"],
-    ["[ arrlist ]", "$$ = $arrlist;"],
-    ["fn_call", "$$ = $fn_call;"],
-  ],
-
-  exp_compare: [
     ["exp NOT_EQ exp", "$$ = {kind: 'not_eq', left: $1, right: $3};"],
     ["exp EQ_EQ exp", "$$ = {kind: 'eq_eq', left: $1, right: $3};"],
     ["exp GT_EQ exp", "$$ = {kind: 'gt_eq', left: $1, right: $3};"],
     ["exp LT_EQ exp", "$$ = {kind: 'lt_eq', left: $1, right: $3};"],
     ["exp > exp", "$$ = {kind: 'gt', left: $1, right: $3};"],
     ["exp < exp", "$$ = {kind: 'lt', left: $1, right: $3};"],
-  ],
-
-  exp_bin: [
-    ["exp AND exp", "$$ = {kind: 'and', left: $1, right: $3};"],
-    ["exp OR exp", "$$ = {kind: 'or', left: $1, right: $3};"],
-  ],
-
-  exp_calc: [
     ["exp + exp", "$$ = {kind: 'add', left: $1, right: $3};"],
     ["exp - exp", "$$ = {kind: 'subtract', left: $1, right: $3};"],
     ["exp * exp", "$$ = {kind: 'multiply', left: $1, right: $3};"],
     ["exp / exp", "$$ = {kind: 'divide', left: $1, right: $3};"],
+    ["exp AND exp", "$$ = {kind: 'and', left: $1, right: $3};"],
+    ["exp OR exp", "$$ = {kind: 'or', left: $1, right: $3};"],
+    ["( exp )", "$$ = $exp;"],
+    ["[ ]", "$$ = newKindList('array', null);"],
+    ["[ arrlist ]", "$$ = $arrlist;"],
+    ["fn_call", "$$ = $fn_call;"],
   ],
 
   fn_call: [

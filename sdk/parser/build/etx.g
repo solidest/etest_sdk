@@ -315,36 +315,6 @@
                 }
             ],
             [
-                "exp_compare",
-                "$$ = $exp_compare;"
-            ],
-            [
-                "exp_calc",
-                "$$ = $exp_calc;"
-            ],
-            [
-                "exp_bin",
-                "$$ = $exp_bin;"
-            ],
-            [
-                "( exp )",
-                "$$ = $exp;"
-            ],
-            [
-                "[ ]",
-                "$$ = newKindList('array', null);"
-            ],
-            [
-                "[ arrlist ]",
-                "$$ = $arrlist;"
-            ],
-            [
-                "fn_call",
-                "$$ = $fn_call;"
-            ]
-        ],
-        "exp_compare": [
-            [
                 "exp NOT_EQ exp",
                 "$$ = {kind: 'not_eq', left: $1, right: $3};"
             ],
@@ -367,19 +337,7 @@
             [
                 "exp < exp",
                 "$$ = {kind: 'lt', left: $1, right: $3};"
-            ]
-        ],
-        "exp_bin": [
-            [
-                "exp AND exp",
-                "$$ = {kind: 'and', left: $1, right: $3};"
             ],
-            [
-                "exp OR exp",
-                "$$ = {kind: 'or', left: $1, right: $3};"
-            ]
-        ],
-        "exp_calc": [
             [
                 "exp + exp",
                 "$$ = {kind: 'add', left: $1, right: $3};"
@@ -395,6 +353,30 @@
             [
                 "exp / exp",
                 "$$ = {kind: 'divide', left: $1, right: $3};"
+            ],
+            [
+                "exp AND exp",
+                "$$ = {kind: 'and', left: $1, right: $3};"
+            ],
+            [
+                "exp OR exp",
+                "$$ = {kind: 'or', left: $1, right: $3};"
+            ],
+            [
+                "( exp )",
+                "$$ = $exp;"
+            ],
+            [
+                "[ ]",
+                "$$ = newKindList('array', null);"
+            ],
+            [
+                "[ arrlist ]",
+                "$$ = $arrlist;"
+            ],
+            [
+                "fn_call",
+                "$$ = $fn_call;"
             ]
         ],
         "fn_call": [
