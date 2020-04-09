@@ -46,7 +46,7 @@
     }
 
     protocol prot_debug {
-        segment seg_14 { parser: 'uint14'}
+        segment seg_14 { parser: 'uint14', autovalue: 2999}
         segment seg_2 { parser: 'uint2'}
     }
 

@@ -103,7 +103,7 @@ function Unit_S_pro()
 end
 
 function Test_debug()
-    local data1 = { seg_14=16383, seg_2=1}
+    local data1 = { seg_2=1}
     local buf = pack(protocol.prot_debug, data1)
     print(string.hex(buf))
     local data2 = unpack(protocol.prot_debug, buf)
@@ -112,8 +112,8 @@ function Test_debug()
 end
 
 function entry(vars, option)
-    -- Test_debug()
-    Unit_S_pro()
+    Test_debug()
+    -- Unit_S_pro()
     -- print("Hello World!", vars, option)
     -- Test_protocol()
     -- Test_message()
