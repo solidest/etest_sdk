@@ -297,13 +297,20 @@ let bnf_etx = {
     ["( exp )", "$$ = $exp;"],
     ["[ ]", "$$ = newKindList('array', null);"],
     ["[ arrlist ]", "$$ = $arrlist;"],
-    ["fn_call", "$$ = $fn_call;"],
+    ["gfn_call", "$$ = $gfn_call;"],
   ],
 
-  fn_call: [
-    ["pid ( )", "$$ = {kind: 'fn_call', pname: $pid};"],
-    ["pid ( arrlist )", "$$ = {kind: 'fn_call', pname: $pid, args: $arrlist};"],
+  gfn_call: [
+    ["ID ( )", "$$ = { kind: $ID };"],
+    ["ID ( paramlist )", "$$ = {kind: $ID, params: $paramlist};"],
   ],
+
+  paramlist: [
+    ["exp", "$$ = newList($exp);"],
+    ["paramlist , exp", "$$ = joinList($paramlist, $exp);"],
+    ["paramlist ,", "$$ = $paramlist;"],
+  ],
+
 
   arrlist: [
     ["exp", "$$ = newKindList('array', $exp);"],

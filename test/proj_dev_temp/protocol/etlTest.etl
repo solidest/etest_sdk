@@ -61,7 +61,7 @@
 
     protocol prot_byte_size {
         segment header { parser: 'int8', autovalue: 0x55AA}
-        segment seg_len { parser: 'int32', autovalue: ByteSize(this.seg_str) }
+        /*segment seg_len { parser: 'int32', autovalue: ByteSize(this.seg_str) }*/
         segment seg_str { parser: 'string' }
     }
 
