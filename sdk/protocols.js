@@ -102,8 +102,9 @@ function clearprops(o) {
 
 const _props_nams = [
     'parser',
-    'repeated',
-    'autovalue'
+    'autovalue',
+    'length',
+    'endwith'
 ];
 
 //检查属性名称是否都在有效范围内

@@ -227,6 +227,10 @@
                 "$$ = newElement('segment', $ID, 'props', $object_like, @ID);"
             ],
             [
+                "SEGMENT ID [ exp ] object_like",
+                "$$ = newElement('segment', $ID, 'props', $object_like, @ID, $exp);"
+            ],
+            [
                 "segments",
                 "$$ = $segments;"
             ],
@@ -243,6 +247,10 @@
             [
                 "SEGMENTS ID { protocol_element_list }",
                 "$$ = newProtSeggroup($ID, $protocol_element_list, @ID);"
+            ],
+            [
+                "SEGMENTS ID [ exp ] { protocol_element_list }",
+                "$$ = newProtSeggroup($ID, $protocol_element_list, @ID, $exp);"
             ]
         ],
         "branch": [
@@ -307,36 +315,6 @@
                 }
             ],
             [
-                "exp_compare",
-                "$$ = $exp_compare;"
-            ],
-            [
-                "exp_calc",
-                "$$ = $exp_calc;"
-            ],
-            [
-                "exp_bin",
-                "$$ = $exp_bin;"
-            ],
-            [
-                "( exp )",
-                "$$ = $exp;"
-            ],
-            [
-                "[ ]",
-                "$$ = newKindList('array', null);"
-            ],
-            [
-                "[ arrlist ]",
-                "$$ = $arrlist;"
-            ],
-            [
-                "fn_call",
-                "$$ = $fn_call;"
-            ]
-        ],
-        "exp_compare": [
-            [
                 "exp NOT_EQ exp",
                 "$$ = {kind: 'not_eq', left: $1, right: $3};"
             ],
@@ -359,19 +337,7 @@
             [
                 "exp < exp",
                 "$$ = {kind: 'lt', left: $1, right: $3};"
-            ]
-        ],
-        "exp_bin": [
-            [
-                "exp AND exp",
-                "$$ = {kind: 'and', left: $1, right: $3};"
             ],
-            [
-                "exp OR exp",
-                "$$ = {kind: 'or', left: $1, right: $3};"
-            ]
-        ],
-        "exp_calc": [
             [
                 "exp + exp",
                 "$$ = {kind: 'add', left: $1, right: $3};"
@@ -387,6 +353,30 @@
             [
                 "exp / exp",
                 "$$ = {kind: 'divide', left: $1, right: $3};"
+            ],
+            [
+                "exp AND exp",
+                "$$ = {kind: 'and', left: $1, right: $3};"
+            ],
+            [
+                "exp OR exp",
+                "$$ = {kind: 'or', left: $1, right: $3};"
+            ],
+            [
+                "( exp )",
+                "$$ = $exp;"
+            ],
+            [
+                "[ ]",
+                "$$ = newKindList('array', null);"
+            ],
+            [
+                "[ arrlist ]",
+                "$$ = $arrlist;"
+            ],
+            [
+                "fn_call",
+                "$$ = $fn_call;"
             ]
         ],
         "fn_call": [
@@ -456,5 +446,5 @@
             ]
         ]
     },
-    "moduleInclude": "\n\n    function newList(item) {\n      if(item) {\n        return [item];\n      } else {\n        return [];\n      }\n    }\n\n    function joinList(list, item) {\n      if(list && item) {\n        list.push(item);\n      }\n      return list;\n    }\n\n    function newKindList(kind, item) {\n      if(item) {\n        return {kind: kind, list: [item]};\n      } else {\n        return {kind: kind, list: []};\n      }\n    }\n\n    function joinKindList(list, item) {\n      if(list && list.list && item) {\n        list.list.push(item);\n      }\n      return list;\n    }\n\n    function newProp(id, exp, id_loc, exp_loc) {\n      return {\n        kind: 'prop',\n        name: id,\n        value: exp,\n        name_from: id_loc.startOffset,\n        name_to: id_loc.endOffset,\n        name_line: id_loc.startLine,\n        value_from: exp_loc.startOffset,\n        value_to: exp_loc.endOffset,\n        value_line: exp_loc.startLine,\n      }\n    }\n\n    function newProtBranch(kind, exp, seglist, exp_loc) {\n      return {\n        kind: kind,\n        exp: exp,\n        seglist: seglist,\n        exp_from: exp_loc.startOffset,\n        exp_to: exp_loc.endOffset,\n        exp_line: exp_loc.startLine,\n      }\n    }\n\n    function newProtSeggroup(name, seglist, name_loc) {\n      return {\n        kind: 'seggroup',\n        name: name,\n        seglist: seglist,\n        name_from: name_loc.startOffset,\n        name_to: name_loc.endOffset,\n        name_line: name_loc.startLine,\n      }\n    }\n\n    function newElement(kind, name, body_name, body, name_loc) {\n      let res = {\n        kind: kind,\n        name: name,\n        name_from: name_loc.startOffset,\n        name_to: name_loc.endOffset,\n        name_line: name_loc.startLine,\n      }\n      res[body_name] = body;\n      return res;\n    }\n\n\n"
+    "moduleInclude": "\n\n    function newList(item) {\n      if(item) {\n        return [item];\n      } else {\n        return [];\n      }\n    }\n\n    function joinList(list, item) {\n      if(list && item) {\n        list.push(item);\n      }\n      return list;\n    }\n\n    function newKindList(kind, item) {\n      if(item) {\n        return {kind: kind, list: [item]};\n      } else {\n        return {kind: kind, list: []};\n      }\n    }\n\n    function joinKindList(list, item) {\n      if(list && list.list && item) {\n        list.list.push(item);\n      }\n      return list;\n    }\n\n    function newProp(id, exp, id_loc, exp_loc) {\n      return {\n        kind: 'prop',\n        name: id,\n        value: exp,\n        name_from: id_loc.startOffset,\n        name_to: id_loc.endOffset,\n        name_line: id_loc.startLine,\n        value_from: exp_loc.startOffset,\n        value_to: exp_loc.endOffset,\n        value_line: exp_loc.startLine,\n      }\n    }\n\n    function newProtBranch(kind, exp, seglist, exp_loc) {\n      return {\n        kind: kind,\n        exp: exp,\n        seglist: seglist,\n        exp_from: exp_loc.startOffset,\n        exp_to: exp_loc.endOffset,\n        exp_line: exp_loc.startLine,\n      }\n    }\n\n    function newProtSeggroup(name, seglist, name_loc, repeated) {\n      let res = {\n        kind: 'seggroup',\n        name: name,\n        seglist: seglist,\n        name_from: name_loc.startOffset,\n        name_to: name_loc.endOffset,\n        name_line: name_loc.startLine,\n      }\n      if(repeated) {\n        res.repeated = repeated;\n      }\n      return res;\n    }\n\n    function newElement(kind, name, body_name, body, name_loc, repeated) {\n      let res = {\n        kind: kind,\n        name: name,\n        name_from: name_loc.startOffset,\n        name_to: name_loc.endOffset,\n        name_line: name_loc.startLine,\n      }\n      res[body_name] = body;\n      if(repeated) {\n        res.repeated = repeated;\n      }\n      return res;\n    }\n\n\n"
 }

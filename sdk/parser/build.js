@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-//etl
+// ETL ////////////////////////////////////////////////////////////////////////////
 let lex_main = {
   startConditions: {
     etl: 1,
@@ -82,6 +82,7 @@ let include_main = `
 
 `
 
+
 /* ETL
 
   build
@@ -101,7 +102,10 @@ let include_main = `
 */
 
 
-// segtype
+
+
+
+// segtype ////////////////////////////////////////////////////////////////////////////
 let lex_segtype = {
   rules: [
     ["uint", "return 'UINT'" ],
@@ -170,7 +174,9 @@ let bnf_segtype = {
   node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/segtype.g -o sdk/parser/segParser.js && syntax-cli -m slr1 -g sdk/parser/build/segtype.g -p "string>"
 */
 
-// lex
+
+
+// ETX ////////////////////////////////////////////////////////////////////////////
 let lex_etx = {
   rules: [
     ["\\/\\*[^*]*\\*+([^\\/][^*]*\\*+)*\\/", "/*return 'COMMENT_BLOCK'*/" ],
@@ -234,6 +240,7 @@ let bnf_etx = {
 
   protocol_element: [
     ["SEGMENT ID object_like", "$$ = newElement('segment', $ID, 'props', $object_like, @ID);"],
+    ["SEGMENT ID [ exp ] object_like", "$$ = newElement('segment', $ID, 'props', $object_like, @ID, $exp);"],
     ["segments", "$$ = $segments;"],
     ["branch", "$$ = $branch;"],
   ],
@@ -241,6 +248,7 @@ let bnf_etx = {
   segments: [
     ["SEGMENTS ID { }", "$$ = newProtSeggroup($ID, null, @ID);"],
     ["SEGMENTS ID { protocol_element_list }", "$$ = newProtSeggroup($ID, $protocol_element_list, @ID);"],
+    ["SEGMENTS ID [ exp ] { protocol_element_list }", "$$ = newProtSeggroup($ID, $protocol_element_list, @ID, $exp);"],
   ],
 
   branch: [
@@ -274,34 +282,22 @@ let bnf_etx = {
     ["object_like", "$$ = $object_like;"],
     ["NOT exp", "$$ = {kind: 'not', exp: $exp};"],
     ["- exp", "$$ = {kind: 'uminus', exp: $exp};", { "prec": "UMINUS" }],
-    ["exp_compare", "$$ = $exp_compare;"],
-    ["exp_calc", "$$ = $exp_calc;"],
-    ["exp_bin", "$$ = $exp_bin;"],
-    ["( exp )", "$$ = $exp;"],
-    ["[ ]", "$$ = newKindList('array', null);"],
-    ["[ arrlist ]", "$$ = $arrlist;"],
-    ["fn_call", "$$ = $fn_call;"],
-  ],
-
-  exp_compare: [
     ["exp NOT_EQ exp", "$$ = {kind: 'not_eq', left: $1, right: $3};"],
     ["exp EQ_EQ exp", "$$ = {kind: 'eq_eq', left: $1, right: $3};"],
     ["exp GT_EQ exp", "$$ = {kind: 'gt_eq', left: $1, right: $3};"],
     ["exp LT_EQ exp", "$$ = {kind: 'lt_eq', left: $1, right: $3};"],
     ["exp > exp", "$$ = {kind: 'gt', left: $1, right: $3};"],
     ["exp < exp", "$$ = {kind: 'lt', left: $1, right: $3};"],
-  ],
-
-  exp_bin: [
-    ["exp AND exp", "$$ = {kind: 'and', left: $1, right: $3};"],
-    ["exp OR exp", "$$ = {kind: 'or', left: $1, right: $3};"],
-  ],
-
-  exp_calc: [
     ["exp + exp", "$$ = {kind: 'add', left: $1, right: $3};"],
     ["exp - exp", "$$ = {kind: 'subtract', left: $1, right: $3};"],
     ["exp * exp", "$$ = {kind: 'multiply', left: $1, right: $3};"],
     ["exp / exp", "$$ = {kind: 'divide', left: $1, right: $3};"],
+    ["exp AND exp", "$$ = {kind: 'and', left: $1, right: $3};"],
+    ["exp OR exp", "$$ = {kind: 'or', left: $1, right: $3};"],
+    ["( exp )", "$$ = $exp;"],
+    ["[ ]", "$$ = newKindList('array', null);"],
+    ["[ arrlist ]", "$$ = $arrlist;"],
+    ["fn_call", "$$ = $fn_call;"],
   ],
 
   fn_call: [
@@ -392,8 +388,8 @@ let include_etx = `
       }
     }
 
-    function newProtSeggroup(name, seglist, name_loc) {
-      return {
+    function newProtSeggroup(name, seglist, name_loc, repeated) {
+      let res = {
         kind: 'seggroup',
         name: name,
         seglist: seglist,
@@ -401,9 +397,13 @@ let include_etx = `
         name_to: name_loc.endOffset,
         name_line: name_loc.startLine,
       }
+      if(repeated) {
+        res.repeated = repeated;
+      }
+      return res;
     }
 
-    function newElement(kind, name, body_name, body, name_loc) {
+    function newElement(kind, name, body_name, body, name_loc, repeated) {
       let res = {
         kind: kind,
         name: name,
@@ -412,6 +412,9 @@ let include_etx = `
         name_line: name_loc.startLine,
       }
       res[body_name] = body;
+      if(repeated) {
+        res.repeated = repeated;
+      }
       return res;
     }
 
@@ -429,19 +432,19 @@ let operators = [
 /* ETX
 
   build
-  node parser/build.js && syntax-cli -m slr1 -g parser/build/etx.g -o parser/etxParser.js --loc
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g -o sdk/parser/etxParser.js --loc
 
   语法验证
-  node parser/build.js && syntax-cli -m slr1 -g parser/build/etx.g --validate
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g --validate
 
   不包含语法时的词法检查
-  node parser/build.js && syntax-cli --lex parser/build/etx_lex.g --tokenize -f parser/test/etxTest.etx --loc
+  node sdk/parser/build.js && syntax-cli --lex sdk/parser/build/etx_lex.g --tokenize -f test/proj_dev_temp/etxTest.etx --loc
 
   包含语法时的词法检查
-  node parser/build.js && syntax-cli -m slr1 -g parser/build/etx.g --tokenize -f parser/test/etxTest.etx --loc
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g --tokenize -f test/proj_dev_temp/etxTest.etx --loc
 
   语法分析
-  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g -o sdk/parser/etxParser.js --loc && syntax-cli -m slr1 -g sdk/parser/build/etx.g -f test/proj_temp/etxTest.etx --loc
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g -o sdk/parser/etxParser.js --loc && syntax-cli -m slr1 -g sdk/parser/build/etx.g -f test/proj_dev_temp/etxTest.etx --loc
 
 */
 
