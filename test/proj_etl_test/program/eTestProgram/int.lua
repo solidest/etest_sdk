@@ -1,7 +1,7 @@
 -- 验证int8的整倍数
 function Int_Pro()
 
-    local data_send = {seg_8=127,seg_16=89,seg_24=105,seg_32=-111}
+    local data_send = {seg_8=127,seg_16=65533,seg_24=16777215,seg_32=-4294967293}
     local buf = pack(protocol.prot_11, data_send)
     local data_recv = unpack(protocol.prot_11, buf)
     assert

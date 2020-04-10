@@ -1,6 +1,6 @@
 -- 验证uint的8的整数倍数
 function Uint_pro()
-    local data_send = {seg_8=127,seg_16=65535,seg_24=16777215,seg_32=4294967295,seg_1}
+    local data_send = {seg_8=127,seg_16=65535,seg_24=16777213,seg_32=4294967293}
     local buf = pack(protocol.prot_12, data_send)
     local data_recv = unpack(protocol.prot_12, buf)
     print(data_recv)
@@ -18,7 +18,7 @@ end
 -- 验证unit特殊值
 function Unit_T_pro()
 
-    local data_send = {seg_1=0,seg_31=2147483641,seg_2=1,seg_30=1073741824}
+    local data_send = {seg_1=0,seg_31=2147483639,seg_2=1,seg_30=1073741823}
     local buf = pack(protocol.prot_12, data_send)
     local data_recv = unpack(protocol.prot_12, buf)
 
@@ -33,7 +33,7 @@ end
 
 -- 验证uint随机值
 function Unit_S_pro()
-    local data_send = {seg_15=32768,seg_17=131072,seg_14=16383,seg_18=26144}
+    local data_send = {seg_15=32761,seg_17=131071,seg_14=16383,seg_18=26143}
     local buf = pack(protocol.prot_12, data_send)
     local data_recv = unpack(protocol.prot_12, buf)
     print(data_recv)
