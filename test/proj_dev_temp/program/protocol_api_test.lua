@@ -79,12 +79,12 @@ function Test_segments_mathequal()
 end
 
 function Test_oneof_exp()
-    local data1 = {type=2, x=1.11, y=2.22, z=3.33}
-    local data2 = unpack(protocol.prot_oneof, pack(protocol.prot_oneof, data1))
+    local data1 = {type1=2, type2=1,  x=1.11, y=2.22, z=3.33}
+    local buf = pack(protocol.prot_oneof, data1)
+    local data2 = unpack(protocol.prot_oneof, buf)
     assert(data2.z==nil)
-    data1.type = 3
-    data2 = unpack(protocol.prot_oneof, pack(protocol.prot_oneof, data1))
-    assert(math.isequal(data1.z, data2.z))
+    assert(math.isequal(data1.x, data2.x))
+    print(data2)
     print('Test_oneof_exp ok')
 end
 
@@ -116,16 +116,16 @@ function Test_debug()
 end
 
 function entry(vars, option)
-    Test_debug()
-    Unit_S_pro()
+    -- Test_debug()
+    -- Unit_S_pro()
+    -- Test_protocol()
+    -- Test_message()
+    -- Test_pack_message()
+    -- Test_pack_unpack()
+    -- Test_segment_array()
+    -- Test_string()
+    -- Test_segments_mathequal()
+    -- Test_oneof_exp()
     print("Hello World!", vars, option)
-    Test_protocol()
-    Test_message()
-    Test_pack_message()
-    Test_pack_unpack()
-    Test_segment_array()
-    Test_string()
-    Test_segments_mathequal()
-    Test_oneof_exp()
     exit()
 end

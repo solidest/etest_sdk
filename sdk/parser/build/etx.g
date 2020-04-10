@@ -375,18 +375,32 @@
                 "$$ = $arrlist;"
             ],
             [
-                "fn_call",
-                "$$ = $fn_call;"
+                "gfn_call",
+                "$$ = $gfn_call;"
             ]
         ],
-        "fn_call": [
+        "gfn_call": [
             [
-                "pid ( )",
-                "$$ = {kind: 'fn_call', pname: $pid};"
+                "ID ( )",
+                "$$ = { kind: $ID };"
             ],
             [
-                "pid ( arrlist )",
-                "$$ = {kind: 'fn_call', pname: $pid, args: $arrlist};"
+                "ID ( paramlist )",
+                "$$ = {kind: $ID, params: $paramlist};"
+            ]
+        ],
+        "paramlist": [
+            [
+                "exp",
+                "$$ = newList($exp);"
+            ],
+            [
+                "paramlist , exp",
+                "$$ = joinList($paramlist, $exp);"
+            ],
+            [
+                "paramlist ,",
+                "$$ = $paramlist;"
             ]
         ],
         "arrlist": [

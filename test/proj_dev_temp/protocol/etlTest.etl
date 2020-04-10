@@ -33,21 +33,36 @@
     }
 
     protocol prot_oneof {
-        segment type { parser: 'int8' }
-        oneof(this.type==2) {
+        segment type1 { parser: 'int8' }
+        segment type2 { parser: 'int8', autovalue: this.type1*2 }
+        oneof(this.type1==2) {
             segment x { parser: 'float' }
             segment y { parser: 'float' }
         }
-        oneof(this.type*2*3-1==17) {
+        oneof(this.type1==3) {
             segment x { parser: 'float' }
             segment y { parser: 'float' }
             segment z { parser: 'float' }
         }
+        segment aa {  }
+        oneof(this.type2==1) {
+            segment x1 { parser: 'float', autovalue: 9.8 }
+        }
+        oneof(this.type2==2) {
+            segment x2 { parser: 'float' }
+        }
+        segment test { parser: 'float', autovalue: 2*(1+this.type1)}
     }
 
     protocol prot_debug {
         segment seg_14 { parser: 'uint14', autovalue: 2999}
         segment seg_2 { parser: 'uint2'}
+    }
+
+    protocol prot_byte_size {
+        segment header { parser: 'int8', autovalue: 0x55AA}
+        /*segment seg_len { parser: 'int32', autovalue: ByteSize(this.seg_str) }*/
+        segment seg_str { parser: 'string' }
     }
 
      protocol prot_12 {
