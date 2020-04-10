@@ -1,0 +1,52 @@
+
+    protocol prot_11 {
+        segment seg_1 { parser: 'int1' }
+        segment seg_2 { parser: 'int2' }
+
+        segment seg_3 { parser: 'int3' }
+        segment seg_4 { parser: 'int4' }
+
+        segment seg_5 { parser: 'int5' }
+        segment seg_6 { parser: 'int6' }
+
+        segment seg_7 { parser: 'int7' }
+
+        segment seg_8 { parser: 'int8' }
+        segment seg_9 { parser: 'int9' }
+
+        segment seg_10 { parser: 'int10' }
+        segment seg_11 { parser: 'int11' }
+
+        segment seg_12 { parser: 'int12' }
+        segment seg_13 { parser: 'int13' }
+
+        segment seg_14 { parser: 'int14'}
+        segment seg_15 { parser: 'int15' }
+        segment seg_16 { parser: 'int16' }
+        segment seg_17 { parser: 'int17' }
+        segment seg_18 { parser: 'int18' }
+
+        segment seg_19 { parser: 'int19' }
+        segment seg_20 { parser: 'int20' }
+
+        segment seg_21 { parser: 'int21' }
+        segment seg_22 { parser: 'int22' }
+
+        segment seg_23 { parser: 'int23' }
+
+        segment seg_24 { parser: 'int24' }
+        segment seg_25 { parser: 'int25' }
+
+        segment seg_26 { parser: 'int26' }
+        segment seg_27 { parser: 'int27' }
+
+        segment seg_28 { parser: 'int28' }
+        segment seg_29 { parser: 'int29' }
+
+        segment seg_30 { parser: 'int30' }
+        segment seg_31 { parser: 'int31' }
+        segment seg_32 { parser: 'int32' }
+    }
+
+
+
