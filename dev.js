@@ -1,10 +1,9 @@
-
 const SdkApi = require('./sdk');
 
 /*
     api: sdk对象
-    proj: 项目文件夹路径，与当前目录的相对路
-    entry: 包含entry函数的执行文件，与proj的相对路径
+    proj: 项目文件夹路径
+    entry: 包含entry函数的执行文件
     _vars: 输入给entry的参数值
     _option: 输入给entry的自定义选项
 */
@@ -12,8 +11,6 @@ const SdkApi = require('./sdk');
 let api = new SdkApi('etest', 1210);
 let proj = 'test/proj_dev_temp';
 let entry = 'program/protocol_api_test.lua';
-// let entry = 'program/test_api.lua';
-// let entry = 'program/demo.lua';
 let _vars = {
     var1: "demo_v1",
     var2: 99
@@ -21,17 +18,8 @@ let _vars = {
 let _option = null;
 
 
-//run demo
 let run_id = null;
 let timer = null;
-
-function exit() {
-    if (timer) {
-        clearInterval(timer);
-        timer = null;
-    }
-    process.exit(0);
-}
 
 function onSended(id, info) {
     console.log('\x1B[90m%s\x1B[39m', id + " -> " + info);
@@ -47,7 +35,11 @@ function onPrint(info) {
 
 function onError(info, id) {
     console.error('\x1B[31m%s\x1B[39m', (id ? id : ' ') + ' <- ' + info);
-    // setTimeout(exit, 3000);
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+    process.exit(0);
 }
 
 function onWarn(info) {
@@ -56,7 +48,7 @@ function onWarn(info) {
 
 function callback(err, res, id) {
     if (err) {
-        return onError(err.message||err, id);
+        return onError(err.message ? err.message : err, id);
     }
     return onRecved(id, res);
 }
@@ -64,7 +56,7 @@ function callback(err, res, id) {
 //创建环境 proj_path: 项目文件夹路径
 function makeEnv(proj_path) {
     let id = api.makeenv(proj_path, callback);
-    onSended(id || ' ', 'makeenv');
+    onSended(id, 'makeenv');
 }
 
 //执行测试 proj_path: 项目文件夹路径，run_file: 执行入口文件, vars: 输入参数取值, option: 自定义选项
@@ -76,7 +68,7 @@ function startRun(proj_path, run_file, vars, option) {
             run_id = res;
         }
     });
-    onSended(id || ' ', 'start');
+    onSended(id, 'start');
 }
 
 //读取执行输出
@@ -94,16 +86,10 @@ function readOut() {
             for (let r of res) {
                 if (r.catalog === 'system') {
                     switch (r.kind) {
-                        case 'entry': {
-                            console.log('')
-                            onRecved(' ', 'entry > ' + r.value + '\n');
-                            break;
-                        }
-
                         case 'exit': {
-                            console.log('')
-                            onRecved(' ', `exit > ${r.value} (${Math.round(r.time/1000000000)}s)\n`)
-                            exit();
+                            setTimeout(() => {
+                                process.exit(0);
+                            }, 1000);
                             break;
                         }
 
@@ -111,7 +97,10 @@ function readOut() {
                             onPrint(r.value);
                             break;
                         }
-
+                        case 'warn': {
+                            onWarn(JSON.parse(r.value).message);
+                            break;
+                        }
                         case 'verifyFail': {
                             onWarn(r.value);
                             break;
@@ -145,7 +134,7 @@ if (argv == 'state') {
         callback(err, res, id);
         process.exit(0);
     });
-    onSended(id || ' ', 'state');
+    onSended(id, 'state');
 } else if (argv == 'stop') {
     let id = api.state((err, res, id) => {
         callback(err, res, id);
@@ -154,12 +143,12 @@ if (argv == 'state') {
                 callback(err, res, id);
                 process.exit(0);
             });
-            onSended(id || ' ', 'stop');
+            onSended(id, 'stop');
         } else {
             process.exit(0);
         }
     });
-    onSended(id || ' ', 'state');
+    onSended(id, 'state');
 
 } else if (argv == 'start') {
     makeEnv(proj);

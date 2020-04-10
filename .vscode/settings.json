@@ -8,6 +8,7 @@
         "protocol",
         "message",
         "pack",
-        "unpack"
+        "unpack",
+        "warn"
     ]
 }

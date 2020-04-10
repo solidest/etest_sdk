@@ -8,7 +8,7 @@ const SdkApi = require('./sdk');
     _option: 输入给entry的自定义选项
 */
 
-let api = new SdkApi('stbox', 1210);
+let api = new SdkApi('etest', 1210);
 let proj = 'test/proj_protocol_test';
 let entry = 'program/test1.lua';
 let _vars = {
@@ -97,7 +97,7 @@ function readOut() {
                             onPrint(r.value);
                             break;
                         }
-
+                        case 'warn': 
                         case 'verifyFail': {
                             onWarn(r.value);
                             break;

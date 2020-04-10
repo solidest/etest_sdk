@@ -1,6 +1,6 @@
 
 function Test_pack_unpack()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    print('::'..debug.getinfo(1).name..'::')
     local data_send = {seg_1 = -111, seg_2 = 189}
     local buf = pack(protocol.prot_1, data_send)
 
@@ -16,7 +16,7 @@ function Test_pack_unpack()
 end
 
 function Test_pack_message()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     local msg1 = message(protocol.prot_1, {seg_1=0xAF} )
     local msg2 = message(protocol.prot_1)
     msg2.seg_1 = 175;
@@ -27,7 +27,7 @@ function Test_pack_message()
 end
 
 function Test_message()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     local msg1 = message(protocol.prot_1)
     print(msg1)
 
@@ -41,14 +41,14 @@ function Test_message()
 end
 
 function Test_protocol()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     for key, value in pairs(protocol) do      
         print(key, value)
     end 
 end
 
 function Test_segment_array()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     local data1 = {}
     data1.seg_1 = {true, false, true, false, 1, 0, true, false}
     data1.seg_2 = {7.88, -9.44, 268888}
@@ -60,7 +60,7 @@ function Test_segment_array()
 end
 
 function Test_string()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     local data1 = {}
     data1.str1 = "abcd"
     data1.str2 = "FSDDSFiou*789320!@#33%"
@@ -75,7 +75,7 @@ function Test_string()
 end
 
 function Test_segments_mathequal()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     local p = { x = 888.32324, y= -234.3893}
     local data1 = { token = 0x55aa, point = p}
     local data2 = unpack(protocol.prot_point, pack(protocol.prot_point, data1));
@@ -85,7 +85,7 @@ function Test_segments_mathequal()
 end
 
 function Test_oneof_exp()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     local data1 = {type1=2, type2=1,  x=1.11, y=2.22, z=3.33}
     local buf = pack(protocol.prot_oneof, data1)
     local data2 = unpack(protocol.prot_oneof, buf)
@@ -97,7 +97,7 @@ end
 
 -- 验证uint随机值
 function Unit_S_pro()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     -- for key, value in pairs(protocol) do      
     --     print(key, value)
     -- end 
@@ -115,7 +115,7 @@ function Unit_S_pro()
 end
 
 function Test_debug()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     local data1 = {seg_14=-1, seg_2=3}
     local buf = pack(protocol.prot_debug, data1)
     print(string.hex(buf))
@@ -125,7 +125,7 @@ function Test_debug()
 end
 
 function Test_ByteSize()
-    print('\n\n'..debug.getinfo(1).name..'\n')
+    warn('::'..debug.getinfo(1).name..'::')
     local msg = message(protocol.prot_byte_size)
     msg.seg_str = "abljdfs@#$%"
     msg.seg_ints = {12, 34, 9999}
@@ -134,18 +134,44 @@ function Test_ByteSize()
     print(data)
 end
 
+function Test_Order()
+    warn('::'..debug.getinfo(1).name..'::')
+    local data1 = {seg_1=1.22}
+    local buf = pack(protocol.prot_15, data1)
+    local data2 = unpack(protocol.prot_15, buf)
+    print(data1, data2)
+end
+
+function Code_pro8()
+    warn('::'..debug.getinfo(1).name..'::')
+
+    local data_send = {seg_9=-1.234,seg_10=-1.2,seg_11=-22345,seg_12=4294967293,seg_16=4294967293}
+    local buf = pack(protocol.prot_14, data_send)
+    local data_recv = unpack(protocol.prot_14, buf)
+    assert(math.isequal(data_recv.seg_9, data_send.seg_9))
+    assert(math.isequal(data_recv.seg_10, data_send.seg_10))
+    assert(math.isequal(data_recv.seg_11, data_send.seg_11,true))
+    -- print(data_recv)
+    print(data_recv.seg_12, data_send.seg_12)
+    assert(math.isequal(data_recv.seg_16, data_send.seg_16))
+  
+
+end
+
 function entry(vars, option)
-    Test_debug()
-    Unit_S_pro()
-    Test_protocol()
-    Test_message()
-    Test_pack_message()
-    Test_pack_unpack()
-    Test_segment_array()
-    Test_string()
-    Test_segments_mathequal()
-    Test_oneof_exp()
-    Test_ByteSize()
+    -- Test_debug()
+    -- Unit_S_pro()
+    -- Test_protocol()
+    -- Test_message()
+    -- Test_pack_message()
+    -- Test_pack_unpack()
+    -- Test_segment_array()
+    -- Test_string()
+    -- Test_segments_mathequal()
+    -- Test_oneof_exp()
+    -- Test_ByteSize()
+    -- Test_Order()
+    Code_pro8()
     -- print("Hello World!", vars, option)
     exit()
 end
