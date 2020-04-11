@@ -21,6 +21,14 @@ let _option = null;
 let run_id = null;
 let timer = null;
 
+function exit() {
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+    process.exit(0);
+}
+
 function onSended(id, info) {
     console.log('\x1B[90m%s\x1B[39m', id + " -> " + info);
 }
@@ -33,6 +41,27 @@ function onPrint(info) {
     console.log('  <- ' + info);
 }
 
+function onLog(type, info) {
+    if(info) {
+        info = JSON.parse(info).message;
+    }
+    let fmt = '\x1B[47;30m%s\x1B[37;49m';
+    switch (type) {
+        case "info":
+            fmt = '\x1B[30;42m%s\x1B[37;49m'
+            break;
+        case "error":
+            fmt = '\x1B[30;41m%s\x1B[37;49m';
+            break;
+        case "warn":
+            fmt = '\x1B[30;43m%s\x1B[37;49m';
+            break;
+        default:
+            break;
+    }
+    console.log(fmt, info);
+}
+
 function onError(info, id) {
     console.error('\x1B[31m%s\x1B[39m', (id ? id : ' ') + ' <- ' + info);
     if (timer) {
@@ -40,10 +69,6 @@ function onError(info, id) {
         timer = null;
     }
     process.exit(0);
-}
-
-function onWarn(info) {
-    console.error('\x1B[33m%s\x1B[39m', '  <- ' + info);
 }
 
 function callback(err, res, id) {
@@ -86,10 +111,23 @@ function readOut() {
             for (let r of res) {
                 if (r.catalog === 'system') {
                     switch (r.kind) {
-                        case 'exit': {
-                            setTimeout(() => {
-                                process.exit(0);
-                            }, 1000);
+                        case 'start':
+                            onRecved(' ', 'start > ' + r.value);
+                            break;
+
+                        case 'entry':
+                            onRecved(' ', '::entry::' + r.value);
+                            console.log('')
+                            break;
+
+                        case 'exit':
+                            console.log('')
+                            onRecved(' ', '::exit::' + r.value);
+                            break;
+
+                        case 'stop': {
+                            onRecved(' ', `stop > ${r.value} (${Math.round(r.time/1000000000)}s)\n`)
+                            exit();
                             break;
                         }
 
@@ -97,10 +135,7 @@ function readOut() {
                             onPrint(r.value);
                             break;
                         }
-                        case 'warn': {
-                            onWarn(JSON.parse(r.value).message);
-                            break;
-                        }
+
                         case 'verifyFail': {
                             onWarn(r.value);
                             break;
@@ -119,6 +154,8 @@ function readOut() {
                             onRecved('?', typeof r == 'object' ? JSON.stringify(r) : r);
                             break;
                     }
+                } else if (r.catalog === 'log') {
+                    onLog(r.kind, r.value);
                 } else {
                     onRecved('?', r);
                 }

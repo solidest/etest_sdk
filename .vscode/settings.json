@@ -9,6 +9,6 @@
         "message",
         "pack",
         "unpack",
-        "warn"
+        "log"
     ]
 }

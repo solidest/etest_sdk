@@ -16,7 +16,7 @@ function Test_pack_unpack()
 end
 
 function Test_pack_message()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local msg1 = message(protocol.prot_1, {seg_1=0xAF} )
     local msg2 = message(protocol.prot_1)
     msg2.seg_1 = 175;
@@ -27,7 +27,7 @@ function Test_pack_message()
 end
 
 function Test_message()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local msg1 = message(protocol.prot_1)
     print(msg1)
 
@@ -41,14 +41,14 @@ function Test_message()
 end
 
 function Test_protocol()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     for key, value in pairs(protocol) do      
         print(key, value)
     end 
 end
 
 function Test_segment_array()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local data1 = {}
     data1.seg_1 = {true, false, true, false, 1, 0, true, false}
     data1.seg_2 = {7.88, -9.44, 268888}
@@ -60,22 +60,23 @@ function Test_segment_array()
 end
 
 function Test_string()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local data1 = {}
     data1.str1 = "abcd"
     data1.str2 = "FSDDSFiou*789320!@#33%"
     data1.str3 = "的房间看了都放假了ffd"
+    data1.seg_5 = string.buf('AA 76 FB CC')
     data1.len = #data1.str2
-    print(data1.str2)
+    print(data1)
 
     local data2 = unpack(protocol.prot_str, pack(protocol.prot_str, data1))
     assert(data1.str1 == data2.str1)
     assert(data1.str2 == data2.str2)
-    print(data2)
+    print(string.hex(data2.seg_5))
 end
 
 function Test_segments_mathequal()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local p = { x = 888.32324, y= -234.3893}
     local data1 = { token = 0x55aa, point = p}
     local data2 = unpack(protocol.prot_point, pack(protocol.prot_point, data1));
@@ -85,7 +86,7 @@ function Test_segments_mathequal()
 end
 
 function Test_oneof_exp()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local data1 = {type1=2, type2=1,  x=1.11, y=2.22, z=3.33}
     local buf = pack(protocol.prot_oneof, data1)
     local data2 = unpack(protocol.prot_oneof, buf)
@@ -97,7 +98,7 @@ end
 
 -- 验证uint随机值
 function Unit_S_pro()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     -- for key, value in pairs(protocol) do      
     --     print(key, value)
     -- end 
@@ -115,7 +116,7 @@ function Unit_S_pro()
 end
 
 function Test_debug()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local data1 = {seg_14=-1, seg_2=3}
     local buf = pack(protocol.prot_debug, data1)
     print(string.hex(buf))
@@ -125,7 +126,7 @@ function Test_debug()
 end
 
 function Test_ByteSize()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local msg = message(protocol.prot_byte_size)
     msg.seg_str = "abljdfs@#$%"
     msg.seg_ints = {12, 34, 9999}
@@ -135,7 +136,7 @@ function Test_ByteSize()
 end
 
 function Test_Order()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
     local data1 = {seg_1=1.22}
     local buf = pack(protocol.prot_15, data1)
     local data2 = unpack(protocol.prot_15, buf)
@@ -143,7 +144,7 @@ function Test_Order()
 end
 
 function Code_pro8()
-    warn('::'..debug.getinfo(1).name..'::')
+    log.info('::'..debug.getinfo(1).name..'::')
 
     local data_send = {seg_9=-1.234,seg_10=-1.2,seg_11=-22345,seg_12=4294967293,seg_16=4294967293}
     local buf = pack(protocol.prot_14, data_send)
@@ -151,27 +152,53 @@ function Code_pro8()
     assert(math.isequal(data_recv.seg_9, data_send.seg_9))
     assert(math.isequal(data_recv.seg_10, data_send.seg_10))
     assert(math.isequal(data_recv.seg_11, data_send.seg_11,true))
-    -- print(data_recv)
-    print(data_recv.seg_12, data_send.seg_12)
+    print(data_recv)
+    assert(math.isequal(data_recv.seg_12, data_send.seg_12))
     assert(math.isequal(data_recv.seg_16, data_send.seg_16))
-  
 
 end
 
+function Test_dynamic_len()
+    log.info('::'..debug.getinfo(1).name..'::')
+    local msg = message(protocol.dynamic_len)
+    msg.seg1 = 4
+    msg.seg2 = {1,2,3, 4}
+    local msg2 = unpack(protocol.dynamic_len, pack(msg))
+    print(msg2)
+end
+
+function Test_log()
+    log.info('::'..debug.getinfo(1).name..'::')
+    print('')
+    log.action("log.action test")
+    log.step("log.step test")
+    log.info("log.info test")
+    log.warn("log.warn test")
+    log.error("log.error test")
+    print('')
+end
+
 function entry(vars, option)
-    -- Test_debug()
-    -- Unit_S_pro()
-    -- Test_protocol()
-    -- Test_message()
-    -- Test_pack_message()
-    -- Test_pack_unpack()
-    -- Test_segment_array()
-    -- Test_string()
-    -- Test_segments_mathequal()
-    -- Test_oneof_exp()
-    -- Test_ByteSize()
-    -- Test_Order()
+    Test_debug()
+    Unit_S_pro()
+    Test_protocol()
+    Test_message()
+    Test_pack_message()
+    Test_pack_unpack()
+    Test_segment_array()
+    Test_log()
+    Test_string()
+    Test_segments_mathequal()
+    Test_oneof_exp()
+    Test_ByteSize()
+    Test_Order()
     Code_pro8()
-    -- print("Hello World!", vars, option)
+    Test_dynamic_len()
+    print("Hello World!", vars, option)
+    local msg = message(protocol.prot_demo)
+    msg.str = string.buf('00 55 CC')
+    local buf = pack(msg)
+    local msg2 = unpack(protocol.prot_demo, buf)
+    print(#msg2.str)
     exit()
 end

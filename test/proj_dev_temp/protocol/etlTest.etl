@@ -5,6 +5,10 @@
         这是多行注释///
         *** 多行注释
     */
+
+    protocol prot_demo {
+        segment str { parser: 'string', length: 3 }
+    }
     protocol prot_1 {
         segment seg_1 { parser: 'int32' }
         segment seg_2 { parser: 'int16' }
@@ -22,6 +26,7 @@
         segment str1 { parser: 'string', length: 4 }
         segment str2 { parser: 'string', endwith: '$' }
         segment str3 { parser: 'string' }
+        segment seg_5 { parser: 'string', length: 4 ,endwith: '@'}
     }
 
     protocol prot_point {
@@ -30,6 +35,18 @@
             segment x { parser: 'float' }
             segment y { parser: 'float' }
         }
+    }
+
+    protocol prot_check {
+        segment seg_1 { parser: 'float !',autovalue:0}
+        segment seg_2 { parser: 'double !',autovalue:0}
+        segment seg_3 { parser: 'int32 !',autovalue:0}
+        segment seg_4 { parser: 'uint32 !',autovalue:0}
+        segment seg_5 { parser: 'float &',autovalue:0}
+        segment seg_6 { parser: 'double &',autovalue:0}
+        segment seg_7 { parser: 'int32 &',autovalue:0}
+        segment seg_8 { parser: 'uint32 &',autovalue:0}
+        segment seg_check { parser: 'uint32',} // autovalue: CheckCode(sum8, this.seg_1, this.seg_2)}
     }
 
     protocol prot_oneof {
@@ -158,5 +175,10 @@
         segment seg_30 { parser: 'uint30', autovalue: 0 }
         segment seg_31 { parser: 'uint31', autovalue: 0 }
         segment seg_32 { parser: 'uint32', autovalue: 0 }
+    }
+
+    protocol dynamic_len {
+        segment seg1 { parser: 'int8'}
+        segment seg2[this.seg1] { parser: 'int8' }
     }
 

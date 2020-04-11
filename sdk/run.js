@@ -111,6 +111,8 @@ function readOut() {
                             }
                             break;
                         }
+                        case 'entry': 
+                            onRecved(' ', r.value)
 
                         default:
                             onRecved('?', typeof r == 'object' ? JSON.stringify(r) : r);
