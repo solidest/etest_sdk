@@ -171,9 +171,13 @@ function Test_log()
     log.info('::'..debug.getinfo(1).name..'::')
     print('')
     log.action("log.action test")
+    print('')
     log.step("log.step test")
+    print('')
     log.info("log.info test")
+    print('')
     log.warn("log.warn test")
+    print('')
     log.error("log.error test")
     print('')
 end
@@ -189,6 +193,13 @@ function Test_string_arr()
     local data1 = {iarr={1,2,3}, sarr={"abc", "def", "eee"}}
     local buf = pack(protocol.text_arr, data1)
     local data2 = unpack(protocol.text_arr, buf)
+    print(data2)
+end
+
+function Test_Xtra()
+    local data1 = { seg1=12.89323 }
+    local buf = pack(protocol.prot_xtra, data1)
+    local data2 = unpack(protocol.prot_xtra, buf)
     print(data2)
 end
 
@@ -210,6 +221,7 @@ function entry(vars, option)
     Test_dynamic_len()
     Test_CheckCode()
     Test_string_arr()
+    Test_Xtra()
     -- print("Hello World!", vars, option)
     exit()
 end
