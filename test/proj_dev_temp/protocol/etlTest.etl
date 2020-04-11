@@ -184,3 +184,8 @@
         segment seg2[this.seg1] { parser: 'int8' }
     }
 
+    protocol text_arr {
+        segment iarr[3] { parser: 'int8' }
+        segment sarr[3] { parser: 'string', length: 3}
+    }
+
