@@ -191,6 +191,8 @@ let lex_etx = {
     ["segments", "return 'SEGMENTS'"],
     ["segment", "return 'SEGMENT'"],
     ["oneof", "return 'ONEOF'"],
+    ["true", "return 'TRUE'"],
+    ["false", "return 'FALSE'"],
     ["0[xX][0-9a-fA-F]+", "return 'NUMBER_HEX'"],
     ["[0-9]+(?:\\.[0-9]+)?", "return 'NUMBER'"],
     ["[a-zA-Z_$][a-zA-Z0-9_]*", "return 'ID'"],
@@ -323,6 +325,8 @@ let bnf_etx = {
     ["NUMBER_HEX", "$$ = {kind: 'number', value: eval(yytext)};"],
     ["str", "$$ = $str;"],
     ["pid", "$$ = $pid;"],
+    ["TRUE", "$$ = {kind: 'bool', value: true};"],
+    ["FALSE", "$$ = {kind: 'bool', value: false};"],
   ],
 
   pid: [

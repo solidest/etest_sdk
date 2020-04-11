@@ -49,6 +49,14 @@
             "return 'ONEOF'"
         ],
         [
+            "true",
+            "return 'TRUE'"
+        ],
+        [
+            "false",
+            "return 'FALSE'"
+        ],
+        [
             "0[xX][0-9a-fA-F]+",
             "return 'NUMBER_HEX'"
         ],

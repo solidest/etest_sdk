@@ -38,15 +38,17 @@
     }
 
     protocol prot_check {
-        segment seg_1 { parser: 'float !',autovalue:0}
-        segment seg_2 { parser: 'double !',autovalue:0}
-        segment seg_3 { parser: 'int32 !',autovalue:0}
-        segment seg_4 { parser: 'uint32 !',autovalue:0}
-        segment seg_5 { parser: 'float &',autovalue:0}
-        segment seg_6 { parser: 'double &',autovalue:0}
-        segment seg_7 { parser: 'int32 &',autovalue:0}
-        segment seg_8 { parser: 'uint32 &',autovalue:0}
-        segment seg_check { parser: 'uint32',} // autovalue: CheckCode(sum8, this.seg_1, this.seg_2)}
+        segment seg_1 { parser: 'float !', autovalue:0}
+        segment seg_2 { parser: 'double !', autovalue:0}
+        segment seg_3 { parser: 'int32 !', autovalue:0}
+        segment seg_4 { parser: 'uint32 !', autovalue:0}
+        segment seg_5 { parser: 'float &', autovalue:0}
+        segment seg_6 { parser: 'double &', autovalue:0}
+        segment seg_7 { parser: 'int32 &', autovalue:0}
+        segment seg_8 { parser: 'uint32 &', autovalue:0}
+        segment seg_check1 { parser: 'uint32', autovalue: CheckCode(SUM_8, this.seg_3, this.seg_5)}
+        segment seg_check2 { parser: 'uint32', autovalue: CheckCode(CRC_64, this.seg_6)}
+        segment seg_check3 { parser: 'uint32', autovalue: CheckCode([0x8877, 0x9988, 0x0000, true, false])}
     }
 
     protocol prot_oneof {

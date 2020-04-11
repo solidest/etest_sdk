@@ -171,10 +171,6 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 输出一个错误对象
 - 测试程序会自动退出
 
-#### warn
-
-- 输出警告信息
-
 #### xxx
 
 - lua内置的全局API函数
@@ -201,4 +197,12 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 判定两个浮点数是否相等
 - 第三个可选参数为布尔型，true：double方式比较， false：float方式比较
 - 默认按float方式比较
+
+### log库
+
+#### log.info
+#### log.warn
+#### log.error
+#### log.step
+#### log.action
 
