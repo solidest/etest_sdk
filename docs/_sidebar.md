@@ -1,3 +1,3 @@
 * [简介](README)
-* [SDK API](SDK_API)
+* [SDK](SDK_API)
 * [ETL](ETL)

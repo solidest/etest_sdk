@@ -1,5 +1,5 @@
 
-## 简介
+## Software Development Kit
 
 - SDK为使用ETestDev进行二次开发的开发程序包
 - SDK中为开发上位机程序和开发测试程序提供API支持

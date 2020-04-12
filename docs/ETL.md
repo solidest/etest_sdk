@@ -1,8 +1,6 @@
 
 ## ETL ( Embedded Test Language )
 
-### 简介
-
 + ETL 是嵌入式测试专用描述语言 
 + ETL文件是扩展名为 `.etl` 的文本文件
 + ETL文件由ETL元素声明组成
