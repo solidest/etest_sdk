@@ -169,7 +169,7 @@
             segment x { parser: 'float' }
             segment y { parser: 'float' }
         }
-        oneof(this.type1==3) {  //解析为三位坐标
+        oneof(this.type1==3) {  //解析为三维坐标
             segment x { parser: 'float' }
             segment y { parser: 'float' }
             segment z { parser: 'float' }
