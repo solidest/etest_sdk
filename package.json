@@ -1,6 +1,6 @@
 {
   "name": "etest_sdk",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "sdk for etest",
   "main": "index.js",
   "scripts": {
