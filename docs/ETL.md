@@ -21,6 +21,27 @@ ETL ( Embedded Test Language )
 
 + ETL元素是ETL文件的直接组成单元
 
++ 根级元素包括以下类型：
+
+    * [protocol](#/PROTOCOL)：协议模版描述
+    * device：设备及接口描述
+    * topology：连接拓扑描述
+    * panel：监控面板描述
+
++ 二级元素
+
+    * 二级元素描述只能出现在根级元素描述内部
+    * 不同类型的根级元素内，可用的二级元素类型不同
+
+        > 举例：协议 `prot_1` ，由一个协议段 `seg_1` 组成
+
+        ```
+        prototcol prot_1 
+        {
+            segment seg_1 { ... } 
+        } 
+        ```
+
 + ETL元素描述语法
 
     - 元素描述的语法为: `元素类型 元素名称 { ... }`，类似于程序语言class声明方式
@@ -39,28 +60,6 @@ ETL ( Embedded Test Language )
         { 
             ... 
         }
-        ```
-
-+ 根级元素
-
-    * ETL代码文件的根级元素包括以下类型：
-        - [protocol](#/PROTOCOL)：协议模版描述
-        - device：设备及接口描述
-        - topology：连接拓扑描述
-        - panel：监控面板描述
-
-+ 二级元素
-
-    * 二级元素描述只能出现在根级元素描述内部
-    * 不同类型的根级元素内，可用的二级元素类型不同
-
-        > 举例：协议 `prot_1` ，由一个协议段 `seg_1` 组成
-
-        ```
-        prototcol prot_1 
-        {
-            segment seg_1 { ... } 
-        } 
         ```
 
 + 元素属性
