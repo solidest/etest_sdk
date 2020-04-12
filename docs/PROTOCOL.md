@@ -165,20 +165,20 @@
     protocol prot_oneof {
         segment type1 { parser: 'int8' }
         segment type2 { parser: 'int8', autovalue: this.type1*2 }
-        oneof(this.type1==2) {  //解析为二维坐标
+        oneof(this.type1 == 2) {  //解析为二维坐标
             segment x { parser: 'float' }
             segment y { parser: 'float' }
         }
-        oneof(this.type1==3) {  //解析为三维坐标
+        oneof(this.type1 == 3) {  //解析为三维坐标
             segment x { parser: 'float' }
             segment y { parser: 'float' }
             segment z { parser: 'float' }
         }
         segment none {  } //设置一个空协议段以分割出两组连续的oneof分支
-        oneof(this.type2==1) {
+        oneof(this.type2 <= 2) {
             segment x1 { parser: 'float', autovalue: 9.8 }
         }
-        oneof(this.type2==2) {
+        oneof(this.type2 == 2*this.type1) {
             segment x2 { parser: 'double' }
         }
         segment tail { parser: 'int8', autovalue: 2*(1+this.type1)}
