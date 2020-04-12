@@ -60,9 +60,18 @@
 
         > 举例：32位CRC校验字段设置
         ```
-        segment seg_crc { 
+        ....
+
+        segment seg_crc1 { 
             parser: 'uin32', 
             autovalue: CheckCode([0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true], this.seg_begin, this.seg_end)
+        }
+
+        ....
+
+        segment seg_crc2 { 
+            parser: 'uin32', 
+            autovalue: CheckCode(CRC_17_CAN, this.seg_begin)
         }
 
         ```
