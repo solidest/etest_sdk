@@ -1,6 +1,7 @@
 
 ## Software Development Kit
 
+### API
 - SDK为使用ETestDev进行二次开发的开发程序包
 - SDK中为开发上位机程序和开发测试程序提供API支持
 
@@ -12,23 +13,27 @@
 ## Outer API
 ETest与外部交互使用的API，主要目的是供UI程序集成时使用
 
-#### makeenv
+### makeenv
 
 -  创建项目执行环境
 
-#### start 
+### start 
 
 - 启动执行项目内的一个测试程序
 
-#### stop
+### stop
 
 - 强制停止测试程序的执行
 
-#### state
+### command
+
+- 向etest执行器发送一条自定义命令
+
+### state
 
 - 查询当前etest执行器的状态
 
-#### readout
+### readout
 
 - 读取执行器的输出数据
 
@@ -36,13 +41,12 @@ ETest与外部交互使用的API，主要目的是供UI程序集成时使用
 
 ETest内部执行用到的API，主要目的是开发测试程序时使用
 
-### 内置对象
+### 预设对象
 
 - `protocol` 包含项目内已定义的全部协议
 - `device` 包含当前拓扑环境中的全部设备
 - `record` 包含用例执行中的全局记录
 - `data` 包含用例执行中的全局数据
-
 
 ### 基础库
 
@@ -81,11 +85,6 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 输出一个错误对象
 - 测试程序会自动退出
 
-#### warn
-
-- 输出警告信息
-- 测试程序不会自动退出
-
 #### message
 
 - 用指定协议的创建消息
@@ -101,6 +100,29 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 
 - unpack(protocol.xxx, buffer) 使用指定协议解包buffer
 - 返回解包后的结果数据
+
+### log库
+
+#### log.info
+
+- 记录普通日志信息
+
+#### log.warn
+
+- 记录警告日志信息
+
+#### log.error
+
+- 记录错误日志信息
+
+#### log.step
+
+- 记录测试步骤开始日志
+
+#### log.action
+
+- 记录测试动作执行日志
+
 
 ### string库
 
