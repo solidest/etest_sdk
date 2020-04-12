@@ -1,5 +1,5 @@
 
-## ETL ( Embedded Test Language )
+ETL ( Embedded Test Language )
 
 + ETL 是嵌入式测试专用描述语言 
 + ETL文件是扩展名为 `.etl` 的文本文件
