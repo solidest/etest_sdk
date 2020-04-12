@@ -160,6 +160,31 @@
 
 + 连续多个`oneof`分支，解析器只会解析第一个判定条件为`true`的分支
 
+    > 举例：
+    ```
+    protocol prot_oneof {
+        segment type1 { parser: 'int8' }
+        segment type2 { parser: 'int8', autovalue: this.type1*2 }
+        oneof(this.type1==2) {
+            segment x { parser: 'float' }
+            segment y { parser: 'float' }
+        }
+        oneof(this.type1==3) {
+            segment x { parser: 'float' }
+            segment y { parser: 'float' }
+            segment z { parser: 'float' }
+        }
+        segment aa {  }
+        oneof(this.type2==1) {
+            segment x1 { parser: 'float', autovalue: 9.8 }
+        }
+        oneof(this.type2==2) {
+            segment x2 { parser: 'double' }
+        }
+        segment tail { parser: 'int8', autovalue: 2*(1+this.type1)}
+    }
+    ```
+
 
 ## 协议段数组 `[ ]` 
 
