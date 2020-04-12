@@ -2,8 +2,8 @@
 ## Software Development Kit
 
 ### API
-- SDK为使用ETestDev进行二次开发的开发程序包
-- SDK中为开发上位机程序和开发测试程序提供API支持
+- SDK是使用ETestDev进行二次开发的软件代码库
+- SDK中为开发上位机程序和开发测试程序分别提供API支持
 
 ### 入口函数
 - 测试程序的入口函数名必须为 `entry`
@@ -27,11 +27,11 @@ ETest与外部交互使用的API，主要目的是供UI程序集成时使用
 
 ### command
 
-- 向etest执行器发送一条自定义命令
+- 向ETest执行器发送一条自定义命令
 
 ### state
 
-- 查询当前etest执行器的状态
+- 查询当前ETest执行器的状态
 
 ### readout
 
