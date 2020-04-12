@@ -1,5 +1,7 @@
 
-## Software Development Kit
+## ETestDev SDK
+
+ETestDev的二次开发程序包
 
 ### API
 - SDK是使用ETestDev进行二次开发的软件代码库
