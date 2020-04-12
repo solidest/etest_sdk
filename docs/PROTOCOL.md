@@ -77,9 +77,9 @@
 
 + `parser`：解析器属性
 
-    * 描述协议段的解析方式，值类型为字符串或自定义解析对象
+    * 描述协议段的解析方式，有两种赋值方式：解析字符串、自定义解析对象
 
-    * 可使用的字符串值由以下取值组成:
+    * 可用的解析字符串包括:
 
         - 数据类型：`int1` ~ `int64`、`uint1` ~ `uint64`、`float`、`double`、`string`
         - 大端序：`>`
@@ -95,14 +95,13 @@
             segment seg_1 { parser: 'uint2' }
             segment seg_2 { parser: 'uint20' }
             segment seg_3 { parser: 'uint10' }
-            segment seg_4 { parser: 'float >' }
+            segment seg_4 { parser: 'float > !' }
         }
         ```
 
-    * `parser`属性的值也可以是自定义解析对象
-    * 自定义解析对象包含`pack`、`unpack`属性，分别用于指定打包和解包函数名
+    * 自定义解析对象内包含`pack`、`unpack`两个属性，分别用于指定用户自定义的打包函数名和解包函数名
 
-        > 举例：使用自定义解析函数的字段
+        > 举例：使用自定义解析对象的字段
 
         ```
         protocol prot_1 {
