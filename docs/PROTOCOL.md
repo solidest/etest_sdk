@@ -71,7 +71,7 @@
 
         segment seg_crc2 { 
             parser: 'uin32', 
-            autovalue: CheckCode(CRC_17_CAN, this.seg_begin)
+            autovalue: CheckCode(CRC_32, this.seg_begin)
         }
 
         ```
