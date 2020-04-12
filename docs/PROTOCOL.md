@@ -174,7 +174,7 @@
             segment y { parser: 'float' }
             segment z { parser: 'float' }
         }
-        segment aa {  } //设置一个空协议段以分割出两组连续的oneof分支
+        segment none {  } //设置一个空协议段以分割出两组连续的oneof分支
         oneof(this.type2==1) {
             segment x1 { parser: 'float', autovalue: 9.8 }
         }
