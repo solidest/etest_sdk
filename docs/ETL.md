@@ -23,7 +23,7 @@ ETL ( Embedded Test Language )
 
 + 根级元素包括以下类型：
 
-    * [protocol](https://https://solidest.github.io/etest_sdk/#/PROTOCOL)：协议模版描述
+    * [protocol](https://solidest.github.io/etest_sdk/#/PROTOCOL)：协议模版描述
     * device：设备及接口描述
     * topology：连接拓扑描述
     * panel：监控面板描述
