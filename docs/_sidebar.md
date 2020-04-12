@@ -1,4 +1,4 @@
-* [ETestDev](README)
+* [简介](README)
 * [SDK](SDK_API)
 * [ETL](ETL)
 * [协议描述](PROTOCOL)
