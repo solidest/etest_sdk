@@ -1,7 +1,8 @@
 {
     "startConditions": {
         "protocol": 1,
-        "device": 1
+        "device": 1,
+        "topology": 1
     },
     "rules": [
         [
@@ -57,29 +58,85 @@
             [
                 "*"
             ],
-            "protocol",
+            "\\bprotocol\\b",
             "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('protocol'); return 'PROTOCOL';"
         ],
         [
             [
                 "protocol"
             ],
-            "segments",
+            "\\bsegments\\b",
             "return 'SEGMENTS'"
         ],
         [
             [
                 "protocol"
             ],
-            "segment",
+            "\\bsegment\\b",
             "return 'SEGMENT'"
         ],
         [
             [
                 "protocol"
             ],
-            "oneof",
+            "\\boneof\\b",
             "return 'ONEOF'"
+        ],
+        [
+            [
+                "*"
+            ],
+            "\\bdevice\\b",
+            "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('device'); return 'DEVICE';"
+        ],
+        [
+            [
+                "device"
+            ],
+            "\\b(udp_server|udp_client|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\\b",
+            "return 'INTFTYPE'"
+        ],
+        [
+            [
+                "*"
+            ],
+            "\\btopology\\b",
+            "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('topology'); return 'TOPOLOGY';"
+        ],
+        [
+            [
+                "topology"
+            ],
+            "\\blinking\\b",
+            "return 'LINKING'"
+        ],
+        [
+            [
+                "topology"
+            ],
+            "\\bmapping\\b",
+            "return 'MAPPING'"
+        ],
+        [
+            [
+                "topology"
+            ],
+            "\\bbinding\\b",
+            "return 'BINDING'"
+        ],
+        [
+            [
+                "topology"
+            ],
+            "\\buut\\b",
+            "return 'UUT'"
+        ],
+        [
+            [
+                "topology"
+            ],
+            "\\betest\\b",
+            "return 'ETEST'"
         ],
         [
             [

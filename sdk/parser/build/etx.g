@@ -2,7 +2,8 @@
     "lex": {
         "startConditions": {
             "protocol": 1,
-            "device": 1
+            "device": 1,
+            "topology": 1
         },
         "rules": [
             [
@@ -58,29 +59,85 @@
                 [
                     "*"
                 ],
-                "protocol",
+                "\\bprotocol\\b",
                 "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('protocol'); return 'PROTOCOL';"
             ],
             [
                 [
                     "protocol"
                 ],
-                "segments",
+                "\\bsegments\\b",
                 "return 'SEGMENTS'"
             ],
             [
                 [
                     "protocol"
                 ],
-                "segment",
+                "\\bsegment\\b",
                 "return 'SEGMENT'"
             ],
             [
                 [
                     "protocol"
                 ],
-                "oneof",
+                "\\boneof\\b",
                 "return 'ONEOF'"
+            ],
+            [
+                [
+                    "*"
+                ],
+                "\\bdevice\\b",
+                "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('device'); return 'DEVICE';"
+            ],
+            [
+                [
+                    "device"
+                ],
+                "\\b(udp_server|udp_client|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\\b",
+                "return 'INTFTYPE'"
+            ],
+            [
+                [
+                    "*"
+                ],
+                "\\btopology\\b",
+                "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('topology'); return 'TOPOLOGY';"
+            ],
+            [
+                [
+                    "topology"
+                ],
+                "\\blinking\\b",
+                "return 'LINKING'"
+            ],
+            [
+                [
+                    "topology"
+                ],
+                "\\bmapping\\b",
+                "return 'MAPPING'"
+            ],
+            [
+                [
+                    "topology"
+                ],
+                "\\bbinding\\b",
+                "return 'BINDING'"
+            ],
+            [
+                [
+                    "topology"
+                ],
+                "\\buut\\b",
+                "return 'UUT'"
+            ],
+            [
+                [
+                    "topology"
+                ],
+                "\\betest\\b",
+                "return 'ETEST'"
             ],
             [
                 [
@@ -325,12 +382,20 @@
                 "$$ = newElement('protocol', $ID,'seglist', $protocol_element_list, @ID);"
             ],
             [
-                "PROGRAM ID { }",
-                ""
+                "DEVICE ID { }",
+                "$$ = null;"
             ],
             [
-                "PROGRAM ID { program_element_list }",
-                ""
+                "DEVICE ID { device_element_list }",
+                "$$ = {kind: 'device', value: $device_element_list};"
+            ],
+            [
+                "TOPOLOGY ID { }",
+                "$$ = null;"
+            ],
+            [
+                "TOPOLOGY ID { topology_element_list }",
+                "$$ = {kind: 'topology', value: $topology_element_list};"
             ]
         ],
         "protocol_element_list": [
@@ -385,7 +450,172 @@
                 "$$ = newProtBranch('oneof', $exp, $protocol_element_list, @exp);"
             ]
         ],
-        "program_element_list": [],
+        "device_element_list": [
+            [
+                "device_element",
+                "$$ = newList($device_element);"
+            ],
+            [
+                "device_element_list device_element",
+                "$$ = joinList($device_element_list, $device_element);"
+            ]
+        ],
+        "device_element": [
+            [
+                "INTFTYPE ID object_like",
+                "$$ = {kind: 'interface', value: $INTFTYPE, config: $object_like};"
+            ]
+        ],
+        "topology_element_list": [
+            [
+                "topology_element",
+                "$$ = $topology_element;"
+            ],
+            [
+                "topology_element_list topology_element",
+                "$$ = $topology_element_list.concat($topology_element);"
+            ]
+        ],
+        "topology_element": [
+            [
+                "LINKING : { }",
+                "$$ = [];"
+            ],
+            [
+                "LINKING : { topology_linking_elements }",
+                "$$ = $topology_linking_elements;"
+            ],
+            [
+                "MAPPING : { }",
+                "$$ = [];"
+            ],
+            [
+                "MAPPING : { topology_mapping_elements }",
+                "$$ = $topology_mapping_elements"
+            ],
+            [
+                "BINDING : { }",
+                "$$ = [];"
+            ],
+            [
+                "BINDING : { topology_bindinging_elements }",
+                "$$ = $topology_bindinging_elements;"
+            ]
+        ],
+        "topology_linking_elements": [
+            [
+                "topology_linking_element",
+                "$$ = newList($topology_linking_element);"
+            ],
+            [
+                "topology_linking_elements , topology_linking_element",
+                "$$ = joinList($topology_linking_elements, $topology_linking_element);"
+            ],
+            [
+                "topology_linking_elements ,",
+                "$$ = $topology_linking_elements;"
+            ]
+        ],
+        "topology_linking_element": [
+            [
+                "ID : [ ]",
+                "$$ = null;"
+            ],
+            [
+                "ID : [ topology_dev_intfs ]",
+                "$$ = { kind: 'linking', name: $ID, value: $topology_dev_intfs };"
+            ]
+        ],
+        "topology_mapping_elements": [
+            [
+                "topology_mapping_element",
+                "$$ = newList($topology_mapping_element);"
+            ],
+            [
+                "topology_mapping_elements , topology_mapping_element",
+                "$$ = joinList($topology_mapping_elements, $topology_mapping_element);"
+            ],
+            [
+                "topology_mapping_elements ,",
+                "$$ = $topology_mapping_elements;"
+            ]
+        ],
+        "topology_mapping_element": [
+            [
+                "UUT : [ ]",
+                "$$ = null;"
+            ],
+            [
+                "UUT : [ topology_devs ]",
+                "$$ = {kind: 'uut', value: $topology_devs};"
+            ],
+            [
+                "ETEST : [ ]",
+                "$$ = null;"
+            ],
+            [
+                "ETEST : [ topology_devs ]",
+                "$$ = {kind: 'etest', value: $topology_devs};"
+            ]
+        ],
+        "topology_bindinging_elements": [
+            [
+                "topology_bindinging_element",
+                "$$ = newList($topology_bindinging_element);"
+            ],
+            [
+                "topology_bindinging_elements , topology_bindinging_element",
+                "$$ = joinList($topology_bindinging_elements, $topology_bindinging_element);"
+            ],
+            [
+                "topology_bindinging_elements ,",
+                "$$ = $topology_bindinging_elements;"
+            ]
+        ],
+        "topology_bindinging_element": [
+            [
+                "topology_dev_intf : STRING_TRIPLE",
+                "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = $STRING_TRIPLE; $$ = $topology_dev_intf;"
+            ],
+            [
+                "topology_dev_intf : STRING_SINGLE",
+                "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = $STRING_SINGLE; $$ = $topology_dev_intf;"
+            ]
+        ],
+        "topology_dev_intfs": [
+            [
+                "topology_dev_intf",
+                "$$ = newList($topology_dev_intf)"
+            ],
+            [
+                "topology_dev_intfs , topology_dev_intf",
+                "$$ = joinList($topology_dev_intfs, $topology_dev_intf);"
+            ],
+            [
+                "topology_dev_intfs ,",
+                "$$ = $topology_dev_intfs"
+            ]
+        ],
+        "topology_dev_intf": [
+            [
+                "ID DOT ID",
+                "$$ = { kind: 'connector', device: $1, interface: $3};"
+            ]
+        ],
+        "topology_devs": [
+            [
+                "ID",
+                "$$ = newList($ID);"
+            ],
+            [
+                "topology_devs , ID",
+                "$$ = joinList($topology_devs, $ID);"
+            ],
+            [
+                "topology_devs ,",
+                "$$ = $topology_devs;"
+            ]
+        ],
         "object_like": [
             [
                 "{ }",

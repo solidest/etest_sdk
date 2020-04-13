@@ -180,7 +180,8 @@ let bnf_segtype = {
 let lex_etx = {
   startConditions: {
     protocol: 1,
-    device: 1
+    device: 1,
+    topology: 1,
   },
   rules: [
     [["*"], "\\/\\*[^*]*\\*+([^\\/][^*]*\\*+)*\\/", "/*return 'COMMENT_BLOCK'*/" ],
@@ -190,10 +191,22 @@ let lex_etx = {
     [["*"], "%[0-9A-Fa-f\\s]*%", "return 'STRING_HEX'"],
     [["*"], "\\s+", "/* return 'WHITESPACE' */"],
     [["*"], "\\n", "/* return 'NEWLINE' */"],
-    [["*"], "protocol", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('protocol'); return 'PROTOCOL';"],
-    [["protocol"], "segments", "return 'SEGMENTS'"],
-    [["protocol"], "segment", "return 'SEGMENT'"],
-    [["protocol"], "oneof", "return 'ONEOF'"],
+
+    [["*"], "\\bprotocol\\b", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('protocol'); return 'PROTOCOL';"],
+    [["protocol"], "\\bsegments\\b", "return 'SEGMENTS'"],
+    [["protocol"], "\\bsegment\\b", "return 'SEGMENT'"],
+    [["protocol"], "\\boneof\\b", "return 'ONEOF'"],
+
+    [["*"], "\\bdevice\\b", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('device'); return 'DEVICE';"],
+    [["device"], "\\b(udp_server|udp_client|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\\b", "return 'INTFTYPE'"],
+
+    [["*"], "\\btopology\\b", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('topology'); return 'TOPOLOGY';"],
+    [["topology"], "\\blinking\\b", "return 'LINKING'"],
+    [["topology"], "\\bmapping\\b", "return 'MAPPING'"],
+    [["topology"], "\\bbinding\\b", "return 'BINDING'"],
+    [["topology"], "\\buut\\b", "return 'UUT'"],
+    [["topology"], "\\betest\\b", "return 'ETEST'"],
+    
     [["*"], "true", "return 'TRUE'"],
     [["*"], "false", "return 'FALSE'"],
     [["*"], "0[xX][0-9a-fA-F]+", "return 'NUMBER_HEX'"],
@@ -233,8 +246,10 @@ let bnf_etx = {
   top_element: [
     ["PROTOCOL ID { }", "newElement('protocol', $ID, 'seglist', null, @ID);"],
     ["PROTOCOL ID { protocol_element_list }", "$$ = newElement('protocol', $ID,'seglist', $protocol_element_list, @ID);"],
-    ["PROGRAM ID { }", ""],
-    ["PROGRAM ID { program_element_list }", ""],
+    ["DEVICE ID { }", "$$ = null;"],
+    ["DEVICE ID { device_element_list }", "$$ = {kind: 'device', value: $device_element_list};"],
+    ["TOPOLOGY ID { }", "$$ = null;"],
+    ["TOPOLOGY ID { topology_element_list }", "$$ = {kind: 'topology', value: $topology_element_list};"],
   ],
 
   // protocol
@@ -261,10 +276,82 @@ let bnf_etx = {
     ["ONEOF ( exp ) { protocol_element_list }", "$$ = newProtBranch('oneof', $exp, $protocol_element_list, @exp);"],
   ],
 
-  // program
-  program_element_list: [
-    
+  // device
+  device_element_list: [
+    ["device_element", "$$ = newList($device_element);"],
+    ["device_element_list device_element", "$$ = joinList($device_element_list, $device_element);"]
   ],
+
+  device_element: [
+    ["INTFTYPE ID object_like", "$$ = {kind: 'interface', value: $INTFTYPE, config: $object_like};"],
+  ],
+
+  //topology
+  topology_element_list: [
+    ["topology_element", "$$ = $topology_element;"],
+    ["topology_element_list topology_element", "$$ = $topology_element_list.concat($topology_element);"]
+  ],
+
+  topology_element: [
+    ["LINKING : { }", "$$ = [];"],
+    ["LINKING : { topology_linking_elements }", "$$ = $topology_linking_elements;"],
+    ["MAPPING : { }", "$$ = [];"],
+    ["MAPPING : { topology_mapping_elements }", "$$ = $topology_mapping_elements"],
+    ["BINDING : { }", "$$ = [];"],
+    ["BINDING : { topology_bindinging_elements }", "$$ = $topology_bindinging_elements;"],
+  ],
+
+  topology_linking_elements: [
+    ["topology_linking_element", "$$ = newList($topology_linking_element);"],
+    ["topology_linking_elements , topology_linking_element", "$$ = joinList($topology_linking_elements, $topology_linking_element);"],
+    ["topology_linking_elements ,", "$$ = $topology_linking_elements;"],
+  ],
+
+  topology_linking_element: [
+    ["ID : [ ]", "$$ = null;"],
+    ["ID : [ topology_dev_intfs ]", "$$ = { kind: 'linking', name: $ID, value: $topology_dev_intfs };"],
+  ],
+
+  topology_mapping_elements: [
+    ["topology_mapping_element", "$$ = newList($topology_mapping_element);"],
+    ["topology_mapping_elements , topology_mapping_element", "$$ = joinList($topology_mapping_elements, $topology_mapping_element);"],
+    ["topology_mapping_elements ,", "$$ = $topology_mapping_elements;"],
+  ],
+
+  topology_mapping_element: [
+    ["UUT : [ ]", "$$ = null;"],
+    ["UUT : [ topology_devs ]", "$$ = {kind: 'uut', value: $topology_devs};"],
+    ["ETEST : [ ]", "$$ = null;"],
+    ["ETEST : [ topology_devs ]", "$$ = {kind: 'etest', value: $topology_devs};"],
+  ],
+
+  topology_bindinging_elements: [
+    ["topology_bindinging_element", "$$ = newList($topology_bindinging_element);"],
+    ["topology_bindinging_elements , topology_bindinging_element", "$$ = joinList($topology_bindinging_elements, $topology_bindinging_element);"],
+    ["topology_bindinging_elements ,", "$$ = $topology_bindinging_elements;"],
+  ],
+
+  topology_bindinging_element: [
+    ["topology_dev_intf : STRING_TRIPLE", "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = $STRING_TRIPLE; $$ = $topology_dev_intf;"],
+    ["topology_dev_intf : STRING_SINGLE", "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = $STRING_SINGLE; $$ = $topology_dev_intf;"],
+  ],
+
+  topology_dev_intfs: [
+    ["topology_dev_intf", "$$ = newList($topology_dev_intf)"],
+    ["topology_dev_intfs , topology_dev_intf", "$$ = joinList($topology_dev_intfs, $topology_dev_intf);"],
+    ["topology_dev_intfs ,", "$$ = $topology_dev_intfs"],
+  ],
+
+  topology_dev_intf: [
+    ["ID DOT ID", "$$ = { kind: 'connector', device: $1, interface: $3};"]
+  ],
+
+  topology_devs: [
+      ["ID", "$$ = newList($ID);"],
+      ["topology_devs , ID", "$$ = joinList($topology_devs, $ID);"],
+      ["topology_devs ,", "$$ = $topology_devs;"],
+  ],
+
 
   // common
   object_like: [
