@@ -45,18 +45,19 @@ function onLog(type, info) {
     if(info) {
         info = JSON.parse(info).message;
     }
-    let fmt = '\x1B[47;30m%s\x1B[37;49m';
+    let fmt = '';
     switch (type) {
         case "info":
-            fmt = '\x1B[30;42m%s\x1B[37;49m'
+            fmt = '\x1B[30;42m INFO \x1B[37;49m'
             break;
         case "error":
-            fmt = '\x1B[30;41m%s\x1B[37;49m';
+            fmt = '\x1B[30;41m ERROR \x1B[37;49m';
             break;
         case "warn":
-            fmt = '\x1B[30;43m%s\x1B[37;49m';
+            fmt = '\x1B[30;43m WARNING \x1B[37;49m';
             break;
         default:
+            fmt = `\x1B[47;30m ${type.toLocaleUpperCase()} \x1B[37;49m`
             break;
     }
     console.log(fmt, info);
