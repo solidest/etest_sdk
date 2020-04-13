@@ -243,57 +243,57 @@ XOR_32_FALSE | 32位异或值，高字节在前，低字节在后
 
 名称|多项式|初始值|结果异或值|反转输入|反转输出
 -|-|-|-|-|-|
-CRC_4_ITU | _ | _ | _ | _ | _ |
-CRC_5_EPC | _ | _ | _ | _ | _ |
-CRC_5_ITU | _ | _ | _ | _ | _ |
-CRC_5_USB | _ | _ | _ | _ | _ |
-CRC_6_ITU | _ | _ | _ | _ | _ |
-CRC_6_CDMA2000A | _ | _ | _ | _ | _ |
-CRC_6_CDMA2000B | _ | _ | _ | _ | _ |
-CRC_7 | _ | _ | _ | _ | _ |
-CRC_8 | _ | _ | _ | _ | _ |
-CRC_8_EBU | _ | _ | _ | _ | _ |
-CRC_8_MAXIM | _ | _ | _ | _ | _ |
-CRC_8_WCDMA | _ | _ | _ | _ | _ |
-CRC_10 | _ | _ | _ | _ | _ |
-CRC_10_CDMA2000 | _ | _ | _ | _ | _ |
-CRC_11 | _ | _ | _ | _ | _ |
-CRC_12_CDMA2000 | _ | _ | _ | _ | _ |
-CRC_12_DECT | _ | _ | _ | _ | _ |
-CRC_12_UMTS | _ | _ | _ | _ | _ |
-CRC_13_BBC | _ | _ | _ | _ | _ |
-CRC_15 | _ | _ | _ | _ | _ |
-CRC_15_MPT1327 | _ | _ | _ | _ | _ |
-CRC_16_ARC | _ | _ | _ | _ | _ |
-CRC_16_BUYPASS | _ | _ | _ | _ | _ |
-CRC_16_CCITTFALSE | _ | _ | _ | _ | _ |
-CRC_16_CDMA2000 | _ | _ | _ | _ | _ |
-CRC_16_CMS | _ | _ | _ | _ | _ |
-CRC_16_DECTR | _ | _ | _ | _ | _ |
-CRC_16_DECTX | _ | _ | _ | _ | _ |
-CRC_16_DNP | _ | _ | _ | _ | _ |
-CRC_16_GENIBUS | _ | _ | _ | _ | _ |
-CRC_16_KERMIT | _ | _ | _ | _ | _ |
-CRC_16_MAXIM | _ | _ | _ | _ | _ |
-CRC_16_MODBUS | _ | _ | _ | _ | _ |
-CRC_16_T10DIF | _ | _ | _ | _ | _ |
-CRC_16_USB | _ | _ | _ | _ | _ |
-CRC_16_X25 | _ | _ | _ | _ | _ |
-CRC_16_XMODEM | _ | _ | _ | _ | _ |
-CRC_17_CAN | _ | _ | _ | _ | _ |
-CRC_21_CAN | _ | _ | _ | _ | _ |
-CRC_24 | _ | _ | _ | _ | _ |
-CRC_24_FLEXRAYA | _ | _ | _ | _ | _ |
-CRC_24_FLEXRAYB | _ | _ | _ | _ | _ |
-CRC_30 | _ | _ | _ | _ | _ |
-CRC_32 | _ | _ | _ | _ | _ |
-CRC_32_BZIP2 | _ | _ | _ | _ | _ |
-CRC_32_C | _ | _ | _ | _ | _ |
-CRC_32_MPEG2 | _ | _ | _ | _ | _ |
-CRC_32_POSIX | _ | _ | _ | _ | _ |
-CRC_32_Q | _ | _ | _ | _ | _ |
-CRC_40_GSM | _ | _ | _ | _ | _ |
-CRC_64 | _ | _ | _ | _ | _ |
+CRC_4_ITU |0x3| 0x0| 0x0| true| true|
+CRC_5_EPC | 0x09| 0x09| 0x00| false| false |
+CRC_5_ITU | 0x15| 0x00| 0x00| true| true |
+CRC_5_USB | 0x05| 0x1F| 0x1F| true| true |
+CRC_6_ITU | 0x03| 0x00| 0x00| true| true |
+CRC_6_CDMA2000A |0x27| 0x3F| 0x00| false| false |
+CRC_6_CDMA2000B | 0x07| 0x3F| 0x00| false| false |
+CRC_7 |0x09| 0x00| 0x00| false| false |
+CRC_8 |0x07| 0x00| 0x00| false| false |
+CRC_8_EBU | 0x1D|0xFF| 0x00| true| true |
+CRC_8_MAXIM | 0x31| 0x00| 0x00| true| true |
+CRC_8_WCDMA | 0x9B| 0x00| 0x00| true| true  |
+CRC_10 | 0x233| 0x000| 0x000| false| false|
+CRC_10_CDMA2000 | 0x3D9| 0x3FF| 0x000| false| false |
+CRC_11 | 0x385| 0x01A| 0x000| false| false |
+CRC_12_CDMA2000 | 0xF13| 0xFFF| 0x000| false| false |
+CRC_12_DECT | 0x80F| 0x000| 0x000|false| false |
+CRC_12_UMTS | 0x80F| 0x000| 0x000| false| true |
+CRC_13_BBC |0x1CF5| 0x0000| 0x0000| false| false |
+CRC_15 | 0x4599| 0x0000| 0x0000| false| false |
+CRC_15_MPT1327 | 0x6815| 0x0000| 0x0001| false| false |
+CRC_16_ARC | 0x8005| 0x0000| 0x0000| true| true |
+CRC_16_BUYPASS |0x8005| 0x0000| 0x0000| false| false |
+CRC_16_CCITTFALSE | 0x1021| 0xFFFF| 0x0000| false| false |
+CRC_16_CDMA2000 |0xC867| 0xFFFF| 0x0000| false| false |
+CRC_16_CMS | 0x8005| 0xFFFF| 0x0000| false| false |
+CRC_16_DECTR | 0x0589| 0x0000| 0x0001| false| false|
+CRC_16_DECTX |0x0589| 0x0000| 0x0000| false| false |
+CRC_16_DNP | 0x3D65| 0x0000| 0xFFFF| true|true |
+CRC_16_GENIBUS | 0x1021 |0xFFFF| 0xFFFF| false| false |
+CRC_16_KERMIT |0x1021|0x0000| 0x0000| true| true |
+CRC_16_MAXIM | 0x8005| 0x0000| 0xFFFF| true| true |
+CRC_16_MODBUS | 0x8005| 0xFFFF| 0x0000| true| true |
+CRC_16_T10DIF |0x8BB7| 0x0000| 0x0000| false| false |
+CRC_16_USB |0x8005| 0xFFFF| 0xFFFF| true| true |
+CRC_16_X25 | 0x1021| 0xFFFF| 0xFFFF| true|true |
+CRC_16_XMODEM | 0x1021| 0x0000| 0x0000| false| false |
+CRC_17_CAN | 0x1685B| 0x00000| 0x00000| false| false|
+CRC_21_CAN | 0x102899| 0x000000| 0x000000| false| false|
+CRC_24 | 0x864CFB|0xB704CE| 0x000000| false| false|
+CRC_24_FLEXRAYA |0x5D6DCB| 0xFEDCBA| 0x000000| false| false|
+CRC_24_FLEXRAYB | 0x5D6DCB| 0xABCDEF| 0x000000| false| false  |
+CRC_30 | 0x2030B9C7| 0x3FFFFFFF| 0x00000000| false|false |
+CRC_32 | 0x04C11DB7|0xFFFFFFFF|0xFFFFFFFF| true| true |
+CRC_32_BZIP2 |0x04C11DB7| 0xFFFFFFFF| 0xFFFFFFFF| false|false| 
+CRC_32_C | 0x1EDC6F41| 0xFFFFFFFF| 0xFFFFFFFF| true| true |
+CRC_32_MPEG2 | 0x04C11DB7| 0xFFFFFFFF | 0x00000000  | false| false |
+CRC_32_POSIX |0x04C11DB7 | 0x00000000| 0xFFFFFFFF| false|false |
+CRC_32_Q | 0x814141AB | 0x00000000| 0x00000000 | false| false |
+CRC_40_GSM | 0x0004820009|0x0000000000|0xFFFFFFFFFF| false|false|
+CRC_64 | 0x42F0E1EBA9EA3693| 0x0000000000000000 | 0x0000000000000000| false| false|
 
 
 
