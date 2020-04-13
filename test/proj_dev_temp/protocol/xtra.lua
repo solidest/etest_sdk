@@ -1,10 +1,10 @@
 -- 打包函数
 -- 协议段打包时调用
--- 输入参数 seg_name: 协议段名称、seg_value：协议段值、 prot_data：全部协议数据
--- 返回值：返回打包后的字符串
+-- 输入参数 seg_name: 协议段名称、seg_value：协议段值
+-- 返回值：返回打包后的string
 
 --将浮点数打包成字符串 字符D替换小数点
-function PackFloat_D(seg_name, seg_value, prot_data)
+function PackFloat_D(seg_name, seg_value)
     local str = string.format("%.5f", seg_value)
     if seg_name=='WD' then  --纬度是最后一个字符串，不需要分割符F
         return string.gsub(str, "%.", "D")
@@ -24,12 +24,12 @@ end
 
 -- 解包函数
 -- 协议段解包时调用
--- 输入参数 seg_name: 协议段名称、prot_buff：协议包原始字节、 pos: 当前解析位置、prot_data：已解析得到的数据
+-- 输入参数 seg_name: 协议段名称、prot_buff：报文原始字节、 pos: 当前解析位置
 -- 返回值：必须返回2个值，第1个为解析得到的值，第2个为解析使用的字节长度
 
 
 --将含D字符的string解包成浮点数
-function UnpackFloat_D(seg_name, prot_buff, pos, prot_data)
+function UnpackFloat_D(seg_name, prot_buff, pos)
     local pos_end = pos
     local str = ''
 
