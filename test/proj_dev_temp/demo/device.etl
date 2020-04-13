@@ -7,12 +7,12 @@ device dev_0 {
     udp_client clt_1 { ip: '127.0.0.1' }
     tcp_client clt_2 { ip: '127.0.0.1' }
 
-    serial_ttl s1 { baudrate： 9600 }
-    serial_232 s2 { baudrate： 9600 }
-    serial_422 s3 { baudrate： 9600 }
-    serial_485 s4 { baudrate： 9600 }
-    serial_485 s5 { baudrate： 9600 }
-    serial_usb s6 { baudrate： 9600 }
+    serial_ttl s1 { baudrate: 9600 }
+    serial_232 s2 { baudrate: 9600 }
+    serial_422 s3 { baudrate: 9600 }
+    serial_485 s4 { baudrate: 9600 }
+    serial_485 s5 { baudrate: 9600 }
+    serial_usb s6 { baudrate: 9600 }
 
     di di1 { minv: 3, maxv: 5 }
     do do1 { minv: 3, maxv: 5 }
@@ -25,7 +25,7 @@ device dev_2 {
 
     tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
     udp_client clt_1 { ip: '127.0.0.1' }
-    serial_ttl s1 { baudrate： 9600 }
+    serial_ttl s1 { baudrate: 9600 }
 
 }
 
@@ -36,7 +36,7 @@ device dev_3 {
     tcp_client clt_2 { ip: '127.0.0.1' }
     do do1 { minv: 3, maxv: 5 }
     ad ad1 { ratio: 16 }
-
+    can can1 { baudrate: 9600}
 }
 
 //拓扑结构

@@ -165,8 +165,7 @@ const lexRules = [[/^\/\*[^*]*\*+([^\/][^*]*\*+)*\//, function() { /*return 'COM
 [/^%[0-9A-Fa-f\s]*%/, function() { return 'STRING_HEX' }],
 [/^\s+/, function() { /* return 'WHITESPACE' */ }],
 [/^\n/, function() { /* return 'NEWLINE' */ }],
-[/^protocol/, function() { return 'PROTOCOL' }],
-[/^program/, function() { return 'PROGRAM' }],
+[/^protocol/, function() { if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('protocol'); return 'PROTOCOL'; }],
 [/^segments/, function() { return 'SEGMENTS' }],
 [/^segment/, function() { return 'SEGMENT' }],
 [/^oneof/, function() { return 'ONEOF' }],
@@ -197,7 +196,7 @@ const lexRules = [[/^\/\*[^*]*\*+([^\/][^*]*\*+)*\//, function() { /*return 'COM
 [/^\)/, function() { return ')' }],
 [/^>/, function() { return '>' }],
 [/^</, function() { return '<' }]];
-const lexRulesByConditions = {"INITIAL":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38]};
+const lexRulesByConditions = {"INITIAL":[0,1,2,3,4,5,6,7,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37],"protocol":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37],"device":[0,1,2,3,4,5,6,7,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37]};
 
 const EOF_TOKEN = {
   type: EOF,
