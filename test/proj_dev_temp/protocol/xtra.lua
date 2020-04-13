@@ -46,7 +46,7 @@ end
 
 
 --将整数字符串解包成缩小10倍的浮点数
-function UnpackFloat_I(seg_name, prot_buff, pos, prot_data)
+function UnpackFloat_I(seg_name, prot_buff, pos)
     local pos_end = string.find(prot_buff, 'F', pos)
     local str = string.sub(prot_buff, pos, pos_end-1)
     return tonumber(str)/10, pos_end-pos+1
