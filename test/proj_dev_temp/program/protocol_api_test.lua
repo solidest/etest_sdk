@@ -183,6 +183,7 @@ function Test_log()
 end
 
 function Test_CheckCode()
+    log.info('::'..debug.getinfo(1).name..'::')
     local data1 = {seg_3=-199, seg_5=-998.7777, seg_8=12345}
     local buf = pack(protocol.prot_check, data1)
     local data2 = unpack(protocol.prot_check, buf)
@@ -190,6 +191,7 @@ function Test_CheckCode()
 end
 
 function Test_string_arr()
+    log.info('::'..debug.getinfo(1).name..'::')
     local data1 = {iarr={1,2,3}, sarr={"abc", "def", "eee"}}
     local buf = pack(protocol.text_arr, data1)
     local data2 = unpack(protocol.text_arr, buf)
@@ -197,6 +199,7 @@ function Test_string_arr()
 end
 
 function Test_Xtra()
+    log.info('::'..debug.getinfo(1).name..'::')
     local data1 = { seg1=12.89323 }
     local buf = pack(protocol.prot_xtra, data1)
     local data2 = unpack(protocol.prot_xtra, buf)
