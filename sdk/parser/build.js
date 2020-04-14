@@ -246,10 +246,10 @@ let bnf_etx = {
   top_element: [
     ["PROTOCOL ID { }", "newElement('protocol', $ID, 'seglist', null, @ID);"],
     ["PROTOCOL ID { protocol_element_list }", "$$ = newElement('protocol', $ID,'seglist', $protocol_element_list, @ID);"],
-    ["DEVICE ID { }", "$$ = null;"],
-    ["DEVICE ID { device_element_list }", "$$ = {kind: 'device', value: $device_element_list};"],
-    ["TOPOLOGY ID { }", "$$ = null;"],
-    ["TOPOLOGY ID { topology_element_list }", "$$ = {kind: 'topology', value: $topology_element_list};"],
+    ["DEVICE ID { }", "$$ = {kind: 'device', name: $ID, value: null};"],
+    ["DEVICE ID { device_element_list }", "$$ = {kind: 'device', name: $ID, value: $device_element_list};"],
+    ["TOPOLOGY ID { }", "$$ = {kind: 'topology', name: $ID, value: null};"],
+    ["TOPOLOGY ID { topology_element_list }", "$$ = {kind: 'topology', name: $ID, value: $topology_element_list};"],
   ],
 
   // protocol
@@ -283,7 +283,7 @@ let bnf_etx = {
   ],
 
   device_element: [
-    ["INTFTYPE ID object_like", "$$ = {kind: 'interface', value: $INTFTYPE, config: $object_like};"],
+    ["INTFTYPE ID object_like", "$$ = {kind: 'connector', name: $ID, type: $INTFTYPE, config: $object_like};"],
   ],
 
   //topology
@@ -343,7 +343,7 @@ let bnf_etx = {
   ],
 
   topology_dev_intf: [
-    ["ID DOT ID", "$$ = { kind: 'connector', device: $1, interface: $3};"]
+    ["ID DOT ID", "$$ = { kind: 'dev_connector', device: $1, connector: $3};"]
   ],
 
   topology_devs: [
@@ -545,7 +545,7 @@ let operators = [
   node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g --tokenize -f test/proj_dev_temp/etxTest.etx --loc
 
   语法分析
-  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g -o sdk/parser/etxParser.js --loc && syntax-cli -m slr1 -g sdk/parser/build/etx.g -f test/proj_dev_temp/protocol/etlTest.etl --loc
+  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g -o sdk/parser/etxParser.js --loc && syntax-cli -m slr1 -g sdk/parser/build/etx.g -f test/proj_dev_temp/device/device.etl --loc
 
 */
 

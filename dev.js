@@ -37,6 +37,11 @@ function onRecved(id, info) {
     console.log('\x1B[90m%s\x1B[39m', id + " <- " + info);
 }
 
+function onWarn(info) {
+    console.error('\x1B[33m%s\x1B[39m', '  <- ' + info);
+}
+
+
 function onPrint(info) {
     console.log('  <- ' + info);
 }

@@ -383,19 +383,19 @@
             ],
             [
                 "DEVICE ID { }",
-                "$$ = null;"
+                "$$ = {kind: 'device', name: $ID, value: null};"
             ],
             [
                 "DEVICE ID { device_element_list }",
-                "$$ = {kind: 'device', value: $device_element_list};"
+                "$$ = {kind: 'device', name: $ID, value: $device_element_list};"
             ],
             [
                 "TOPOLOGY ID { }",
-                "$$ = null;"
+                "$$ = {kind: 'topology', name: $ID, value: null};"
             ],
             [
                 "TOPOLOGY ID { topology_element_list }",
-                "$$ = {kind: 'topology', value: $topology_element_list};"
+                "$$ = {kind: 'topology', name: $ID, value: $topology_element_list};"
             ]
         ],
         "protocol_element_list": [
@@ -463,7 +463,7 @@
         "device_element": [
             [
                 "INTFTYPE ID object_like",
-                "$$ = {kind: 'interface', value: $INTFTYPE, config: $object_like};"
+                "$$ = {kind: 'connector', name: $ID, type: $INTFTYPE, config: $object_like};"
             ]
         ],
         "topology_element_list": [
@@ -599,7 +599,7 @@
         "topology_dev_intf": [
             [
                 "ID DOT ID",
-                "$$ = { kind: 'connector', device: $1, interface: $3};"
+                "$$ = { kind: 'dev_connector', device: $1, connector: $3};"
             ]
         ],
         "topology_devs": [
