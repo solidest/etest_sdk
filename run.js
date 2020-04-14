@@ -10,7 +10,11 @@ const SdkApi = require('./sdk');
 
 let api = new SdkApi('127.0.0.1', 1210);
 let proj = 'test/proj_etl_test';
-let entry = 'program/eTestProgram/bytesize.lua';
+let entry = 'program/eTestProgram/checkcode.lua';
+
+
+// let proj = 'test/proj_dev_temp';
+// let entry = 'program/protocol_api_test.lua';
 let _vars = {
     var1: "demo_v1",
     var2: 99
