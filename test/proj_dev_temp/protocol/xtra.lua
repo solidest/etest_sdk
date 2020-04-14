@@ -6,6 +6,7 @@
 --将浮点数打包成字符串 字符D替换小数点
 function PackFloat_D(seg_name, seg_value)
     local str = string.format("%.5f", seg_value)
+    print(str,seg_name)
     if seg_name=='WD' then  --纬度是最后一个字符串，不需要分割符F
         return string.gsub(str, "%.", "D")
     else 
@@ -32,7 +33,7 @@ end
 function UnpackFloat_D(seg_name, prot_buff, pos)
     local pos_end = pos
     local str = ''
-
+    print(seg_name,prot_buff,pos)
     if seg_name=='WD' then
         pos_end = string.len(prot_buff)
         str = string.sub(prot_buff, pos, pos_end)
@@ -40,6 +41,7 @@ function UnpackFloat_D(seg_name, prot_buff, pos)
         pos_end = string.find(prot_buff, 'F', pos)
         str = string.sub(prot_buff, pos, pos_end-1)
     end
+    print(str)
     str = string.gsub(str, 'D', '.')
     return tonumber(str), pos_end-pos+1
 end
@@ -60,9 +62,13 @@ end
 -- xor8校验后转字符串
 function My_xor8(prot_buff, pos_begin, pos_end)
     local res = 0
+    print("0000")
+    print(prot_buff,pos_begin,pos_end)
     for i=pos_begin, pos_end do
         res = res ~ string.byte(prot_buff, i)
+        print(res)
     end
+    print(string.format("%02X", res))
     return string.format("%02X", res)
 end
 
