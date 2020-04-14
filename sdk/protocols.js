@@ -5,7 +5,7 @@ const parser = require("./parser/etxParser")
 const segparser = require("./parser/segParser")
 
 //获取目录下所有的etl文件
-function getEtls(pf, results) {
+function getEtlFiles(pf, results) {
     if(!fs.existsSync(pf)) {
         return;
     }
@@ -22,13 +22,13 @@ function getEtls(pf, results) {
     if(st.isDirectory()) {
         let dir = fs.readdirSync(pf);
         for(let p of dir) {
-            getEtls(path.join(pf, p), results);
+            getEtlFiles(path.join(pf, p), results);
         }        
     }
 }
 
 //分析解析器字符串
-function getSegStrType(seg, pser, vp, file) {
+function getSegTypeFromStr(seg, pser, vp, file) {
     try {
         let ast = segparser.parse(vp);
         seg.kind = ast.type;
@@ -49,7 +49,7 @@ function getSegStrType(seg, pser, vp, file) {
 }
 
 //分析自定义解析器
-function getSegArrType(seg, pser, props, file) {
+function getPackUnpack(seg, pser, props, file) {
     let pack = props.find(it=>it.name==='pack');
     if(pack) {
         let v = pack.value;
@@ -134,9 +134,9 @@ function parseSegType(file, seg) {
             throw new Error(`"parser"属性未设置(${file} : ${pser.value_line||''})`);
         }
         if(pser.value.kind === 'string') {
-            getSegStrType(seg, pser, pser.value.value, file);
+            getSegTypeFromStr(seg, pser, pser.value.value, file);
         } else if(pser.value instanceof Array) {
-            getSegArrType(seg, pser, pser.value, file);
+            getPackUnpack(seg, pser, pser.value, file);
         } else {
             throw new Error('ERR parser.kind : ' + typeof pser.value, pser)
         }
@@ -180,7 +180,7 @@ function parseProtocol(file, prot_asts, dir) {
 function parseProtocols(pf) {
     pf = path.resolve(pf)
     let files =[];
-    getEtls(pf, files);
+    getEtlFiles(pf, files);
     if(files.length == 0) {
         return [];
     }

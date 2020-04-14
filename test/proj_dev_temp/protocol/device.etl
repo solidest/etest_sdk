@@ -52,7 +52,7 @@ topology topo_1 {
 
     //接口绑定
     binding: {
-        dev_1.s1: 'com1',
+        dev_1.s1: 'localhost',
         dev_2.s1: 'com2@192.168.1.5',
         dev_2.can_1: 'can_a:1@192.168.1.5',
     }

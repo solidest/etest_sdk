@@ -48,16 +48,16 @@ function onLog(type, info) {
     let fmt = '';
     switch (type) {
         case "info":
-            fmt = '\x1B[30;42m INFO \x1B[37;49m'
+            fmt = '\x1B[30;42m INFO \x1B[32;49m%s\x1B[0m'
             break;
         case "error":
-            fmt = '\x1B[30;41m ERROR \x1B[37;49m';
+            fmt = '\x1B[30;41m ERROR \x1B[31;49m%s\x1B[0m';
             break;
         case "warn":
-            fmt = '\x1B[30;43m WARNING \x1B[37;49m';
+            fmt = '\x1B[30;43m WARNING \x1B[33;49m%s\x1B[0m';
             break;
         default:
-            fmt = `\x1B[47;30m ${type.toLocaleUpperCase()} \x1B[37;49m`
+            fmt = `\x1B[44;30m ${type.toLocaleUpperCase()} \x1B[34;49m%s\x1B[0m`
             break;
     }
     console.log(fmt, info);
