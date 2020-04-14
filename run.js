@@ -1,21 +1,16 @@
-
 const SdkApi = require('./sdk');
 
 /*
     api: sdk对象
-    proj: 项目文件夹路径，与当前目录的相对路
-    entry: 包含entry函数的执行文件，与proj的相对路径
+    proj: 项目文件夹路径
+    entry: 包含entry函数的执行文件
     _vars: 输入给entry的参数值
     _option: 输入给entry的自定义选项
 */
 
 let api = new SdkApi('127.0.0.1', 1210);
 let proj = 'test/proj_etl_test';
-let entry = 'program/eTestProgram/oneof.lua';
-// let proj = 'test/proj_dev_temp';
-// let entry = 'program/protocol_api_test.lua';
-// let entry = 'program/test_api.lua';
-// let entry = 'program/demo.lua';
+let entry = 'program/eTestProgram/bytesize.lua';
 let _vars = {
     var1: "demo_v1",
     var2: 99
@@ -23,7 +18,6 @@ let _vars = {
 let _option = null;
 
 
-//run demo
 let run_id = null;
 let timer = null;
 
@@ -47,18 +41,39 @@ function onPrint(info) {
     console.log('  <- ' + info);
 }
 
-function onError(info, id) {
-    console.error('\x1B[31m%s\x1B[39m', (id ? id : ' ') + ' <- ' + info);
-    // setTimeout(exit, 3000);
+function onLog(type, info) {
+    if(info) {
+        info = JSON.parse(info).message;
+    }
+    let fmt = '\x1B[47;30m%s\x1B[37;49m';
+    switch (type) {
+        case "info":
+            fmt = '\x1B[30;42m%s\x1B[37;49m'
+            break;
+        case "error":
+            fmt = '\x1B[30;41m%s\x1B[37;49m';
+            break;
+        case "warn":
+            fmt = '\x1B[30;43m%s\x1B[37;49m';
+            break;
+        default:
+            break;
+    }
+    console.log(fmt, info);
 }
 
-function onWarn(info) {
-    console.error('\x1B[33m%s\x1B[39m', '  <- ' + info);
+function onError(info, id) {
+    console.error('\x1B[31m%s\x1B[39m', (id ? id : ' ') + ' <- ' + info);
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+    process.exit(0);
 }
 
 function callback(err, res, id) {
     if (err) {
-        return onError(err.message||err, id);
+        return onError(err.message ? err.message : err, id);
     }
     return onRecved(id, res);
 }
@@ -66,7 +81,7 @@ function callback(err, res, id) {
 //创建环境 proj_path: 项目文件夹路径
 function makeEnv(proj_path) {
     let id = api.makeenv(proj_path, callback);
-    onSended(id || ' ', 'makeenv');
+    onSended(id, 'makeenv');
 }
 
 //执行测试 proj_path: 项目文件夹路径，run_file: 执行入口文件, vars: 输入参数取值, option: 自定义选项
@@ -78,7 +93,7 @@ function startRun(proj_path, run_file, vars, option) {
             run_id = res;
         }
     });
-    onSended(id || ' ', 'start');
+    onSended(id, 'start');
 }
 
 //读取执行输出
@@ -96,15 +111,22 @@ function readOut() {
             for (let r of res) {
                 if (r.catalog === 'system') {
                     switch (r.kind) {
-                        case 'entry': {
-                            console.log('')
-                            onRecved(' ', 'entry > ' + r.value + '\n');
+                        case 'start':
+                            onRecved(' ', 'start > ' + r.value);
                             break;
-                        }
 
-                        case 'exit': {
+                        case 'entry':
+                            onRecved(' ', '::entry::' + r.value);
                             console.log('')
-                            onRecved(' ', `exit > ${r.value} (${Math.round(r.time/1000000000)}s)\n`)
+                            break;
+
+                        case 'exit':
+                            console.log('')
+                            onRecved(' ', '::exit::' + r.value);
+                            break;
+
+                        case 'stop': {
+                            onRecved(' ', `stop > ${r.value} (${Math.round(r.time/1000000000)}s)\n`)
                             exit();
                             break;
                         }
@@ -132,6 +154,8 @@ function readOut() {
                             onRecved('?', typeof r == 'object' ? JSON.stringify(r) : r);
                             break;
                     }
+                } else if (r.catalog === 'log') {
+                    onLog(r.kind, r.value);
                 } else {
                     onRecved('?', r);
                 }
@@ -147,7 +171,7 @@ if (argv == 'state') {
         callback(err, res, id);
         process.exit(0);
     });
-    onSended(id || ' ', 'state');
+    onSended(id, 'state');
 } else if (argv == 'stop') {
     let id = api.state((err, res, id) => {
         callback(err, res, id);
@@ -156,12 +180,12 @@ if (argv == 'state') {
                 callback(err, res, id);
                 process.exit(0);
             });
-            onSended(id || ' ', 'stop');
+            onSended(id, 'stop');
         } else {
             process.exit(0);
         }
     });
-    onSended(id || ' ', 'state');
+    onSended(id, 'state');
 
 } else if (argv == 'start') {
     makeEnv(proj);
