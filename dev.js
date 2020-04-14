@@ -15,7 +15,7 @@ let _vars = {
     var1: "demo_v1",
     var2: 99
 };
-let _option = null;
+let _option = {topology: 'topo_1'};
 
 
 let run_id = null;

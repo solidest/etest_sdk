@@ -128,17 +128,24 @@ class Topology {
 
             //检查设备接口
             for(let connor of dev.connectors) {
+
+                //检查连接
+                if(!connor.link) {
+                    console.error('\x1B[33m%s\x1B[39m', "WARNING", `拓扑 ${this.name} 中引用的设备接口 ${dev.name}.${connor.name} 未设置连接`);
+                }
+
                 //绑定检查
                 if(connor.uri) {
                     if(dev.map==='uut') {
                         throw (`拓扑 ${this.name} 中设备映射与接口绑定存在冲突: ${dev.name}.${connor.name}`);
                     }
-                } else {
+                } else if(connor.link) {
                     if(dev.map!=='uut') {
                         //警告接口未设置绑定
                         console.error('\x1B[33m%s\x1B[39m', "WARNING", `拓扑 ${this.name} 中引用的设备接口 ${dev.name}.${connor.name} 未设置绑定`);
                     }
                 }
+
             }
         }
         return;
