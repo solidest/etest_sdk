@@ -215,11 +215,65 @@
 
 ## 自定义解析
 
-### 自定义解包函数
-
 ### 自定义打包函数
 
++ 协议段打包时调用
++ 输入参数 seg_name: 协议段名称、seg_value：协议段值
++ 返回值：返回打包后的string
+
+    >举例：将浮点数打包成字符串 字符D替换小数点
+
+    ```
+    function PackFloat_D(seg_name, seg_value)
+        local str = string.format("%.5f", seg_value)
+        if seg_name=='WD' then  注：纬度是最后一个字符串，不需要分割符F
+            return string.gsub(str, "%.", "D")
+        else 
+            return string.gsub(str, "%.", "D")..'F'
+        end
+    end
+    ```
+
+### 自定义解包函数
+
++ 协议段解包时调用
++ 输入参数 seg_name: 协议段名称、prot_buff：报文原始字节、 pos: 当前解析位置
++ 返回值：必须返回2个值，第1个为解析得到的值，第2个为解析使用的字节长度
+
+    >举例：将含D字符的string解包成浮点数
+    ```
+    function UnpackFloat_D(seg_name, prot_buff, pos)
+        local pos_end = pos
+        local str = ''
+
+        if seg_name=='WD' then
+            pos_end = string.len(prot_buff)
+            str = string.sub(prot_buff, pos, pos_end)
+        else 
+            pos_end = string.find(prot_buff, 'F', pos)
+            str = string.sub(prot_buff, pos, pos_end-1)
+        end
+        str = string.gsub(str, 'D', '.')
+        return tonumber(str), pos_end-pos+1
+    end
+    ```
+
 ### 自定义校验函数
+
++ 校验函数用于生成原始字节的校验码
++ 输入参数 prot_buff: 协议包原始字节、pos_begin：校验开始字节位置、pos_end：校验结束字节位置
++ 返回值：返回特定长度字符串
+
+    > 举例：xor8校验后转字符串
+    ```
+    function My_xor8(prot_buff, pos_begin, pos_end)
+        local res = 0
+        for i=pos_begin, pos_end do
+            res = res ~ string.byte(prot_buff, i)
+        end
+        return string.format("%02X", res)
+    end
+    ```
 
 ## 内置校验函数
 
