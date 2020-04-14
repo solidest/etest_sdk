@@ -249,8 +249,8 @@ protocol dynamic_len {
 }
 
 protocol text_arr {
-    segment iarr[3] { parser: 'int8' }
-    segment sarr[3] { parser: 'string', length: 3}
+    segment iarr[3] { parser: 'int8', autovalue: [100, 9, 2] }
+    segment sarr[3] { parser: 'string', length: 3, autovalue: ["aad", "ddd", "fff"]}
 }
 
 protocol prot_xtra {
