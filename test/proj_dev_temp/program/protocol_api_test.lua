@@ -1,6 +1,7 @@
-
+COUNT = 0
 function Test_pack_unpack()
-    print('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data_send = {seg_1 = -111, seg_2 = 189}
     local buf = pack(protocol.prot_1, data_send)
 
@@ -16,7 +17,8 @@ function Test_pack_unpack()
 end
 
 function Test_pack_message()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local msg1 = message(protocol.prot_1, {seg_1=0xAF} )
     local msg2 = message(protocol.prot_1)
     msg2.seg_1 = 175;
@@ -27,7 +29,8 @@ function Test_pack_message()
 end
 
 function Test_message()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local msg1 = message(protocol.prot_1)
     print(msg1)
 
@@ -41,14 +44,16 @@ function Test_message()
 end
 
 function Test_protocol()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     for key, value in pairs(protocol) do      
         print(key, value)
     end 
 end
 
 function Test_segment_array()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = {}
     data1.seg_1 = {true, false, true, false, 1, 0, true, false}
     data1.seg_2 = {7.88, -9.44, 268888}
@@ -60,7 +65,8 @@ function Test_segment_array()
 end
 
 function Test_string()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = {}
     data1.str1 = "abcd"
     data1.str2 = "FSDDSFiou*789320!@#33%"
@@ -76,7 +82,8 @@ function Test_string()
 end
 
 function Test_segments_mathequal()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local p = { x = 888.32324, y= -234.3893}
     local data1 = { token = 0x55aa, point = p}
     local data2 = unpack(protocol.prot_point, pack(protocol.prot_point, data1));
@@ -86,7 +93,8 @@ function Test_segments_mathequal()
 end
 
 function Test_oneof_exp()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = {type1=2, type2=1,  x=1.11, y=2.22, z=3.33}
     local buf = pack(protocol.prot_oneof, data1)
     local data2 = unpack(protocol.prot_oneof, buf)
@@ -98,7 +106,8 @@ end
 
 -- 验证uint随机值
 function Unit_S_pro()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     -- for key, value in pairs(protocol) do      
     --     print(key, value)
     -- end 
@@ -112,11 +121,11 @@ function Unit_S_pro()
     and data_recv.seg_17 == data_send.seg_17 
     and data_recv.seg_18 == data_send.seg_18
     ) 
-    exit()
 end
 
 function Test_debug()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = {seg_14=-1, seg_2=3}
     local buf = pack(protocol.prot_debug, data1)
     print(string.hex(buf))
@@ -126,7 +135,8 @@ function Test_debug()
 end
 
 function Test_ByteSize()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local msg = message(protocol.prot_byte_size)
     msg.seg_str = "abljdfs@#$%"
     msg.seg_ints = {12, 34, 9999}
@@ -136,7 +146,8 @@ function Test_ByteSize()
 end
 
 function Test_Order()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = {seg_1=1.22}
     local buf = pack(protocol.prot_15, data1)
     local data2 = unpack(protocol.prot_15, buf)
@@ -144,7 +155,8 @@ function Test_Order()
 end
 
 function Code_pro8()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
 
     local data_send = {seg_9=-1.234,seg_10=-1.2,seg_11=-22345,seg_12=4294967293,seg_16=4294967293}
     local buf = pack(protocol.prot_14, data_send)
@@ -159,7 +171,8 @@ function Code_pro8()
 end
 
 function Test_dynamic_len()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local msg = message(protocol.dynamic_len)
     msg.seg1 = 4
     msg.seg2 = {1,2,3, 4}
@@ -168,7 +181,8 @@ function Test_dynamic_len()
 end
 
 function Test_log()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     print('')
     log.action("log.action test")
     print('')
@@ -183,7 +197,8 @@ function Test_log()
 end
 
 function Test_CheckCode()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = {seg_3=-199, seg_5=-998.7777, seg_8=12345}
     local buf = pack(protocol.prot_check, data1)
     local data2 = unpack(protocol.prot_check, buf)
@@ -191,7 +206,8 @@ function Test_CheckCode()
 end
 
 function Test_string_arr()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = {}
     local buf = pack(protocol.text_arr, data1)
     local data2 = unpack(protocol.text_arr, buf)
@@ -199,15 +215,25 @@ function Test_string_arr()
 end
 
 function Test_Xtra()
-    log.info('::'..debug.getinfo(1).name..'::')
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = { seg1=12.89323 }
     local buf = pack(protocol.prot_xtra, data1)
     local data2 = unpack(protocol.prot_xtra, buf)
     print(data2)
 end
 
+function Test_now_delay()
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+    local t1 = now();
+    print('delay 1s')
+    delay(1000)
+    local t2 = now()
+    print(t2-t1)
+end
+
 function entry(vars, option)
-    print("Hello World!", vars, option)
     Test_debug()
     Unit_S_pro()
     Test_protocol()
@@ -215,6 +241,7 @@ function entry(vars, option)
     Test_pack_message()
     Test_pack_unpack()
     Test_segment_array()
+    Test_now_delay()
     Test_log()
     Test_string()
     Test_segments_mathequal()
@@ -226,5 +253,6 @@ function entry(vars, option)
     Test_CheckCode()
     Test_string_arr()
     Test_Xtra()
+    print("Hello World!", vars, option)
     exit()
 end
