@@ -8,10 +8,10 @@
 
 device dev_0 {
 
-    udp_server srv_1 { ip: '127.0.0.1', port: 3000 }
+    udp srv_1 { ip: '127.0.0.1', port: 3000 }
     tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
 
-    udp_client clt_1 { ip: '127.0.0.1' }
+    udp clt_1 { ip: '127.0.0.1' }
     tcp_client clt_2 { ip: '127.0.0.1' }
 
     serial_ttl s1 {  }
@@ -55,7 +55,7 @@ protocol prot_str {
 device dev_2 {
 
     tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
-    udp_client clt_1 { ip: '127.0.0.1' }
+    udp clt_1 { ip: '127.0.0.1' }
     serial_ttl s1 { baudrate: 9600 }
 
 }
@@ -270,7 +270,7 @@ protocol prot_xtra {
 //设备
 device dev_3 {
 
-    udp_server srv_1 { ip: '127.0.0.1', port: 3000 }
+    udp srv_1 { ip: '127.0.0.1', port: 3000 }
     tcp_client clt_2 { ip: '127.0.0.1' }
     do do1 { minv: 3, maxv: 5 }
     ad ad1 { ratio: 16 }

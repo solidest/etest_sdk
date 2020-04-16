@@ -93,7 +93,7 @@
             [
                 "device"
             ],
-            "\\b(udp_server|udp_client|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\\b",
+            "\\b(udp|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\\b",
             "return 'INTFTYPE'"
         ],
         [

@@ -32,6 +32,7 @@ device dev_1 {
 
     tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
     udp clt_1 { ip: '127.0.0.1' }
+    udp s1 { ip: '127.0.0.1' }
 
     serial_ttl ad1 { baudrate: 9600 }
     serial_ttl da1 { baudrate: 9600 }
@@ -111,7 +112,7 @@ topology topo_1 {
     //设备映射
     mapping: {
         uut: [dev_1, dev_2],   //被测硬件单元
-        etest: [dev2, dev_3], //软设备
+        etest: [dev2, dev_3, dev_0], //软设备
     }
 
     //接口绑定

@@ -198,7 +198,7 @@ let lex_etx = {
     [["protocol"], "\\boneof\\b", "return 'ONEOF'"],
 
     [["*"], "\\bdevice\\b", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('device'); return 'DEVICE';"],
-    [["device"], "\\b(udp_server|udp_client|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\\b", "return 'INTFTYPE'"],
+    [["device"], "\\b(udp|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\\b", "return 'INTFTYPE'"],
 
     [["*"], "\\btopology\\b", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('topology'); return 'TOPOLOGY';"],
     [["topology"], "\\blinking\\b", "return 'LINKING'"],
