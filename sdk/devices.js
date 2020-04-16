@@ -79,7 +79,13 @@ class Topology {
         if(conn.uri) {
             throw (`拓扑 ${this.name}.binding 中重复设置了接口 ${devname}.${connname}`);
         }
-        conn.uri = uri;
+        let uris = uri.replace(/\s/g, '').split("@");
+        if(uris.length===1) {
+            conn.uri = uris[0];
+        } else if(uris.length===2) {
+            conn.uri = uris[0];
+            conn.host = uris[1];
+        }
     }
 
     setLink(linkname, line) {
@@ -299,6 +305,9 @@ function parseAll(pf) {
     let devs = [];
     let topos = [];
     for(let f of files) {
+        if(path.extname(f)!==".etl") {
+            continue;
+        }
         try {
             parseTopology(f, devs, topos, pf);
         } catch (error) {

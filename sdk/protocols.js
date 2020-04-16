@@ -186,6 +186,9 @@ function parseProtocols(pf) {
     }
     let asts = [];
     for(let f of files) {
+        if(path.extname(f)!==".etl") {
+            continue;
+        }
         try {
             parseProtocol(f, asts, pf);
         } catch (error) {

@@ -32,6 +32,12 @@ class SdkApi {
             if(fs.existsSync(xtra_path)) {
                 xtra = fs.readFileSync(xtra_path, 'utf8');
             }
+            if(protos && protos.length === 0) {
+                protos = null;
+            }
+            if(devs && devs.length === 0) {
+                devs = null;
+            }
             return this._xfn('makeenv', {proj_apath: proj_apath, protos: protos, proto_xtra: xtra, devices: devs}, callback);
         } catch (error) {
             if(callback) {

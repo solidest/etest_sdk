@@ -332,8 +332,8 @@ let bnf_etx = {
   ],
 
   topology_bindinging_element: [
-    ["topology_dev_intf : STRING_TRIPLE", "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = $STRING_TRIPLE; $$ = $topology_dev_intf;"],
-    ["topology_dev_intf : STRING_SINGLE", "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = $STRING_SINGLE; $$ = $topology_dev_intf;"],
+    ["topology_dev_intf : STRING_TRIPLE", "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = eval($STRING_TRIPLE); $$ = $topology_dev_intf;"],
+    ["topology_dev_intf : STRING_SINGLE", "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = eval($STRING_SINGLE); $$ = $topology_dev_intf;"],
   ],
 
   topology_dev_intfs: [
