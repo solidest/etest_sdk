@@ -31,33 +31,33 @@
 + 举例如下
 
     ```
-        topology topo_2{
-            //设备映射
-            mapping: {
-                uut: [dev_2, dev_1],   
-                etest: [dev2, dev_3], 
-            }
+    topology topo_2{
+        //设备映射
+        mapping: {
+            uut: [dev_2, dev_1],   
+            etest: [dev2, dev_3], 
         }
-        
-        
-        注释：设备映射参数名称均不可修改，uut表示被测硬件单元（即硬件），etest表示软设备（即与硬件上接口通信的软件）
+    }
+    
+    
+    注释：设备映射参数名称均不可修改，uut表示被测硬件单元（即硬件），etest表示软设备（即与硬件上接口通信的软件）
     ```
 ### 接口绑定
 
 + 举例如下
 
     ```
-        topology topo_2{
-            //接口绑定
-            binding: {
-                dev2.s1: 'auto',
-                dev_3.s1: 'com2@192.168.1.5',
-                dev_3.clt_1: 'can_a:1@192.168.1.5',
-            }
+    topology topo_2{
+        //接口绑定
+        binding: {
+            dev2.s1: 'auto',
+            dev_3.s1: 'com2@192.168.1.5',
+            dev_3.clt_1: 'can_a:1@192.168.1.5',
         }
-        
-        
-        注释：接口绑定参数为binding，当接口为软件所提供时，绑定接口地址设置为auto，表示自动获取网络地址
+    }
+    
+    
+    注释：接口绑定参数为binding，当接口为软件所提供时，绑定接口地址设置为auto，表示自动获取网络地址
      ```
 
 
@@ -87,7 +87,7 @@
         da da1 { ratio: 8, minv: 0, maxv: 24 }
         ad ad1 { ratio: 16, minv: 0, maxv: 12 }
     }
-    
+
     ```
 + 以上详细解释如下
 
