@@ -30,32 +30,32 @@
 
 + 举例如下
     ```
-    topology topo_2{
-        //设备映射
-        mapping: {
-            uut: [dev_2, dev_1],   
-            etest: [dev2, dev_3], 
+        topology topo_2{
+            //设备映射
+            mapping: {
+                uut: [dev_2, dev_1],   
+                etest: [dev2, dev_3], 
+            }
         }
-    }
-    
-    
-    注释：设备映射参数名称均不可修改，uut表示被测硬件单元（即硬件），etest表示软设备（即与硬件上接口通信的软件）
+        
+        
+        注释：设备映射参数名称均不可修改，uut表示被测硬件单元（即硬件），etest表示软设备（即与硬件上接口通信的软件）
     ```
 ### 接口绑定
 
 + 举例如下
     ```
-    topology topo_2{
-        //接口绑定
-        binding: {
-            dev2.s1: 'auto',
-            dev_3.s1: 'com2@192.168.1.5',
-            dev_3.clt_1: 'can_a:1@192.168.1.5',
+        topology topo_2{
+            //接口绑定
+            binding: {
+                dev2.s1: 'auto',
+                dev_3.s1: 'com2@192.168.1.5',
+                dev_3.clt_1: 'can_a:1@192.168.1.5',
+            }
         }
-    }
-     
-     
-    注释：接口绑定参数为binding，当接口为软件所提供时，绑定接口地址设置为auto，表示自动获取网络地址
+        
+        
+        注释：接口绑定参数为binding，当接口为软件所提供时，绑定接口地址设置为auto，表示自动获取网络地址
      ```
 
 
@@ -87,14 +87,14 @@
     ```
 + 以上详细解释如下
 
-    - udp 通信协议，参数ip地址（ip）、端口号（prot）、数据包分发次数（ttl）
-    - tcp_client  TCP通信协议客户端，参数ip地址
-    - tcp_server  TCP通信协议服务端，参数ip地址，端口号
-    - serial_ttl  参数 baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
-    - serial_232  参数 baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
-    - serial_422  参数 baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
-    - serial_485  参数 baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
-    - di  参数 minv：最小电压；maxv：最大电压
-    - do  参数 minv：最小电压；maxv：最大电压
-    - da  参数 ratio:分辨； minv：最小电压；maxv：最大电压，当最大电压与最小电压一致时，分辨率越大表示精度越高
-    - ad  参数 ratio:分辨； minv：最小电压；maxv：最大电压，当最大电压与最小电压一致时，分辨率越大表示精度越高
+    - udp： 通信协议，参数ip地址（ip）、端口号（prot）、数据包分发次数（ttl）
+    - tcp_client：  TCP通信协议客户端，参数ip地址
+    - tcp_server：  TCP通信协议服务端，参数ip地址，端口号
+    - serial_ttl： 串口 参数 baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
+    - serial_232： 串口 参数 baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
+    - serial_422： 串口 参数 baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
+    - serial_485： 串口 参数 baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
+    - di：开关量输入反映开关量的状态是分还是合 ， 参数 minv：最小电压；maxv：最大电压
+    - do：开关量输出可以是继电器或大功率管等  ，参数 minv：最小电压；maxv：最大电压
+    - da：将数字信号转换为模拟信号 ，参数 ratio:分辨； minv：最小电压；maxv：最大电压，当最大电压与最小电压一致时，分辨率越大表示精度越高
+    - ad：将模拟信号转换成数字信号 ， 参数 ratio:分辨； minv：最小电压；maxv：最大电压，当最大电压与最小电压一致时，分辨率越大表示精度越高
