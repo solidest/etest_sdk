@@ -1,12 +1,13 @@
 
-//设备1
+//硬件设备
 device dev1 {
-    udp u1 { ip: '127.0.0.1', port: 4000, ttl: 20 }
-    udp uu1 { ip: '127.0.0.1', port: 6000 }
+    udp u1 { ip: '192.168.1.12', port: 4000, ttl: 20 }
+    udp uu1 { ip: '192.168.1.12', port: 6000 }
 }
 
+//etest控制的设备
 device dev2 {
-    udp u2 { ip: '127.0.0.1', port: 5000 }
+    udp u2 { ip: '127.0.0.1', port: 5000, ttl: 30 }
     udp uu2 { ip: '127.0.0.1', port: 7000 }
     udp uu3 { ip: '127.0.0.1', port: 8000 }
 }
@@ -22,7 +23,7 @@ topology deault {
     }
     binding: {
         dev2.u2: 'auto',
-        dev2.uu2: 'au to@ localhost',
+        dev2.uu2: 'auto@localhost',
         dev2.uu3: 'auto@127.0.0.1 '
     }
 }

@@ -9,6 +9,8 @@
         "message",
         "pack",
         "unpack",
-        "log"
+        "log",
+        "device",
+        "send"
     ]
 }

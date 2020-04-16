@@ -233,6 +233,23 @@ function Test_now_delay()
     print(t2-t1)
 end
 
+function Test_device()
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+
+    local msg = message(protocol.dynamic_len)
+    msg.seg1 = 4
+    msg.seg2 = {1,2,3, 4}
+
+    send(device.dev2.u2, 'abcd')
+    send(device.dev2.u2, msg)
+    send(device.dev2.uu2, msg, {to='dev1.uu1'})
+    send(device.dev2.uu2, msg, {to_port=8000})
+    send(device.dev2.uu2, string.buf('AA 55 E2 B3'), {to='dev2.uu3'})
+    -- send(device.dev2.uu2, msg)
+
+end
+
 function entry(vars, option)
     -- Test_debug()
     -- Unit_S_pro()
@@ -253,6 +270,7 @@ function entry(vars, option)
     -- Test_CheckCode()
     -- Test_string_arr()
     -- Test_Xtra()
+    Test_device()
     print("Hello World!", vars, option)
     exit()
 end
