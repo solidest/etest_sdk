@@ -2,4 +2,5 @@
 * [SDK](SDK_API)
 * [ETL](ETL)
 * [协议描述](PROTOCOL)
+* [装备描述](DEVICE)
 * [ETLua语言基础教程](LUA)
