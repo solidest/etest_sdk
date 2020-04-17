@@ -5,8 +5,8 @@ device dev11 {
     tcp_client clt_2 { ip: '127.0.0.1' }
     tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
 
-    udp c1 { ip: '127.0.0.1', prot: 8887 }
-    udp c2 { ip: '127.0.0.1', prot: 8889 }
+    udp c1 { ip: '127.0.0.1', port: 8887 }
+    udp c2 { ip: '127.0.0.1', port: 8889 }
     udp udp_name {ip: '0.0.0.0', port: 8888}
 
     serial_ttl s1 { baudrate: 9600}
