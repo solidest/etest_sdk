@@ -10,7 +10,7 @@ const SdkApi = require('./sdk');
 
 let api = new SdkApi('127.0.0.1', 1210);
 let proj = 'test/proj_etl_test';
-let entry = 'program/eTestProgram/checkcode.lua';
+let entry = 'program/eTestProgram/send.lua';
 
 
 // let proj = 'test/proj_dev_temp';
