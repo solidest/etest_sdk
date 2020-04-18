@@ -199,6 +199,7 @@ end
 function Test_CheckCode()
     COUNT = COUNT + 1;
     log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+
     local data1 = {seg_3=-199, seg_5=-998.7777, seg_8=12345}
     local buf = pack(protocol.prot_check, data1)
     local data2 = unpack(protocol.prot_check, buf)
@@ -208,6 +209,7 @@ end
 function Test_string_arr()
     COUNT = COUNT + 1;
     log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+    
     local data1 = {}
     local buf = pack(protocol.text_arr, data1)
     local data2 = unpack(protocol.text_arr, buf)
@@ -217,6 +219,7 @@ end
 function Test_Xtra()
     COUNT = COUNT + 1;
     log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+
     local data1 = { seg1=12.89323 }
     local buf = pack(protocol.prot_xtra, data1)
     local data2 = unpack(protocol.prot_xtra, buf)
@@ -226,6 +229,7 @@ end
 function Test_now_delay()
     COUNT = COUNT + 1;
     log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+
     local t1 = now();
     print('delay 1s')
     delay(1000)
@@ -233,7 +237,15 @@ function Test_now_delay()
     print(t2-t1)
 end
 
-function Test_device()
+function After_send()
+    print("send ok")
+end
+
+function After_recv(msg, opt)
+    print("recved", msg, opt)
+end
+
+function Test_send_recv_async()
     COUNT = COUNT + 1;
     log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
 
@@ -241,40 +253,67 @@ function Test_device()
     msg.seg1 = 4
     msg.seg2 = {1,2,3, 4}
 
-    send(device.dev2.u2, 'abcd')
-    send(device.dev2.u2, msg)
-    send(device.dev2.uu2, msg, {to='dev1.uu1'})
-    send(device.dev2.uu2, string.buf('AA 55 E2 B3'), {to_port=8000})
-    send(device.dev2.uu2,  'abcd\0', {to='dev2.uu3'})
-    local s1 = recv(device.dev2.uu3, nil, 1000);
-    --delay(1000)
-    local s2 = recv(device.dev2.uu3);
-    print(s1, s2)
-    -- send(device.dev2.uu2, msg)
 
+    async.send(device.dev2.uu2,  'abcd\0', {to='dev2.uu3'}, After_send)
+    async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+    send(device.dev2.uu2,  'abcd\0', {to='dev2.uu3'})
+    send(device.dev2.uu2,  msg, {to='dev2.uu3'})
+    async.send(device.dev2.uu2,  'abcd\0', {to='dev2.uu3'}, After_send)
+    async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+
+    async.recv(device.dev2.uu3, nil, 300, After_recv);
+    async.recv(device.dev2.uu3, protocol.dynamic_len, 200, After_recv);
+    local s1, o1 = recv(device.dev2.uu3, nil, 200);
+    local s2, o2 = recv(device.dev2.uu3, protocol.dynamic_len, 100);
+    async.recv(device.dev2.uu3, nil, 300, After_recv);
+    async.recv(device.dev2.uu3, protocol.dynamic_len,3000, After_recv);
+    
+    print('sync', s1, o1, s2, o2)
+    delay(1000)
+end
+
+function Tout(a1, a2)
+    print('timeout', a1, a2)
+end
+
+function Interv(a1, a2)
+    print('interval', a1, a2)
+end
+
+function Test_timer()
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+
+    async.timeout(200, Tout, -199, "aaa")
+    local t2 = async.interval(100, 300, Interv, -222, "bbbb")
+    local t3 = async.timeout(5000, Tout, 100, "不应该能看到我")
+    delay(3000)
+    async.clear(t2)
+    async.clear(t3)
 end
 
 function entry(vars, option)
-    -- Test_debug()
-    -- Unit_S_pro()
-    -- Test_protocol()
-    -- Test_message()
-    -- Test_pack_message()
-    -- Test_pack_unpack()
-    -- Test_segment_array()
-    -- Test_now_delay()
-    -- Test_log()
-    -- Test_string()
-    -- Test_segments_mathequal()
-    -- Test_oneof_exp()
-    -- Test_ByteSize()
-    -- Test_Order()
-    -- Code_pro8()
-    -- Test_dynamic_len()
-    -- Test_CheckCode()
-    -- Test_string_arr()
-    -- Test_Xtra()
-    Test_device()
-    print("Hello World!", vars, option)
+    Test_debug()
+    Unit_S_pro()
+    Test_protocol()
+    Test_message()
+    Test_pack_message()
+    Test_pack_unpack()
+    Test_segment_array()
+    Test_now_delay()
+    Test_log()
+    Test_string()
+    Test_segments_mathequal()
+    Test_oneof_exp()
+    Test_ByteSize()
+    Test_Order()
+    Code_pro8()
+    Test_dynamic_len()
+    Test_CheckCode()
+    Test_string_arr()
+    Test_Xtra()
+    Test_send_recv_async()
+    Test_timer()
+    -- print("Hello World!", vars, option)
     exit()
 end

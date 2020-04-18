@@ -12,6 +12,7 @@
         "log",
         "device",
         "send",
-        "recv"
+        "recv",
+        "async"
     ]
 }

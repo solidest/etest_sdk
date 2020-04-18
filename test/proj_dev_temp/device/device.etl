@@ -7,9 +7,9 @@ device dev1 {
 
 //etest控制的设备
 device dev2 {
-    udp u2 { ip: '127.0.0.1', port: 5000, ttl: 30 }
-    udp uu2 { ip: '127.0.0.1', port: 7000 }
-    udp uu3 { ip: '127.0.0.1', port: 8000 }
+    udp u2 { ip: '0.0.0.0', port: 5000, ttl: 30 }
+    udp uu2 { ip: '0.0.0.0', port: 7000 }
+    udp uu3 { ip: '0.0.0.0', port: 8000 }
 }
 
 topology deault {
