@@ -3,7 +3,7 @@
 ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，采用ETL编写的测试程序可在ETL运行器上直接执行
 
 ## 组成结构
-![ETL组成结构](https://solidest.github.io/etest_sdk/ETL_Topo.png)
+![ETL组成结构](https://solidest.github.io/etest_sdk/ETL_Topo.svg)
 
 + `ETL`使用简洁易懂的语法描述测试程序的环境组成和执行脚本，包括：
     - `device` 设备接口描述
