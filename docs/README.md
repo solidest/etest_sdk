@@ -9,7 +9,7 @@ ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，�
     - `device` 设备接口描述
     - `topology` 连接拓扑描述
     - `protocol` 通信协议描述
-    - `panle` 监控面板描述
+    - `panel` 监控面板描述
     - `ETLua` 测试执行脚本 
 
 + `ETL运行器`负责编译并执行采用ETL开发的测试程序，包括：
