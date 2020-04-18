@@ -11,6 +11,7 @@
         "unpack",
         "log",
         "device",
-        "send"
+        "send",
+        "recv"
     ]
 }

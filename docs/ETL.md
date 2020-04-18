@@ -1,10 +1,23 @@
 
+## ETL简介
+ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，采用ETL编写的测试程序可在ETL运行器上直接执行
 
-### ETL简介
+## 组成结构
+![ETL组成结构图](https://assets.processon.com/chart_image/5e8b29e6e4b03bfcd082a5fb.png)
 
-+ ETL (Embedded Test Language)是嵌入式测试专用描述语言 
-+ ETL文件是扩展名为 `.etl` 的文本文件
-+ ETL文件由ETL元素声明组成
++ `ETL`使用简洁易懂的语法描述测试程序的环境组成和执行脚本，组成包括
+    - `device` 设备接口描述
+    - `topology` 连接拓扑描述
+    - `protocol` 通信协议描述
+    - `panle` 监控面板描述
+    - `ETLua` 测试执行脚本 
+
++ `ETL运行器`负责编译并执行采用ETL开发的测试程序，组成包括
+    - `ETestD` ETL服务器
+    - `ETestX` 测试程序执行器
+    - `ETest` UI渲染器
+
+## ETL语法入门
 
 ### 注释
 
@@ -16,7 +29,6 @@
 
 + ETL同时支持单引号字符串和双引号字符串
 + 字符串规则和Python、JavaScript等语言相同
-
 
 ### ETL元素
 
