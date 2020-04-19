@@ -41,7 +41,7 @@
         - 比同步send函数的输入参数多一个回调函数
         - 回调函数的输入参数与同步recv的返回值相同
     - `async.on_recv` 订阅数据到达事件，用法：`async.on_recv(interface, nil|protocol, fn_callback)`
-    - `async.on_recv` 取消数据到达事件的订阅，用法：`async.off_recv(interface)`
+    - `async.off_recv` 取消数据到达事件的订阅，用法：`async.off_recv(interface)`
 
 
 ### 0.1.9
