@@ -237,8 +237,8 @@ function Test_now_delay()
     print(t2-t1)
 end
 
-function After_send()
-    print("send ok")
+function After_send(len)
+    print("send len", len)
 end
 
 function After_recv(msg, opt)
@@ -292,6 +292,37 @@ function Test_timer()
     async.clear(t3)
 end
 
+
+function Test_recved_event()
+    COUNT = COUNT + 1;
+    log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+
+    local msg = message(protocol.dynamic_len)
+    msg.seg1 = 4
+    msg.seg2 = {1,2,3, 4}
+
+
+    local l1 = send(device.dev2.uu2,  'abcd\0', {to='dev2.uu3'})
+    local l2 = send(device.dev2.uu2,  'dbca1234\0', {to='dev2.uu3'})
+    delay(100)
+    print("send", l1, l2)
+    async.on_recv(device.dev2.uu3, nil, After_recv)
+    delay(100)
+
+    -- 异常测试
+    -- async.recv(device.dev2.uu3, nil, 1000, After_recv)
+
+    async.on_recv(device.dev2.uu3, protocol.dynamic_len, After_recv)
+
+    async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+    msg.seg1 = 5;
+    msg.seg2 = {5,4,3,2,1}
+    async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+    delay(500)
+
+    async.off_recv(device.dev2.uu2)
+end
+
 function entry(vars, option)
     Test_debug()
     Unit_S_pro()
@@ -313,7 +344,8 @@ function entry(vars, option)
     Test_string_arr()
     Test_Xtra()
     Test_send_recv_async()
+    Test_recved_event()
     Test_timer()
-    -- print("Hello World!", vars, option)
+    print("Hello ETL!", vars, option)
     exit()
 end
