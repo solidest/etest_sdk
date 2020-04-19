@@ -17,11 +17,11 @@
 
 ### 0.1.10
 - API `send` 添加了一个整数类型返回值，表示已发送字节长度
-- 基础库新增 API `recv`，用于同步接收数据，用法：`msg, opt = recv(connector, nil | protocol, timeout)`
+- 基础库新增 API `recv`，用于同步接收数据，用法：`msg, opt = recv(connector, nil|protocol, timeout)`
     - 第一个输入参数必须为设备接口
-    - 第二个输入参数可以为空或协议，为空时接收原始字节，为协议时接收协议解析后的报文
+    - 第二个输入参数可以为nil或协议，为nil时接收原始字节，为协议时接收协议解析后的报文
     - 第三个输入参数指定超时时间，单位ms，默认值0，timeout=0时会立即返回结果
-    - 返回2个值，第一个值为：string或协议解析后的message，第二个值为：空或option
+    - 返回2个值，第一个值为：string或协议解析后的message，第二个值为：nil或option
 - 新增异步API库`async`，成员包括:
     - `async.timeout` 延时定时器，用法：`id = async.timeout(tout, fn, ...)`
         - 指定时间后执行一个函数，返回定时器id
