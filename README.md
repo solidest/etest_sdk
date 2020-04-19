@@ -17,7 +17,7 @@
 
 ### 0.1.10
 - API `send` 添加了一个整数类型返回值，表示已发送字节长度
-- 基础库新增 API `recv`，用于同步接收数据，用法：`msg, opt = recv(interface, nil | protocol, timeout)`
+- 基础库新增 API `recv`，用于同步接收数据，用法：`msg, opt = recv(connector, nil | protocol, timeout)`
     - 第一个输入参数必须为设备接口
     - 第二个输入参数可以为空或协议，为空时接收原始字节，为协议时接收协议解析后的报文
     - 第三个输入参数指定超时时间，单位ms，默认值0，timeout=0时会立即返回结果
@@ -34,14 +34,14 @@
         - 第三个参数必须为函数，后面可以输入可变数量函数执行时的参数
     - `async.clear` 清除定时器，用法：`async.clear(id)`
         - 清除输入参数id对应的定时器
-    - `async.send` 异步发送，用法：`async.send(interface, msg, option, fn_callback)`
+    - `async.send` 异步发送，用法：`async.send(connector, msg, option, fn_callback)`
         - 比同步send函数的输入参数多一个回调函数
         - 回调函数的输入参数与同步send的返回值相同
-    - `async.recv` 异步接收，用法：`async.recv(interface, nil|protocol, timeout, fn_callback)`
+    - `async.recv` 异步接收，用法：`async.recv(connector, nil|protocol, timeout, fn_callback)`
         - 比同步send函数的输入参数多一个回调函数
         - 回调函数的输入参数与同步recv的返回值相同
-    - `async.on_recv` 订阅数据到达事件，用法：`async.on_recv(interface, nil|protocol, fn_callback)`
-    - `async.off_recv` 取消数据到达事件的订阅，用法：`async.off_recv(interface)`
+    - `async.on_recv` 订阅数据到达事件，用法：`async.on_recv(connector, nil|protocol, fn_callback)`
+    - `async.off_recv` 取消数据到达事件的订阅，用法：`async.off_recv(connector)`
 
 
 ### 0.1.9
