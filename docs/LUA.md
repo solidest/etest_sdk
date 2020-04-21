@@ -1,6 +1,6 @@
 ## ETlua
 
-ETLua 是开发测试程序的执行脚本时使用的编程语言，ETLua基于Lua语言进行深度定制和扩展，主要扩展内容包括：
+ETlua 是开发测试程序的执行脚本时使用的编程语言，ETlua基于ETlua语言进行深度定制和扩展，主要扩展内容包括：
 - 内置ETL编译器
 - 内置ETL专用API
 - 内置ETL专用全局对象
@@ -10,7 +10,7 @@ ETLua 是开发测试程序的执行脚本时使用的编程语言，ETLua基于
 
 ## 数据类型
  
-ETLua 是动态类型语言，变量不要类型定义,只需要为变量赋值。 值可以存储在变量中，作为参数传递或结果返回。ETLua 中有 8 个基本类型分别为：nil、boolean、number、string、userdata、function、thread 和 table。
+ETlua 是动态类型语言，变量不要类型定义,只需要为变量赋值。 值可以存储在变量中，作为参数传递或结果返回。ETlua 中有 8 个基本类型分别为：nil、boolean、number、string、userdata、function、thread 和 table。
 
 数据类型|描述
 -|-
@@ -18,10 +18,10 @@ nil	    |这个最简单，只有值nil属于该类，表示一个无效值（�
 boolean	|包含两个值：false和true
 number	|表示双精度类型的实浮点数
 string	|字符串由一对双引号或单引号来表示
-function|	由 C 或 Lua 编写的函数
+function|	由 C 或 ETlua 编写的函数
 userdata|	表示任意存储在变量中的C数据结构
 thread	|表示执行的独立线路，用于执行协同程序
-table	|表（table）其实是一个"关联数组"（associative arrays），数组的索引可以是数字、字符串或表类型。在 Lua 里，table 的创建是通过"构造表达式"来完成，最简单构造表达式是{}，用来创建一个空表
+table	|表（table）其实是一个"关联数组"（associative arrays），数组的索引可以是数字、字符串或表类型。在 ETlua 里，table 的创建是通过"构造表达式"来完成，最简单构造表达式是{}，用来创建一个空表
 
 ### nil（空）
 
@@ -31,11 +31,11 @@ table	|表（table）其实是一个"关联数组"（associative arrays），数
 
 ### boolean（布尔）
 
-+ boolean 类型只有两个可选值：true（真） 和 false（假），Lua 把 false 和 nil 看作是 false，其他的都为 true，数字 0 也是 true
++ boolean 类型只有两个可选值：true（真） 和 false（假），ETlua 把 false 和 nil 看作是 false，其他的都为 true，数字 0 也是 true
 
 ### number（数字）
 
-+ 默认只有一种 number 类型 -- double（双精度）类型（默认类型可以修改 luaconf.h 里的定义）
++ 默认只有一种 number 类型 -- double（双精度）类型（默认类型可以修改 ETluaconf.h 里的定义）
 
 ### string（字符串）
 
@@ -63,7 +63,7 @@ table	|表（table）其实是一个"关联数组"（associative arrays），数
 
 ### userdata（自定义类型）
 
-+ userdata 是一种用户自定义数据，用于表示一种由应用程序或 C/C++ 语言库所创建的类型，可以将任意 C/C++ 的任意数据类型的数据（通常是 struct 和 指针）存储到 Lua 变量中调用
++ userdata 是一种用户自定义数据，用于表示一种由应用程序或 C/C++ 语言库所创建的类型，可以将任意 C/C++ 的任意数据类型的数据（通常是 struct 和 指针）存储到 ETlua 变量中调用
 
 ## 变量
 
@@ -71,9 +71,9 @@ table	|表（table）其实是一个"关联数组"（associative arrays），数
 
 编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。
 
-Lua 变量有三种类型：全局变量、局部变量、表中的域。
+ETlua 变量有三种类型：全局变量、局部变量、表中的域。
 
-Lua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。
+ETlua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。
 
 局部变量的作用域为从声明位置开始到所在语句块结束。
 
@@ -124,7 +124,7 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 
 流程控制语句通过程序设定一个或多个条件语句来设定。在条件为 true 时执行指定程序代码，在条件为 false 时执行其他指定代码
 
-控制结构的条件表达式结果可以是任何值，Lua认为false和nil为假，true和非nil为真。
+控制结构的条件表达式结果可以是任何值，ETlua认为false和nil为假，true和非nil为真。
 
 要注意的是 0 为 true
 
@@ -144,7 +144,7 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 2.计算并返回值，这种情况下函数作为赋值语句的表达式使用
 
 ### 函数定义
-+ Lua 编程语言函数定义格式如下：
++ ETlua 编程语言函数定义格式如下：
 
     ```
     optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
@@ -162,7 +162,7 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 - function_body: 函数体，函数中需要执行的代码语句块。
 
-- result_params_comma_separated: 函数返回值，Lua语言函数可以返回多个值，每个值以逗号隔开
+- result_params_comma_separated: 函数返回值，ETlua语言函数可以返回多个值，每个值以逗号隔开
 
 ### 多返回值
 
@@ -266,7 +266,7 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
     ```    
 
 ##  运算符
-运算符是一个特殊的符号，用于告诉解释器执行特定的数学或逻辑运算。Lua提供了以下几种运算符类型：
+运算符是一个特殊的符号，用于告诉解释器执行特定的数学或逻辑运算。ETlua提供了以下几种运算符类型：
 
 算术运算符
 
@@ -278,7 +278,7 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 ### 算术运算符
 
-+ 下表列出了 Lua 语言中的常用算术运算符，设定 A 的值为10，B 的值为 20
++ 下表列出了 ETlua 语言中的常用算术运算符，设定 A 的值为10，B 的值为 20
 
     操作符|	描述|	实例
     -|-|-
@@ -292,7 +292,7 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 ### 关系运算符
 
-下表列出了 Lua 语言中的常用关系运算符，设定 A 的值为10，B 的值为 20：
+下表列出了 ETlua 语言中的常用关系运算符，设定 A 的值为10，B 的值为 20：
 
 操作符|	描述|	实例
 -|-|-
@@ -305,7 +305,7 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 ### 逻辑运算符
 
-下表列出了 Lua 语言中的常用逻辑运算符，设定 A 的值为 true，B 的值为 false：
+下表列出了 ETlua 语言中的常用逻辑运算符，设定 A 的值为 true，B 的值为 false：
 
 操作符|	描述|	实例
 -|-|-
@@ -328,7 +328,7 @@ not	|逻辑非操作符。与逻辑运算结果相反，如果条件为 true，�
 
 ### 其他运算符
 
-下表列出了 Lua 语言中的连接运算符与计算表或字符串长度的运算符：
+下表列出了 ETlua 语言中的连接运算符与计算表或字符串长度的运算符：
 
 |操作符|	描述|	实例|
 |-|-|-
@@ -353,7 +353,7 @@ or
 
 字符串或串(String)是由数字、字母、下划线组成的一串字符。
 
-Lua 语言中字符串可以使用以下三种方式来表示：
+ETlua 语言中字符串可以使用以下三种方式来表示：
 
 单引号间的一串字符。
 
@@ -400,7 +400,7 @@ Lua 语言中字符串可以使用以下三种方式来表示：
 + %E - 接受一个数字并将其转化为科学记数法格式, 使用大写字母E
 + %f - 接受一个数字并将其转化为浮点数格式
 + %g(%G) - 接受一个数字并将其转化为%e(%E, 对应%G)及%f中较短的一种格式
-+ %q - 接受一个字符串并将其转化为可安全被Lua编译器读入的格式
++ %q - 接受一个字符串并将其转化为可安全被ETlua编译器读入的格式
 + %s - 接受一个字符串并按照给定的参数格式化该字符串
 + 为进一步细化格式, 可以在%号后添加参数. 参数将以如下的顺序读入:
 
@@ -417,15 +417,15 @@ Lua 语言中字符串可以使用以下三种方式来表示：
 ```
     -- 字符转换
     -- 转换第一个字符
-    print(string.byte("Lua"))
+    print(string.byte("ETlua"))
     -- 转换第三个字符
-    print(string.byte("Lua",3))
+    print(string.byte("ETlua",3))
     -- 转换末尾第一个字符
-    print(string.byte("Lua",-1))
+    print(string.byte("ETlua",-1))
     -- 第二个字符
-    print(string.byte("Lua",2))
+    print(string.byte("ETlua",2))
     -- 转换末尾第二个字符
-    print(string.byte("Lua",-2))
+    print(string.byte("ETlua",-2))
 
     -- 整数 ASCII 码转换为字符
     print(string.char(97))
@@ -441,13 +441,13 @@ Lua 语言中字符串可以使用以下三种方式来表示：
 
 ### 匹配模式
 
-Lua 中的匹配模式直接用常规的字符串来描述。 它用于模式匹配函数 string.find, string.gmatch, string.gsub, string.match。
+ETlua 中的匹配模式直接用常规的字符串来描述。 它用于模式匹配函数 string.find, string.gmatch, string.gsub, string.match。
 
 你还可以在模式串中使用字符类。
 
 字符类指可以匹配一个特定字符集合内任何字符的模式项。比如，字符类 %d 匹配任意数字
 
-下面的表列出了Lua支持的所有字符类：
+下面的表列出了ETlua支持的所有字符类：
 
 单个字符(除 ^$()%.[]*+-? 外): 与该字符自身配对
 + .(点): 与任何字符配对
@@ -500,14 +500,14 @@ Lua 中的匹配模式直接用常规的字符串来描述。 它用于模式匹
 
 数组，就是相同数据类型的元素按一定顺序排列的集合，可以是一维数组和多维数组。
 
-Lua 数组的索引键值可以使用整数表示，数组的大小不是固定的
+ETlua 数组的索引键值可以使用整数表示，数组的大小不是固定的
 
 ### 一维数组
 
 + 一维数组是最简单的数组，其逻辑结构是线性表。一维数组可以用for循环出数组中的元素
 
     ```
-    array = {"Lua", "Tutorial"}
+    array = {"ETlua", "Tutorial"}
 
     for i= 0, 2 do
     print(array[i])
@@ -563,7 +563,7 @@ do
 end
 ```
 
-以上实例中我们使用了 Lua 默认提供的迭代函数 ipairs。
+以上实例中我们使用了 ETlua 默认提供的迭代函数 ipairs。
 
 下面我们看看泛型 for 的执行过程：
 
@@ -573,7 +573,7 @@ end
 + 第四，如果返回的第一个值为nil循环结束，否则执行循环体。
 + 第五，回到第二步再次调用迭代函数
 
-在Lua中我们常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。Lua 的迭代器包含以下两种类型：
+在ETlua中我们常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。ETlua 的迭代器包含以下两种类型：
 
 + 无状态的迭代器
 + 多状态的迭代器
@@ -603,7 +603,7 @@ end
 
     输出: 1  1      2  4        3  9
      ```
-+ 迭代的状态包括被遍历的表（循环过程中不会改变的状态常量）和当前的索引下标（控制变量），ipairs 和迭代函数都很简单，我们在 Lua 中可以这样实现：
++ 迭代的状态包括被遍历的表（循环过程中不会改变的状态常量）和当前的索引下标（控制变量），ipairs 和迭代函数都很简单，我们在 ETlua 中可以这样实现：
 
     ```
     function iter (a, i)
@@ -618,7 +618,7 @@ end
         return iter, a, 0
     end
     ```
-+ 当 Lua 调用 ipairs(a) 开始循环时，他获取三个值：迭代函数 iter、状态常量 a、控制变量初始值 0；然后 Lua 调用 iter(a,0) 返回 1, a[1]（除非 a[1]=nil）；第二次迭代调用 iter(a,1) 返回 2, a[2]……直到第一个 nil 元素
++ 当 ETlua 调用 ipairs(a) 开始循环时，他获取三个值：迭代函数 iter、状态常量 a、控制变量初始值 0；然后 ETlua 调用 iter(a,0) 返回 1, a[1]（除非 a[1]=nil）；第二次迭代调用 iter(a,1) 返回 2, a[2]……直到第一个 nil 元素
 
 ### 多状态的迭代器
 + 很多情况下，迭代器需要保存多个状态信息而不是简单的状态常量和控制变量，最简单的方法是使用闭包，还有一种方法就是将所有的状态信息封装到 table 内，将 table 作为迭代器的状态常量，因为这种情况下可以将所有的信息存放在 table 内，所以迭代函数通常不需要第二个参数。
@@ -667,19 +667,19 @@ table 是不固定大小的，你可以根据自己需要进行扩容。
 
 ### table(表)的构造
 
-+ 构造器是创建和初始化表的表达式。表是Lua特有的功能强大的东西。最简单的构造函数是{}，用来创建一个空表。可以直接初始化数组:
++ 构造器是创建和初始化表的表达式。表是ETlua特有的功能强大的东西。最简单的构造函数是{}，用来创建一个空表。可以直接初始化数组:
         ```
         -- 初始化表
         mytable = {}
 
         -- 指定值
-        mytable[1]= "Lua"
+        mytable[1]= "ETlua"
 
         -- 移除引用
         mytable = nil
-        -- lua 垃圾回收会释放内存
+        -- ETlua 垃圾回收会释放内存
         ```
-+ 当我们为 table a 并设置元素，然后将 a 赋值给 b，则 a 与 b 都指向同一个内存。如果 a 设置为 nil ，则 b 同样能访问 table 的元素。如果没有指定的变量指向a，Lua的垃圾回收机制会清理相对应的内存。
++ 当我们为 table a 并设置元素，然后将 a 赋值给 b，则 a 与 b 都指向同一个内存。如果 a 设置为 nil ，则 b 同样能访问 table 的元素。如果没有指定的变量指向a，ETlua的垃圾回收机制会清理相对应的内存。
     ```
     以下实例演示了以上的描述情况：
 
@@ -688,7 +688,7 @@ table 是不固定大小的，你可以根据自己需要进行扩容。
     mytable = {}
     print("mytable 的类型是 ",type(mytable))
 
-    mytable[1]= "Lua"
+    mytable[1]= "ETlua"
     mytable["wow"] = "修改前"
     print("mytable 索引为 1 的元素是 ", mytable[1])
     print("mytable 索引为 wow 的元素是 ", mytable["wow"])
@@ -715,9 +715,9 @@ table 是不固定大小的，你可以根据自己需要进行扩容。
     以上代码执行结果为：
 
     mytable 的类型是     table
-    mytable 索引为 1 的元素是     Lua
+    mytable 索引为 1 的元素是     ETlua
     mytable 索引为 wow 的元素是     修改前
-    alternatetable 索引为 1 的元素是     Lua
+    alternatetable 索引为 1 的元素是     ETlua
     mytable 索引为 wow 的元素是     修改前
     mytable 索引为 wow 的元素是     修改后
     alternatetable 是     nil
@@ -725,19 +725,9 @@ table 是不固定大小的，你可以根据自己需要进行扩容。
     mytable 是     niltable(表)的构造
     ```
 
-### Table 操作
-
-+ 以下列出了 Table 操作常用的方法
-
-    序号	|方法 & 用途
-    -|-
-    1	|table.concat (table [, sep [, start [, end]]]):concat是concatenate(连锁, 连接)的缩写. table.concat()函数列出参数中指定table的数组部分从start位置到end位置的所有元素, 元素间以指定的分隔符(sep)隔开。
-    2   |table.insert (table, [pos,] value):在table的数组部分指定位置(pos)插入值为value的一个元素. pos参数可选, 默认为数组部分末尾.
-    3|	table.maxn (table)指定table中所有正数key值中最大的key值. 如果不存在key值为正数的元素, 则返回0。(Lua5.2之后该方法已经不存在了,本文使用了自定义函数实现)
-    4	|table.remove (table [, pos])返回table数组部分位于pos位置的元素. 其后的元素会被前移. pos参数可选, 默认为table长度, 即从最后一个元素删起。
-    5	|table.sort (table [, comp])对给定的table进行升序排序。
 
 ### Table 连接
+
 + 我们可以使用 concat() 输出一个列表中元素连接成的字符串:
 
     ```
@@ -815,7 +805,7 @@ table 是不固定大小的，你可以根据自己需要进行扩容。
 
 ### Table 最大值
 
-+ table.maxn 在 Lua5.2 之后该方法已经不存在了，我们定义了 table_maxn 方法来实现。
++ 我们定义了 table_maxn 方法来实现。
 
     ```
     以下实例演示了如何获取 table 中的最大值：
