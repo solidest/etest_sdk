@@ -10,6 +10,7 @@ class Frame {
 
     //打包数据
     static pack(body) {
+        //TODO
         let buf_body = Buffer.from(JSON.stringify(body), 'utf8');
         let buf_magic = Buffer.alloc(4);
         buf_magic.writeInt32BE(magic);
@@ -63,7 +64,7 @@ class Frame {
             }
             this._bufs = bufs;
         }
-        
+        //TODO
         return JSON.parse(buf.toString('utf8', 8, data_len)); 
     }
 
@@ -187,7 +188,7 @@ class RpcTask {
         let id = recv_info.id;
         let idx = this._tasks.findIndex(it => it.info.id===id);
         if(idx<0) {
-            throw new Error(JSON.stringify(recv_info));
+            throw new Error('bad info:', JSON.stringify(recv_info));
         }
         let cb = this._tasks[idx].cb;
         this._tasks.splice(idx, 1);
