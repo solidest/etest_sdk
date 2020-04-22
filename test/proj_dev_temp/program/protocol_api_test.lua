@@ -194,6 +194,7 @@ function Test_log()
     print('')
     log.error("log.error test")
     print('')
+    log.check("aaa", true);
 end
 
 function Test_CheckCode()
