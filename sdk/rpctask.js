@@ -2,7 +2,7 @@
 
 
 const net = require('net');
-
+const msgpack = require("msgpack-lite");
 const magic = 0x7777;
 
 //打包解包
@@ -10,12 +10,12 @@ class Frame {
 
     //打包数据
     static pack(body) {
-        //TODO
-        let buf_body = Buffer.from(JSON.stringify(body), 'utf8');
+        let buf_body = msgpack.encode(body); //Buffer.from(JSON.stringify(body), 'utf8');
+        //console.log("pack len:", buf_body.length);
         let buf_magic = Buffer.alloc(4);
-        buf_magic.writeInt32BE(magic);
+        buf_magic.writeInt32LE(magic);
         let buf_len = Buffer.alloc(4);
-        buf_len.writeInt32BE(buf_body.length);
+        buf_len.writeInt32LE(buf_body.length);
         return Buffer.concat([buf_magic, buf_len, buf_body]);
     }
 
@@ -64,8 +64,8 @@ class Frame {
             }
             this._bufs = bufs;
         }
-        //TODO
-        return JSON.parse(buf.toString('utf8', 8, data_len)); 
+        //JSON.parse(buf.toString('utf8', 8, data_len)); 
+        return msgpack.decode(buf.subarray(8, 8+data_len));
     }
 
     unpack(buf) {
@@ -88,10 +88,12 @@ class Frame {
                 return null;
             }
         }
-        if(first.readInt16BE(2)!==magic) {
+        if(first.readInt16LE(2)!==magic) {
             throw new Error('json rpc error');
         }
-        return this._unpack(first.readInt32BE(4) + 8);
+        let body_len = first.readInt32LE(4);
+        //console.log("body len:", body_len);
+        return this._unpack(body_len + 8);
     }
 }
 

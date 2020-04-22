@@ -1,6 +1,6 @@
 {
   "name": "etest_sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "sdk for etest",
   "main": "index.js",
   "scripts": {
@@ -29,5 +29,8 @@
   "homepage": "https://github.com/solidest/etest_sdk#readme",
   "devDependencies": {
     "eslint": "^6.8.0"
+  },
+  "dependencies": {
+    "msgpack-lite": "^0.1.26"
   }
 }

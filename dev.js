@@ -10,12 +10,12 @@ const SdkApi = require('./sdk');
 
 let api = new SdkApi('etest', 1210);
 let proj = 'test/proj_dev_temp';
-let entry = 'program/protocol_api_test.lua';
+let entry = 'program/test.lua';
 let _vars = {
     var1: "demo_v1",
     var2: 99
 };
-let _option = {topology: 'topo_1'};
+let _option = {topology: 'topo11'};
 
 
 let run_id = null;
