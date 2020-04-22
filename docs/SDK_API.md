@@ -113,6 +113,15 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 点对点连接中option可以省略
 - 总线连接中通过设置option的`to`属性标识目标设备接口
 - 通过设置option的`to_port`属性发送广播报文
+- 返回值一个整数类型，表示已发送字节长度
+
+#### recv
+
+- 用于同步接收数据，用法：`msg, opt = recv(connector, nil|protocol, timeout)`
+- 第一个输入参数必须为设备接口
+- 第二个输入参数可以为nil或协议，为nil时接收原始字节，为协议时接收协议解析后的报文
+- 第三个输入参数指定超时时间，单位ms，默认值0，timeout=0时会立即返回结果
+- 返回2个值，第一个值为：string或协议解析后的message，第二个值为：nil或option
 
 ### log库
 
@@ -383,3 +392,109 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 默认按float方式比较
 
 
+
+
+### table库
+
+#### table.concat (list [, sep [, i [, j]]])
+
+- 提供一个列表，其所有元素都是字符串或数字，返回字符串 list[i]..sep..list[i+1] ··· sep..list[j]。 sep 的默认值是空串， i 的默认值是 1 ， j 的默认值是 #list 。 如果 i 比 j 大，返回空串。
+
+#### table.insert (list, [pos,] value)
+- 在 list 的位置 pos 处插入元素 value ， 并后移元素 list[pos], list[pos+1], ···, list[#list] 。 pos 的默认值为 #list+1 ， 因此调用 table.insert(t,x) 会将 x 插在列表 t 的末尾。
+
+#### table.move (a1, f, e, t [,a2])
+- 将元素从表 a1 移到表 a2。 这个函数做了次等价于后面这个多重赋值的等价操作： a2[t],··· = a1[f],···,a1[e]。 a2 的默认值为 a1。 目标区间可以和源区间重叠。 索引 f 必须是正数。
+
+#### table.pack (···)
+- 返回用所有参数以键 1,2, 等填充的新表， 并将 "n" 这个域设为参数的总数。 注意这张返回的表不一定是一个序列。
+
+#### table.remove (list [, pos])
+- 移除 list 中 pos 位置上的元素，并返回这个被移除的值。 当 pos 是在 1 到 #list 之间的整数时， 它向前移动元素　list[pos+1], list[pos+2], ···, list[#list] 并删除元素 list[#list]； 索引 pos 可以是 #list + 1 ，或在 #list 为 0 时可以是 0 ； 在这些情况下，函数删除元素 list[pos]。
+
+- pos 默认为 #list， 因此调用 table.remove(l) 将移除表 l 的最后一个元素。
+
+#### table.sort (list [, comp])
+- 在表内从 list[1] 到 list[#list] 原地 对其间元素按指定次序排序。 如果提供了 comp ， 它必须是一个可以接收两个列表内元素为参数的函数。 当第一个元素需要排在第二个元素之前时，返回真 （因此 not comp(list[i+1],list[i]) 在排序结束后将为真）。 如果没有提供 comp， 将使用标准 ETlua 操作 < 作为替代品。
+
+- 排序算法并不稳定； 即当两个元素次序相等时，它们在排序后的相对位置可能会改变。
+
+#### table.unpack (list [, i [, j]])
+
+- 返回列表中的元素。 这个函数等价于
+`
+return list[i], list[i+1], ···, list[j]
+`
+i 默认为 1 ，j 默认为 #list
+
+### utf8库
+
+#### utf8.char (···)
+
+- 接收零或多个整数， 将每个整数转换成对应的 UTF-8 字节序列，并返回这些序列连接到一起的字符串。
+
+#### utf8.charpattern
+
+- 用于精确匹配到一个 UTF-8 字节序列的模式（是一个字符串，并非函数）"[\0-\x7F\xC2-\xF4][\x80-\xBF]*" 。 它假定处理的对象是一个合法的 UTF-8 字符串。
+
+#### utf8.codes (s)
+
+- 返回一系列的值，可以让`for p, c in utf8.codes(s) do body end`迭代出字符串 s 中所有的字符。 这里的 p 是位置（按字节数）而 c 是每个字符的编号。 如果处理到一个不合法的字节序列，将抛出一个错误。
+
+#### utf8.codepoint (s [, i [, j]])
+
+- 以整数形式返回 s 中 从位置 i 到 j 间（包括两端） 所有字符的编号。 默认的 i 为 1 ，默认的 j 为 i。 如果碰上不合法的字节序列，抛出一个错误。
+
+#### utf8.len (s [, i [, j]])
+
+- 返回字符串 s 中 从位置 i 到 j 间 （包括两端） UTF-8 字符的个数。 默认的 i 为 1 ，默认的 j 为 -1 。 如果它找到任何不合法的字节序列， 返回假值加上第一个不合法字节的位置。
+
+#### utf8.offset (s, n [, i])
+
+- 返回编码在 s 中的第 n 个字符的开始位置（按字节数） （从位置 i 处开始统计）。 负 n 则取在位置 i 前的字符。 当 n 是非负数时，默认的 i 是 1， 否则默认为 #s + 1。 因此，utf8.offset(s, -n) 取字符串的倒数第 n 个字符的位置。 如果指定的字符不在其中或在结束点之后，函数返回 nil。
+作为特例，当 n 等于 0 时， 此函数返回含有 s 第 i 字节的那个字符的开始位置。
+
+- 这个函数假定 s 是一个合法的 UTF-8 字符串
+
+
+### 异步API库`async`
+
+#### async.timeout
+
+- 延时定时器，用法：`id = async.timeout(tout, fn, ...)`
+- 指定时间后执行一个函数，返回定时器id
+- 第一个参数必须为大于0的数字，指定延时ms数
+- 第二个参数必须为函数，后面可以输入可变数量函数执行时的参数
+
+#### async.interval
+
+- 周期定时器，用法:`id = async.interval(delay, intv, fn, ...)`
+- 延时指定时间后开始周期性执行函数，返回定时器id
+- 第一个参数为数字，指定延时ms数
+- 第二个参数为大于0的数字，指定间隔周期ms数
+- 第三个参数必须为函数，后面可以输入可变数量函数执行时的参数
+
+#### async.clear
+
+- 清除定时器，用法：`async.clear(id)`
+- 清除输入参数id对应的定时器
+
+#### async.send
+
+- 异步发送，用法：`async.send(connector, msg, option, fn_callback)`
+- 比同步send函数的输入参数多一个回调函数
+- 回调函数的输入参数与同步send的返回值相同
+
+#### async.recv
+
+- 异步接收，用法：`async.recv(connector, nil|protocol, timeout, fn_callback)`
+- 比同步send函数的输入参数多一个回调函数
+- 回调函数的输入参数与同步recv的返回值相同
+
+#### async.on_recv
+
+- 订阅数据到达事件，用法：`async.on_recv(connector, nil|protocol, fn_callback)`
+
+#### async.off_recv
+
+- 取消数据到达事件的订阅，用法：`async.off_recv(connector)`
