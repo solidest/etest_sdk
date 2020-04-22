@@ -3,17 +3,29 @@
 
 ## SDK
 
+### 0.2.0
+- rpc传输机制替换为MessagePack格式
+
 ### 0.1.1
 - 更新run.js文件
 - 配合`log`API 在控制台输出带颜色背景信息
 
 ## ETestD
 
+### 0.2.0
+- rpc传输机制替换为MessagePack格式
+- 去除对协程库的依赖，以适配龙芯CPU
+
 ### 0.1.3
 - 将API `entry` 合并入 `output`
 
 
 ## ETestX
+
+### 0.2.0
+- rpc传输机制替换为MessagePack格式
+- 去除对协程库的依赖，以适配龙芯CPU
+- UDP中不再使用连接绑定模式，由于服务端口启动顺序会导致ICMP回复`connection refused`异常
 
 ### 0.1.10
 - API `send` 添加了一个整数类型返回值，表示已发送字节长度
