@@ -8,7 +8,7 @@ const SdkApi = require('./sdk');
     _option: 输入给entry的自定义选项
 */
 
-let api = new SdkApi('etest', 1210);
+let api = new SdkApi('lxql', 8888);
 let proj = 'test/proj_dev_temp';
 let entry = 'program/protocol_api_test.lua';
 let _vars = {
