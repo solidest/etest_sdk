@@ -56,52 +56,124 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 命令行输出文本信息
 - 输入参数可变数量
 - 任意类型的数据均转为文本输出
+- 举例 
+    ```
+        print("abc") 
+        输出abc
+    ```
 
 #### exit
 
 - 退出测试程序执行
+- 举例
+    ```
+        function function_name()
+            function body
+            exit（）
+        end
+    ```
 
 #### assert
 
 - 执行断言，第一个参数为fasle时退出程序
 - 第二个参数为可选的断言失败时的提示信息
+- 举例
+    ```
+        assert(123==123)
+        assert(math.isequal(1.0, 1.0))
+    ```
 
 #### verify
 
 - 执行判定，并返回判定结果，但不退出程序
 - 第二个参数为可选的判定失败时的提示信息
+- 举例
+    ```
+        与assert用法一致，区别在于程序不退出
+    ```
 
 #### delay
 
 - 延时指定的 ms 时间
+- 参数为正整数
+- 举例
+    ```
+        dealy(1000)
+        延时1000毫秒(1秒)
+    ```
 
 #### now
 
 - 返回测试程序自启动至当前时长
 - 默认返回时长单位是 ms
 - 输入可选字符串参数 'ms' 或 'us' 或 'ns' 指定时长单位
+- 举例 
+    ```
+        function Test_now_delay()
+            local t1 = now();
+            delay(1000)
+            local t2 = now()
+            print(t2-t1)
+        end
+    ```
 
 #### error
 
 - 输出一个错误对象
 - 测试程序会自动退出
 
+
 #### message
 
 - 用指定协议的创建消息
+- 第一个参数指定协议
 - 第二个可选参数用于初始化消息内容
+- 举例
+    ```
+        function Test_pack_message()
+
+            local msg1 = message(protocol.prot_1, {seg_1=0xAF} )
+            local msg2 = message(protocol.prot_1)
+            msg2.seg_1 = 175
+            msg1.seg_2 = 0
+            print(msg1,msg2)
+
+        end
+    ```
 
 #### pack
 
 - pack(msg) 将消息打包
 - pack(protocol.xxx, data) 使用指定协议打包数据
+- 第一个参数是指定协议，第二个参数为打包的数据
 - 返回值是打包后的buffer
+- 举例
+    ```
+        function Test_segments_mathequal()
+
+            local data1 = { token = 0x55aa, point = p}
+            local buffer = pack(protocol.prot_point, data1)
+            local data2 = unpack(protocol.prot_point,buffer);
+
+        end
+    ```
 
 #### unpack
 
 - unpack(protocol.xxx, buffer) 使用指定协议解包buffer
+- 第一个参数是指定协议，第二个参数为打包的数据
 - 解包成功后返回两个值，第一个返回最值是解包后的数据。第二个返回值，解包使用的字节长度
 - 处理粘包问题
+- 举例
+    ```
+        function Test_segments_mathequal()
+
+            local data1 = { token = 0x55aa, point = p}
+            local buffer = pack(protocol.prot_point, data1)
+            local data2 = unpack(protocol.prot_point,buffer);
+
+        end
+    ```
 
 #### send
 
@@ -114,6 +186,21 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 总线连接中通过设置option的`to`属性标识目标设备接口
 - 通过设置option的`to_port`属性发送广播报文
 - 返回值一个整数类型，表示已发送字节长度
+- 举例
+    ```
+        function Test_send_recv_async()
+
+            local msg = message(protocol.dynamic_len)
+            msg.seg1 = 4
+            msg.seg2 = {1,2,3, 4}
+            send(device.dev2.uu2,  'abcd\0', {to='dev2.uu3'})
+            send(device.dev2.uu2,  msg, {to_port=8001})
+            local s1, o1 = recv(device.dev2.uu3, nil, 200);
+            local s2, o2 = recv(device.dev2.uu3, protocol.dynamic_len, 100);
+
+        end
+
+    ```
 
 #### recv
 
@@ -122,6 +209,20 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 第二个输入参数可以为nil或协议，为nil时接收原始字节，为协议时接收协议解析后的报文
 - 第三个输入参数指定超时时间，单位ms，默认值0，timeout=0时会立即返回结果
 - 返回2个值，第一个值为：string或协议解析后的message，第二个值为：nil或option
+- 举例
+    ```
+        function Test_send_recv_async()
+
+            local msg = message(protocol.dynamic_len)
+            msg.seg1 = 4
+            msg.seg2 = {1,2,3, 4}
+            send(device.dev2.uu2,  'abcd\0', {to='dev2.uu3'})
+            send(device.dev2.uu2,  msg, {to_port=8001})
+            local s1, o1 = recv(device.dev2.uu3, nil, 200);
+            local s2, o2 = recv(device.dev2.uu3, protocol.dynamic_len, 100);
+
+        end
+    ```
 
 ### async库
 
@@ -131,6 +232,20 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 指定时间后执行一个函数，返回定时器id
 - 第一个参数必须为大于0的数字，指定延时ms数
 - 第二个参数必须为函数，后面可以输入可变数量函数执行时的参数
+- 举例
+    ```
+    function Test_timer()
+
+        async.timeout(200, Tout, -199, "aaa")
+        local t2 = async.interval(100, 300, Interv, -222, "bbbb")
+        local t3 = async.timeout(5000, Tout, 100, "不应该能看到我")
+        delay(3000)
+        async.clear(t2)
+        async.clear(t3)
+
+    end
+
+    ```
 
 #### async.interval
 
@@ -139,31 +254,130 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 第一个参数为数字，指定延时ms数
 - 第二个参数为大于0的数字，指定间隔周期ms数
 - 第三个参数必须为函数，后面可以输入可变数量函数执行时的参数
+- 举例
+    ```
+    function Test_timer()
+
+        async.timeout(200, Tout, -199, "aaa")
+        local t2 = async.interval(100, 300, Interv, -222, "bbbb")
+        local t3 = async.timeout(5000, Tout, 100, "不应该能看到我")
+        delay(3000)
+        async.clear(t2)
+        async.clear(t3)
+        
+    end
+
+    ```
 
 #### async.clear
 
 - 清除定时器，用法：`async.clear(id)`
 - 清除输入参数id对应的定时器
+- 举例
+    ```
+    function Test_timer()
+
+        async.timeout(200, Tout, -199, "aaa")
+        local t2 = async.interval(100, 300, Interv, -222, "bbbb")
+        local t3 = async.timeout(5000, Tout, 100, "不应该能看到我")
+        delay(3000)
+        async.clear(t2)
+        async.clear(t3)
+        
+    end
+
+    ```
 
 #### async.send
 
 - 异步发送，用法：`async.send(connector, msg, option, fn_callback)`
 - 比同步send函数的输入参数多一个回调函数
 - 回调函数的输入参数与同步send的返回值相同
+- 举例
+    ```
+    function Test_recved_event()
+
+        local msg = message(protocol.dynamic_len)
+        msg.seg1 = 4
+        msg.seg2 = {1,2,3, 4}
+        async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+        msg.seg1 = 5;
+        msg.seg2 = {5,4,3,2,1}
+        async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+
+    end
+    ```
 
 #### async.recv
 
 - 异步接收，用法：`async.recv(connector, nil|protocol, timeout, fn_callback)`
 - 比同步send函数的输入参数多一个回调函数
 - 回调函数的输入参数与同步recv的返回值相同
+- 举例
+    ```
+     function Test_send_recv_async()
+
+        local msg = message(protocol.dynamic_len)
+        msg.seg1 = 4
+        msg.seg2 = {1,2,3, 4}
+        async.send(device.dev2.uu2,  'abcd\0', {to='dev2.uu3'}, After_send)
+        async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+        async.recv(device.dev2.uu3, nil, 300, After_recv);
+        async.recv(device.dev2.uu3, protocol.dynamic_len, 200, After_recv);
+       
+    end
+       
+    ```
 
 #### async.on_recv
 
 - 订阅数据到达事件，用法：`async.on_recv(connector, nil|protocol, fn_callback)`
+- 举例
+    ```
+    function Test_recved_event()
+   
+        local msg = message(protocol.dynamic_len)
+        msg.seg1 = 4
+        msg.seg2 = {1,2,3, 4}
+
+        async.on_recv(device.dev2.uu3, nil, After_recv)
+        delay(100)
+        async.on_recv(device.dev2.uu3, protocol.dynamic_len, After_recv)
+
+        msg.seg1 = 5;
+        msg.seg2 = {5,4,3,2,1}
+
+        async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+        delay(500)
+        async.off_recv(device.dev2.uu2)
+
+    end
+    ```
 
 #### async.off_recv
 
 - 取消数据到达事件的订阅，用法：`async.off_recv(connector)`
+- 举例
+    ```
+    function Test_recved_event()
+   
+        local msg = message(protocol.dynamic_len)
+        msg.seg1 = 4
+        msg.seg2 = {1,2,3, 4}
+
+        async.on_recv(device.dev2.uu3, nil, After_recv)
+        delay(100)
+        async.on_recv(device.dev2.uu3, protocol.dynamic_len, After_recv)
+
+        msg.seg1 = 5;
+        msg.seg2 = {5,4,3,2,1}
+
+        async.send(device.dev2.uu2,  msg, {to='dev2.uu3'}, After_send)
+        delay(500)
+        async.off_recv(device.dev2.uu2)
+
+    end
+    ```
 
 ### log库
 
@@ -171,24 +385,80 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 
 - 记录普通日志信息
 - 输出结果为绿色标识
+- 举例
+    ```
+    function Test_log()
+
+        COUNT = COUNT + 1;
+        log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
+       
+    end
+
+    ```
 
 #### log.warn
 
 - 记录警告日志信息
 - 输出结果为黄色标识
+- 举例
+    ```
+    function Test_log()
+        print('')
+        log.warn("log.warn test")
+    end
+
+    ```
 
 #### log.error
 
 - 记录错误日志信息
 - 输出结果为红色标识
+- 举例
+    ```
+        function Test_log()
+            print('')
+            log.error("log.error test")
+        end
+    ```
 
 #### log.step
 
 - 记录测试步骤开始日志
+- 举例
+    ```
+        function Test_log()
+
+            print('')
+            log.step("log.step test")
+         
+        end
+
+    ```
 
 #### log.action
 
 - 记录测试动作执行日志
+- 举例
+    ```
+        function Test_log()
+            print('')
+            log.action("log.action test") 
+        end
+
+    ```
+
+#### log.check
+
+- 输出检查结果的日志
+- 第一个参数为字符串，第二个参数为布尔值
+- 举例
+    ```
+        function Test_log()
+            print('')
+            log.check("aaa", true);
+        end
+
+    ```
 
 
 ### string库
