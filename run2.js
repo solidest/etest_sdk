@@ -8,9 +8,9 @@ const SdkApi = require('./sdk');
     _option: 输入给entry的自定义选项
 */
 
-let api = new SdkApi('127.0.0.1', 1210);
+let api = new SdkApi('127.0.0.1', 1212);
 let proj = 'test/proj_etl_test';
-let entry = 'program/eTestProgram/run.lua';
+let entry = 'program/eTestProgram/run2.lua';
 
 
 // let proj = 'test/proj_dev_temp';
@@ -19,7 +19,7 @@ let _vars = {
     var1: "demo_v1",
     var2: 99
 };
-let _option = {topology:'topo_main'};;
+let _option = {topology:'topo_b'};
 
 
 let run_id = null;

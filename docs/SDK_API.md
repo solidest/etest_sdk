@@ -123,6 +123,48 @@ ETest内部执行用到的API，主要目的是开发测试程序时使用
 - 第三个输入参数指定超时时间，单位ms，默认值0，timeout=0时会立即返回结果
 - 返回2个值，第一个值为：string或协议解析后的message，第二个值为：nil或option
 
+### async库
+
+#### async.timeout
+
+- 延时定时器，用法：`id = async.timeout(tout, fn, ...)`
+- 指定时间后执行一个函数，返回定时器id
+- 第一个参数必须为大于0的数字，指定延时ms数
+- 第二个参数必须为函数，后面可以输入可变数量函数执行时的参数
+
+#### async.interval
+
+- 周期定时器，用法:`id = async.interval(delay, intv, fn, ...)`
+- 延时指定时间后开始周期性执行函数，返回定时器id
+- 第一个参数为数字，指定延时ms数
+- 第二个参数为大于0的数字，指定间隔周期ms数
+- 第三个参数必须为函数，后面可以输入可变数量函数执行时的参数
+
+#### async.clear
+
+- 清除定时器，用法：`async.clear(id)`
+- 清除输入参数id对应的定时器
+
+#### async.send
+
+- 异步发送，用法：`async.send(connector, msg, option, fn_callback)`
+- 比同步send函数的输入参数多一个回调函数
+- 回调函数的输入参数与同步send的返回值相同
+
+#### async.recv
+
+- 异步接收，用法：`async.recv(connector, nil|protocol, timeout, fn_callback)`
+- 比同步send函数的输入参数多一个回调函数
+- 回调函数的输入参数与同步recv的返回值相同
+
+#### async.on_recv
+
+- 订阅数据到达事件，用法：`async.on_recv(connector, nil|protocol, fn_callback)`
+
+#### async.off_recv
+
+- 取消数据到达事件的订阅，用法：`async.off_recv(connector)`
+
 ### log库
 
 #### log.info
@@ -457,44 +499,3 @@ i 默认为 1 ，j 默认为 #list
 - 这个函数假定 s 是一个合法的 UTF-8 字符串
 
 
-### 异步API库`async`
-
-#### async.timeout
-
-- 延时定时器，用法：`id = async.timeout(tout, fn, ...)`
-- 指定时间后执行一个函数，返回定时器id
-- 第一个参数必须为大于0的数字，指定延时ms数
-- 第二个参数必须为函数，后面可以输入可变数量函数执行时的参数
-
-#### async.interval
-
-- 周期定时器，用法:`id = async.interval(delay, intv, fn, ...)`
-- 延时指定时间后开始周期性执行函数，返回定时器id
-- 第一个参数为数字，指定延时ms数
-- 第二个参数为大于0的数字，指定间隔周期ms数
-- 第三个参数必须为函数，后面可以输入可变数量函数执行时的参数
-
-#### async.clear
-
-- 清除定时器，用法：`async.clear(id)`
-- 清除输入参数id对应的定时器
-
-#### async.send
-
-- 异步发送，用法：`async.send(connector, msg, option, fn_callback)`
-- 比同步send函数的输入参数多一个回调函数
-- 回调函数的输入参数与同步send的返回值相同
-
-#### async.recv
-
-- 异步接收，用法：`async.recv(connector, nil|protocol, timeout, fn_callback)`
-- 比同步send函数的输入参数多一个回调函数
-- 回调函数的输入参数与同步recv的返回值相同
-
-#### async.on_recv
-
-- 订阅数据到达事件，用法：`async.on_recv(connector, nil|protocol, fn_callback)`
-
-#### async.off_recv
-
-- 取消数据到达事件的订阅，用法：`async.off_recv(connector)`
