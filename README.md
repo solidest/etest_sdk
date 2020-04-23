@@ -26,6 +26,7 @@
 - rpc传输机制替换为MessagePack格式
 - 去除对协程库的依赖，以适配龙芯CPU
 - UDP中不再使用连接绑定模式，由于服务端口启动顺序会导致ICMP回复`connection refused`异常
+- 新增log.check(str_info, b_result) 输出检查结果日志
 
 ### 0.1.10
 - API `send` 添加了一个整数类型返回值，表示已发送字节长度
