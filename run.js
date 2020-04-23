@@ -10,7 +10,7 @@ const SdkApi = require('./sdk');
 
 let api = new SdkApi('127.0.0.1', 1210);
 let proj = 'test/proj_etl_test';
-let entry = 'program/eTestProgram/array.lua';
+let entry = 'program/eTestProgram/run.lua';
 
 
 // let proj = 'test/proj_dev_temp';
@@ -19,7 +19,7 @@ let _vars = {
     var1: "demo_v1",
     var2: 99
 };
-let _option = null;
+let _option = {topology:'topo_main'};;
 
 
 let run_id = null;
