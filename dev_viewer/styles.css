@@ -6,6 +6,25 @@ body {
     display: flex;
     flex-direction: column;
   }
+
+input {
+  border-bottom:#666 1px solid;
+  border-left-width:0px; 
+  border-right-width:0px; 
+  border-top-width:0px; 
+  border-radius: 3px; 
+  height:40px; 
+  width:260px; 
+  color: lightgray; 
+  font-size:18px; 
+  text-align: center;
+  background: #2f3241; 
+}
+
+input:focus{
+  outline: none;
+  color:white;
+}
   
   .container {
     margin: 15px 30px;
