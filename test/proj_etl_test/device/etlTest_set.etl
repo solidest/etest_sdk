@@ -1,13 +1,13 @@
 
 // 硬件接口
 device dev11 {
-    udp srv_1 { ip: '192.168.253.1', port: 8081, ttl: 20 }
+    udp srv_1 { ip: '127.0.0.1', port: 8081, ttl: 20 }
     tcp_client clt_2 { ip: '127.0.0.1' }
     tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
 
-    udp c1 { ip: '192.168.253.150', port: 8001 }
+    udp c1 { ip: '127.0.0.1', port: 8001 }
     udp c2 { ip: '127.0.0.1', port: 8889 }
-    udp udp_name {ip: '0.0.0.0', port: 8888}
+    udp udp_name {ip: '127.0.0.1', port: 8888}
 
     serial_ttl s1 { baudrate: 9600}
     serial_232 s2 { baudrate: 9600 }
@@ -27,8 +27,8 @@ device dev11 {
 device dev12{
 
     udp udp_name {ip: '127.0.0.1',port:8090}
-    udp s1 { ip: '0.0.0.0',port:5000}
-    udp s2 { ip: '0.0.0.0',port:7000 }
+    udp s1 { ip: '127.0.0.1',port:5000}
+    udp s2 { ip: '127.0.0.1',port:7000 }
     udp s3 { ip: '127.0.0.1' ,port:8004}
     udp s4 { ip: '127.0.0.1' ,port:8005}
  
@@ -67,27 +67,27 @@ topology topo11 {
 //仿真设备1
 device dev_a {
 
-    udp conn { ip: '192.168.253.150', port: 8001}
+    udp conn { ip: '127.0.0.1', port: 8001}
 }
 
 
 //仿真设备2
 device dev_b {
 
-    udp conn { ip: '192.168.253.150', port: 8002}
+    udp conn { ip: '127.0.0.1', port: 8002}
 }
 
 //仿真设备3
 device dev_c {
 
-    udp conn { ip: '192.168.253.150', port: 8003}
+    udp conn { ip: '127.0.0.1', port: 8003}
 }
 
 
 
 //主控设备
 device main_ctr {
-    udp conn {ip: '192.168.253.150',port:8888}
+    udp conn {ip: '127.0.0.1',port:8888}
 
 }
 

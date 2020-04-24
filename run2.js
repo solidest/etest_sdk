@@ -8,7 +8,7 @@ const SdkApi = require('./sdk');
     _option: 输入给entry的自定义选项
 */
 
-let api = new SdkApi('127.0.0.1', 1212);
+let api = new SdkApi('etest', 1212);
 let proj = 'test/proj_etl_test';
 let entry = 'program/eTestProgram/run2.lua';
 

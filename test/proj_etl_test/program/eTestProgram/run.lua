@@ -27,7 +27,9 @@ end
 
 
 function entry(vars, option)
-    Test1()
+    while true do
+        Test1()
+    end
     exit()
 
 end

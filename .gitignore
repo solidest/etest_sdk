@@ -14,6 +14,7 @@ server/dist
 docs/.vuepress/dist
 
 bin/
+!bin/*.conf
 logs/
 runs/
 

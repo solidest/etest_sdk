@@ -350,5 +350,6 @@ function entry(vars, option)
     Test_recved_event()
     Test_timer()
     print("Hello ETL!", vars, option)
+    delay(1000)
     exit()
 end
