@@ -1,0 +1,14 @@
+project:
+  proj_id: 51a68f3b-07a6-4356-bda4-26d74a5c299b
+  name: 项目名称
+  path: /xxx/xxx
+program:
+- test_1:
+  name: 测试项1
+  src: program/script1.lua
+  topology: topo_main
+- test_2:
+  name: 测试项2
+  src: program/script2.lua
+  topology: topo_1
+  vars: null

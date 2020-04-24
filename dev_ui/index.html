@@ -26,16 +26,27 @@
             <span id="_start" onclick="start()" style="color: #0099FF; font-size:20px; cursor:pointer">启动</span>
             <span id="_exit" onclick="exit()" style="color: #0099FF; font-size:20px; cursor:pointer; margin-left: 20px;">退出</span>
         </p>
-        <p><input id="_dev_url" type="text" value="http://127.0.0.1:8080"/>
+        <p><input id="_dev_url"/>
         </p>
         <p> 返回快捷键：Ctrl+E </p>
 
     </div>
     <script>
-        const r = require("./renderer.js")
-        function start() {
-            window.location.href = document.getElementById("_dev_url").value;
+        const r = require("./renderer.js");
+        let _url = window.localStorage.getItem("etest-dev-url");
+        if(!_url) {
+            _url = "http://127.0.0.1:8080";
         }
+        document.getElementById("_dev_url").value = _url;
+
+        function start() {
+            let url = document.getElementById("_dev_url").value;
+            if(url) {
+                window.localStorage.setItem("etest-dev-url", url);
+                window.location.href = url;
+            }
+        }
+
         function exit() {
             r.exit();
         }
