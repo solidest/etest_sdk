@@ -1,7 +1,7 @@
 
-# ETLTools
+# DevTools
 
-ETLTools提供了多个实用工具，供定制开发时使用，包括
+DevTools包含多个实用工具，供定制开发时使用，包括
 
 - `etl-cli` etl命令行执行工具
 - `etl-vsix` etl专用vscode插件
@@ -9,9 +9,14 @@ ETLTools提供了多个实用工具，供定制开发时使用，包括
 
 ## etl-cli
 
+#### etl参数选项
+
 #### etl setup
+
 #### etl state
-#### etl run <run_id>
+
+#### etl run
+
 #### etl stop
 
 ## etl-vsix
@@ -20,4 +25,4 @@ ETLTools提供了多个实用工具，供定制开发时使用，包括
 
 ## etl-ui-viewer
 
-执行允许图形窗口程序
+跨平台单一执行程序，自带图形界面
