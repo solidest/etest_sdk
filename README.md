@@ -3,6 +3,13 @@
 
 ## SDK
 
+### 0.2.1
+- 新增etl命令行执行功能
+- 在命令行执行etl，查看命令参数说明
+- etl命令执行时需要指定配置文件
+- etl命令的配置文件使用yaml格式（[学习教程](http://www.ruanyifeng.com/blog/2016/07/yaml.html)）
+- etl命令默认会使用`index.yml`配置文件
+
 ### 0.2.0
 - rpc传输机制替换为MessagePack格式
 
@@ -11,6 +18,9 @@
 - 配合`log`API 在控制台输出带颜色背景信息
 
 ## ETestD
+
+### 0.2.1
+- 兼容etl命令行执行功能
 
 ### 0.2.0
 - rpc传输机制替换为MessagePack格式
@@ -21,6 +31,9 @@
 
 
 ## ETestX
+
+### 0.2.1
+- 兼容etl命令行执行功能
 
 ### 0.2.0
 - rpc传输机制替换为MessagePack格式
