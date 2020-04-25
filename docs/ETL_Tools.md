@@ -1,42 +1,23 @@
 
-## ETestDev SDK
+# ETLTools
 
-ETestDev的二次开发程序包
+ETLTools提供了多个实用工具，供定制开发时使用，包括
 
-### API
-- SDK是使用ETestDev进行二次开发的软件代码库
-- SDK中为开发上位机程序和开发测试程序分别提供API支持
+- `etl-cli` etl命令行执行工具
+- `etl-vsix` etl专用vscode插件
+- `etl-ui-viewer` 开发模式下的实时ui查看器
 
-### 入口函数
-- 测试程序的入口函数名必须为 `entry`
-- 入口函数接收2个参数，`vars`、`option`,分别用于用例输入参数值，和用户自定义选项
+## etl-cli
 
+#### etl setup
+#### etl state
+#### etl run <run_id>
+#### etl stop
 
-## Outer API
-ETest与外部交互使用的API，主要目的是供UI程序集成时使用
+## etl-vsix
 
-### makeenv
+在vscode的插件市场搜索etl进行安装
 
--  创建项目执行环境
+## etl-ui-viewer
 
-### start 
-
-- 启动执行项目内的一个测试程序
-
-### stop
-
-- 强制停止测试程序的执行
-
-### command
-
-- 向ETest执行器发送一条自定义命令
-
-### state
-
-- 查询当前ETest执行器的状态
-
-### readout
-
-- 读取执行器的输出数据
-
-## Inner API
+执行允许图形窗口程序

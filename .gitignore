@@ -13,6 +13,11 @@ dist
 server/dist
 docs/.vuepress/dist
 
+dev_ui_viewer/node_modules
+dev_ui_viewer/dist
+dev_ui_viewer/build
+
+
 bin/
 logs/
 runs/

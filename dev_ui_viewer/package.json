@@ -1,0 +1,23 @@
+{
+  "name": "etest-dev-viewer",
+  "version": "0.1.0",
+  "description": "Viewer for ETestDev",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . &",
+    "build": "electron-packager .",
+    "pack-mac": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ electron-packager . --platform=darwin --out=build  --asar --overwrite",
+    "pack-win": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ electron-packager . --platform=win32 --out=build  --asar --overwrite",
+    "pack-linux": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ electron-packager . --platform=linux --out=build --asar --overwrite",
+    "build-mac": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ electron-builder --mac",
+    "build-linux": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ electron-builder --linux tar.gz --x64",
+    "build-win": "ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ electron-builder --win --x64"
+  },
+  "author": "solidest",
+  "homepage": "www.kiyun.com",
+  "email": "solidest@163.com",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "4.0.6"
+  }
+}
