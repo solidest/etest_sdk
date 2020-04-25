@@ -1,5 +1,5 @@
 * [ETestDev介绍](README)
 * [ETL](ETL)
-* [ETLua](LUA)
-* [ETLua API](LUA_API)
+* [ETLua教程](LUA)
+* [API手册](LUA_API)
 * [DevTools](Dev_Tools)
