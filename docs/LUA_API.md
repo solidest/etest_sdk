@@ -11,7 +11,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 ## 基础库
 
-### print
+#### print
 
 - 命令行输出文本信息
 - 输入参数可变数量
@@ -22,7 +22,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         输出abc
     ```
 
-### exit
+#### exit
 
 - 退出测试程序执行
 - 举例
@@ -33,7 +33,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         end
     ```
 
-### assert
+#### assert
 
 - 执行断言，第一个参数为fasle时退出程序
 - 第二个参数为可选的断言失败时的提示信息
@@ -43,7 +43,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         assert(math.isequal(1.0, 1.0))
     ```
 
-### verify
+#### verify
 
 - 执行判定，并返回判定结果，但不退出程序
 - 第二个参数为可选的判定失败时的提示信息
@@ -52,7 +52,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         与assert用法一致，区别在于程序不退出
     ```
 
-### delay
+#### delay
 
 - 延时指定的 ms 时间
 - 参数为正整数
@@ -62,7 +62,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         延时1000毫秒(1秒)
     ```
 
-### now
+#### now
 
 - 返回测试程序自启动至当前时长
 - 默认返回时长单位是 ms
@@ -77,13 +77,13 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         end
     ```
 
-### error
+#### error
 
 - 输出一个错误对象
 - 测试程序会自动退出
 
 
-### message
+#### message
 
 - 用指定协议的创建消息
 - 第一个参数指定协议
@@ -101,7 +101,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         end
     ```
 
-### pack
+#### pack
 
 - pack(msg) 将消息打包
 - pack(protocol.xxx, data) 使用指定协议打包数据
@@ -118,7 +118,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         end
     ```
 
-### unpack
+#### unpack
 
 - unpack(protocol.xxx, buffer) 使用指定协议解包buffer
 - 第一个参数是指定协议，第二个参数为打包的数据
@@ -135,7 +135,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         end
     ```
 
-### send
+#### send
 
 - 3个输入参数依次为：发送使用的设备接口、str或msg、可选的option
 - str可以是字符串也可以是二进制buffer
@@ -162,7 +162,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
     ```
 
-### recv
+#### recv
 
 - 用于同步接收数据，用法：`msg, opt = recv(connector, nil|protocol, timeout)`
 - 第一个输入参数必须为设备接口
@@ -186,7 +186,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 ## async库
 
-### async.timeout
+#### async.timeout
 
 - 延时定时器，用法：`id = async.timeout(tout, fn, ...)`
 - 指定时间后执行一个函数，返回定时器id
@@ -207,7 +207,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
     ```
 
-### async.interval
+#### async.interval
 
 - 周期定时器，用法:`id = async.interval(delay, intv, fn, ...)`
 - 延时指定时间后开始周期性执行函数，返回定时器id
@@ -229,7 +229,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
     ```
 
-### async.clear
+#### async.clear
 
 - 清除定时器，用法：`async.clear(id)`
 - 清除输入参数id对应的定时器
@@ -248,7 +248,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
     ```
 
-#### async.send
+##### async.send
 
 - 异步发送，用法：`async.send(connector, msg, option, fn_callback)`
 - 比同步send函数的输入参数多一个回调函数
@@ -268,7 +268,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
     end
     ```
 
-### async.recv
+#### async.recv
 
 - 异步接收，用法：`async.recv(connector, nil|protocol, timeout, fn_callback)`
 - 比同步send函数的输入参数多一个回调函数
@@ -289,7 +289,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
        
     ```
 
-### async.on_recv
+#### async.on_recv
 
 - 订阅数据到达事件，用法：`async.on_recv(connector, nil|protocol, fn_callback)`
 - 举例
@@ -314,7 +314,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
     end
     ```
 
-### async.off_recv
+#### async.off_recv
 
 - 取消数据到达事件的订阅，用法：`async.off_recv(connector)`
 - 举例
@@ -341,7 +341,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 ## log库
 
-### log.info
+#### log.info
 
 - 记录普通日志信息
 - 输出结果为绿色标识
@@ -356,7 +356,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
     ```
 
-### log.warn
+#### log.warn
 
 - 记录警告日志信息
 - 输出结果为黄色标识
@@ -369,7 +369,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
     ```
 
-### log.error
+#### log.error
 
 - 记录错误日志信息
 - 输出结果为红色标识
@@ -381,7 +381,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         end
     ```
 
-### log.step
+#### log.step
 
 - 记录测试步骤开始日志
 - 举例
@@ -395,7 +395,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
     ```
 
-### log.action
+#### log.action
 
 - 记录测试动作执行日志
 - 举例
@@ -407,7 +407,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
     ```
 
-### log.check
+#### log.check
 
 - 输出检查结果的日志
 - 第一个参数为字符串，第二个参数为布尔值
@@ -423,33 +423,33 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 ## string库
 
-### string.hex
+#### string.hex
 
 - 将buffer转为16进制字符串，以用于阅读输出
 
-### string.buf
+#### string.buf
 
 - 将16进制字符串转为buffer，以用于通信使用
 
-### string.byte
+#### string.byte
 
 - 输出字符串的内部编码
 - 输入参数依次为字符串，要输出的开始索引[i]、结束索引[j]
 - 默认i=1，j=i
 
-### string.char
+#### string.char
 
 - 输出和参数数量相同长度的字符串
 - 参数为零或者更多的整数
 - 每个字符的内部编码值等于对应的参数值
 
-### string.dump
+#### string.dump
 
 - 输出包含有以二进制方式表示的（一个 二进制代码块 ）指定函数的字符串
 - 之后可以用 load 调用这个字符串获得 该函数的副本（但是绑定新的上值）
 - 参数1为function， 如果参数2可选，如果为真值， 二进制代码块不携带该函数的调试信息 （局部变量名，行号，等等）
 
-### string.find
+#### string.find
 
 - 查找参数1(字符串)中匹配到的参数2 （参见 §6.4.1）。 
 - 如果找到一个匹配，find 会返回参数1中关于它起始及终点位置的索引； 否则，返回 nil 
@@ -457,19 +457,19 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 第四个可选参数为 true 时， 关闭模式匹配机制， 此时函数仅做直接的 “查找子串”的操作， 而参数2中没有字符被看作魔法字符 
 - 注意，如果给定了参数4　，就必须写上参数3
 
-### string.format
+#### string.format
 
 - 输出不定数量参数的格式化版本， 格式化串为第一个参数（必须是一个字符串）
 - 格式化字符串遵循 ISO C 函数 sprintf 的规则，不同点在于选项 *, h, L, l, n, p 不支持， 另外还增加了一个选项 q， q 选项将一个字符串格式化为两个双引号括起，对内部字符做恰当的转义处理的字符串该字符串可以安全的被 Lua 解释器读回来
 - 例如，调用string.format('%q', 'a string with "quotes" and \n new line')
 会产生字符串："a string with \"quotes\" and \new line"
 
-### string.gmatch
+#### string.gmatch
 
 - 输出一个迭代器函数， 每次调用这个函数都会继续以参数2对参数1做匹配，并返回所有捕获到的值 
 - 如果参数2中没有指定捕获，则每次捕获整个参数2
 
-### string.gsub
+#### string.gsub
 
 - 将参数1(字符串)中，所有的（或是在参数4给出时的前参数4(参数4为可选参数)个）参数2都替换成参数3 ，并输出
 - 参数3 可以是字符串、表、或函数，gsub 还会在第二个返回值返回一共发生了多少次匹配
@@ -480,48 +480,48 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 任何情况下，模板中没有设定捕获都看成是捕获整个模板
 - 如果表的查询结果或函数的返回结果是一个字符串或是个数字， 都将其作为替换用串； 而在返回 false 或 nil　时不作替换 （即保留匹配前的原始串）
 
-### string.len
+#### string.len
 
 - 参数为一个字符串
 - 输出其长度
 - 空串 "" 的长度为 0 
 - 内嵌零也统计在内，因此 "a\000bc\000" 的长度为 5 
 
-### string.lower
+#### string.lower
 
 - 参数为一个字符串
 - 将其中的大写字符都转为小写后输出
 - 其它的字符串不会更改，对大写字符的定义取决于当前的区域设置
 
-### string.match
+#### string.match
 
 - 在参数1(字符串)中找到第一个能用参数2匹配到的部分
 - 如果能找到，输出其中的捕获物； 否则返回 nil 
 - 如果参数2中未指定捕获， 输出整个参数2捕获到的串
 - 第三个可选数字参数，指明从哪里开始搜索； 它默认为1，可以是负数
 
-### string.pack 
+#### string.pack 
 
 - 输出一个打包了（即以二进制形式序列化） 参数2, 参数3等值的二进制字符串
 - 参数1(字符串)为打包格式
 
-### string.packsize
+#### string.packsize
 
 - 输出以指定格式用 string.pack 打包的字符串的长度
 - 格式化字符串中不可以有变长选项 's' 或 'z'
 
-### string.rep
+#### string.rep
 
 - 输出 参数2(正数) 个参数1(参数1) 以参数3(字符串)为分割符连在一起的字符串
 - 默认的参数3值为空字符串（即没有分割符）
 - 如果参数2不是正数则返回空串
 
-### string.reverse
+#### string.reverse
 
 - 输出字符串的翻转串
 - 输入参数为字符串
 
-### string.sub
+#### string.sub
 
 - 输出参数1的子串， 该子串从参数2开始到参数3为止； 参数2 和 参数3 都可以为负数。 如果不给出参数3 ，就当它是 -1 （和字符串长度相同） 
 - 调用 string.sub(参数1,1,参数3) 可以返回参数1的长度为参数3 的前缀串， 而 string.sub(参数1, -参数2) 返回长度为参数2的后缀串。
@@ -529,12 +529,12 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 如果参数3比字符串的长度还大，就修正为字符串长度 
 - 如果在修正之后，参数2大于参数3， 函数返回空串。
 
-### string.unpack
+#### string.unpack
 
 - 输出以格式参数1打包在参数2(字符串)中的值
 - 选项参数3（默认为 1 ）标记了从参数2中哪里开始读起。 读完所有的值后，函数返回参数2中第一个未读字节的位置。
 
-### string.upper
+#### string.upper
 
 - 输入参数为一个字符串 
 - 将其中的小写字符都转为大写后输出 
@@ -542,122 +542,122 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 ## math库
 
-### math.abs 
+#### math.abs 
 
 - 输出参数的绝对值(integer/float)
 
-### math.acos 
+#### math.acos 
 
 - 输出参数的反余弦值（用弧度表示）
 
-### math.asin
+#### math.asin
 
 - 输出参数的反正弦值（用弧度表示）
 
-### math.atan
+#### math.atan
 
 - 输出 参数1/参数2（参数2为可选参数）的反正切值（用弧度表示）。 
 - 它会使用两个参数的符号来找到结果落在哪个象限中（即使参数2为零时，也可以正确的处理）
 - 默认的参数2是 1 ，因此调用 math.atan(参数1) 将返回参数1的反正切值
 
-### math.ceil
+#### math.ceil
 
 - 输出不小于参数的最小整数值
 
-### math.cos
+#### math.cos
 
 - 输出参数的余弦（假定参数是弧度）
 
-### math.deg 
+#### math.deg 
 
 - 将角 参数 从弧度转换为角度
 
-### math.exp
+#### math.exp
 
 - 输出 e的x次方(假定参数为x) 的值（e 为自然对数的底）
 
-### math.floor 
+#### math.floor 
 
 - 输出不大于参数的最大整数值
 
-### math.fmod 
+#### math.fmod 
 
 - 返回参数1除以参数2，将商向零圆整后的余数。 (integer/float)
 
-### math.huge
+#### math.huge
 
 - 浮点数 HUGE_VAL， 这个数比任何数字值都大
 
-### math.log
+#### math.log
 
 - 返回以指定底的 参数1 的对数，默认的参数2是e（因此此函数返回参数1 的自然对数）
 
-### math.max 
+#### math.max 
 
 - 返回参数中最大的值， 大小由 Lua 操作 < 决定(integer/float)
 
-### math.maxinteger
+#### math.maxinteger
 
 - 最大值的整数
 
-### math.min 
+#### math.min 
 
 - 输出参数中最小的值， 大小由 Lua 操作 < 决定(integer/float)
 
-### math.mininteger
+#### math.mininteger
 
 - 最小值的整数
 
-### math.modf
+#### math.modf
 
 - 输出参数的整数部分和小数部分，第二个结果一定是浮点数
 
-### math.pi
+#### math.pi
 
 - π 的值
 
-### math.rad
+#### math.rad
 
 - 将角 (参数) 从角度转换为弧度
 
-### math.random
+#### math.random
 
 - 当不带参数调用时， 返回一个 [0,1) 区间内一致分布的浮点伪随机数。 
 - 当以两个整数 m 与 n 调用时， math.random 返回一个 [m, n] 区间 内一致分布的整数为随机数（值 n-m 不能是负数，且必须在 Lua 整数的表示范围内）
 - 调用 math.random(n) 等价于 math.random(1,n)
 - 这个函数是对 C 提供的位随机数函数的封装。 对其统计属性不作担保
 
-### math.randomseed 
+#### math.randomseed 
 
 - 把 参数 设为伪随机数发生器的“种子”： 相同的种子产生相同的随机数列
 
-### math.sin
+#### math.sin
 
 - 输出参数的正弦值（假定参数是弧度）
 
-#### math.sqrt
+##### math.sqrt
 
 - 输出参数的平方根（你也可以使用乘方 参数^0.5 来计算这个值）
 
-### math.tan
+#### math.tan
 
 - 输出参数的正切值（假定参数是弧度）
 
-### math.tointeger 
+#### math.tointeger 
 
 - 如果参数可以转换为一个整数， 返回该整数 否则返回 nil
 
-### math.type 
+#### math.type 
 
 - 如果参数是整数，返回 "integer" 
 - 如果是浮点数，返回 "float"
 - 如果不是数字，返回 nil
 
-### math.ult
+#### math.ult
 
 - 如果整数参数1和 参数2 以无符号整数形式比较， 参数1在 参数2 之下，返回布尔真否则返回假
 
-### math.isequal(f1, f2, is_double)
+#### math.isequal(f1, f2, is_double)
 
 - 判定两个浮点数是否相等
 - 第三个可选参数为布尔型，true：double方式比较， false：float方式比较
@@ -668,30 +668,30 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 ## table库
 
-### table.concat (list [, sep [, i [, j]]])
+#### table.concat (list [, sep [, i [, j]]])
 
 - 提供一个列表，其所有元素都是字符串或数字，返回字符串 list[i]..sep..list[i+1] ··· sep..list[j]。 sep 的默认值是空串， i 的默认值是 1 ， j 的默认值是 #list 。 如果 i 比 j 大，返回空串。
 
-### table.insert (list, [pos,] value)
+#### table.insert (list, [pos,] value)
 - 在 list 的位置 pos 处插入元素 value ， 并后移元素 list[pos], list[pos+1], ···, list[#list] 。 pos 的默认值为 #list+1 ， 因此调用 table.insert(t,x) 会将 x 插在列表 t 的末尾。
 
-### table.move (a1, f, e, t [,a2])
+#### table.move (a1, f, e, t [,a2])
 - 将元素从表 a1 移到表 a2。 这个函数做了次等价于后面这个多重赋值的等价操作： a2[t],··· = a1[f],···,a1[e]。 a2 的默认值为 a1。 目标区间可以和源区间重叠。 索引 f 必须是正数。
 
-### table.pack (···)
+#### table.pack (···)
 - 返回用所有参数以键 1,2, 等填充的新表， 并将 "n" 这个域设为参数的总数。 注意这张返回的表不一定是一个序列。
 
-### table.remove (list [, pos])
+#### table.remove (list [, pos])
 - 移除 list 中 pos 位置上的元素，并返回这个被移除的值。 当 pos 是在 1 到 #list 之间的整数时， 它向前移动元素　list[pos+1], list[pos+2], ···, list[#list] 并删除元素 list[#list]； 索引 pos 可以是 #list + 1 ，或在 #list 为 0 时可以是 0 ； 在这些情况下，函数删除元素 list[pos]。
 
 - pos 默认为 #list， 因此调用 table.remove(l) 将移除表 l 的最后一个元素。
 
-### table.sort (list [, comp])
+#### table.sort (list [, comp])
 - 在表内从 list[1] 到 list[#list] 原地 对其间元素按指定次序排序。 如果提供了 comp ， 它必须是一个可以接收两个列表内元素为参数的函数。 当第一个元素需要排在第二个元素之前时，返回真 （因此 not comp(list[i+1],list[i]) 在排序结束后将为真）。 如果没有提供 comp， 将使用标准 ETlua 操作 < 作为替代品。
 
 - 排序算法并不稳定； 即当两个元素次序相等时，它们在排序后的相对位置可能会改变。
 
-### table.unpack (list [, i [, j]])
+#### table.unpack (list [, i [, j]])
 
 - 返回列表中的元素。 这个函数等价于
 `
@@ -701,27 +701,27 @@ i 默认为 1 ，j 默认为 #list
 
 ## utf8库
 
-### utf8.char (···)
+#### utf8.char (···)
 
 - 接收零或多个整数， 将每个整数转换成对应的 UTF-8 字节序列，并返回这些序列连接到一起的字符串。
 
-### utf8.charpattern
+#### utf8.charpattern
 
 - 用于精确匹配到一个 UTF-8 字节序列的模式（是一个字符串，并非函数）"[\0-\x7F\xC2-\xF4][\x80-\xBF]*" 。 它假定处理的对象是一个合法的 UTF-8 字符串。
 
-### utf8.codes (s)
+#### utf8.codes (s)
 
 - 返回一系列的值，可以让`for p, c in utf8.codes(s) do body end`迭代出字符串 s 中所有的字符。 这里的 p 是位置（按字节数）而 c 是每个字符的编号。 如果处理到一个不合法的字节序列，将抛出一个错误。
 
-### utf8.codepoint (s [, i [, j]])
+#### utf8.codepoint (s [, i [, j]])
 
 - 以整数形式返回 s 中 从位置 i 到 j 间（包括两端） 所有字符的编号。 默认的 i 为 1 ，默认的 j 为 i。 如果碰上不合法的字节序列，抛出一个错误。
 
-### utf8.len (s [, i [, j]])
+#### utf8.len (s [, i [, j]])
 
 - 返回字符串 s 中 从位置 i 到 j 间 （包括两端） UTF-8 字符的个数。 默认的 i 为 1 ，默认的 j 为 -1 。 如果它找到任何不合法的字节序列， 返回假值加上第一个不合法字节的位置。
 
-### utf8.offset (s, n [, i])
+#### utf8.offset (s, n [, i])
 
 - 返回编码在 s 中的第 n 个字符的开始位置（按字节数） （从位置 i 处开始统计）。 负 n 则取在位置 i 前的字符。 当 n 是非负数时，默认的 i 是 1， 否则默认为 #s + 1。 因此，utf8.offset(s, -n) 取字符串的倒数第 n 个字符的位置。 如果指定的字符不在其中或在结束点之后，函数返回 nil。
 作为特例，当 n 等于 0 时， 此函数返回含有 s 第 i 字节的那个字符的开始位置。
