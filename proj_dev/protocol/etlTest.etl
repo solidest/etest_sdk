@@ -6,27 +6,27 @@
     *** 多行注释
 */
 
-device dev_0 {
+// device dev_0 {
 
-    udp srv_1 { ip: '127.0.0.1', port: 3000 }
-    tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
+//     udp srv_1 { ip: '127.0.0.1', port: 3000 }
+//     tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
 
-    udp clt_1 { ip: '127.0.0.1' }
-    tcp_client clt_2 { ip: '127.0.0.1' }
+//     udp clt_1 { ip: '127.0.0.1' }
+//     tcp_client clt_2 { ip: '127.0.0.1' }
 
-    serial_ttl s1 {  }
-    serial_232 s2 { baudrate: 9600 }
-    serial_422 s3 { baudrate: 9600 }
-    serial_485 s4 { baudrate: 9600 }
-    serial_485 s5 { baudrate: 9600 }
-    serial_usb s6 { baudrate: 9600 }
+//     serial_ttl s1 {  }
+//     serial_232 s2 { baudrate: 9600 }
+//     serial_422 s3 { baudrate: 9600 }
+//     serial_485 s4 { baudrate: 9600 }
+//     serial_485 s5 { baudrate: 9600 }
+//     serial_usb s6 { baudrate: 9600 }
 
-    di di1 { minv: 3, maxv: 5 }
-    do do1 { minv: 3, maxv: 5 }
+//     di di1 { minv: 3, maxv: 5 }
+//     do do1 { minv: 3, maxv: 5 }
 
-    da da1 { ratio: 8 }
-    ad ad1 { ratio: 16 }
-}
+//     da da1 { ratio: 8 }
+//     ad ad1 { ratio: 16 }
+// }
 
 protocol protocol_1 {
     segment str { parser: 'string', length: 3 }
@@ -52,46 +52,46 @@ protocol prot_str {
 }
 
 
-device dev_2 {
+// device dev_2 {
 
-    tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
-    udp clt_1 { ip: '127.0.0.1' }
-    serial_ttl s1 { baudrate: 9600 }
+//     tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
+//     udp clt_1 { ip: '127.0.0.1' }
+//     serial_ttl s1 { baudrate: 9600 }
 
-}
+// }
 
-//拓扑结构
-topology topo_1 {
+// //拓扑结构
+// topology topo_1 {
 
-    //接口之间的连接
-    linking: {
-        bus_1: [dev_1.srv_1, dev2.srv_1, dev_2.clt_1, dev_3.clt_2, dev_4.clt_1] ,   //总线
-        link_1: [dev_3.srv_1, dev_2.clt_1] , //点到点连接
-        link_2: [dev_4.srv_1, dev_1.clt_1],
-        bus_2: [dev_5.s1, dev_6.s2, dev_2.s3], //总线
-        link_3: [ ],
-        link_4: [dev_5.ad1, dev_6.da1],  
-    }
+//     //接口之间的连接
+//     linking: {
+//         bus_1: [dev_1.srv_1, dev2.srv_1, dev_2.clt_1, dev_3.clt_2, dev_4.clt_1] ,   //总线
+//         link_1: [dev_3.srv_1, dev_2.clt_1] , //点到点连接
+//         link_2: [dev_4.srv_1, dev_1.clt_1],
+//         bus_2: [dev_5.s1, dev_6.s2, dev_2.s3], //总线
+//         link_3: [ ],
+//         link_4: [dev_5.ad1, dev_6.da1],  
+//     }
 
-    mapping: {
+//     mapping: {
         
-    }
+//     }
 
-    //设备映射
-    mapping: {
-        uut: [],   //被测硬件单元
-        uut: [devs, dve],   //被测硬件单元
-        etest: [dev_3, dev_4], //软设备
-    }
+//     //设备映射
+//     mapping: {
+//         uut: [],   //被测硬件单元
+//         uut: [devs, dve],   //被测硬件单元
+//         etest: [dev_3, dev_4], //软设备
+//     }
 
 
-    //接口绑定
-    binding: {
-        dev_1.s1: 'com1',
-        dev_2.s1: 'com2@192.168.1.5',
-        dev_2.can_1: 'can_a:1@192.168.1.5',
-    }
-}
+//     //接口绑定
+//     binding: {
+//         dev_1.s1: 'com1',
+//         dev_2.s1: 'com2@192.168.1.5',
+//         dev_2.can_1: 'can_a:1@192.168.1.5',
+//     }
+// }
 
 protocol prot_point {
     segment token { parser: 'uint32' }
@@ -267,12 +267,12 @@ protocol prot_xtra {
     }
 }
 
-//设备
-device dev_3 {
+// //设备
+// device dev_3 {
 
-    udp srv_1 { ip: '127.0.0.1', port: 3000 }
-    tcp_client clt_2 { ip: '127.0.0.1' }
-    do do1 { minv: 3, maxv: 5 }
-    ad ad1 { ratio: 16 }
-    can can1 { baudrate: 9600}
-}
+//     udp srv_1 { ip: '127.0.0.1', port: 3000 }
+//     tcp_client clt_2 { ip: '127.0.0.1' }
+//     do do1 { minv: 3, maxv: 5 }
+//     ad ad1 { ratio: 16 }
+//     can can1 { baudrate: 9600}
+// }

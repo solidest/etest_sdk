@@ -1,5 +1,10 @@
 
-
+/**
+ * 上位机rpc客户端模块
+ * Frame负责原始字节流与JSON对象之间的转换
+ * NetWork负责TCP传输
+ * RpcTask负责rpc调度
+ */
 
 const net = require('net');
 const msgpack = require("msgpack-lite");

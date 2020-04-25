@@ -1,0 +1,24 @@
+
+# 项目设置
+project:
+  id: 2923ffa5-d130-4b92-b808-343c3d9dfeb9  # 项目唯一id
+  path: proj_etl_test  # 项目文件根目录，绝对路径或相对路径
+  xtra: protocol/xtra.lua # 项目使用的协议解析插件
+  etestd_ip: 127.0.01 # etest守护服务的ip地址或主机名
+  etestd_port: 1210 # etest守护服务的端口号
+
+# 执行程序设置
+program:
+  demo:  # 执行实例id，同一个项目内必须唯一
+    src: program/demo.lua  # 用例脚本文件路径，与project.path的相对路径
+    vars: {}  # 执行用例脚本时的输入参数
+    topology: topo_main # 执行用例脚本时使用的连接拓扑
+  hello: # 临时测试
+    src: program/hello_world.lua
+    topology: topo_main
+  test_api: # 全部api的基本测试
+    src: program/test_api.lua
+    topology: topo_main
+    
+
+

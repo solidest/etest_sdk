@@ -349,6 +349,6 @@ function entry(vars, option)
     Test_send_recv_async()
     Test_recved_event()
     Test_timer()
-    print("Hello ETL!", vars, option)
+    print("END", vars, option)
     exit()
 end

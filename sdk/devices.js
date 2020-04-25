@@ -1,4 +1,10 @@
 
+
+/**
+ * 设备解析模块
+ * 提取etl文件中的设备接口描述和连接拓扑描述
+ * 返回的解析结果为拓扑图对象数组
+ */
 const path = require("path");
 const fs = require("fs");
 const parser = require("./parser/etxParser")
@@ -13,7 +19,7 @@ class Connector {
 
     addConfig(key, value) {
         if(this.config[key]) {
-            throw (`设备 ${this.name} 的参数 ${key} 重复设置`);
+            throw new Error(`设备 ${this.name} 的参数 ${key} 重复设置`);
         }
         this.config[key] = value;
     }
@@ -29,7 +35,7 @@ class Device {
     addConnector(conner) {
         let find = Device.findConnector(this, conner.name);
         if(find) {
-            throw (`接口 ${this.name}.${conner.name} 重复定义`);
+            throw new Error(`接口 ${this.name}.${conner.name} 重复定义`);
         } else {
             this.connectors.push(conner);
         }
@@ -65,7 +71,7 @@ class Topology {
     setMap(devname, maptype) {
         let dev = this.findDevice(devname);
         if(dev.map) {
-            throw (`拓扑 ${this.name}.mapping 中重复引用了设备 ${devname} 的映射`);
+            throw new Error(`拓扑 ${this.name}.mapping 中重复引用了设备 ${devname} 的映射`);
         }
         dev.map = maptype;
     }
@@ -74,10 +80,10 @@ class Topology {
         let dev = this.findDevice(devname);
         let conn = Device.findConnector(dev, connname);
         if(!conn) {
-            throw (`拓扑 ${this.name}.binding 中引用了未定义的接口 ${devname}.${connname}`);
+            throw new Error(`拓扑 ${this.name}.binding 中引用了未定义的接口 ${devname}.${connname}`);
         }
         if(conn.uri) {
-            throw (`拓扑 ${this.name}.binding 中重复设置了接口 ${devname}.${connname}`);
+            throw new Error(`拓扑 ${this.name}.binding 中重复设置了接口 ${devname}.${connname}`);
         }
         let uris = uri.replace(/\s/g, '').split("@");
         if(uris.length===1) {
@@ -99,10 +105,10 @@ class Topology {
             let dev = this.findDevice(conn.device);
             let conner = Device.findConnector(dev, conn.connector);
             if(!conner) {
-                throw (`拓扑 ${this.name}.linking.${linkname} 中引用了未定义的接口 ${conn.device}.${conn.connector}`);
+                throw new Error(`拓扑 ${this.name}.linking.${linkname} 中引用了未定义的接口 ${conn.device}.${conn.connector}`);
             }
             if(conner.link) {
-                throw (`拓扑 ${this.name}.linking.${linkname} 中重复设置接口 ${conn.device}.${conn.connector} 连接`);
+                throw new Error(`拓扑 ${this.name}.linking.${linkname} 中重复设置接口 ${conn.device}.${conn.connector} 连接`);
             }
             let _line = [];
             for(let _conn of line) {
@@ -111,7 +117,7 @@ class Topology {
                 }
             }
             if(_line.length<1) {
-                throw (`拓扑 ${this.name}.linking.${linkname} 设置错误`);
+                throw new Error(`拓扑 ${this.name}.linking.${linkname} 设置错误`);
             }
             conner.link = linkname;
             if(_line.length == 1) {
@@ -129,7 +135,7 @@ class Topology {
         for(let dev of this.devices) {
             //检查设备映射
             if(!dev.map) {
-                throw (`拓扑 ${this.name} 中引用的设备 ${dev.name} 未设置映射`);
+                throw new Error (`拓扑 ${this.name} 中引用的设备 ${dev.name} 未设置映射`);
             }
 
             //检查设备接口
@@ -143,7 +149,7 @@ class Topology {
                 //绑定检查
                 if(connor.uri) {
                     if(dev.map==='uut') {
-                        throw (`拓扑 ${this.name} 中设备映射与接口绑定存在冲突: ${dev.name}.${connor.name}`);
+                        throw new Error (`拓扑 ${this.name} 中设备映射与接口绑定存在冲突: ${dev.name}.${connor.name}`);
                     }
                 } else if(connor.link) {
                     if(dev.map!=='uut') {
@@ -243,75 +249,99 @@ function parseDevices(asts) {
 }
 
 
-//获取目录下所有的etl文件
-function getEtlFiles(pf, results) {
-    if(!fs.existsSync(pf)) {
-        return;
-    }
+// //获取目录下所有的etl文件
+// function getEtlFiles(pf, results) {
+//     if(!fs.existsSync(pf)) {
+//         return;
+//     }
 
-    let st = fs.statSync(pf);
-    if(st.isFile()) {
-        if(path.extname(pf)!=='.etl') {
-            return;
-        }
-        results.push(pf);
-        return;
-    }
+//     let st = fs.statSync(pf);
+//     if(st.isFile()) {
+//         if(path.extname(pf)!=='.etl') {
+//             return;
+//         }
+//         results.push(pf);
+//         return;
+//     }
 
-    if(st.isDirectory()) {
-        let dir = fs.readdirSync(pf);
-        for(let p of dir) {
-            getEtlFiles(path.join(pf, p), results);
-        }        
-    }
-}
-
-
-//解析一个拓扑图
-function parseTopology(file, devs, topos, dir) {
-    let text = fs.readFileSync(file, "utf8");
-    let asts = parser.parse(text);
-
-    if(asts && asts.length>0) {
-        for(let ast of asts) {
-            if(ast.kind ==='device') {
-                let rename = devs.find(it=>it.name===ast.name);
-                if(rename) {
-                    throw new Error(`设备"${ast.name}"重复定义: "${path.relative(dir, file)}", "${rename.src}"`)
-                }
-                ast.src = path.relative(dir, file);
-                devs.push(ast);
-            } else if(ast.kind === 'topology') {
-                let rename = topos.find(it=>it.name===ast.name);
-                if(rename) {
-                    throw new Error(`拓扑"${ast.name}"重复定义: "${path.relative(dir, file)}", "${rename.src}"`)
-                }
-                ast.src = path.relative(dir, file);
-                topos.push(ast);
-            }
-        }
-    }
-}
+//     if(st.isDirectory()) {
+//         let dir = fs.readdirSync(pf);
+//         for(let p of dir) {
+//             getEtlFiles(path.join(pf, p), results);
+//         }        
+//     }
+// }
 
 
-//解析目录文件下所有的拓扑图
-function parseAll(pf) {
-    pf = path.resolve(pf)
-    let files =[];
-    getEtlFiles(pf, files);
-    if(files.length == 0) {
-        return [];
-    }
-    let devs = [];
+// //解析一个拓扑图
+// function parseTopology(file, devs, topos, dir) {
+//     let text = fs.readFileSync(file, "utf8");
+//     let asts = parser.parse(text);
+
+//     if(asts && asts.length>0) {
+//         for(let ast of asts) {
+//             if(ast.kind ==='device') {
+//                 let rename = devs.find(it=>it.name===ast.name);
+//                 if(rename) {
+//                     throw new Error(`设备"${ast.name}"重复定义: "${path.relative(dir, file)}", "${rename.src}"`)
+//                 }
+//                 ast.src = path.relative(dir, file);
+//                 devs.push(ast);
+//             } else if(ast.kind === 'topology') {
+//                 let rename = topos.find(it=>it.name===ast.name);
+//                 if(rename) {
+//                     throw new Error(`拓扑"${ast.name}"重复定义: "${path.relative(dir, file)}", "${rename.src}"`)
+//                 }
+//                 ast.src = path.relative(dir, file);
+//                 topos.push(ast);
+//             }
+//         }
+//     }
+// }
+
+
+// //解析目录文件下所有的拓扑图
+// function parseAll(pf) {
+//     pf = path.resolve(pf)
+//     let files =[];
+//     getEtlFiles(pf, files);
+//     if(files.length == 0) {
+//         return [];
+//     }
+//     let devs = [];
+//     let topos = [];
+//     for(let f of files) {
+//         if(path.extname(f)!==".etl") {
+//             continue;
+//         }
+//         try {
+//             parseTopology(f, devs, topos, pf);
+//         } catch (error) {
+//             throw new Error(`解析文件"${path.relative(pf, f)}"出错: ${error.message}`)
+//         }
+//     }
+
+//     let odevs = parseDevices(devs);
+//     return parseTopologys(topos, odevs);
+// }
+
+
+function parseHardEnv(asts) {
     let topos = [];
-    for(let f of files) {
-        if(path.extname(f)!==".etl") {
-            continue;
-        }
-        try {
-            parseTopology(f, devs, topos, pf);
-        } catch (error) {
-            throw new Error(`解析文件"${path.relative(pf, f)}"出错: ${error.message}`)
+    let devs = [];
+    for(let ast of asts) {
+        if(ast.kind ==='device') {
+            let rename = devs.find(it=>it.name===ast.name);
+            if(rename) {
+                throw new Error(`设备"${ast.name}"重复定义: "${ast.src}", "${rename.src}"`)
+            }
+            devs.push(ast);
+        } else if(ast.kind === 'topology') {
+            let rename = topos.find(it=>it.name===ast.name);
+            if(rename) {
+                throw new Error(`拓扑"${ast.name}"重复定义: "${ast.src}", "${rename.src}"`)
+            }
+            topos.push(ast);
         }
     }
 
@@ -320,4 +350,4 @@ function parseAll(pf) {
 }
 
 
-module.exports = parseAll;
+module.exports = parseHardEnv;

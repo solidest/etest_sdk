@@ -1,4 +1,8 @@
 
+/**
+ * 命令行执行
+ * 执行命令
+ */
 const SdkApi = require('./sdk');
 
 /*

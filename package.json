@@ -1,12 +1,12 @@
 {
   "name": "etest_sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "sdk for etest",
   "main": "index.js",
   "scripts": {
     "build:parser": "node sdk/parser/build.js",
     "start": "node run.js start",
-    "dev": "node dev.js start",
+    "dev": "node sdk/cli/run.js start",
     "devstop": "node dev.js stop",
     "devstate": "node dev.js state",
     "stop": "node run.js stop",
@@ -31,6 +31,11 @@
     "eslint": "^6.8.0"
   },
   "dependencies": {
+    "commander": "^5.1.0",
+    "js-yaml": "^3.13.1",
     "msgpack-lite": "^0.1.26"
+  },
+  "bin": {
+    "etl": "./sdk/cli/index.js"
   }
 }

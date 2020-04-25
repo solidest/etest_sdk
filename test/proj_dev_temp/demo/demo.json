@@ -1,6 +1,0 @@
-{
-    "com1": {
-        "uri": "/dev/ttyUSB0",
-        "driver": "serial.so"
-    }
-}

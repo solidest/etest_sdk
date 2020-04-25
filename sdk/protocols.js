@@ -1,31 +1,36 @@
 
+/**
+ * 协议解析模块
+ * 提取etl中的协议描述
+ * 返回的解析结果为协议对象数组
+ */
 const path = require("path");
 const fs = require("fs");
-const parser = require("./parser/etxParser")
+// const parser = require("./parser/etxParser")
 const segparser = require("./parser/segParser")
 
-//获取目录下所有的etl文件
-function getEtlFiles(pf, results) {
-    if(!fs.existsSync(pf)) {
-        return;
-    }
+// //获取目录下所有的etl文件
+// function getEtlFiles(pf, results) {
+//     if(!fs.existsSync(pf)) {
+//         return;
+//     }
 
-    let st = fs.statSync(pf);
-    if(st.isFile()) {
-        if(path.extname(pf)!=='.etl') {
-            return;
-        }
-        results.push(pf);
-        return;
-    }
+//     let st = fs.statSync(pf);
+//     if(st.isFile()) {
+//         if(path.extname(pf)!=='.etl') {
+//             return;
+//         }
+//         results.push(pf);
+//         return;
+//     }
 
-    if(st.isDirectory()) {
-        let dir = fs.readdirSync(pf);
-        for(let p of dir) {
-            getEtlFiles(path.join(pf, p), results);
-        }        
-    }
-}
+//     if(st.isDirectory()) {
+//         let dir = fs.readdirSync(pf);
+//         for(let p of dir) {
+//             getEtlFiles(path.join(pf, p), results);
+//         }        
+//     }
+// }
 
 //分析解析器字符串
 function getSegTypeFromStr(seg, pser, vp, file) {
@@ -156,49 +161,69 @@ function parseSegType(file, seg) {
     }
 }
 
-//解析一个协议
-function parseProtocol(file, prot_asts, dir) {
-    let text = fs.readFileSync(file, "utf8");
-    let asts = parser.parse(text);
+// //解析一个协议
+// function parseProtocol(file, prot_asts, dir) {
+//     let text = fs.readFileSync(file, "utf8");
+//     let asts = parser.parse(text);
 
-    if(asts && asts.length>0) {
-        for(let ast of asts) {
-            if(ast.kind ==='protocol') {
-                let rename = prot_asts.find(it=>it.name===ast.name);
-                if(rename) {
-                    throw new Error(`协议"${ast.name}"重复定义: "${path.relative(dir, file)}", "${rename.src}"`)
-                }
-                ast.src = path.relative(dir, file);
-                prot_asts.push(ast);
+//     if(asts && asts.length>0) {
+//         for(let ast of asts) {
+//             if(ast.kind ==='protocol') {
+//                 let rename = prot_asts.find(it=>it.name===ast.name);
+//                 if(rename) {
+//                     throw new Error(`协议"${ast.name}"重复定义: "${path.relative(dir, file)}", "${rename.src}"`)
+//                 }
+//                 ast.src = path.relative(dir, file);
+//                 prot_asts.push(ast);
+//             }
+//         }
+//     }
+// }
+
+
+// //解析目录文件下所有的协议
+// function _parseProtocols(pf) {
+//     pf = path.resolve(pf)
+//     let files =[];
+//     getEtlFiles(pf, files);
+//     if(files.length == 0) {
+//         return [];
+//     }
+//     let asts = [];
+//     for(let f of files) {
+//         if(path.extname(f)!==".etl") {
+//             continue;
+//         }
+//         try {
+//             parseProtocol(f, asts, pf);
+//         } catch (error) {
+//             throw new Error(`解析文件"${path.relative(pf, f)}"出错: ${error.message}`)
+//         }
+//     }
+//     for(let p of asts) {
+//         parseSegType(p.src, p);
+//     }
+//     return asts;
+// }
+
+//解析全部协议
+function parseProtocols(asts) {
+    let res = [];
+    for(let ast of asts) {
+        if(ast.kind ==='protocol') {
+            let rename = res.find(it=>it.name===ast.name);
+            if(rename) {
+                throw new Error(`协议"${ast.name}"重复定义: "${ast.src}", "${rename.src}"`)
             }
+            res.push(ast);
         }
     }
-}
 
-
-//解析目录文件下所有的协议
-function parseProtocols(pf) {
-    pf = path.resolve(pf)
-    let files =[];
-    getEtlFiles(pf, files);
-    if(files.length == 0) {
-        return [];
-    }
-    let asts = [];
-    for(let f of files) {
-        if(path.extname(f)!==".etl") {
-            continue;
-        }
-        try {
-            parseProtocol(f, asts, pf);
-        } catch (error) {
-            throw new Error(`解析文件"${path.relative(pf, f)}"出错: ${error.message}`)
-        }
-    }
-    for(let p of asts) {
+    for(let p of res) {
         parseSegType(p.src, p);
     }
-    return asts;
+
+    return res;
 }
 
 
