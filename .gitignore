@@ -17,7 +17,7 @@ etl_ui_viewer/node_modules
 etl_ui_viewer/dist
 etl_ui_viewer/build
 
-
+logdb/
 bin/
 logs/
 runs/

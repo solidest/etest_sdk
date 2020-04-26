@@ -26,6 +26,7 @@
   "dependencies": {
     "commander": "^5.1.0",
     "js-yaml": "^3.13.1",
+    "lokijs": "^1.5.8",
     "msgpack-lite": "^0.1.26"
   },
   "bin": {
