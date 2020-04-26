@@ -106,7 +106,7 @@ class SdkApi {
     //开发模式下执行程序
     start(cfg, run_id, callback) {
         //开发模式需要先设置环境
-        this.setup(cfg, (err) => {
+        return this.setup(cfg, (err) => {
             if (err) {
                 return callback(err);
             } else {

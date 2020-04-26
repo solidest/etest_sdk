@@ -16,7 +16,6 @@ function parse_out(res) {
             switch (r.kind) {
                 case 'start':
                     print.sys_recved(' ', '::start:: ' + r.value);
-                    console.log('');
                     break;
 
                 case 'entry':
