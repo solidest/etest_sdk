@@ -19,6 +19,10 @@ program:
   test_api: # 全部api的基本测试
     src: program/protocol_api_test.lua
     topology: topo_dev
+  record: # 测试记录输出
+    src: program/record.lua
+    topology: topo_dev
+
     
 
 

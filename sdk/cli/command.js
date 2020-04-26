@@ -3,12 +3,12 @@
  * 命令操作模块
  */
 
-const SdkApi = require('../index.js');
-const print = require('./print');
-const parse_out = require('./parse_out');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const logdb = require('./logdb');
+const SdkApi = require('../index.js');
+const print = require('./print');
+const parse_out = require('./parse_out');
 
 let _srv = null;
 let _run_uuid = null;

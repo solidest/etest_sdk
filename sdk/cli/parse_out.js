@@ -60,7 +60,9 @@ function parse_out(res) {
         } else if (r.catalog === 'log') {
             print.usr_log(r.kind, r.value);
         } else {
-            print.sys_recved('?', r);
+            if(r.catalog!=="record") {
+                print.sys_recved('?', r);
+            }
         }
     }
 

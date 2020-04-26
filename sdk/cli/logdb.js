@@ -17,12 +17,11 @@ function _databaseInitialize(run_id) {
         autosaveInterval: 4000
     });
 
-    _db.addCollection("syslog", {
+    _db.addCollection("output", {
         unique: ['time']
     });
-
     _db.addCollection("record", {
-        unique: ['time']
+        unique: ['$time']
     });
 }
 
@@ -31,20 +30,16 @@ function save(run_id, data) {
     if(!_db) {
         _databaseInitialize(run_id);
     }
-    let coll_syslog = _db.getCollection("syslog");
-    let coll_record = _db.getCollection("record");
+    let coll = _db.getCollection("output");
+    let rcd = _db.getCollection("record");
     for(let r of data) {
-        switch (r.catalog) {
-            case 'system':
-            case 'log':
-                coll_syslog.insert(r);
-                break;
-            case 'record':
-                coll_record.insert(r);
-                break;
-            default:
-                throw new Error(JSON.stringify(data));
+        if(r.catalog === 'record' && r.value) {
+            let rv = JSON.parse(r.value);
+            rv['$time'] = r.time;
+            rcd.insert(rv);
+            delete r.value;
         }
+        coll.insert(r);
     }
 }
 
