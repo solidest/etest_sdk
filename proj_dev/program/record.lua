@@ -13,9 +13,11 @@ function entry()
     function Interv()
         i = i+1
         print('interval', i)
-        record.e = {x=i*20+3, y=i*10}
-        -- print(record.e)
-        record.a = i
+        if i~=3 then
+            record.e = {x=i*20+3, y=i*10}
+            -- print(record.e)
+            record.a = i
+        end
     end
     local t = async.interval(100, 300, Interv)
     delay(3000)
