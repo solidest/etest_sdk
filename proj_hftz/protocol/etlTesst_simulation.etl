@@ -1,0 +1,9 @@
+protocol prot_simulation {
+        segment seg_1 { parser: 'int32', autovalue: 0 }
+        segment seg_2 { parser: 'string' }
+        segment seg_3 { parser: 'double' }
+        segment seg_4 { parser: 'float'  }
+        segment seg_5[3] { parser:'string'}
+        // segment seg_6  { parser: 'int32', autovalue: ByteSize(this.seg_1) }
+        segment seg_7[2] { parser:'int32',autovalue: 0 }
+    }

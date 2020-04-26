@@ -1,0 +1,17 @@
+
+# 项目设置
+project:
+  name: 合肥同智项目
+  id: a34ba38c-d4b6-4233-840f-3cf76bb45ff4  # 项目唯一id
+  path: ./ # 项目文件根目录，绝对路径或相对路径
+  etestd_ip: 127.0.0.1 # etest守护服务的ip地址或主机名
+  etestd_port: 1213 # etest守护服务的端口号
+
+# 执行程序设置
+program:
+
+
+  dev_c: #仿真接口c 
+    src: program/run3.lua
+    vars: {}
+    topology: topo_c
