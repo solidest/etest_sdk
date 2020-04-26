@@ -24,7 +24,7 @@ function Unit_T_pro()
 
     assert
         (
-            data_recv.seg_1 == data_send.seg_1 
+            data_recv.seg_1 == false 
         and data_recv.seg_2 == data_send.seg_2 
         and data_recv.seg_30 == data_send.seg_30 
         and data_recv.seg_31 == data_send.seg_31 

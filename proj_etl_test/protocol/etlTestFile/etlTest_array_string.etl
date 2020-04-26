@@ -51,7 +51,7 @@
     }
 
   protocol prot29 {
-        segment seg_1[1] { parser: 'int32', autovalue: 2*3/2-3+2}
+        // segment seg_1[1] { parser: 'int32', autovalue: }
         //segment seg_2[3] { parser: 'string',autovalue:{} }
         segment seg_3 { parser: 'double <' }
     }

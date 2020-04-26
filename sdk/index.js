@@ -106,7 +106,7 @@ class SdkApi {
     //开发模式下执行程序
     start(cfg, run_id, callback) {
         //开发模式需要先设置环境
-        this.setup(cfg, (err) => {
+        return this.setup(cfg, (err) => {
             if (err) {
                 return callback(err);
             } else {
@@ -147,49 +147,6 @@ class SdkApi {
             }
         });
     }
-
-    //创建执行环境
-    // makeenv(proj_path, callback) {
-    //     try {
-    //         let proj_apath = path.isAbsolute(proj_path) ? proj_path : path.resolve(proj_path);
-    //         let protos = protocols(path.join(proj_apath, 'protocol'));
-    //         let devs = devices(path.join(proj_apath, 'device'));
-    //         let xtra_path = path.join(proj_apath, 'protocol', 'xtra.lua');
-    //         let xtra = null;
-    //         if(fs.existsSync(xtra_path)) {
-    //             xtra = fs.readFileSync(xtra_path, 'utf8');
-    //         }
-    //         if(protos && protos.length === 0) {
-    //             protos = null;
-    //         }
-    //         if(devs && devs.length === 0) {
-    //             devs = null;
-    //         }
-    //         return this._xfn('makeenv', {proj_apath: proj_apath, protos: protos, proto_xtra: xtra, devices: devs}, callback);
-    //     } catch (error) {
-    //         if(callback) {
-    //             callback(error);
-    //         }
-    //     }
-    // }
-
-
-    //开始执行程序
-    // start(proj_path, src_path, vars, option, callback) {
-    //     try {
-    //         let asts = parse_all.getRunAstList(proj_path, src_path);
-    //         if(!asts || asts.length===0) {
-    //             return;
-    //         }
-    //         asts[0].vars = vars;
-    //         asts[0].option = option;
-    //         return this._xfn('start', asts, callback);
-    //     } catch (error) {
-    //         if(callback) {
-    //             callback(error);
-    //         }
-    //     }
-    // }
 
     //读取执行输出
     readout(run_id, callback) {

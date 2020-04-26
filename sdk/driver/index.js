@@ -1,17 +1,15 @@
 
 /**
- * 命令操作模块
+ * ETest驱动程序
  */
 
-const yaml = require('js-yaml');
-const fs = require('fs');
-const logdb = require('./logdb');
 const SdkApi = require('../index.js');
 const print = require('./print');
 const parse_out = require('./parse_out');
+const yaml = require('js-yaml');
+const fs = require('fs');
 
 let _srv = null;
-let _run_uuid = null;
 let _run_id = null;
 let _timer = null;
 
@@ -21,10 +19,7 @@ function _exit() {
         clearInterval(_timer);
         _timer = null;
     }
-    logdb.close();
-    setTimeout(()=>{
-        process.exit(0);
-    }, 500);
+    process.exit(0);
 }
 
 //命令执行回调
@@ -35,21 +30,17 @@ function _callback(err, res, id) {
     return print.sys_recved(id, res);
 }
 
-
-
 //读取执行输出
 function _read_out() {
-    if (!_run_uuid) {
+    if (!_run_id) {
         return;
     }
-
-    _srv.readout(_run_uuid, (err, res, id) => {
+    _srv.readout(_run_id, (err, res, id) => {
         if (err) {
             print.sys_error(id, err);
             _exit();
             return;
         }
-        logdb.save(_run_id, res);
         if(parse_out(res)) {
             _exit();
             return;
@@ -108,12 +99,11 @@ function cmd_setup(idxfile) {
 //执行实例
 function cmd_run(idxfile, runid) {
     let cfg = _check_cfg(idxfile);
-    _run_uuid = null;
-    _run_id = runid;
+    _run_id = null;
     let id = _srv.start(cfg, runid, (err, res, id)=>{
         _callback(err, res, id);
         if (res) {
-            _run_uuid = res;
+            _run_id = res;
         }
     });
     print.sys_sended(id || ' ', 'run ' + runid);

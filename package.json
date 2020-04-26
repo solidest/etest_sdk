@@ -1,6 +1,6 @@
 {
   "name": "etest_sdk",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "sdk for etest",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "dependencies": {
     "commander": "^5.1.0",
     "js-yaml": "^3.13.1",
+    "lokijs": "^1.5.8",
     "msgpack-lite": "^0.1.26"
   },
   "bin": {
