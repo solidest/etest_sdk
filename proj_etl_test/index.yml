@@ -34,6 +34,11 @@ program:
     vars: {}  
     topology: topo_main
 
+  code: #测试函数
+    src: program/eTestProgram/code.lua
+    vars: {}  
+    topology: topo_main
+
   int_uint_float_one: #测试int uint float double 补码反码 大小端续 两者组合
     src: program/eTestProgram/code.lua
     vars: {}  
