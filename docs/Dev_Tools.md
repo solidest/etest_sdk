@@ -11,6 +11,15 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 
 #### etl参数选项
 
+#### etl -i 
+
+- 指定执行某个文件
+- 举例： `etl run/stop -i 文件名称 run_id`
+
+#### etl -r
+
+- 在实时模式下执行
+
 #### etl setup
 
 - 在etestx中设置环境
@@ -30,14 +39,7 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 
 - 强制停止测试程序的执行
 
-#### etl -i 
 
-- 指定执行某个文件
-- 举例： `etl run/stop -i 文件名称 run_id`
-
-#### etl -r
-
-- 在实时模式下执行
 
 ## etl-vsix
 

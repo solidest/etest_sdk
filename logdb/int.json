@@ -1,1 +1,196 @@
-{"filename":"logdb/int.json","collections":[{"name":"output","data":[{"catalog":"system","kind":"start","time":0,"value":"56b1a033-570c-4668-b78c-8caa88d5b177","meta":{"revision":0,"created":1587898632172,"version":0},"$loki":1},{"catalog":"system","kind":"entry","time":1,"value":"int.lua","meta":{"revision":0,"created":1587898632237,"version":0},"$loki":2},{"catalog":"system","kind":"print","time":5755141,"value":"{\"seg_1\":false,\"seg_10\":0,\"seg_11\":0,\"seg_12\":0,\"seg_13\":0,\"seg_14\":-1383,\"seg_15\":3268,\"seg_16\":0,\"seg_17\":13172,\"seg_18\":2614,\"seg_19\":0,\"seg_2\":0,\"seg_20\":0,\"seg_21\":0,\"seg_22\":0,\"seg_23\":0,\"seg_24\":0,\"seg_25\":0,\"seg_26\":0,\"seg_27\":0,\"seg_28\":0,\"seg_29\":0,\"seg_3\":0,\"seg_30\":0,\"seg_31\":0,\"seg_32\":0,\"seg_4\":0,\"seg_5\":0,\"seg_6\":0,\"seg_7\":0,\"seg_8\":0,\"seg_9\":0}","meta":{"revision":0,"created":1587898632318,"version":0},"$loki":3},{"catalog":"system","kind":"exit","time":46367203,"value":"int.lua","meta":{"revision":0,"created":1587898632318,"version":0},"$loki":4},{"catalog":"system","exit_code":0,"kind":"stop","time":156417797,"value":"56b1a033-570c-4668-b78c-8caa88d5b177","meta":{"revision":0,"created":1587898632318,"version":0},"$loki":5}],"idIndex":[1,2,3,4,5],"binaryIndices":{},"constraints":null,"uniqueNames":["time"],"transforms":{},"objType":"output","dirty":false,"cachedIndex":null,"cachedBinaryIndex":null,"cachedData":null,"adaptiveBinaryIndices":true,"transactional":false,"cloneObjects":false,"cloneMethod":"parse-stringify","asyncListeners":false,"disableMeta":false,"disableChangesApi":true,"disableDeltaChangesApi":true,"autoupdate":false,"serializableIndices":true,"ttl":null,"maxId":5,"DynamicViews":[],"events":{"insert":[],"update":[],"pre-insert":[],"pre-update":[],"close":[],"flushbuffer":[],"error":[],"delete":[null],"warning":[null]},"changes":[],"dirtyIds":[]},{"name":"record","data":[],"idIndex":[],"binaryIndices":{},"constraints":null,"uniqueNames":["$time"],"transforms":{},"objType":"record","dirty":false,"cachedIndex":null,"cachedBinaryIndex":null,"cachedData":null,"adaptiveBinaryIndices":true,"transactional":false,"cloneObjects":false,"cloneMethod":"parse-stringify","asyncListeners":false,"disableMeta":false,"disableChangesApi":true,"disableDeltaChangesApi":true,"autoupdate":false,"serializableIndices":true,"ttl":null,"maxId":0,"DynamicViews":[],"events":{"insert":[],"update":[],"pre-insert":[],"pre-update":[],"close":[],"flushbuffer":[],"error":[],"delete":[null],"warning":[null]},"changes":[],"dirtyIds":[]}],"databaseVersion":1.5,"engineVersion":1.5,"autosave":true,"autosaveInterval":4000,"autosaveHandle":null,"throttledSaves":true,"options":{"autoload":true,"autosave":true,"autosaveInterval":4000,"serializationMethod":"normal","destructureDelimiter":"$<\n","recursiveWait":true,"recursiveWaitLimit":false,"recursiveWaitLimitDuration":2000,"started":1587898632173},"persistenceMethod":"fs","persistenceAdapter":null,"verbose":false,"events":{"init":[null],"loaded":[],"flushChanges":[],"close":[],"changes":[],"warning":[]},"ENV":"NODEJS"}
+{
+    "filename": "logdb/int.json",
+    "collections": [
+        {
+            "name": "output",
+            "data": [
+                {
+                    "catalog": "system",
+                    "kind": "start",
+                    "time": 0,
+                    "value": "9bfdee76-bea4-4b0d-bb9b-41f392610a4a",
+                    "meta": {
+                        "revision": 0,
+                        "created": 1587898583309,
+                        "version": 0
+                    },
+                    "$loki": 1
+                },
+                {
+                    "catalog": "system",
+                    "kind": "entry",
+                    "time": 1,
+                    "value": "int.lua",
+                    "meta": {
+                        "revision": 0,
+                        "created": 1587898583430,
+                        "version": 0
+                    },
+                    "$loki": 2
+                },
+                {
+                    "catalog": "system",
+                    "kind": "print",
+                    "time": 4001968,
+                    "value": "{\"seg_1\":false,\"seg_10\":0,\"seg_11\":0,\"seg_12\":0,\"seg_13\":0,\"seg_14\":-1383,\"seg_15\":3268,\"seg_16\":0,\"seg_17\":13172,\"seg_18\":2614,\"seg_19\":0,\"seg_2\":0,\"seg_20\":0,\"seg_21\":0,\"seg_22\":0,\"seg_23\":0,\"seg_24\":0,\"seg_25\":0,\"seg_26\":0,\"seg_27\":0,\"seg_28\":0,\"seg_29\":0,\"seg_3\":0,\"seg_30\":0,\"seg_31\":0,\"seg_32\":0,\"seg_4\":0,\"seg_5\":0,\"seg_6\":0,\"seg_7\":0,\"seg_8\":0,\"seg_9\":0}",
+                    "meta": {
+                        "revision": 0,
+                        "created": 1587898583430,
+                        "version": 0
+                    },
+                    "$loki": 3
+                },
+                {
+                    "catalog": "system",
+                    "kind": "exit",
+                    "time": 8102037,
+                    "value": "int.lua",
+                    "meta": {
+                        "revision": 0,
+                        "created": 1587898583430,
+                        "version": 0
+                    },
+                    "$loki": 4
+                },
+                {
+                    "catalog": "system",
+                    "exit_code": 0,
+                    "kind": "stop",
+                    "time": 116751140,
+                    "value": "9bfdee76-bea4-4b0d-bb9b-41f392610a4a",
+                    "meta": {
+                        "revision": 0,
+                        "created": 1587898583430,
+                        "version": 0
+                    },
+                    "$loki": 5
+                }
+            ],
+            "idIndex": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "binaryIndices": {},
+            "constraints": null,
+            "uniqueNames": [
+                "time"
+            ],
+            "transforms": {},
+            "objType": "output",
+            "dirty": false,
+            "cachedIndex": null,
+            "cachedBinaryIndex": null,
+            "cachedData": null,
+            "adaptiveBinaryIndices": true,
+            "transactional": false,
+            "cloneObjects": false,
+            "cloneMethod": "parse-stringify",
+            "asyncListeners": false,
+            "disableMeta": false,
+            "disableChangesApi": true,
+            "disableDeltaChangesApi": true,
+            "autoupdate": false,
+            "serializableIndices": true,
+            "ttl": null,
+            "maxId": 5,
+            "DynamicViews": [],
+            "events": {
+                "insert": [],
+                "update": [],
+                "pre-insert": [],
+                "pre-update": [],
+                "close": [],
+                "flushbuffer": [],
+                "error": [],
+                "delete": [
+                    null
+                ],
+                "warning": [
+                    null
+                ]
+            },
+            "changes": [],
+            "dirtyIds": []
+        },
+        {
+            "name": "record",
+            "data": [],
+            "idIndex": [],
+            "binaryIndices": {},
+            "constraints": null,
+            "uniqueNames": [
+                "$time"
+            ],
+            "transforms": {},
+            "objType": "record",
+            "dirty": false,
+            "cachedIndex": null,
+            "cachedBinaryIndex": null,
+            "cachedData": null,
+            "adaptiveBinaryIndices": true,
+            "transactional": false,
+            "cloneObjects": false,
+            "cloneMethod": "parse-stringify",
+            "asyncListeners": false,
+            "disableMeta": false,
+            "disableChangesApi": true,
+            "disableDeltaChangesApi": true,
+            "autoupdate": false,
+            "serializableIndices": true,
+            "ttl": null,
+            "maxId": 0,
+            "DynamicViews": [],
+            "events": {
+                "insert": [],
+                "update": [],
+                "pre-insert": [],
+                "pre-update": [],
+                "close": [],
+                "flushbuffer": [],
+                "error": [],
+                "delete": [
+                    null
+                ],
+                "warning": [
+                    null
+                ]
+            },
+            "changes": [],
+            "dirtyIds": []
+        }
+    ],
+    "databaseVersion": 1.5,
+    "engineVersion": 1.5,
+    "autosave": true,
+    "autosaveInterval": 4000,
+    "autosaveHandle": null,
+    "throttledSaves": true,
+    "options": {
+        "autoload": true,
+        "autosave": true,
+        "autosaveInterval": 4000,
+        "serializationMethod": "normal",
+        "destructureDelimiter": "$<\n",
+        "recursiveWait": true,
+        "recursiveWaitLimit": false,
+        "recursiveWaitLimitDuration": 2000,
+        "started": 1587898583315
+    },
+    "persistenceMethod": "fs",
+    "persistenceAdapter": null,
+    "verbose": false,
+    "events": {
+        "init": [
+            null
+        ],
+        "loaded": [],
+        "flushChanges": [],
+        "close": [],
+        "changes": [],
+        "warning": []
+    },
+    "ENV": "NODEJS"
+}
