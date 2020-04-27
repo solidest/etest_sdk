@@ -46,5 +46,5 @@ function entry(vars, option)
     Float_Bmin_pro()
     Float_Bmax_pro()
     Float_S_pro()
-
+    exit()
 end

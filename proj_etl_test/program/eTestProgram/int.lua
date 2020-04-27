@@ -1,7 +1,7 @@
 -- 验证int8的整倍数
 function Int_Pro()
 
-    local data_send = {seg_8=127,seg_16=65533,seg_24=16777215,seg_32=-4294967293}
+    local data_send = {seg_8=127,seg_16=6533,seg_24=167215,seg_32=-42949293}
     local buf = pack(protocol.prot_11, data_send)
     local data_recv = unpack(protocol.prot_11, buf)
     assert
@@ -20,13 +20,15 @@ end
 
 function Eight_pro()
 
-    local data_send = {seg_1=0,seg_31=-6453925591,seg_2=1,seg_30=-16119077055}
+    local data_send = {seg_1=2,seg_31=-64525591,seg_2=1,seg_30=-16177055}
     local buf = pack(protocol.prot_11, data_send)
     local data_recv = unpack(protocol.prot_11, buf)
+    -- print(data_recv.seg_1)
+    -- print(data_send.seg_1)
 
     assert
         (
-            data_recv.seg_1 == data_send.seg_1 
+            data_recv.seg_1 == true 
         and data_recv.seg_2 == data_send.seg_2 
         and data_recv.seg_30 == data_send.seg_30 
         and data_recv.seg_31 == data_send.seg_31 
@@ -38,7 +40,7 @@ end
 
 -- 验证int随意位数组合
 function Sun_pro()
-    local data_send = {seg_15=32768,seg_17=131072,seg_14=-16383,seg_18=26144}
+    local data_send = {seg_15=3268,seg_17=13172,seg_14=-1383,seg_18=2614}
     local buf = pack(protocol.prot_11, data_send)
     local data_recv = unpack(protocol.prot_11, buf)
     print(data_recv)

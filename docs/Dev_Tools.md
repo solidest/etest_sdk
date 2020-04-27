@@ -13,11 +13,31 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 
 #### etl setup
 
+- 在etestx中设置环境
+
 #### etl state
+
+- 查看当前ETest执行器的状态
+- 返回`idle`表示空闲状态，可以启动任务进行执行 
+- 返回为`uuid`表示该执行器被占用
 
 #### etl run
 
+- 启动执行项目内的一个测试程序
+- 用法`etl run run_id`
+
 #### etl stop
+
+- 强制停止测试程序的执行
+
+#### etl -i 
+
+- 指定执行某个文件
+- 举例： `etl run/stop -i 文件名称 run_id`
+
+#### etl -r
+
+- 在实时模式下执行
 
 ## etl-vsix
 
