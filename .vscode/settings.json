@@ -13,6 +13,8 @@
         "device",
         "send",
         "recv",
-        "async"
+        "async",
+        "record",
+        "before_record"
     ]
 }

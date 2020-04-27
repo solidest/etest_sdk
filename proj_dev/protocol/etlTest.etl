@@ -267,6 +267,16 @@ protocol prot_xtra {
     }
 }
 
+//仿真设备真值测试协议
+protocol truvalue {
+    segment seg_device_name {parser: 'string'} //代表设备名称
+    segment seg_start {parser:'string'} //启动测试执行
+    segment seg_all[8] {parser:'string'}
+    segment seg_end {parser:'string'} //停止测试执行
+    segment seg_true {parser:'string'} 
+    segment seg_init {parser: 'string',length:7,endwith: '@@'} //各个设备恢复初始状态
+}
+
 // //设备
 // device dev_3 {
 
