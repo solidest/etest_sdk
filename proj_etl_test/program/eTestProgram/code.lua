@@ -1,5 +1,5 @@
 -- 验证补码，反码,大断续，小断续等组合值
-
+record = {a=0, b=0, c=0, e={x=10, y=0}}
 function Code_pro()
     local data_send = {seg_1=1.23}
     local buf = pack(protocol.prot_14, data_send)

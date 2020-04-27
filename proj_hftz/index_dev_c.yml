@@ -9,9 +9,17 @@ project:
 
 # 执行程序设置
 program:
-
-
   dev_c: #仿真接口c 
     src: program/run3.lua
+    vars: {}
+    topology: topo_c
+
+  dev_check_c: #自检仿真接口c
+      src: program/dev_check_c.lua
+      vars: {}
+      topology: topo_c
+
+  dev_truevalue_c: #设备真值实例仿真接口c
+    src: program/dev_truevalue_c.lua
     vars: {}
     topology: topo_c

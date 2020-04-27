@@ -13,3 +13,13 @@ program:
     src: program/run2.lua
     vars: {}
     topology: topo_b
+
+  dev_check_b: #自检仿真接口b
+    src: program/dev_check_b.lua
+    vars: {}
+    topology: topo_b
+
+  dev_truevalue_b: #设备真值实例仿真接口b
+    src: program/dev_truevalue_b.lua
+    vars: {}
+    topology: topo_b

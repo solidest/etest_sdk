@@ -64,7 +64,18 @@ function Test1()
     async.send(device.main_ctr.conn,msg,{to="dev_b.conn"})
     print("ping dev_c")
     async.send(device.main_ctr.conn,msg,{to="dev_c.conn"})
-    delay(3000)
+    delay(1000)
+    function recv_data(data,opt)
+        if data == nil then
+            error("超时间")
+        end
+        print("收到信息：  ",data)
+
+
+    end
+    async.on_recv(device.main_ctr.conn,protocol.prot_simulation,recv_data)
+    
+  
     
 
 end

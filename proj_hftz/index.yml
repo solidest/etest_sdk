@@ -13,5 +13,14 @@ program:
     src: program/run.lua  # 用例脚本文件路径，与project.path的相对路径
     vars: {}  # 执行用例脚本时的输入参数
     topology: topo_main # 执行用例脚本时使用的连接拓扑
-  
+
+  dev_check_total: #系统自检主控件
+    src: program/dev_check_total.lua 
+    vars: {}  
+    topology: topo_main
+
+  dev_truevalue_total: #设备真值实例主控软件
+    src: program/dev_truevalue_total.lua
+    vars: {}
+    topology: topo_main
 
