@@ -70,7 +70,7 @@ topology topo_a {
 }
 
 
-//拓扑结构设备a
+//拓扑结构设备b
 topology topo_b {
 
     linking: {

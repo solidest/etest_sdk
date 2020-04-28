@@ -1,0 +1,235 @@
+// 握手查询指令
+protocol handshake_query {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //设备类型
+    segment DATA1 {parser:'uint8'}//设备编号低8位
+    segment DATA2 {parser:'uint16'}//设备编号低高8位
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+
+}
+
+
+//握手响应指令
+protocol handshake_response {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //DA数量
+    segment DATA0 {parser:'uint8'} //IO输出数量
+    segment DATA1 {parser:'uint8'} //AD数量
+    segment DATA2 {parser:'uint8'} //IO输入数量
+    segment DATA4 {parser:'uint8'} //CAN数量
+    segment DATA5 {parser:'uint8'} //1553B数量
+    segment DATA6 {parser:'uint8'} //MIC数量
+    segment DATA7 {parser:'uint8'} //FlexRay数量
+    segment DATA8 {parser:'uint8'} //USART数量
+    segment DATA9 {parser:'uint8'} //上报自检结果
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+
+}
+
+//初始化指令
+protocol init {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //设备类型
+    segment DATA1 {parser:'uint8'} //设备编号低8位
+    segment DATA2 {parser:'uint8'} //设备编号高8位
+    segment DATA3 {parser:'uint8'} //测试项编号
+    segment DATA00 {parser:'uint16'} //采样周期
+    segment DATA01 {parser:'uint16'} //状态数据帧上报周期
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+
+}
+
+// 初始化响应指令
+protocol init_response {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //设备类型
+    segment DATA1 {parser:'uint8'} //设备编号低8位
+    segment DATA2 {parser:'uint8'} //设备编号高8位
+    segment DATA3 {parser:'uint8'} //测试项编号
+    segment DATA00 {parser:'uint16'} //采样周期
+    segment DATA01 {parser:'uint16'} //状态数据帧上报周期
+    segment DATA9 {parser:'uint8'} //初始化结果
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+//控制指令下发协议0x30，表1 防护类采集板1控制协议
+protocol protect_collection1 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //测试项编号
+    segment DATA1 {parser:'uint8'} //测试项状态
+
+    segment DATA2 {parser:'uint8'} //
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+
+//控制指令下发协议0x30，表2 防护类采集板1控制协议
+protocol protect_collection2 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //测试项编号
+    segment DATA1 {parser:'uint8'} //测试项状态
+
+    segment DATA2 {parser:'uint8'} //
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+//状态数据上报协议0x31、0x32 ,表3 防护类采集板1状态数据
+protocol protect_collection3 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+
+    segment DATA2 {parser:'uint8'} //
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+
+//状态数据上报协议0x31、0x32 ,表4 防护类采集板1状态数据
+protocol protect_collection4 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+
+    segment DATA2 {parser:'uint8'} //
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+//表5 	防护类采集板时间数据
+protocol protect_collection5 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+
+    segment DATA2 {parser:'uint16'} //
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+//表6 	仪表校验采集板卡控制协议
+protocol protect_collection6 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //测试项编号
+    segment DATA1 {parser:'uint8'} //测试项状态
+
+    segment DATA2 {parser:'uint8'} //
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+//表7 	仪表校验采集板卡状态数据
+protocol protect_collection7 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+
+    segment DATA2 {parser:'uint16'} //
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+//表8 	仪表校验采集板卡（用于波形显示）状态数据
+protocol protect_collection8 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint16'} //波形类似
+    segment DATA1 {parser:'uint32'}//数据包号，递增
+
+    segment DATA2 {parser:'uint32'}
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+//表9 	通讯类板卡协议
+protocol protect_collection9 {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //通讯类型
+    segment DATA1 {parser:'uint8'}//通道
+
+    segment DATA2 {parser:'uint32'}
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+//主控单元下发AD校准指令0x03
+protocol prot_3ad {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //通讯类型
+
+    segment DATA1 {parser:'uint8'}//通道
+
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
+
+
+//主控单元下发DA校准指令0x04
+protocol prot_4ad {
+    segment HEAD { parser: 'uint48'} //帧头标志
+    segment LEN { parser: 'uint16 <'} //帧长度
+    segment DA {parser:'uint8'} //目标地址
+    segment SA {parser:'uint8'} //源地址
+    segment CMD {parser:'uint8'} //帧命令类型
+    segment DATA0 {parser:'uint8'} //
+    segment DATA1 {parser:'uint8'}//校准段(待定)
+    segment DATA3 {parser:'uint8'} //调整量低8位
+    segment DATA4 {parser:'uint8'}//调整量高8位
+    segment CHECK {parser:'uint8'} //数据校验,帧长度开始（6字节后）至本字节前，所有字节异或结果
+}
