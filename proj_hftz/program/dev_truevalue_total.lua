@@ -1,3 +1,19 @@
+function inter(data)
+    if data == nil then
+        error('执行时间超时')
+    end
+    print("收到信息：  ",data)
+    log.check(data["seg_true"],true)
+
+end
+
+function recv_da()
+    async.on_recv(device.main_ctr.conn,protocol.truvalue,inter)
+end
+
+
+
+
 -- 重置
 function Test_truevalue1()
     local msg = message(protocol.truvalue)
@@ -9,15 +25,6 @@ function Test_truevalue1()
     msg.seg_true = "reset"
 
     print("发送消息：",msg)
-    -- - 接收消息
-    function recv_data(data,opt)
-        if data == nil then
-            error('执行时间超时')
-        end
-        print("收到信息：  ",data)
-        log.check(data["seg_true"],true)
-    end
-    async.recv(device.main_ctr.conn,protocol.truvalue,500,recv_data)
 
     -- 发送消息
     print("发送到 dev_a")
@@ -42,16 +49,6 @@ function Test_truevalue2()
     msg.seg_all = {"1","0","1","1","0","2","2","0"}
     msg.seg_true = "测试步骤一"
 
-    -- - 接收消息
-    function recv_data(data,opt)
-        if data == nil then
-            error('执行时间超时')
-        end
-        print("收到信息：  ",data)
-        log.check(data["seg_true"],true)
-    end
-    async.recv(device.main_ctr.conn,protocol.truvalue,500,recv_data)
-
     -- 发送消息
     print("发送到 dev_a")
     async.send(device.main_ctr.conn,msg,{to="dev_a.conn"})
@@ -72,16 +69,6 @@ function Test_truevalue3()
     msg.seg_end = "start-end"
     msg.seg_all = {"1","0","1","1","0","2","2","0"}
     msg.seg_true = "测试步骤二"
-
-    -- - 接收消息
-    function recv_data(data,opt)
-        if data == nil then
-            error('执行时间超时')
-        end
-        print("收到信息：  ",data)
-        log.check(data["seg_true"],true)
-    end
-    async.recv(device.main_ctr.conn,protocol.truvalue,500,recv_data)
 
     -- 发送消息
     print("发送到 dev_a")
@@ -104,15 +91,7 @@ function Test_truevalue4()
     msg.seg_all = {"1","0","1","1","0","2","2","0"}
     msg.seg_true = "测试步骤三"
 
-    -- - 接收消息
-    function recv_data(data,opt)
-        if data == nil then
-            error('执行时间超时')
-        end
-        print("收到信息：  ",data)
-        log.check(data["seg_true"],true)
-    end
-    async.recv(device.main_ctr.conn,protocol.truvalue,500,recv_data)
+
 
     -- 发送消息
     print("发送到 dev_a")
@@ -135,15 +114,7 @@ function Test_truevalue5()
     msg.seg_all = {"1","1","1","1","1","2","2","0"}
     msg.seg_true = "测试步骤四"
 
-    -- - 接收消息
-    function recv_data(data,opt)
-        if data == nil then
-            error('执行时间超时')
-        end
-        print("收到信息：  ",data)
-        log.check(data["seg_true"],true)
-    end
-    async.recv(device.main_ctr.conn,protocol.truvalue,500,recv_data)
+
 
     -- 发送消息
     print("发送到 dev_a")
@@ -166,16 +137,6 @@ function Test_truevalue6()
     msg.seg_all = {"1","1","1","1","1","2","2","0"}
     msg.seg_true = "测试步骤五"
 
-    -- - 接收消息
-    function recv_data(data,opt)
-        if data == nil then
-            error('执行时间超时')
-        end
-        print("收到信息：  ",data)
-        log.check(data["seg_true"],true)
-    end
-    async.recv(device.main_ctr.conn,protocol.truvalue,500,recv_data)
-
     -- 发送消息
     print("发送到 dev_a")
     async.send(device.main_ctr.conn,msg,{to="dev_a.conn"})
@@ -197,15 +158,6 @@ function Test_truevalue7()
     msg.seg_all = {"1","1","1","1","1","2","2","0"}
     msg.seg_true = "测试步骤六"
 
-    -- - 接收消息
-    function recv_data(data,opt)
-        if data == nil then
-            error('执行时间超时')
-        end
-        print("收到信息：  ",data)
-        log.check(data["seg_true"],true)
-    end
-    async.recv(device.main_ctr.conn,protocol.truvalue,500,recv_data)
 
     -- 发送消息
     print("发送到 dev_a")
@@ -229,16 +181,6 @@ function Test_truevalue8()
     msg.seg_all = {"1","1","1","1","1","2","2","0"}
     msg.seg_true = "测试步骤七"
 
-    -- - 接收消息
-    function recv_data(data,opt)
-        if data == nil then
-            error('执行时间超时')
-        end
-        print("收到信息：  ",data)
-        log.check(data["seg_true"],true)
-    end
-    async.recv(device.main_ctr.conn,protocol.truvalue,500,recv_data)
-
     -- 发送消息
     print("发送到 dev_a")
     async.send(device.main_ctr.conn,msg,{to="dev_a.conn"})
@@ -249,43 +191,46 @@ function Test_truevalue8()
 
     
 end
+
 function entry(vars, option)
+    local t = async.timeout(50,recv_da)
     log.step("第一步")
     Test_truevalue1()
-    delay(500)
+    delay(200)
     log.step("第二步")
     Test_truevalue2()
-    delay(500)
-    -- log.step("第三步")
-    -- Test_truevalue1()
-    -- delay(500)
-    -- Test_truevalue3()
-    -- delay(500)
-    -- log.step("第四步")
-    -- Test_truevalue1()
-    -- delay(500)
-    -- Test_truevalue4()
-    -- delay(500)
-    -- log.step("第五步")
-    -- Test_truevalue1()
-    -- delay(1000)
-    -- Test_truevalue5()
-    -- delay(500)
-    -- log.step("第六步")
-    -- Test_truevalue1()
-    -- delay(500)
-    -- Test_truevalue6()
-    -- delay(500)
-    -- log.step("第七步")
-    -- Test_truevalue1()
-    -- delay(500)
-    -- Test_truevalue7()
-    -- delay(500)
-    -- log.step("第八步")
-    -- Test_truevalue1()
-    -- delay(500)
-    -- Test_truevalue8()
-    -- delay(500)
+    delay(200)
+    log.step("第三步")
+    Test_truevalue1()
+    delay(200)
+    Test_truevalue3()
+    delay(200)
+    log.step("第四步")
+    Test_truevalue1()
+    delay(200)
+    Test_truevalue4()
+    delay(200)
+    log.step("第五步")
+    Test_truevalue1()
+    delay(200)
+    Test_truevalue5()
+    delay(200)
+    log.step("第六步")
+    Test_truevalue1()
+    delay(200)
+    Test_truevalue6()
+    delay(200)
+    log.step("第七步")
+    Test_truevalue1()
+    delay(200)
+    Test_truevalue7()
+    delay(200)
+    log.step("第八步")
+    Test_truevalue1()
+    delay(200)
+    Test_truevalue8()
+    delay(200)
+    async.clear(t)
     exit()
 
 end
