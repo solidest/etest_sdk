@@ -10,6 +10,17 @@ function Test_recv()
 end
 
 function entry()
-    Test_recv()
+    local msg = message(protocol.truvalue)
+    msg.seg_init = "7777777"
+    msg.seg_device_name = "测试设备a"
+    msg.seg_start = "start"
+    msg,seg_end = "start-end"
+    msg.seg_all = {"1","0","1","1","0","2","2","0"}
+    msg.seg_true = "reset完成"
+    local buf = pack(msg)
+    print('pack len', #buf)
+    local msg2 = unpack(protocol.truvalue, buf)
+    print('unpack', msg2)
     exit()
+    
 end
