@@ -12,7 +12,7 @@ function Dev_check()
         end
         print("收到信息：  ",data)
     end
-    async.on_recv(device.main_ctr.conn,protocol.dev_check,recv_data)
+    async.recv(device.main_ctr.conn,protocol.dev_check,200,recv_data)
 
     -- 发送消息
     print("发送到 dev_a")
