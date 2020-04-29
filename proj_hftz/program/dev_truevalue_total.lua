@@ -97,32 +97,36 @@ function Test_truevalue_set()
 end
 
 function recv_set(msg,opt)
+    print("msg")
     print(msg)
     if msg["seg_device_name"] == "测试设备a" then
-        local A = msg
+        local a = msg
     elseif msg["seg_device_name"] == "测试设备b" then
-        local B = msg
+        local b = msg
     elseif msg["seg_device_name"] == "测试设备c" then
-        local C = msg
-    end
-    ResetTimer(500)
-    if A == nil then
-        Timeout_err()
-    end
-    if B == nil  then
-        Timeout_err()
-    end
-    if C == nil then
-        Timeout_err()
-    end
-    print("收到消息",A)
-    print("收到消息",B)
-    print("收到消息",C)
-    log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-    log.check(B["seg_device_name"].." , "..B["seg_true"],true)
-    log.check(C["seg_device_name"].." , "..C["seg_true"],true)
+        local c = msg
+    print("#####################")
+    print(a,b,c)
+    delay(4000)
+    -- ResetTimer(5000)
+    print(a,b,c)
+    -- if a == nil then
+    --     Timeout_err()
+    -- end
+    -- if b == nil  then
+    --     Timeout_err()
+    -- end
+    -- if c == nil then
+    --     Timeout_err()
+    -- end
+    print("收到消息",a)
+    print("收到消息",b)
+    print("收到消息",c)
+    log.check(a["seg_device_name"].." , "..a["seg_true"],true)
+    log.check(b["seg_device_name"].." , "..b["seg_true"],true)
+    log.check(c["seg_device_name"].." , "..c["seg_true"],true)
      
-    
+    end
     
 
 end
@@ -235,8 +239,8 @@ function recv2(msg,opt)
     log.check(C["seg_device_name"].." , "..C["seg_true"],true)
     A ,B,C = nil 
     log.step("第二步")
-    -- Test_truevalue_set()
-    -- delay(200)
+    Test_truevalue_set()
+    delay(200)
     Test_truevalue3()
     end
     
