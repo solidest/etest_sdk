@@ -73,7 +73,7 @@ end
 -- 重置
 function Test_truevalue1()
     log.step("reset")
-    ResetTimer(200)
+    ResetTimer(500)
     local msg = message(protocol.truvalue)
     msg.seg_init = "7777777"
     msg.seg_device_name = "主控软件"
@@ -99,25 +99,25 @@ end
 function recv1(msg,opt)
     if msg["seg_device_name"] == "测试设备a" then
         A = msg
+        print("收到消息",A)
+        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
     elseif msg["seg_device_name"] == "测试设备b" then
         B = msg
+        print("收到消息",B)
+        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
     elseif msg["seg_device_name"] == "测试设备c" then
         C = msg
+        print("收到消息",C)
+        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
     end
     if (A ~= nil and B ~= nil and C ~= nil) then
-        print("收到消息",A)
-        print("收到消息",B)
-        print("收到消息",C)
-        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
-        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
-        A ,B,C = nil 
         Test_truevalue2()
     end
 
 end
 -- 测试步骤一
 function Test_truevalue2()
+    A ,B,C = nil
     log.step("第一步")
     ResetTimer(200)
     local msg = message(protocol.truvalue)
@@ -144,20 +144,19 @@ end
 function recv2(msg,opt)
     if msg["seg_device_name"] == "测试设备a" then
         A = msg
+        print("收到消息",A)
+        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
     elseif msg["seg_device_name"] == "测试设备b" then
         B = msg
+        print("收到消息",B)
+        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
     elseif msg["seg_device_name"] == "测试设备c" then
         C = msg
+        print("收到消息",C)
+        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
     end
     
     if (A ~= nil and B ~= nil and C ~= nil) then
-        print("收到消息",A)
-        print("收到消息",B)
-        print("收到消息",C)
-        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
-        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
-        A ,B,C = nil 
         Test_truevalue3()
     end
     
@@ -167,6 +166,7 @@ end
 
 -- 测试步骤二
 function Test_truevalue3()
+    A ,B,C = nil 
     log.step("第二步")
     ResetTimer(200)
     local msg = message(protocol.truvalue)
@@ -193,25 +193,24 @@ end
 function recv3(msg,opt)
     if msg["seg_device_name"] == "我是测试设备a" then
         A = msg
-
+        print("收到消息",A)
+        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备b" then
         B = msg
+        print("收到消息",B)
+        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备c" then
         C = msg
+        print("收到消息",C)
+        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
     end
     if (A ~= nil and B ~= nil and C ~= nil) then
-        print("收到消息",A)
-        print("收到消息",B)
-        print("收到消息",C)
-        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
-        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
-        A ,B,C = nil 
         Test_truevalue4()
     end
 end
 -- 测试步骤三
 function Test_truevalue4()
+    A ,B,C = nil 
     log.step("第三步")
     ResetTimer(200)
     local msg = message(protocol.truvalue)
@@ -239,26 +238,26 @@ end
 function recv4(msg,opt)
     if msg["seg_device_name"] == "我是测试设备a" then
         A = msg
-
+        print("收到消息",A)
+        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备b" then
         B = msg
+        print("收到消息",B)
+        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备c" then
         C = msg
+        print("收到消息",C)
+        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
     end
     if (A ~= nil and B ~= nil and C ~= nil) then
-        print("收到消息",A)
-        print("收到消息",B)
-        print("收到消息",C)
-        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
-        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
-        A ,B,C = nil 
+        
         Test_truevalue5()
     end
     
 end
 -- 测试步骤四
 function Test_truevalue5()
+    A ,B,C = nil 
     log.step("第四步")
     ResetTimer(200)
     local msg = message(protocol.truvalue)
@@ -286,26 +285,25 @@ end
 function recv5(msg,opt)
     if msg["seg_device_name"] == "我是测试设备a" then
         A = msg
-
+        print("收到消息",A)
+        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备b" then
         B = msg
+        print("收到消息",B)
+        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备c" then
         C = msg
+        print("收到消息",C)
+        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
     end
     if (A ~= nil and B ~= nil and C ~= nil) then
-        print("收到消息",A)
-        print("收到消息",B)
-        print("收到消息",C)
-        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
-        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
-        A ,B,C = nil 
         Test_truevalue6()
     end
     
 end
 -- 测试步骤五
 function Test_truevalue6()
+    A ,B,C = nil 
     log.step("第五步")
     ResetTimer(200)
     local msg = message(protocol.truvalue)
@@ -330,26 +328,25 @@ end
 function recv6(msg,opt)
     if msg["seg_device_name"] == "我是测试设备a" then
         A = msg
-
+        print("收到消息",A)
+        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备b" then
         B = msg
+        print("收到消息",B)
+        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备c" then
         C = msg
+        print("收到消息",C)
+        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
     end
     if (A ~= nil and B ~= nil and C ~= nil) then
-        print("收到消息",A)
-        print("收到消息",B)
-        print("收到消息",C)
-        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
-        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
-        A ,B,C = nil 
         Test_truevalue7()
     end
 end
 -- 测试步骤六
 function Test_truevalue7()
-    log.step("第六部")
+    A ,B,C = nil 
+    log.step("第六步")
     ResetTimer(200)
     local msg = message(protocol.truvalue)
     msg.seg_init = "7777710"
@@ -376,20 +373,18 @@ end
 function recv7(msg,opt)
     if msg["seg_device_name"] == "我是测试设备a" then
         A = msg
-
+        print("收到消息",A)
+        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备b" then
         B = msg
+        print("收到消息",B)
+        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备c" then
         C = msg
+        print("收到消息",C)
+        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
     end
     if (A ~= nil and B ~= nil and C ~= nil) then
-        print("收到消息",A)
-        print("收到消息",B)
-        print("收到消息",C)
-        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
-        log.check(C["seg_device_name"].." , "..C["seg_true"],true)
-        A ,B,C = nil 
         Test_truevalue8()
     end
     
@@ -397,7 +392,8 @@ end
 
 -- 测试步骤7
 function Test_truevalue8()
-    log.step("第七部")
+    A ,B,C = nil 
+    log.step("第七步")
     ResetTimer(100)
     local msg = message(protocol.truvalue)
     msg.seg_init = "7777710"
@@ -421,26 +417,25 @@ end
 function recv8(msg,opt)
     if msg["seg_device_name"] == "我是测试设备a" then
         A = msg
+        print("收到消息",A)
+        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备b" then
         B = msg
+        print("收到消息",B)
+        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
     elseif msg["seg_device_name"] == "我是测试设备c" then
         C = msg
-    end
-    print(A,B,C)
-    if (A ~= nil and B ~= nil and C ~= nil) then
-        print("收到消息",A)
-        print("收到消息",B)
         print("收到消息",C)
-        log.check(A["seg_device_name"].." , "..A["seg_true"],true)
-        log.check(B["seg_device_name"].." , "..B["seg_true"],true)
         log.check(C["seg_device_name"].." , "..C["seg_true"],true)
-        A ,B,C = nil 
+    end
+    if (A ~= nil and B ~= nil and C ~= nil) then
+        A ,B ,C = nil 
         exit()
     end
     
 end
 function entry(vars, option)
-
+    
     Test_truevalue1()
 
 end
