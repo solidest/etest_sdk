@@ -40,7 +40,7 @@ function usr_log(type, info) {
     if(info) {
         if(type=="check") {
             let o = JSON.parse(info)
-            info = o.message + " : " + o.result;
+            info = o.message + " : " + (o.result? 'true': 'false');
         } else {
             info = JSON.parse(info).message;
         }
@@ -55,9 +55,6 @@ function usr_log(type, info) {
             break;
         case "warn":
             fmt = '\x1B[30;43m WARNING \x1B[33;49m%s\x1B[0m';
-            break;
-        case "check":
-            fmt = '\x1B[30;43m CEHCK \x1B[33;49m%s\x1B[0m';
             break;
         default:
             fmt = `\x1B[44;30m ${type.toLocaleUpperCase()} \x1B[34;49m%s\x1B[0m`
