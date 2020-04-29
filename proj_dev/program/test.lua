@@ -9,19 +9,48 @@ function Test_recv()
     print(s1,s2)
 end
 
+function Demo_log()
+
+    log.step("测试项1")
+    delay(300)
+    log.action("执行xxx1操作")
+    delay(300)
+    log.warn("报警信息aaa")
+    delay(300)
+    log.action("执行xxx3操作")
+    delay(300)
+    log.step("测试项2")
+    delay(300)
+    log.action("执行yyy1操作")
+    delay(300)
+    log.error("错误信息yyy")
+    delay(300)
+    log.action("执行yyy3操作")
+    delay(300)
+    log.step("测试项3")
+    delay(300)
+    log.action("执行zzz1操作")
+    delay(300)
+    verify(false, "验证aaa失败")
+    print('printa', 'pringb')
+    delay(300)
+    log.info("普通信息efg")
+    delay(300)
+    log.action("执行zzz3操作")
+    print('printc')
+    delay(300)
+    log.step("测试项4")
+    delay(300)
+    log.check("检查abc1", true)
+    delay(300)
+    log.check("检查abc2", true)
+    delay(300)
+    log.check("检查abc3", false)
+    delay(300)
+    assert(false, '用例执行失败')
+end
+
 function entry()
-    local msg = message(protocol.truvalue)
-    msg.seg_init = "7777777"
-    msg.seg_device_name = "测试设备a"
-    msg.seg_start = "start"
-    msg.seg_end = "start-end"
-    msg.seg_all = {"1","0","1","1","0","2","2","0"}
-    msg.seg_true = "reset完成"
-    local buf = pack(msg)
-    print('pack len', #buf)
-    local msg2 = unpack(protocol.truvalue, buf)
-    print('unpack', msg2)
-    Test_recv()
+    Demo_log()
     exit()
-    
 end

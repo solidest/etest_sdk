@@ -50,7 +50,7 @@ function onLog(type, info) {
     if(info) {
         if(type=="check") {
             let o = JSON.parse(info)
-            info = o.message + " : " + o.result;
+            info = o.message + " : " + (o.result ? 'true':'false');
         } else {
             info = JSON.parse(info).message;
         }
