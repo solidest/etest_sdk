@@ -2,7 +2,7 @@
 # 项目设置
 project:
   id: 18cde1dd-1907-4bd9-96cc-7fc89489665c  # 项目唯一id
-  path: proj_dev  # 项目文件根目录，绝对路径或相对路径
+  path: .  # 项目文件根目录，绝对路径或相对路径
   xtra: protocol/xtra.lua # 项目使用的协议解析插件
   etestd_ip: etest # etest守护服务的ip地址或主机名
   etestd_port: 1210 # etest守护服务的端口号
