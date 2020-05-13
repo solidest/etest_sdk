@@ -2,16 +2,19 @@ function Test_string()
     local data1 = {}
     data1.seg_1 = 4
     data1.seg_2= "FSDD"
-    data1.seg_3= "的房dfr了ffd"
-    data1.seg_4 = "qwe"
+    data1.seg_3= "的房dfr了ffd$"
+    data1.seg_4 = "qwe\0"
     data1.seg_5 = '111'
     local da = pack(protocol.prot16, data1)
 
     local data2 = unpack(protocol.prot16, da)
+    print(data2)
+    print("11111111111")
+    print(data2.seg_1)
     assert(data1.seg_1 == data2.seg_1)
     assert(data1.seg_2 == data2.seg_2)
-    assert(data1.seg_3 == data2.seg_3)
-    assert(data1.seg_4 == data2.seg_4)
+    assert(data1.seg_3 == data2.seg_3..'$')
+    assert(data1.seg_4 == data2.seg_4..'\0')
     assert(data1.seg_5 == data2.seg_5)
 
 end
