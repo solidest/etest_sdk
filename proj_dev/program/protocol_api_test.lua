@@ -69,15 +69,17 @@ function Test_string()
     log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
     local data1 = {}
     data1.str1 = "abcd"
-    data1.str2 = "FSDDSFiou*789320!@#33%"
-    data1.str3 = "的房间看了都放假了ffd"
+    data1.str2 = "FSDDSFiou*789320!@#33%$"
+    data1.str3 = "的房间看了都放假了ffd\0"
     data1.seg_5 = string.buf('AA 76 FB CC')
     data1.len = #data1.str2
     print(data1)
+    local buf = pack(protocol.prot_str, data1)
+    print('len', #buf)
 
-    local data2 = unpack(protocol.prot_str, pack(protocol.prot_str, data1))
+    local data2 = unpack(protocol.prot_str, buf)
     assert(data1.str1 == data2.str1)
-    assert(data1.str2 == data2.str2)
+    assert(data1.str2 == data2.str2..'$')
     print(string.hex(data2.seg_5))
 end
 
