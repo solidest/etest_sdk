@@ -201,11 +201,11 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         
             固定参数"text"
             local answer3 = ask('text', {title='提示', msg='输入字符串', default='abcd'})
-            print(answer3.result)-------->输出输入字符串，默认值 abcd
+            print(answer3.result)-------->输出字符串，默认值 abcd
             
             固定参数"number"
-            local answer4 = ask('number', {title='提示', msg='输入数字', default=3, min=0, max=100, step=1})
-            print(answer4.result)-------->输出输入整数、最大值为100、最小值为0、步长为1，默认值 3
+            local answer4 = ask('number', {title='提示', msg='输入数字', default=3, min=0, max=100, fixed=2})
+            print(answer4.result)-------->输出数字、最大值为100、最小值为0，默认值是3，默认2位小数
         
             固定参数"select"
             local answer4 = ask('select', {title='提示', msg='请选择', default='第一项', items={'第一项','第二项', '第三项'} })
