@@ -185,29 +185,30 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
     ```
 ### ask 
 
-- 用于提示用户进行弹框的输入
-- 输入参数两个，第一个为弹框类型，第二个位输入参数
+- 用于和用户界面进行交互
+- 输入参数两个，第一个为交互方式，第二个为交互选项
 - 返回值为对象，结果在属性result中
+- 交互方式包括'ok' 'yesno' 'text' 'number' 'select'
 - 举例
     ```
         function entry(vars, option)
-            固定参数"ok"
+            --提示用户进行确认
             local answer1 = ask('ok',  {title='提示', msg='确认后继续'})
             print(answer1.result) ------>ok
             
-            固定参数"yesno"
+            --提示用户选择是与否
             local answer2 = ask('yesno',  {title='提示', msg='请回答yes或no', default=true})
             print(answer2.result)------>默认true
         
-            固定参数"text"
+            --提示用户输入字符串
             local answer3 = ask('text', {title='提示', msg='输入字符串', default='abcd'})
             print(answer3.result)-------->输出字符串，默认值 abcd
             
-            固定参数"number"
+            --提示用户输入数字
             local answer4 = ask('number', {title='提示', msg='输入数字', default=3, min=0, max=100, fixed=2})
             print(answer4.result)-------->输出数字、最大值为100、最小值为0，默认值是3，默认2位小数
         
-            固定参数"select"
+            --提示用户选择某一项
             local answer4 = ask('select', {title='提示', msg='请选择', default='第一项', items={'第一项','第二项', '第三项'} })
             print(answer4.result)------------> 输出所选择的那一项，默认为第一项
             exit()
