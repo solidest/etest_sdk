@@ -237,6 +237,11 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
     ```
 
 
+#### insert
+
+- insert(o) 新增一条完整的数据记录
+- insert输入参数必须为table类型的数据
+
 ## async库
 
 #### async.timeout
