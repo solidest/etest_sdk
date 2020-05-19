@@ -188,7 +188,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 用于和用户界面进行交互
 - 输入参数两个，第一个为交互方式，第二个为交互选项
 - 返回值为对象，结果在属性result中
-- 交互方式包括'ok' 'yesno' 'text' 'number' 'select'
+- 交互方式包括'ok' 'yesno' 'text' 'number' 'select' 'multiswitch'
 - 举例
     ```
         function entry(vars, option)
@@ -211,6 +211,27 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
             --提示用户选择某一项
             local answer4 = ask('select', {title='提示', msg='请选择', default='第一项', items={'第一项','第二项', '第三项'} })
             print(answer4.result)------------> 输出所选择的那一项，默认为第一项
+
+            local answer5 = ask("multiswitch", 
+                        {
+                            title = "提示", 
+                            msg = "按照以下指示进行开关操作", 
+                            items = {
+                                {
+                                    name = "xxx开关名称1",
+                                    value = "x2-34",
+                                    on = true,
+                                    disabled = true,
+                                }, {
+                                    name = "xxx开关名称2",
+                                    value = "x2-35",
+                                    on = false,
+                                    disabled = false,
+                                }
+                            }
+                        }
+                    )
+            print(answer5.result)------------> 输出默认为[]
             exit()
         end
     ```
