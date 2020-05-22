@@ -5,7 +5,7 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 
 - `etl-cli` etl命令行执行工具
 - `etl-vsix` etl专用vscode插件
-- `etl-ui-viewer` 开发模式下的实时ui查看器
+- `etl-vue` 使用前端框架vue开发的etl ui组件库
 
 ## etl-cli
 
@@ -13,7 +13,7 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 
 #### etl setup
 
-- 在etestx中设置环境
+- 将项目执行环境安装到ETest执行器中
 
 #### etl state
 
@@ -34,19 +34,34 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 
 #### etl -i 
 
-- 指定执行某个文件
-- 举例： `etl run/stop -i 文件名称 run_id`
+- 指定测试项目的index索引文件
+- 举例： `etl -i index1.yml run run_id`
 
 #### etl -r
 
 - 在实时模式下执行
-- 举例：`etl run/stop -r 文件名称 run_id`
+- 举例：`etl -r run run_id`
 
 
 ## etl-vsix
 
-在vscode的插件市场搜索etl进行安装
+etl专用vscode插件
 
-## etl-ui-viewer
+### 安装使用
 
-跨平台单一执行程序，自带图形界面
+- 在vscode的插件市场搜索etl进行安装
+![vscode etl插件](https://solidest.github.io/etest_sdk/VSCODE.png)
+
+## etl-vue
+
+使用前端框架vue开发的etl ui专用组件库，源代码开放
+![ETL-VUE-监控组件](https://solidest.github.io/etest_sdk/VUE1.png)
+![ETL-VUE-数据分析组件](https://solidest.github.io/etest_sdk/VUE2.png)
+
+### 安装使用
+
+- 使用git克隆代码库 https://github.com/solidest/etest_vue.git
+
+- 执行 `yarn install` 进行安装
+
+- 执行 `yarn electron:serve` 启动可视化开发
