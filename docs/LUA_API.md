@@ -145,11 +145,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - str可以是字符串也可以是二进制buffer
 - msg必须是由message api创建的返回值
 - option数据类型必须为对象，用来设置发送数据时的参数选项，不同的接口类型属性不同
-- 增加udp接口驱动支持
-- 点对点连接中option可以省略
-- 总线连接中通过设置option的`to`属性标识目标设备接口
-- 通过设置option的`to_port`属性发送广播报文
-- 返回值一个整数类型，表示已发送字节长度
+- 返回值为整数，对应已发送字节长度
 - 举例
     ```
         function Test_send_recv_async()
