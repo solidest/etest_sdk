@@ -32,13 +32,13 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 
 #### etl命令参数选项
 
-##### etl -i 
+##### -i 
 
 - 指定测试项目的index索引配置文件
 - 缺省情况下，使用项目根目录中的index.yml做为项目索引配置文件
 - 举例： `etl -i index1.yml run run_id`
 
-##### etl -r
+##### -r
 
 - 在实时模式下执行
 - 举例：`etl -r run run_id`
