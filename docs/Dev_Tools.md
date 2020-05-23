@@ -34,7 +34,8 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 
 ##### etl -i 
 
-- 指定测试项目的index索引文件
+- 指定测试项目的index索引配置文件
+- 缺省情况下，使用项目根目录中的index.yml做为项目索引配置文件
 - 举例： `etl -i index1.yml run run_id`
 
 ##### etl -r
