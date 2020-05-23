@@ -257,6 +257,8 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 ## async库
 
+async库为异步编程api，async中的api执行时均会立即返回，并以异步方式执行
+
 #### async.timeout
 
 - 延时定时器，用法：`id = async.timeout(tout, fn, ...)`
