@@ -115,7 +115,7 @@ ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，�
         tcp_client clt_2 { ip: '127.0.0.1' }
         tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
 
-        udp clt_1 { ip: '127.0.0.1', prot: 8888 }
+        udp clt_1 { ip: '127.0.0.1', port: 8888 }
         udp udp_name {ip: '0.0.0.0', port: 8888}
 
         //baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
