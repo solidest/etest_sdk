@@ -107,9 +107,10 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 #### pack
 
-- pack(msg) 将消息打包
-- pack(protocol.xxx, data) 使用指定协议打包数据
+- pack(msg, strict) 将消息打包
+- pack(protocol.xxx, data, strict) 使用指定协议打包数据
 - 第一个参数是指定协议，第二个参数为打包的数据
+- strict指定是否需要严格匹配协议段，缺省值为true
 - 返回值是打包后的buffer
 - 举例
     ```
