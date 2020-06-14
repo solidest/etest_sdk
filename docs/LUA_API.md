@@ -508,17 +508,17 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 #### string.buff2hex
 
 - 将buffer转为16进制字符串
-- 举例 `local str = string.tohex(buff)`
+- 举例 `local str = string.buff2hex(buff)`
 
 #### string.hex2buff
 
 - 将16进制字符串转为buffer
-- 举例 `local buff = string.tobuf('AA E0 0F 19 BE')`
+- 举例 `local buff = string.hex2buff('AA E0 0F 19 BE')`
 
 #### string.arr2buff
 
 - 将数组数组转为buffer
-- 举例 `local buff = string.fromarr({0x01, 0xEF, 0xAA, 0xEE})`
+- 举例 `local buff = string.arr2buff({0x01, 0xEF, 0xAA, 0xEE})`
 
 #### string.byte
 
