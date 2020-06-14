@@ -26,6 +26,11 @@ DevTools包含多个实用工具，供定制开发时使用，包括
 - 启动执行项目内的一个测试程序
 - 用法`etl run run_id`
 
+##### etl runs
+
+- 启动执行项目内的一组测试程序
+- 用法`etl runs runs_id`
+
 ##### etl stop
 
 - 强制停止测试程序的执行
