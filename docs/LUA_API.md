@@ -184,6 +184,16 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
         end
     ```
+#### ioctl
+
+- 执行同步控制指令
+- 输入参数为设备接口、控制指令名称、table类型的指令参数
+- 返回值为table类型的指令执行结果
+- 举例：
+    ```
+    -- 手动建立到服务器的连接
+    local result = ioctl(device.tcp_pc1.client1, 'connect', { to = 'tcp_server1.srv1' })
+    ```
 
 #### write
 - 将信号量写入指定接口（DA/DO）
@@ -364,6 +374,20 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
        
     end
        
+    ```
+#### async.ioctl
+
+- 执行异步控制指令
+- 输入参数为设备接口、控制指令名称、table类型的指令参数、回调函数
+- 回调函数的输入参数为指令执行结果
+- 举例：
+    ```
+    -- 手动建立到服务器的连接
+    ioctl(device.tcp_pc1.client1, 'connect', { to = 'tcp_server1.srv1' },
+        function(result)
+            print('result =', result)
+        end
+    )
     ```
 
 #### async.on_recv
