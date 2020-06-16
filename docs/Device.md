@@ -4,10 +4,11 @@
 ## udp
 
 ### 接口参数
-+ `{ ip: '127.0.0.1', port: 3000, ttl: 20 } `
++ `{ ip: '0.0.0.0', port: 3000, ttl: 20, reuseaddr: true } `
 + `ip`指定接口使用的ip地址
 + `port`指定接口监听的网络端口
 + `ttl`udp报文网络存活周期
++ `reuseaddr`复用udp地址和端口
 
 ### 操作选项
 + `to`属性用于指定报文发送时的目标，如`{ to = 'dev1.conn1' }`
