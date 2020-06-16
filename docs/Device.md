@@ -16,7 +16,7 @@
 
 ### 控制指令
 + `joingroup`加入组播群，同步执行
-+ `levavegroup`退出组播群，同步执行
++ `leavegroup`退出组播群，同步执行
 
 ## tcp_client
 
