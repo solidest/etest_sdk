@@ -57,10 +57,7 @@
 + `Stop`停止服务，同步执行
 
 
-## serial_232
-## serial_422
-## serial_485
-## serial_ttl
+## serial_232｜422｜485｜ttl
 
 #### 接口参数
 
