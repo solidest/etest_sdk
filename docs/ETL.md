@@ -111,18 +111,18 @@ ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，�
 
     ```
     device dev_0 {
-        udp srv_1 { ip: '127.0.0.1', port: 3000, ttl: 20 }
-        tcp_client clt_2 { ip: '127.0.0.1' }
-        tcp_server srv_2 { ip: '127.0.0.1', port: 3000 }
 
-        udp clt_1 { ip: '127.0.0.1', port: 8888 }
-        udp udp_name {ip: '0.0.0.0', port: 8888}
+        tcp_client tcp1 { ip: '127.0.0.1', port: 3333, keepalive: true, nodelay: false, autoconnect: true }
 
-        //baudrate: 波特率；databits: 数据位； stopbits: 停止位； xonxoff: 软件流控；rtscts：硬件流控
-        serial_ttl s1 { baudrate: 9600, databits: 6, stopbits: 1.5, xonxoff: true, rtscts: true }
-        serial_232 s2 { baudrate: 9600 }
-        serial_422 s3 { baudrate: 9600 }
-        serial_485 s4 { baudrate: 9600 }
+        tcp_server srva { ip: '127.0.0.1', port: 8080, keepalive: true, nodelay: true, acceptany: false }
+
+        udp conn1 { ip: '0.0.0.0', port: 3000, ttl: 20, reuseaddr: true }
+
+
+        serial_232 com1 {  baudrate: 115200,  bytesize: 8, parity: 'none', stopbits: 1, flowcontrol: 'none' }
+        serial_ttl com2 { baudrate: 9600 }
+        serial_422 com3 { baudrate: 9600 }
+        serial_485 com4 { baudrate: 9600 }
     
         di di1 { minv: 3, maxv: 5 }
         do do1 { minv: 3, maxv: 5 }
