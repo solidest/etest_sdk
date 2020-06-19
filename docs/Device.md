@@ -74,7 +74,7 @@
 #### 控制指令
 + `SetBreak`同步执行设置Break
 + `SetRTS`同步执行设置RTS值
-+ `SetDTR`同步执行设置DRT值
++ `SetDTR`同步执行设置DTR值
 + `GetCTS`同步执行获取CTS值
 + `GetDSR`同步执行获取DSR值
 + `GetRI`同步执行获取RI值
