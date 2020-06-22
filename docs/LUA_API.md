@@ -184,6 +184,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
         end
     ```
+    
 #### ioctl
 
 - 执行同步控制指令
@@ -375,6 +376,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
     end
        
     ```
+
 #### async.ioctl
 
 - 执行异步控制指令
