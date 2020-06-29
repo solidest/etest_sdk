@@ -1,4 +1,4 @@
-* [介绍](ide_about)
+* [介绍](README)
 * [快速上手](ide_quick)
 * [FAQ](ide_faq)
 * [入门教程](ide_tutorial)
