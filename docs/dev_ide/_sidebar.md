@@ -1,0 +1,6 @@
+* [介绍](ide_about)
+* [快速上手](ide_quick)
+* [FAQ](ide_faq)
+* [入门教程](ide_tutorial)
+* [核心概念](ide_elements)
+* [高级指引](ide_advanced)
