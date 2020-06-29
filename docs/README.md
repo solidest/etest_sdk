@@ -1,6 +1,6 @@
 # ETestDev
 
-![ETestIDE操作手册](https://solidest.github.io/etest_sdk/dev_ide/index.html)
+![ETestIDE操作手册](https://solidest.github.io/etest_sdk/dev_ide/#/README)
 
 ETestDev是嵌入式系统测试开发工具套件，由多个开发组件构成，主要包括ETL编译器、测试程序执行器、监控界面渲染器、多个组件库，以及vscode插件、命令行工具等。  
 ETestDev支持windows、linux、mac等多种操作系统，兼容各种国产cpu、国产操作系统。  
