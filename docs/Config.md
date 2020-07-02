@@ -1,5 +1,6 @@
 
-# 项目配置
+## 项目配置
+
 项目的全局配置
 
 ```
@@ -16,7 +17,7 @@ project:
 ```
 
 
-# 执行配置
+## 执行配置
 
 用例执行的配置
 
@@ -39,9 +40,9 @@ program:
 
 ```
 
-# 设备接口配置
+## 设备接口配置
 
-## udp
+### udp
 
 #### 接口参数
 + `{ ip: '0.0.0.0', port: 3000, ttl: 20, reuseaddr: true } `
@@ -58,7 +59,7 @@ program:
 + `JoinGroup`加入组播群，同步执行
 + `LeaveGroup`退出组播群，同步执行
 
-## tcp_client
+### tcp_client
 
 #### 接口参数
 
@@ -76,7 +77,7 @@ program:
 + `Connect`建立到服务端的连接，同步/异步执行
 + `Disconnect`关闭到服务端的连接，同步/异步执行
 
-## tcp_server
+### tcp_server
 
 #### 接口参数
 
@@ -97,7 +98,7 @@ program:
 + `Stop`停止服务，同步执行
 
 
-## serial_232｜422｜485｜ttl
+### serial_232｜422｜485｜ttl
 
 #### 接口参数
 
