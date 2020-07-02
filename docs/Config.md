@@ -36,7 +36,7 @@ program:
     option: #执行设置选项
       real_time: true  # 是否启用实时模式
       rt_cycle: 1000   # 实时任务调度周期(us)
-      rt_policy: auto  # 实时任务执行策略, auto:自动 speed_first:执行速度优先 memory_first:内存占用优先
+      rt_policy: auto  # 实时任务执行策略, auto:自动 speed_first:速度优化 memory_first:内存优化
 
 ```
 
