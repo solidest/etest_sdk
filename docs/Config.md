@@ -1,11 +1,47 @@
 
-# 测试项目配置项
+# 项目配置
+项目的全局配置
 
-# 测试执行配置项
+```
 
-# 设备接口配置项
+# 项目设置
+project:
+  id: 18cde1dd-1907-4bd9-96cc-7fc89489665c  # 项目唯一id
+  path: .  # 项目文件根目录，绝对路径或相对路径
+  lib_path: libs
+  xtra: xtra.lua # 项目使用的协议解析插件
+  etestd_ip: etest # etest服务的ip地址或主机名
+  etestd_port: 1210 # etest服务的端口号
 
-### udp
+```
+
+
+# 执行配置
+
+用例执行的配置
+
+```
+
+# 执行程序设置
+program:
+  demo: # run_id
+    src: program/demo.lua
+    topology: topo_udp
+    vars:
+  t_udp: # run_id
+    src: program/t_udp.lua #指定执行的脚本文件
+    topology: topo_udp  #指定执行使用的拓扑环境
+    vars: {} #执行输入参数
+    option: #执行设置选项
+      real_time: true  # 是否启用实时模式
+      rt_cycle: 1000   # 实时任务调度周期(us)
+      rt_policy: auto  # 实时任务执行策略, auto:自动 speed_first:执行速度优先 memory_first:内存占用优先
+
+```
+
+# 设备接口配置
+
+## udp
 
 #### 接口参数
 + `{ ip: '0.0.0.0', port: 3000, ttl: 20, reuseaddr: true } `
