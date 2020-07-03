@@ -9,7 +9,7 @@
 project:
   id: 18cde1dd-1907-4bd9-96cc-7fc89489665c  # 项目唯一id
   path: .  # 项目文件根目录，绝对路径或相对路径
-  lib_path: libs
+  lib_path: libs # 公用脚本库目录
   xtra: xtra.lua # 项目使用的协议解析插件
   etestd_ip: etest # etest服务的ip地址或主机名
   etestd_port: 1210 # etest服务的端口号
@@ -25,10 +25,7 @@ project:
 
 # 执行程序设置
 program:
-  demo: # run_id
-    src: program/demo.lua
-    topology: topo_udp
-    vars:
+
   t_udp: # run_id
     src: program/t_udp.lua #指定执行的脚本文件
     topology: topo_udp  #指定执行使用的拓扑环境
@@ -37,6 +34,11 @@ program:
       real_time: true  # 是否启用实时模式
       rt_cycle: 1000   # 实时任务调度周期(us)
       rt_policy: auto  # 实时任务执行策略, auto:自动 speed_first:速度优化 memory_first:内存优化
+
+  simple_demo:
+    src: program/demo.lua
+    topology: topo_default
+    vars:
 
 ```
 
