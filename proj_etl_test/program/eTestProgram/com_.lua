@@ -163,7 +163,7 @@ end
 
 function Com_pro14()
 
-    local data_send = {seg_13=0,seg_15=0,seg_15=0}
+    local data_send = {seg_13=0,seg_15=0}
     local buf = pack(protocol.prot_15, data_send)
     local data_recv = unpack(protocol.prot_15, buf)
     assert(math.isequal(data_recv.seg_13, data_send.seg_13))

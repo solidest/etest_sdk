@@ -18,7 +18,7 @@ end
 
 function Step01()
     -- 发送执行指令
-    async.send(...)
+    -- async.send(...)
 
     -- 订阅接收事件
     async.on_recv(device.dev2.uu3, protocol.dynamic_len, After_recv01)
@@ -42,7 +42,7 @@ end
 
 function Step02()
     -- 发送执行指令
-    async.send(...)
+    -- async.send( ... )
 
     -- 订阅接收事件
     async.on_recv(device.dev2.uu3, protocol.dynamic_len, After_recv02)
@@ -57,7 +57,7 @@ function After_recv02(msg, opt)
 
     -- 如果执行完毕
     if(step_02_finished) then
-        Step03()
+        -- Step03()
     end
 end
 
