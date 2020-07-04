@@ -454,8 +454,7 @@ end
         end
     end
    
-    for i,n in square,3,0
-    do
+    for i,n in square,3,0 do
         print(i,n)
     end
 
