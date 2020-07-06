@@ -467,7 +467,7 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
         i = i + 1
         local v = a[i]
         if v then
-        return i, v
+            return i, v
         end
     end
     
