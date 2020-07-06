@@ -56,7 +56,7 @@ ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，�
 + 元素描述的语法为: `元素类型 元素名称 { ... }`，类似于程序语言class声明方式
 
     > 举例：设备拓扑描述  
-    ```
+    ```js
     topology topo_1 
     { 
         ... 
@@ -64,7 +64,7 @@ ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，�
     ```
 
     > 举例：协议描述  
-    ```
+    ```js
     protocol prot_1 
     { 
         ... 
@@ -254,7 +254,7 @@ ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，�
 
     > 举例：包括各类元素的协议
 
-        ```
+        ```js
         prototcol prot_1 
         {
             //协议段
