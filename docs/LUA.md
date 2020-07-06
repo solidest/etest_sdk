@@ -487,17 +487,16 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
     array = {"Google", "Runoob"}
 
     function elementIterator (collection)
-    local index = 0
-    local count = #collection
-    -- 闭包函数
-    return function ()
-        index = index + 1
-        if index <= count
-        then
-            --  返回迭代器的当前元素
-            return collection[index]
+        local index = 0
+        local count = #collection
+        -- 闭包函数
+        return function ()
+            index = index + 1
+            if index <= count then
+                --  返回迭代器的当前元素
+                return collection[index]
+            end
         end
-    end
     end
 
     for element in elementIterator(array) do
