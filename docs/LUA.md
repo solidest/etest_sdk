@@ -344,7 +344,6 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
     or 
     ```
 
-
 ## 数组
 
 数组，就是相同数据类型的元素按一定顺序排列的集合，可以是一维数组和多维数组。
@@ -364,6 +363,7 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
     
     输出结果为 nil Lua Tutorial
     ```
+
 + 我们可以使用整数索引来访问数组元素，如果知道的索引没有值则返回nil。
 
 + 索引值是以 1 为起始，但你也可以指定 0 开始。
@@ -413,8 +413,7 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
     ```
     array = {"Google", "Runoob"}
     
-    for key,value in ipairs(array) 
-    do
+    for key,value in ipairs(array) do
        print(key, value)
     end
     
