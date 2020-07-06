@@ -825,6 +825,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 如果参数是整数，返回 "integer" 
 - 如果是浮点数，返回 "float"
 - 如果不是数字，返回 nil
+- 举例`math.type(1)输出integer`
 
 #### math.ult
 
@@ -837,6 +838,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 第三个可选参数为布尔型，true：double方式比较， false：float方式比较
 - 默认按float方式比较
 - 返回true跟false
+- 举例`math.isequal(2, 2)输出true`
 
 
 
