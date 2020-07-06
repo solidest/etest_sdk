@@ -558,6 +558,18 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 输出包含有以二进制方式表示的（一个 二进制代码块 ）指定函数的字符串
 - 之后可以用 load 调用这个字符串获得 该函数的副本（但是绑定新的上值）
 - 参数1为function， 如果参数2可选，如果为真值， 二进制代码块不携带该函数的调试信息 （局部变量名，行号，等等）
+- 举例
+    ```
+    function test(n)
+    	print("test:",n)
+    end
+    
+    a = string.dump(test, true)
+    b = load(a)
+    b(6) 
+    输出
+    test:6
+    ```
 
 #### string.find (str, substr, [init, [end]])
 
@@ -592,7 +604,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 
 - 在字符串中替换
 - mainString 为要操作的字符串， findString 为被替换的字符，replaceString 要替换的字符，num 替换次数（可以忽略，则全部替换）
-- 举例`string.gsub("aaaa","a","z",3)输出 zzza    3`
+- 举例`string.gsub("aaaa","a","z",3)输出 zzza 3`
 
 #### string.len
 
@@ -617,15 +629,10 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 第三个可选数字参数，指明从哪里开始搜索； 它默认为1，可以是负数
 - 举例`string.match("I have 2 questions for you.", "%d+ %a+")输出 2 questions`
 
-#### string.pack 
-
-- 输出一个打包了（即以二进制形式序列化） 参数2, 参数3等值的二进制字符串
-- 参数1(字符串)为打包格式
-
 #### string.packsize
 
 - 输出以指定格式用 string.pack 打包的字符串的长度
-- 格式化字符串中不可以有变长选项 's' 或 'z'
+- 格式化字符串中不可以有变长选项 's' 或 'z'(见打包和解包用到的格式串)
 
 #### string.rep(s, n [, sep])
 
@@ -683,16 +690,74 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
     ```
 
 #### string.unpack
+#### string.pack 
 
-- 输出以格式参数1打包在参数2(字符串)中的值
-- 选项参数3（默认为 1 ）标记了从参数2中哪里开始读起。 读完所有的值后，函数返回参数2中第一个未读字节的位置。
+- `大端字节序(网络字节序) 和 小端字节序（主机字节序）`先了解一下 大端编码和小端编码，大端就是将高位字节放到内存的低地址端，低位字节放到高地址端。网络传输中(比如TCP/IP)低地址端(高位字节)放在流的开始，对于2个字节的字符串(ab)，传输顺序为：a(0-7bit)、b(8-15bit)。
+之所以又称为 网络字节序，是因为网络传输时，默认是大端编码传输的。
+如果把计算机的内存看做是一个很大的字节数组，一个字节包含 8 bit 信息可以表示 0-255 的无符号整型，以及 -128—127 的有符号整型。当存储一个大于 8 bit 的值到内存时，这个值常常会被切分成多个 8 bit 的 segment 存储在一个连续的内存空间，一个 segment 一个字节。有些处理器会把高位存储在内存这个字节数组的头部，把低位存储在尾部，这种处理方式叫 大端字节序 ，有些处理器则相反，低位存储在头部，高位存储在尾部，称之为 小端字节序 
 
+- string.pack 负责将不同的变量打包在一起，成为一个字节字符串
+- string.unpack 负责将字节字符串解包成为变量
+- 举例 
+    ```
+    local unpack = string.unpack
+    local pack = string.pack
+    local str1 = pack(">b",-128) --最小支持 -128
+    local str2 = pack("<b",127) --最大支持 127
+    
+    --如果把 pack("b",127) 改为 pack("b",128)，就会出现下面的错误
+    --bad argument #2 to 'pack' (integer overflow)，意思是pack的第二个参数整型溢出了
+    
+    print(unpack(">b", str1)) 
+    输出 -128  2 ，这个2表示下一个字节的位置
+    
+    print(unpack("<b", str2)) 
+    输出127  2 ，这个2表示下一个字节的位置
+
+    ```
 #### string.upper
 
 - 输入参数为一个字符串 
 - 将其中的小写字符都转为大写后输出 
 - 其它的字符串不会更改，对小写字符的定义取决于当前的区域设置
 - 举例`string.lower("abc")输出ABC`
+
+#### 打包和解包用到的格式串
+
+- 用于 string.pack， string.packsize， string.unpack 的第一个参数
+- 是一个描述了需要创建或读取的结构之布局
+- 格式串是由转换选项构成的序列。 这些转换选项如下
+-  小于号(<) : 设为小端编码
+-  大于号(>) : 设为大端编码
+- ![n] : 将最大对齐数设为 n （默认遵循本地对齐设置）
+- b : 一个有符号字节 (char)
+- B : 一个无符号字节 (char)
+- h : 一个有符号 short （本地大小）
+- H : 一个无符号 short （本地大小）
+- l : 一个有符号 long （本地大小）
+- L : 一个无符号 long （本地大小）
+- j : 一个 lua_Integer
+- J : 一个 lua_Unsigned
+- T : 一个 size_t （本地大小）
+- i[n] : 一个 n 字节长（默认为本地大小）的有符号 int
+- I[n] : 一个 n 字节长（默认为本地大小）的无符号 int
+- f : 一个 float （本地大小）
+- d : 一个 double （本地大小）
+- n : 一个 lua_Number
+- cn : n字节固定长度的字符串
+- z : 零结尾的字符串
+- s[n] : 长度加内容的字符串，其长度编码为一个 n 字节（默认是个 size_t） 长的无符号整数。
+- x : 一个字节的填充
+- Xop : 按选项 op 的方式对齐（忽略它的其它方面）的一个空条目
+- ' ' : （空格）忽略
+- （ "[n]" 表示一个可选的整数。） 除填充、空格、配置项（选项 "xX <=>!"）外， 每个选项都关联一个参数（对于 string.pack） 或结果（对于 string.unpack）
+- 对于选项 "!n", "sn", "in", "In", n 可以是 1 到 16 间的整数
+- 所有的整数选项都将做溢出检查
+- string.pack 检查提供的值是否能用指定的字长表示
+- string.unpack 检查读出的值能否置入 Lua 整数中
+- 任何格式串都假设有一个 "!1=" 前缀， 即最大对齐为 1 （无对齐）且采用本地大小端设置。
+- 对齐行为按如下规则工作： 对每个选项，格式化时都会填充一些字节直到数据从一个特定偏移处开始， 这个位置是该选项的大小和最大对齐数中较小的那个数的倍数； 这个较小值必须是 2 个整数次方。 选项 "c" 及 "z" 不做对齐处理； 选项 "s" 对对齐遵循其开头的整数
+- string.pack 用零去填充 （string.unpack 则忽略它）
 
 ## math库
 
@@ -783,6 +848,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 #### math.pi
 
 - π 的值
+- 举例`math.pi输出3.14...`
 
 #### math.rad
 
@@ -819,6 +885,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 #### math.tointeger 
 
 - 如果参数可以转换为一个整数， 返回该整数 否则返回 nil
+- 举例`math.tointeger("3")输出3,math.tointeger("N")输出nil`
 
 #### math.type 
 
@@ -848,33 +915,117 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 #### table.concat (list [, sep [, i [, j]]])
 
 - 提供一个列表，其所有元素都是字符串或数字，返回字符串 list[i]..sep..list[i+1] ··· sep..list[j]。 sep 的默认值是空串， i 的默认值是 1 ， j 的默认值是 #list 。 如果 i 比 j 大，返回空串。
+- 举例
+    ```
+    tbl = {"alpha", "beta", "gamma"}
+    print(table.concat(tbl, ":"))
+    输出
+    alpha:beta:gamma
+
+    print(table.concat(tbl, nil, 1, 2))
+    输出
+    alphabeta
+
+    print(table.concat(tbl, "\n", 2, 3))
+    输出
+    beta
+    gamma
+    ```
 
 #### table.insert (list, [pos,] value)
 - 在 list 的位置 pos 处插入元素 value ， 并后移元素 list[pos], list[pos+1], ···, list[#list] 。 pos 的默认值为 #list+1 ， 因此调用 table.insert(t,x) 会将 x 插在列表 t 的末尾。
+- 举例
+    ```
+    tbl = {"alpha", "beta", "gamma"}
+    table.insert(tbl, "delta")
+    print(table.concat(tbl, ", ")
+    输出 alpha, beta, gamma, delta
+    ```
 
 #### table.move (a1, f, e, t [,a2])
-- 将元素从表 a1 移到表 a2。 这个函数做了次等价于后面这个多重赋值的等价操作： a2[t],··· = a1[f],···,a1[e]。 a2 的默认值为 a1。 目标区间可以和源区间重叠。 索引 f 必须是正数。
+- 把表a1中从下标f到e的value移动到表a2中，位置为a2下标从t开始
+- 表a1，a1下标开始位置f，a1下标结束位置e，t选择移动到的开始位置(如果没有a2，默认a1的下标)
+- 举例 
+    ```
+    tbl = {"a","b","c"} 
+    newtbl = {1,2,3,5}
+    table.move(tbl, 2, 3, 2, newtbl)
+    print(table.concat(tbl,","))
+    输出 
+    a,b,c
+    
+    print(table.concat(newtbl,",")) 
+    输出
+    1,b,c,5
+    
+    table.move(tbl,2,3,2)
+    print(table.concat(tbl,",")) 
+    输出
+    a,b,c
+    
+    table.move(tbl, 1, #tbl, 2)
+    print(table.concat(tbl,",")) 
+    输出
+    a,a,b,c
+    
+    ```
 
 #### table.pack (···)
-- 返回用所有参数以键 1,2, 等填充的新表， 并将 "n" 这个域设为参数的总数。 注意这张返回的表不一定是一个序列。
+- 以多个元素创建一个新的表
+- 任意个数的value
+- 举例 
+    ```
+    newtbl = table.pack(1,2,3,5)
+    print(table.concat(newtbl,",")) 
+    输出
+    1,2,3,5
+    ```
 
 #### table.remove (list [, pos])
 - 移除 list 中 pos 位置上的元素，并返回这个被移除的值。 当 pos 是在 1 到 #list 之间的整数时， 它向前移动元素　list[pos+1], list[pos+2], ···, list[#list] 并删除元素 list[#list]； 索引 pos 可以是 #list + 1 ，或在 #list 为 0 时可以是 0 ； 在这些情况下，函数删除元素 list[pos]。
 
 - pos 默认为 #list， 因此调用 table.remove(l) 将移除表 l 的最后一个元素。
+- 举例
+    ```
+    local number = {"189","9163", "1512","18991631512"}
+    local result = table.remove(number, 1)
+    print(result)
+    print(number[1])
+
+    输出
+    189
+    9163
+    ```
 
 #### table.sort (list [, comp])
 - 在表内从 list[1] 到 list[#list] 原地 对其间元素按指定次序排序。 如果提供了 comp ， 它必须是一个可以接收两个列表内元素为参数的函数。 当第一个元素需要排在第二个元素之前时，返回真 （因此 not comp(list[i+1],list[i]) 在排序结束后将为真）。 如果没有提供 comp， 将使用标准 ETlua 操作 < 作为替代品。
 
 - 排序算法并不稳定； 即当两个元素次序相等时，它们在排序后的相对位置可能会改变。
+- 举例
+    ```
+    tbl = {"alpha", "beta", "gamma", "delta"}
+    table.sort(tbl)
+    print(table.concat(tbl, ", "))
+    输出
+    alpha, beta, delta, gamma
+    ```
 
 #### table.unpack (list [, i [, j]])
 
-- 返回列表中的元素。 这个函数等价于
-`
-return list[i], list[i+1], ···, list[j]
-`
-i 默认为 1 ，j 默认为 #list
+- 返回list表从i到j位置的value
+- 表a1，下标开始位置i，下标结束位置j，i,j如果默认，分别代表1 #list
+- 举例 
+    ```
+    newtbl = {1,2,3,5}
+    print(table.unpack(newtbl)) 
+    输出1 2 3 5
+    
+    print(table.unpack(newtbl,2))
+    输出 2 3 5
+
+    print(table.unpack(newtbl,2,3))
+    输出2 3
+    ```
 
 ## utf8库
 
