@@ -30,7 +30,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 
 - 退出测试程序执行
 - 举例
-    ```
+    ```lua
     function function_name()
         function body
         exit()
