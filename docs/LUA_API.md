@@ -309,8 +309,6 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
         async.clear(t2)
         async.clear(t3)
     end
-
-
     ```
 
 #### async.interval
