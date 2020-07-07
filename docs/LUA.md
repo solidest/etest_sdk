@@ -141,7 +141,7 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 ### 函数定义
 + ETlua 编程语言函数定义格式如下：
 
-    ```
+    ```lua
     optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
         function_body
         return result_params_comma_separated
@@ -166,7 +166,7 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 ### 可变参数
 + 函数可以接受可变数目的参数，和 C 语言类似，在函数参数列表中使用三点 ... 表示函数有可变的参数
 
-    ```
+    ```lua
     function add(...)  
         local s = 0  
         for i, v in ipairs{...} do   --> {...} 表示一个由所有变长参数构成的数组  
@@ -179,7 +179,7 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 
 + 我们可以将可变参数赋值给一个变量。
 
-    ```
+    ```lua
     function average(...)
         result = 0
         local arg={...}    --> arg 为一个表，局部变量
@@ -192,13 +192,13 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 
     print("平均值为",average(10,5,3,4,5,6))
 
-    以上代码执行结果为：
-    总共传入 6 个数
-    平均值为    5.5
+    --以上代码执行结果为：
+    --总共传入 6 个数
+    --平均值为    5.5
     ```
 + 通过 select("#",...) 来获取可变参数的数量:
 
-    ```
+    ```lua
     function average(...)
         result = 0
         local arg={...}
@@ -210,16 +210,16 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
     end
 
     print("平均值为",average(10,5,3,4,5,6))
-    以上代码执行结果为：
+    --以上代码执行结果为：
 
-    总共传入 6 个数
-    平均值为    5.5
+    --总共传入 6 个数
+    --平均值为    5.5
 
     ```
 
 + 可能需要几个固定参数加上可变参数，固定参数必须放在变长参数之前
 
-    ```
+    ```lua
     function fwrite(fmt, ...)  ---> 固定的参数fmt
         return io.write(string.format(fmt, ...))     
     end
@@ -227,10 +227,10 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
     fwrite("runoob\n")       --->fmt = "runoob", 没有变长参数。  
     fwrite("%d%d\n", 1, 2)   --->fmt = "%d%d", 变长参数为 1 和 2
     
-    输出结果为：
+    -- 输出结果为：
 
-    runoob
-    12
+    -- runoob
+    -- 12
 
     ```
 
@@ -241,7 +241,7 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 
 + 调用select时，必须传入一个固定实参selector(选择开关)和一系列变长参数。如果selector为数字n,那么select返回它的第n个可变实参，否则只能为字符串"#",这样select会返回变长参数的总数
 
-    ```
+    ```lua
     do  
         function foo(...)  
             for i = 1, select('#', ...) do  -->获取参数总数
@@ -252,11 +252,11 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 
         foo(1, 2, 3, 4);  
     end
-    输出结果为：
-    arg    1
-    arg    2
-    arg    3
-    arg    4 
+    --输出结果为：
+    --arg    1
+    --arg    2
+    --arg    3
+    --arg    4 
 
     ```    
 
@@ -354,14 +354,14 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
 
 + 一维数组是最简单的数组，其逻辑结构是线性表。一维数组可以用for循环出数组中的元素
 
-    ```
+    ```lua
     array = {"ETlua", "Tutorial"}
 
     for i= 0, 2 do
         print(array[i])
     end
     
-    输出结果为 nil Lua Tutorial
+    --输出结果为 nil Lua Tutorial
     ```
 
 + 我们可以使用整数索引来访问数组元素，如果知道的索引没有值则返回nil。
@@ -374,7 +374,7 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
 
 + 多维数组即数组中包含数组或一维数组的索引键对应一个数组。
 
-    ```
+    ```lua
     -- 初始化数组
     array = {}
     for i=1,3 do
@@ -391,7 +391,7 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
         end
     end
 
-    输出结果 1 2 3 2 4 6 3 6 9
+    --输出结果 1 2 3 2 4 6 3 6 9
     ```
 
 ## 迭代器
@@ -410,18 +410,14 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
 
 + 泛型 for 迭代器提供了集合的 key/value 对，语法格式如下：
 
-    ```
+    ```lua
     array = {"Google", "Runoob"}
     
     for key,value in ipairs(array) do
        print(key, value)
     end
     
-    输出结果为 
-    
-    1 Google
-    
-    2 Runoob
+    --输出结果为  1 Google  2 Runoob
     ```
 
 + 以上实例中我们使用了 ETlua 默认提供的迭代函数 ipairs。
@@ -445,7 +441,7 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
 
 + 以下实例我们使用了一个简单的函数来实现迭代器，实现 数字 n 的平方：
 
-    ```
+    ```lua
     function square(iteratorMaxCount,currentNumber)
         if currentNumber<iteratorMaxCount then
             currentNumber = currentNumber+1
@@ -457,11 +453,11 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
         print(i,n)
     end
 
-    输出结果  1  1      2  4       3  9
+    -- 输出结果  1  1      2  4       3  9
     ```
 + 迭代的状态包括被遍历的表（循环过程中不会改变的状态常量）和当前的索引下标（控制变量），ipairs 和迭代函数都很简单，我们在 ETlua 中可以这样实现：
 
-    ```
+    ```lua
     function iter (a, i)
         i = i + 1
         local v = a[i]
@@ -482,7 +478,7 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
 
 + 以下实例我们创建了自己的迭代器：
 
-    ```
+    ```lua
     array = {"Google", "Runoob"}
 
     function elementIterator (collection)
@@ -502,10 +498,7 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
         print(element)
     end
 
-    以上输出结果为：
+    --以上输出结果为：Google Runoob
 
-    Google
-    Runoob
-
-    以上我们可以看到，elementIterator 内使用了闭包函数，实现计算集合大小并输出各个元素
+    --以上我们可以看到，elementIterator 内使用了闭包函数，实现计算集合大小并输出各个元素
     ```

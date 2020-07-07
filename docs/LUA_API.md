@@ -65,7 +65,6 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
     dealy(1000)
     --延时1000毫秒(1秒)
     print("bbb")
-
     ```
 
 #### now
@@ -75,9 +74,9 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 输入可选字符串参数 'ms' 或 'us' 或 'ns' 指定时长单位
 - 默认参数为 ms 毫秒
 - 举例 
-    ```
+    ```lua
     function Test_now_delay()
-        local t1 = now();
+        local t1 = now()
         delay(1000)
         local t2 = now()
         print(t2-t1)
@@ -89,10 +88,10 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 输出一个错误对象
 - 测试程序会自动退出
 - 举例 
-    ```
+    ```lua
     function Test_error()
         print("检测error")
-        error("错误退出")
+        error("错误退出")--程序退出
         print("执行失败")
     end
     ```
@@ -104,9 +103,9 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 第一个参数指定协议
 - 第二个可选参数用于初始化消息内容
 - 有两种创建消息的方式
-- protocol.prot_1 为自定义的协议，定义方式见ETL语法入门
+- protocol.prot_1 为自定义的协议，具体定义方式见ETL语法入门，这里不做详细介绍
 - 举例
-    ```
+    ```lua
     function Test_pack_message()
         -- 方式一
         local msg1 = message(protocol.prot_1, {seg_1=0xAF})
@@ -115,7 +114,6 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
         msg2.seg_1 = 175
         msg1.seg_2 = 0
         print(msg1,msg2)
-
     end
     ```
 
@@ -128,9 +126,9 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 返回值是打包后的buffer
 - protocol.prot_point为自定义的协议，定义方式见ETL语法入门
 - 举例
-    ```
+    ```lua
     function Test_pack()
-        local data1 = { token = 0x55aa, point = p}
+        local data1 = { token = 0x55aa, point = "p"}
         local buffer = pack(protocol.prot_point, data1, true)
         local data2 = unpack(protocol.prot_point,buffer)
         print(data1,data2)
@@ -147,9 +145,9 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 处理粘包问题
 - protocol.prot_point为自定义的协议，定义方式见ETL语法入门
 - 举例
-    ```
+    ```lua
     function Test_unpack()
-        local data1 = { token = 0x55aa, point = p}
+        local data1 = { token = 0x55aa, point = "p"}
         local buffer = pack(protocol.prot_point, data1)
         local data2 = unpack(protocol.prot_point,buffer)
         print(data1,data2)
@@ -166,7 +164,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 返回值为整数，对应已发送字节长度
 - protocol.dynamic_len  为自定义的协议，定义方式见ETL语法入门
 - 举例
-    ```
+    ```lua
     function Test_send()
         local msg = message(protocol.dynamic_len)
         msg.seg1 = 4
@@ -189,7 +187,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 返回2个值，第一个值为：string或协议解析后的message，第二个值为：nil或option
 - protocol.prot_point为自定义的协议，定义方式见ETL语法入门
 - 举例
-    ```
+    ```lua
     function Test_recv()
         local msg = message(protocol.dynamic_len)
         msg.seg1 = 4
@@ -206,7 +204,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 输入参数为设备接口、控制指令名称、table类型的指令参数
 - 返回值为table类型的指令执行结果
 - 举例：
-    ```
+    ```lua
     -- 手动建立到服务器的连接
     local result = ioctl(device.tcp_pc1.client1, 'connect', { to = 'tcp_server1.srv1' })
     ```
@@ -233,7 +231,7 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 返回值为用户操作结果
 - 交互方式包括'ok' 'yesno' 'text' 'number' 'select' 'multiswitch'
 - 举例
-    ```
+    ```lua
     function entry(vars, option)
         --提示用户进行确认
         local answer1 = ask('ok',  {title='提示', msg='确认后继续'})
@@ -296,7 +294,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 第一个参数必须为大于0的数字，指定延时ms数
 - 第二个参数必须为函数，后面可以输入可变数量函数执行时的参数
 - 举例
-    ```
+    ```lua
     function Tout(a1, a2)
         print('timeout', a1, a2)
     end
@@ -338,7 +336,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - protocol.dynamic_len为自定义的协议，定义方式见ETL语法入门
 - After_send为回调函数
 - 举例
-    ```
+    ```lua
     --异步发送的回调函数
     function After_send(len)
         print("send len", len)
@@ -386,7 +384,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 输入参数为设备接口、控制指令名称、table类型的指令参数、回调函数
 - 回调函数的输入参数为指令执行结果
 - 举例：
-    ```
+    ```lua
     -- 手动建立到服务器的连接
     ioctl(device.tcp_pc1.client1, 'connect', { to = 'tcp_server1.srv1' },
         function(result)
@@ -404,7 +402,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 
 - 取消数据到达事件的订阅，用法：`async.off_recv(connector)`
 - 举例
-    ```
+    ```lua
     --发送的回调函数
     function After_send(len)
         print("send len", len)
@@ -452,7 +450,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 记录普通日志信息
 - 输出结果为绿色标识
 - 举例
-    ```
+    ```lua
     function Test_log()
         COUNT = COUNT + 1;
         log.info('  '..COUNT..'  '..'::'..debug.getinfo(1).name..'::')
@@ -465,7 +463,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 记录警告日志信息
 - 输出结果为黄色标识
 - 举例
-    ```
+    ```lua
     function Test_log()
         print('')
         log.warn("log.warn test")
@@ -477,7 +475,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 记录错误日志信息
 - 输出结果为红色标识
 - 举例
-    ```
+    ```lua
     function Test_log()
         print('')
         log.error("log.error test")
@@ -488,7 +486,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 
 - 记录测试步骤开始日志
 - 举例
-    ```
+    ```lua
     function Test_log()
         print('')
         log.step("log.step test")
@@ -499,7 +497,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 
 - 记录测试动作执行日志
 - 举例
-    ```
+    ```lua
     function Test_log()
         print('')
         log.action("log.action test") 
@@ -516,7 +514,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 输出检查结果的日志
 - 第一个参数为字符串，第二个参数为布尔值
 - 举例
-    ```
+    ```lua
     function Test_log()
         print('')
         log.check("aaa", true);
@@ -561,7 +559,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 之后可以用 load 调用这个字符串获得 该函数的副本（但是绑定新的上值）
 - 参数1为function， 如果参数2可选，如果为真值， 二进制代码块不携带该函数的调试信息 （局部变量名，行号，等等）
 - 举例
-    ```
+    ```lua
     function test(n)
     	print("test:",n)
     end
@@ -569,8 +567,8 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
     a = string.dump(test, true)
     b = load(a)
     b(6) 
-    输出
-    test:6
+    --输出
+    --test:6
     ```
 
 #### string.find (str, substr, [init, [end]])
@@ -595,11 +593,11 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 输出一个迭代器函数， 每次调用这个函数都会继续以参数2对参数1做匹配，并返回所有捕获到的值 
 - 如果参数2中没有指定捕获，则每次捕获整个参数2
 - 举例
-    ```
+    ```lua
     for word in string.gmatch("Hello Lua user", "%a+") do
         print(word) 
     end
-    输出 Hello Lua user
+    --输出 Hello Lua user
     ```
 
 #### string.gsub(mainString,findString,replaceString,num)
@@ -657,7 +655,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 如果参数3比字符串的长度还大，就修正为字符串长度 
 - 如果在修正之后，参数2大于参数3， 函数返回空串。
 - 举例
-    ```
+    ```lua
     -- 字符串
     local sourcestr = "prefix--runoobgoogletaobao--suffix"
     print("\n原始字符串", string.format("%q", sourcestr))
@@ -678,17 +676,17 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
     local fourth_sub = string.sub(sourcestr, -100)
     print("\n第四次截取", string.format("%q", fourth_sub))
     
-    执行输出
+    --执行输出
 
-    原始字符串    "prefix--runoobgoogletaobao--suffix"
+    --原始字符串    "prefix--runoobgoogletaobao--suffix"
 
-    第一次截取    "fix--runoobg"
+    --第一次截取    "fix--runoobg"
     
-    第二次截取    "prefix--"
+    --第二次截取    "prefix--"
     
-    第三次截取    "ao--suffix"
+    --第三次截取    "ao--suffix"
     
-    第四次截取    "prefix--runoobgoogletaobao--suffix"
+    --第四次截取    "prefix--runoobgoogletaobao--suffix"
     ```
 
 #### string.unpack
@@ -702,7 +700,7 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - string.pack 负责将不同的变量打包在一起，成为一个字节字符串
 - string.unpack 负责将字节字符串解包成为变量
 - 举例 
-    ```
+    ```lua
     local unpack = string.unpack
     local pack = string.pack
     local str1 = pack(">b",-128) --最小支持 -128
@@ -712,10 +710,10 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
     --bad argument #2 to 'pack' (integer overflow)，意思是pack的第二个参数整型溢出了
     
     print(unpack(">b", str1)) 
-    输出 -128  2 ，这个2表示下一个字节的位置
+   -- 输出 -128  2 ，这个2表示下一个字节的位置
     
     print(unpack("<b", str2)) 
-    输出127  2 ，这个2表示下一个字节的位置
+    --输出127  2 ，这个2表示下一个字节的位置
     ```
 
 #### string.upper
@@ -919,69 +917,68 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 
 - 提供一个列表，其所有元素都是字符串或数字，返回字符串 list[i]..sep..list[i+1] ··· sep..list[j]。 sep 的默认值是空串， i 的默认值是 1 ， j 的默认值是 #list 。 如果 i 比 j 大，返回空串。
 - 举例
-    ```
+    ```lua
     tbl = {"alpha", "beta", "gamma"}
     print(table.concat(tbl, ":"))
-    输出
-    alpha:beta:gamma
+    --输出
+    --alpha:beta:gamma
 
     print(table.concat(tbl, nil, 1, 2))
-    输出
-    alphabeta
+    --输出
+    --alphabeta
 
     print(table.concat(tbl, "\n", 2, 3))
-    输出
-    beta
-    gamma
+    --输出
+    --beta
+    --gamma
     ```
 
 #### table.insert (list, [pos,] value)
 - 在 list 的位置 pos 处插入元素 value ， 并后移元素 list[pos], list[pos+1], ···, list[#list] 。 pos 的默认值为 #list+1 ， 因此调用 table.insert(t,x) 会将 x 插在列表 t 的末尾。
 - 举例
-    ```
+    ```lua
     tbl = {"alpha", "beta", "gamma"}
     table.insert(tbl, "delta")
     print(table.concat(tbl, ", ")
-    输出 alpha, beta, gamma, delta
+    --输出 alpha, beta, gamma, delta
     ```
 
 #### table.move (a1, f, e, t [,a2])
 - 把表a1中从下标f到e的value移动到表a2中，位置为a2下标从t开始
 - 表a1，a1下标开始位置f，a1下标结束位置e，t选择移动到的开始位置(如果没有a2，默认a1的下标)
 - 举例 
-    ```
+    ```lua
     tbl = {"a","b","c"} 
     newtbl = {1,2,3,5}
     table.move(tbl, 2, 3, 2, newtbl)
     print(table.concat(tbl,","))
-    输出 
-    a,b,c
+    --输出 
+    --a,b,c
     
     print(table.concat(newtbl,",")) 
-    输出
-    1,b,c,5
+    --输出
+    --1,b,c,5
     
     table.move(tbl,2,3,2)
     print(table.concat(tbl,",")) 
-    输出
-    a,b,c
+    --输出
+    --a,b,c
     
     table.move(tbl, 1, #tbl, 2)
     print(table.concat(tbl,",")) 
-    输出
-    a,a,b,c
-    
+    --输出
+    --a,a,b,c
     ```
 
 #### table.pack (···)
 - 以多个元素创建一个新的表
 - 任意个数的value
 - 举例 
-    ```
+    ```lua
     newtbl = table.pack(1,2,3,5)
     print(table.concat(newtbl,",")) 
-    输出
-    1,2,3,5
+    --输出
+    --1,2,3,5
     ```
 
 #### table.remove (list [, pos])
@@ -989,15 +986,15 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 
 - pos 默认为 #list， 因此调用 table.remove(l) 将移除表 l 的最后一个元素。
 - 举例
-    ```
+    ```lua
     local number = {"189","9163", "1512","18991631512"}
     local result = table.remove(number, 1)
     print(result)
     print(number[1])
 
-    输出
-    189
-    9163
+    --输出
+    --189
+    --9163
     ```
 
 #### table.sort (list [, comp])
@@ -1005,12 +1002,12 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 
 - 排序算法并不稳定； 即当两个元素次序相等时，它们在排序后的相对位置可能会改变。
 - 举例
-    ```
+    ```lua
     tbl = {"alpha", "beta", "gamma", "delta"}
     table.sort(tbl)
     print(table.concat(tbl, ", "))
-    输出
-    alpha, beta, delta, gamma
+    --输出
+    --alpha, beta, delta, gamma
     ```
 
 #### table.unpack (list [, i [, j]])
@@ -1018,16 +1015,16 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 - 返回list表从i到j位置的value
 - 表a1，下标开始位置i，下标结束位置j，i,j如果默认，分别代表1 #list
 - 举例 
-    ```
+    ```lua
     newtbl = {1,2,3,5}
     print(table.unpack(newtbl)) 
-    输出1 2 3 5
+    --输出1 2 3 5
     
     print(table.unpack(newtbl,2))
-    输出 2 3 5
+    --输出 2 3 5
 
     print(table.unpack(newtbl,2,3))
-    输出2 3
+    --输出2 3
     ```
 
 ## utf8库
