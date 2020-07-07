@@ -205,11 +205,180 @@ ETestDev是嵌入式系统测试开发工具套件，由多个开发组件构成
 #### 新增部件子面板
 + 新增部件子面板界面配置项可以设置子面板标题
 + `子面板标题设置为标题1`
-+ `添加按钮`
++ `添加按钮新增按钮，可以设置按钮标题(按钮)宽度(12)与命令，命令是指点击按钮测试程序要发出去的指令`
++ `新增文字显示，可以设置标题(文字显示)、宽度(12)、记录的key(记录在系统record中的key值)、命令的key(发送的控制指令的key值)`
++ `新增状态指示说明，可设置value值的显示状态(如：当value为1，设置为红色，当value值为0设置为白色)`
++ `新增多行文本输出，可以设置标题、宽、行数、为空时提示、记录key、命令key`
++ `设置的具体参数后面做详细介绍`
+![部件子面板]( ./photo/panel1.png )
+
+#### 部件子面板
++ 部件子面板同时具有上移、下移、删除等操作
++ 见图新增部件子面板
 
 
 #### 新增图形子面板 
++ `新增仪表盘，设置可以设置仪表盘要记录的key值`
++ `新增曲线，设置x轴记录的key与y轴记录的key`
++ `新增散点，设置x轴记录的key与y轴记录的key`
++ `设置的具体参数后面做详细介绍`
+![图形子面板]( ./photo/panel2.png )
 
+#### 图形子面板
++ 图形子面板具有新增、删除等操作
 
+#### 部件子面板的参数配置
++ 这里介绍了每个子面板具体类型的参数设置
++ 状态指示说明举例
+    ```yml
+    value: 0
+    foreground: white 
+    background: grey
+    icon: mdi-lock
+    value: 1
+    foreground: red
+    background: white
+    icon: mdi-lock-open  #icon表示引用的图标，icon对应的值表示引用图标的名称
 
+    #当value的值为0时，前景色为白色，背景色为灰色；当value的值为0时，前景色为红色，背景色为白色
+    ```
++ 单选按钮说明举例
+    ```yml
+    value: 1   
+    text: 选项1
+    value: 2
+    text: 选项2
+    #以上说明，当选择的文本选项1时，对应的value值为1时 ，当选择的文本选项为选项2时，对应的value值为2 
+    ```
++ 下拉选择举例同单选按钮
++ 复合选择举例说明(符合选择支持选择，同时也支持手动输入)
+    ```yml
+    选项1
+    选项2
+    #当复合选择的选项为选项1，选项2时，支持从选项1，选项2中选择，也支持手动输出所需要的参数
+    ```
+
+#### 图形子面板的参数配置
++ 仪表盘参数说明
+    ```yml
+    series:
+      - min: 0 #最小刻度0
+        max: 220 #最大刻度220
+        splitNumber: 11 #共分成11分
+        radius: 90% #仪表盘半径，可以是相对于容器高宽中较小的一项的一半的百分比，也可以是绝对的数值
+        axisLine: #仪表盘轴线相关配置
+          lineStyle: #仪表盘轴线样式
+            color: #仪表盘的轴线颜色(可以被分成不同颜色的多段。每段的结束位置和颜色可以通过一个数组来表示)
+              - - 0.09  #颜色段的范围
+                - lime # 设置颜色段的颜色
+              - - 0.82
+                - '#1e90ff'
+              - - 1
+                - '#ff4500'
+            width: 3 #外部轴线的宽度
+            shadowColor: '#fff' #设置阴影颜色
+            shadowBlur: 10 # 设置阴影颜色的模糊的大小
+        axisLabel:
+          fontWeight: bolder #设置字体属性，字体加粗
+          color: '#fff'  #设置字体颜色
+          shadowColor: '#fff' #设置阴影颜色
+          shadowBlur: 10 #设置阴影颜色的模糊级数
+        axisTick: #刻度样式
+          length: 15 # 刻度线长。支持相对半径的百分比
+          lineStyle: #线的样式
+            color: auto  #线的颜色
+            shadowColor: '#fff' #阴影颜色
+            shadowBlur: 10 #图形阴影的模糊大小
+        splitLine: #分隔线样式
+          length: 25 #分隔线线长。支持相对半径的百yanze分比
+          lineStyle: #分割线的样式
+            width: 3 # 线宽
+            color: '#fff' #线的颜色
+            shadowColor: '#fff' #阴影颜色
+            shadowBlur: 10 #图形阴影的模糊大小
+        pointer: #设置指针
+          shadowColor: '#fff' #阴影颜色
+          shadowBlur: 5 #图形阴影的模糊大小
+        title:  #仪表盘标-线的颜色
+            shadowColor: '#fff' #阴影颜色
+            shadowBlur: 10 #图形阴影的模糊大小
+        splitLine: #分隔线样式
+          length: 25 #分隔线线长。支持相对半径的百yanze分比
+          lineStyle: #分割线的样式
+            width: 3 # 线宽
+            color: '#fff' #线的颜色
+            shadowColor: '#fff' #阴影颜色
+            shadowBlur: 10 #图形阴影的模糊大小
+        pointer: #设置指针
+          shadowColor: '#fff' #阴影颜色
+          shadowBlur: 5 #图形阴影的模糊大小
+        title:  #仪表盘标题
+          textStyle:  # 文本样式
+            fontWeight: bolder #设置字体样式
+            fontSize: 20  #设置字体尺寸
+            fontStyle: italic #设置字体风格
+            color: '#fff' #设置字体颜色
+            shadowColor: '#fff'  #阴影颜色
+            shadowBlur: 10 #图形阴影的模糊大小
+        detail: #仪表详情，用于展示数据
+          backgroundColor: 'rgba(30,144,255,0.8)' #文字块背景色（可以使用颜色值，也可以直接使用图片）
+          borderWidth: 1  #文字块边框宽度
+          borderColor: '#fff' #文字块边框颜色
+          shadowColor: '#fff' #阴影颜色
+          shadowBlur: 5 #图形阴影的模糊大小
+          offsetCenter: #相对于仪表盘中心的偏移位置。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+            - 0  #水平方向的偏移
+            - 50% #垂直方向的偏移
+          textStyle: #设置文本样式
+            fontWeight: bolder  #设置字体样式
+            color: '#fff'  #设置字体颜色
+    
+    ```
++ 曲线参数说明，当设置多条曲线时，坐标轴的方式只需要在第一条设置
+    ```yml
+    tooltip: #本坐标系特定的 tooltip 设定
+      # item ：数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用
+      # axis ：坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用
+      # none ：什么都不触发
+      trigg: axis #触发类型
+      axisPointer: #坐标轴指示器配置项
+        animation: false # 是否开启动画 支持参数[true,false]
+    xAxis: #设置x轴属性
+      # value ： 数值轴，适用于连续数据
+      # log ：对数轴。适用于对数数据
+      # time ： 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度
+      # category ： 类目轴，适用于离散的类目数据。为该类型时类目数据可自动从 series.data 或 dataset.source 中取，或者可通过 xAxis.data 设置类目数据
+      type: time #坐标轴类型
+      splitLine: #分割线
+        show: false # 是否显示分隔线。默认数值轴显示，类目轴不显示
+    yAxis: #设置y轴属性
+      type: value #坐标轴类型
+      boundaryGap: #坐标轴两边留白策略
+        # 类目轴中 boundaryGap 可以配置为 true 和 false。默认为 true，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间
+        # 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围，可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效
+        - 0
+        - 10发生的0%
+      splitLine: #分割线
+        show: false # 是否显示分隔线。默认数值轴显示，类目轴不显示
+    series: #系列列表。每个系列通过 type 决定自己的图表类型
+      - type: line #设置类型，折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势
+        showSymbol: false # 是否显示 symbol, 如果 false 则只有在 tooltip hover 的时候显示
+        hoverAnimation: false #是否开启 hover 在拐点标志上的提示动画效果
+    ```
++ 散点图参数说明
+    ```yml
+    xAxis: #设置x轴属性
+      scale: true # 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用
+    yAxis: #设置y轴属性
+      scale: true # 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用
+    series: #系列列表。每个系列通过 type 决定自己的图表类型
+      - type: effectScatter # 设置类型，带有涟漪特效动画的散点（气泡）图
+        symbolSize: 8 # 标记的大小，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，高为10
+        data: # 系列中的数据内容数组。数组项通常为具体的数据项,通常为多维数组 [[172.7, 105.2], [153.4, 42]]
+          - - 172.7 
+            - 105.2
+          - - 153.4
+            - 42
+
+    ```
 
