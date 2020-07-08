@@ -382,3 +382,11 @@ ETestDev是嵌入式系统测试开发工具套件，由多个开发组件构成
 
     ```
 
+
+#### 数据配置
++ 包括两个record与command
++ record指需要记录在系统中的key值，command要下发的控制指令的key值
++ `标题记录key为seg_1,命令key为comd1 ......`
++ `数据配置的参数说明`
+![数据配置图形](./photo/panel_ctrl.png )
+![数据配置图形](./photo/panel_ui.png )
