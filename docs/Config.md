@@ -3,7 +3,7 @@
 
 项目的全局配置
 
-```yml
+```yaml
 
 # 项目设置
 project:
@@ -21,7 +21,7 @@ project:
 
 用例执行的配置
 
-```yml
+```yaml
 
 # 执行程序设置
 program:
