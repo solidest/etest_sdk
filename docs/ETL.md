@@ -15,7 +15,7 @@ ETL (Embedded Test Language)是专用于开发嵌入式测试程序的语言，�
 + `ETL运行器`负责编译并执行采用ETL开发的测试程序，包括：
     - `ETestD` ETL服务器
     - `ETestX` 测试程序执行器
-    - `ETest` UI渲染器
+    - `ETestUI` UI渲染器
 
 ## ETL语法入门
 
