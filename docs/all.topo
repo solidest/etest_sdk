@@ -8,8 +8,8 @@ stateDiagram
         监控面板描述 --> 测试脚本
     }
     state ETL运行器 {
-        用户界面渲染器 --> ETL服务器 : 命令
-        ETL服务器 --> 用户界面渲染器 : 记录
-		ETL服务器 --> 测试程序执行器 : 分发
-		测试程序执行器 --> ETL服务器 : 缓存
+        ETestUI --> ETestD : 命令
+        ETestD --> ETestUI : 记录
+        ETestD --> ETestX : 分发
+        ETestX --> ETestD : 缓存
     }

@@ -105,8 +105,8 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 ### 循环控制语句
 
 + 循环控制语句用于控制程序的流程， 以实现程序的各种结构方式
-     - 控制语句|	描述
-     -|-
+    - 控制语句|	描述
+    -|-
     - break 语句|	退出当前循环或语句，并开始脚本执行紧接着的语句。
     - goto 语句|	将程序的控制点转移到一个标签处
 
@@ -116,17 +116,17 @@ repeat...until	|重复执行循环，直到 指定的条件为真时为止
 
 ### 流程控制
 
-流程控制语句通过程序设定一个或多个条件语句来设定。在条件为 true 时执行指定程序代码，在条件为 false 时执行其他指定代码
++ 流程控制语句通过程序设定一个或多个条件语句来设定。在条件为 true 时执行指定程序代码，在条件为 false 时执行其他指定代码
 
-控制结构的条件表达式结果可以是任何值，ETlua认为false和nil为假，true和非nil为真。
++ 控制结构的条件表达式结果可以是任何值，ETlua认为false和nil为假，true和非nil为真。
 
-要注意的是 0 为 true
++ 要注意的是 0 为 true
 
-语句|	描述
--|-
-if 语句	|if 语句 由一个布尔表达式作为条件判断，其后紧跟其他语句组成。
-if...else 语句	|if 语句 可以与 else 语句搭配使用, 在 if 条件表达式为 false 时执行 else 语句代码。
-if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else if 语句 。
+    语句|	描述
+    -|-
+    if 语句	|if 语句 由一个布尔表达式作为条件判断，其后紧跟其他语句组成。
+    if...else 语句	|if 语句 可以与 else 语句搭配使用, 在 if 条件表达式为 false 时执行 else 语句代码。
+    if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else if 语句 
 
 ## 函数
 
@@ -134,13 +134,14 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 函数主要有两种用途：
 
-1.完成指定的任务，这种情况下函数作为调用语句使用；
+1.完成指定的任务，这种情况下函数作为调用语句使用
+
 2.计算并返回值，这种情况下函数作为赋值语句的表达式使用
 
 ### 函数定义
 + ETlua 编程语言函数定义格式如下：
 
-    ```
+    ```lua
     optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
         function_body
         return result_params_comma_separated
@@ -160,12 +161,12 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 ### 多返回值
 
-+ 函数可以返回多个结果值,用,隔开
++ 函数可以返回多个结果值用逗号(,)隔开
 
 ### 可变参数
 + 函数可以接受可变数目的参数，和 C 语言类似，在函数参数列表中使用三点 ... 表示函数有可变的参数
 
-    ```
+    ```lua
     function add(...)  
         local s = 0  
         for i, v in ipairs{...} do   --> {...} 表示一个由所有变长参数构成的数组  
@@ -178,7 +179,7 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 + 我们可以将可变参数赋值给一个变量。
 
-    ```
+    ```lua
     function average(...)
         result = 0
         local arg={...}    --> arg 为一个表，局部变量
@@ -191,14 +192,13 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
     print("平均值为",average(10,5,3,4,5,6))
 
-    以上代码执行结果为：
-    总共传入 6 个数
-    平均值为    5.5
+    --以上代码执行结果为：
+    --总共传入 6 个数
+    --平均值为    5.5
     ```
 + 通过 select("#",...) 来获取可变参数的数量:
 
-
-    ```
+    ```lua
     function average(...)
         result = 0
         local arg={...}
@@ -210,15 +210,16 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
     end
 
     print("平均值为",average(10,5,3,4,5,6))
-    以上代码执行结果为：
+    --以上代码执行结果为：
 
-    总共传入 6 个数
-    平均值为    5.5
+    --总共传入 6 个数
+    --平均值为    5.5
+
     ```
 
 + 可能需要几个固定参数加上可变参数，固定参数必须放在变长参数之前
 
-    ```
+    ```lua
     function fwrite(fmt, ...)  ---> 固定的参数fmt
         return io.write(string.format(fmt, ...))     
     end
@@ -226,10 +227,10 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
     fwrite("runoob\n")       --->fmt = "runoob", 没有变长参数。  
     fwrite("%d%d\n", 1, 2)   --->fmt = "%d%d", 变长参数为 1 和 2
     
-    输出结果为：
+    -- 输出结果为：
 
-    runoob
-    12
+    -- runoob
+    -- 12
 
     ```
 
@@ -240,7 +241,7 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 + 调用select时，必须传入一个固定实参selector(选择开关)和一系列变长参数。如果selector为数字n,那么select返回它的第n个可变实参，否则只能为字符串"#",这样select会返回变长参数的总数
 
-    ```
+    ```lua
     do  
         function foo(...)  
             for i = 1, select('#', ...) do  -->获取参数总数
@@ -251,11 +252,11 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
         foo(1, 2, 3, 4);  
     end
-    输出结果为：
-    arg    1
-    arg    2
-    arg    3
-    arg    4 
+    --输出结果为：
+    --arg    1
+    --arg    2
+    --arg    3
+    --arg    4 
 
     ```    
 
@@ -286,63 +287,62 @@ if 嵌套语句	|你可以在if 或 else if中使用一个或多个 if 或 else 
 
 ### 关系运算符
 
-下表列出了 ETlua 语言中的常用关系运算符，设定 A 的值为10，B 的值为 20：
++ 下表列出了 ETlua 语言中的常用关系运算符，设定 A 的值为10，B 的值为 20：
 
-操作符|	描述|	实例
--|-|-
-==|	等于，检测两个值是否相等，相等返回 true，否则返回 false|	(A == B) 为 false。
-~=|	不等于，检测两个值是否相等，相等返回 false，否则返回 true|	(A ~= B) 为 true。
->	|大于，如果左边的值大于右边的值，返回 true，否则返回 false|	(A > B) 为 false。
-<|	小于，如果左边的值大于右边的值，返回 false，否则返回 true|	(A < B) 为 true。
->=|	大于等于，如果左边的值大于等于右边的值，返回 true，否则返回 false|	(A >= B) 返回 false。
-<=|	小于等于， 如果左边的值小于等于右边的值，返回 true，否则返回 false|	(A <= B) 返回 true。
+    操作符|	描述|	实例
+    -|-|-
+    ==|	等于，检测两个值是否相等，相等返回 true，否则返回 false|	(A == B) 为 false。
+    ~=|	不等于，检测两个值是否相等，相等返回 false，否则返回 true|	(A ~= B) 为 true。
+    &gt;|大于，如果左边的值大于右边的值，返回 true，否则返回 false|	(A > B) 为 false。
+    <|	小于，如果左边的值大于右边的值，返回 false，否则返回 true|	(A < B) 为 true。
+    &gt;=|	大于等于，如果左边的值大于等于右边的值，返回 true，否则返回 false|	(A >= B) 返回 false。
+    <=|	小于等于， 如果左边的值小于等于右边的值，返回 true，否则返回 false|	(A <= B) 返回 true。
 
 ### 逻辑运算符
 
-下表列出了 ETlua 语言中的常用逻辑运算符，设定 A 的值为 true，B 的值为 false：
++ 下表列出了 ETlua 语言中的常用逻辑运算符，设定 A 的值为 true，B 的值为 false：
 
-操作符|	描述|	实例
--|-|-
-and|	逻辑与操作符。 若 A 为 false，则返回 A，否则返回 B。	|(A and B) 为 false。
-or	|逻辑或操作符。 若 A 为 true，则返回 A，否则返回 B。	|(A or B) 为 true。
-not	|逻辑非操作符。与逻辑运算结果相反，如果条件为 true，逻辑非为 false。|	not(A and B) 为 true。
+    操作符|	描述|	实例
+    -|-|-
+    and |逻辑与操作符。 若 A 为 false，则返回 A，否则返回 B。	|(A and B) 为 false。
+    or	|逻辑或操作符。 若 A 为 true，则返回 A，否则返回 B。	|(A or B) 为 true。
+    not	|逻辑非操作符。与逻辑运算结果相反，如果条件为 true，逻辑非为 false。|	not(A and B) 为 true。
 
 ### 位操作符
 
-|操作符|	描述|
-|-|-|
++ 下表列出了 ETlua 语言中的常用位操作符
 
-- （& ）（按位与）操作法。
-
-- （ | ）（按位或）操作
-- （ ~ ）  （按位异或）操作。 
-- （ ~ ） （按位非）操作。 
-- （ << ）  （左移）操作。
-- （ >> ） （右移）操作。 
+    操作符|	描述
+    -|-
+     &  |（按位与）操作法。
+     &Iota; |（按位或）操作
+     ~  | （按位异或）操作。 
+     ~  |（按位非）操作。 
+     << | （左移）操作。
+    &gt;&gt; |（右移）操作。 
 
 ### 其他运算符
 
-下表列出了 ETlua 语言中的连接运算符与计算表或字符串长度的运算符：
++ 下表列出了 ETlua 语言中的连接运算符与计算表或字符串长度的运算符：
 
-|操作符|	描述|	实例|
-|-|-|-
-|..	|连接两个字符串	|a..b ，其中 a 为 "Hello " ， b 为 "World", 输出结果为 "Hello World"。
-|#	|一元运算符，返回字符串或表的长度。|	#"Hello" 返回 5
+    |操作符|	描述|	实例|
+    |-|-|-
+    |..	|连接两个字符串	|a..b ，其中 a 为 "Hello " ， b 为 "World", 输出结果为 "Hello World"。
+    |#	|一元运算符，返回字符串或表的长度。|	#"Hello" 返回 5
 
 ### 运算符优先级
 
-从高到低的顺序：
-```
-^
-not    - (unary)
-*      /
-+      -
-..
-<      >      <=     >=     ~=     ==
-and
-or 
-```
-
++ 从高到低的顺序：
+    ```
+    ^
+    not    - (unary)
+    *      /
+    +      -
+    ..
+    <      >      <=     >=     ~=     ==
+    and
+    or 
+    ```
 
 ## 数组
 
@@ -354,13 +354,16 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
 
 + 一维数组是最简单的数组，其逻辑结构是线性表。一维数组可以用for循环出数组中的元素
 
-    ```
+    ```lua
     array = {"ETlua", "Tutorial"}
 
     for i= 0, 2 do
-    print(array[i])
+        print(array[i])
     end
+    
+    --输出结果为 nil Lua Tutorial
     ```
+
 + 我们可以使用整数索引来访问数组元素，如果知道的索引没有值则返回nil。
 
 + 索引值是以 1 为起始，但你也可以指定 0 开始。
@@ -371,22 +374,24 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
 
 + 多维数组即数组中包含数组或一维数组的索引键对应一个数组。
 
-    ```
+    ```lua
     -- 初始化数组
     array = {}
     for i=1,3 do
-    array[i] = {}
-        for j=1,3 do
-            array[i][j] = i*j
-        end
+        array[i] = {}
+            for j=1,3 do
+                array[i][j] = i*j
+            end
     end
 
     -- 访问数组
     for i=1,3 do
-    for j=1,3 do
-        print(array[i][j])
+        for j=1,3 do
+            print(array[i][j])
+        end
     end
-    end
+
+    --输出结果 1 2 3 2 4 6 3 6 9
     ```
 
 ## 迭代器
@@ -395,36 +400,36 @@ ETlua 数组的索引键值可以使用整数表示，数组的大小不是固�
 
 迭代器是一种支持指针类型的结构，它可以遍历集合的每一个元素。
 
+在ETlua中我们常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。ETlua 的迭代器包含以下两种类型：无状态的迭代器
+和多状态的迭代器
+
 
 ### 泛型 for 迭代器
 
-泛型 for 在自己内部保存迭代函数，实际上它保存三个值：迭代函数、状态常量、控制变量。
++ 泛型 for 在自己内部保存迭代函数，实际上它保存三个值：迭代函数、状态常量、控制变量。
 
-泛型 for 迭代器提供了集合的 key/value 对，语法格式如下：
++ 泛型 for 迭代器提供了集合的 key/value 对，语法格式如下：
 
-```
-array = {"Google", "Runoob"}
+    ```lua
+    array = {"Google", "Runoob"}
+    
+    for key,value in ipairs(array) do
+       print(key, value)
+    end
+    
+    --输出结果为  1 Google  2 Runoob
+    ```
 
-for key,value in ipairs(array) 
-do
-   print(key, value)
-end
-```
++ 以上实例中我们使用了 ETlua 默认提供的迭代函数 ipairs。
 
-以上实例中我们使用了 ETlua 默认提供的迭代函数 ipairs。
++ 下面我们看看泛型 for 的执行过程：
 
-下面我们看看泛型 for 的执行过程：
+    + 首先，初始化，计算 in 后面表达式的值，表达式应该返回泛型 for 需要的三个值：迭代函数、状态常量、控制变量；与多值赋值一样，如果表达式返回的结果个数不足三个会自动用 nil 补足，多出部分会被忽略。
+    + 第二，将状态常量和控制变量作为参数调用迭代函数（注意：对于 for 结构来说，状态常量没有用处，仅仅在初始化时获取他的值并传递给迭代函数）。
+    + 第三，将迭代函数返回的值赋给变量列表。
+    + 第四，如果返回的第一个值为nil循环结束，否则执行循环体。
+    + 第五，回到第二步再次调用迭代函数
 
-+ 首先，初始化，计算 in 后面表达式的值，表达式应该返回泛型 for 需要的三个值：迭代函数、状态常量、控制变量；与多值赋值一样，如果表达式返回的结果个数不足三个会自动用 nil 补足，多出部分会被忽略。
-+ 第二，将状态常量和控制变量作为参数调用迭代函数（注意：对于 for 结构来说，状态常量没有用处，仅仅在初始化时获取他的值并传递给迭代函数）。
-+ 第三，将迭代函数返回的值赋给变量列表。
-+ 第四，如果返回的第一个值为nil循环结束，否则执行循环体。
-+ 第五，回到第二步再次调用迭代函数
-
-在ETlua中我们常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。ETlua 的迭代器包含以下两种类型：
-
-+ 无状态的迭代器
-+ 多状态的迭代器
 
 ### 无状态的迭代器
 
@@ -436,30 +441,28 @@ end
 
 + 以下实例我们使用了一个简单的函数来实现迭代器，实现 数字 n 的平方：
 
-    ```
+    ```lua
     function square(iteratorMaxCount,currentNumber)
         if currentNumber<iteratorMaxCount then
             currentNumber = currentNumber+1
             return currentNumber, currentNumber*currentNumber
         end
     end
-   
-    for i,n in square,3,0
-    do
+
+    for i,n in square,3,0  do
         print(i,n)
     end
 
-
-    输出: 1  1      2  4        3  9
-     ```
+    -- 输出结果  1  1      2  4       3  9
+    ```
 + 迭代的状态包括被遍历的表（循环过程中不会改变的状态常量）和当前的索引下标（控制变量），ipairs 和迭代函数都很简单，我们在 ETlua 中可以这样实现：
 
-    ```
+    ```lua
     function iter (a, i)
         i = i + 1
         local v = a[i]
         if v then
-        return i, v
+            return i, v
         end
     end
     
@@ -475,32 +478,27 @@ end
 
 + 以下实例我们创建了自己的迭代器：
 
-    ```
+    ```lua
     array = {"Google", "Runoob"}
 
     function elementIterator (collection)
-    local index = 0
-    local count = #collection
-    -- 闭包函数
-    return function ()
-        index = index + 1
-        if index <= count
-        then
-            --  返回迭代器的当前元素
-            return collection[index]
+        local index = 0
+        local count = #collection
+        -- 闭包函数
+        return function ()
+            index = index + 1
+            if index <= count then
+                --  返回迭代器的当前元素
+                return collection[index]
+            end
         end
     end
+
+    for element in elementIterator(array) do
+        print(element)
     end
 
-    for element in elementIterator(array)
-    do
-    print(element)
-    end
+    --以上输出结果为：Google Runoob
 
-    以上输出结果为：
-
-    Google
-    Runoob
-
-    以上我们可以看到，elementIterator 内使用了闭包函数，实现计算集合大小并输出各个元素
+    --以上我们可以看到，elementIterator 内使用了闭包函数，实现计算集合大小并输出各个元素
     ```
