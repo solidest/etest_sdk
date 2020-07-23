@@ -440,6 +440,20 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
     end
     ```
 
+#### async.on
+
+- async.on(event, cb)
+- 订阅用户自定义事件`event`
+- 当`event`事件触发时，cb函数会被调用
+
+#### async.off
+- async.off(event)
+- 关闭对用户自定义事件`event`对订阅
+
+#### async.emit
+- async.emit(event, udata)
+- 触发`event`事件，并传递可选参数udata
+
 ## log库
 
 #### log.info
