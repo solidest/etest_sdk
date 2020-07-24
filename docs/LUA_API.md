@@ -221,9 +221,6 @@ ETLua API是内置在ETLua执行器中的全局对象和函数，开发时无须
 - 对于AD接口，返回值为整数
 - 对于DI接口，返回值为布尔值，高电平为true，低电平为false
 
-#### nameof
-- 获取内置对象名称，输入参数为内置对象或消息对象
-
 #### ask 
 
 - 用于和用户界面进行交互
@@ -442,6 +439,20 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
         async.off_recv(device.dev2.uu2)
     end
     ```
+
+#### async.on
+
+- `async.on(event, cb)`
+- 订阅用户自定义事件`event`
+- 当`event`事件触发时，cb函数会被调用
+
+#### async.off
+- `async.off(event)`
+- 关闭对用户自定义事件`event`对订阅
+
+#### async.emit
+- `async.emit(event, udata)`
+- 触发`event`事件，并传递可选参数udata
 
 ## log库
 
