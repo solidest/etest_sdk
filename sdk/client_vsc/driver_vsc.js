@@ -1,18 +1,15 @@
 const path = require('path');
 const fs = require('fs');
-const RpcTask = require('../driver/RpcTask');
-const NetWork = require('../driver/NetWork');
-const parser = require("../parser/etxParser")
-const parser_run = require('../parser');
-const protocols = require('../etl/protocols');
-const parseHardEnv = require('../etl/devices');
+const RpcTask = require('./rpctask');
+const parser = require("./parser/etxParser")
+const parser_run = require('./parser');
+const protocols = require('./protocols');
+const parseHardEnv = require('./devices');
 const yaml = require('js-yaml');
 
 class SdkApi {
     constructor(ip, port) {
-        let net = new NetWork();
-        this._srv = new RpcTask(net);
-        net.open(ip, port);
+        this._srv = new RpcTask(ip, port, false);
     }
 
     //执行服务器api
@@ -135,6 +132,58 @@ class SdkApi {
         }
     }
 
+    // start_quick(cfg, run_id, callback) {
+    //     try {
+    //         let pf = cfg.project.path;
+    //         pf = path.isAbsolute(pf) ? pf : path.resolve(pf);
+    //         let run = cfg.program[run_id];
+    //         if (!run) {
+    //             throw new Error(`实例"${run_id}"未找到`);
+    //         }
+    //         if (!run.src) {
+    //             throw new Error(`实例"${run_id}"未设置src属性`);
+    //         }
+    //         let src = path.resolve(pf, run.src);
+    //         if (!fs.existsSync(src)) {
+    //             throw new Error(`文件"${src}"未找到`);
+    //         }
+
+    //         let asts = parser_run.getRunAstList(pf, src);
+    //         if (!asts || asts.length === 0) {
+    //             return;
+    //         }
+    //         let option = run.option || {};
+    //         if (run.topology) {
+    //             option.topology = run.topology;
+    //         }
+
+    //         asts[0].option = option;
+    //         if(typeof run.vars === 'object') {
+    //             if(Array.isArray(run.vars)) {
+    //                 let vs = [];
+    //                 for(let f of run.vars) {
+    //                     vs = vs.concat(yaml.safeLoad(fs.readFileSync(f, 'utf8')));
+    //                 }
+    //                 // console.log(vs.length)
+    //                 asts[0].vars = vs;
+    //             } else {
+    //                 asts[0].vars = run.vars;
+    //             }
+    //         } else if(typeof run.vars === 'string'){
+    //             let f = path.resolve(pf, run.vars) 
+    //             asts[0].vars = yaml.safeLoad(fs.readFileSync(f, 'utf8'));
+    //         } else {
+    //             console.log('type of vars is ', typeof run.vars)
+    //         }
+    //         asts[0].proj_id = cfg.project.id;
+
+    //         return this._xfn('start', asts, callback);
+    //     } catch (error) {
+    //         if (callback) {
+    //             callback(error);
+    //         }
+    //     }
+    // }
 
     start_quick(cfg, run_id, callback) {
         try {
@@ -215,16 +264,6 @@ class SdkApi {
     state(callback) {
         try {
             return this._xfn('state', null, callback);
-        } catch (error) {
-            if (callback) {
-                callback(error);
-            }
-        }
-    }
-
-    ping(callback) {
-        try {
-            return this._xfn('ping', null, callback);
         } catch (error) {
             if (callback) {
                 callback(error);

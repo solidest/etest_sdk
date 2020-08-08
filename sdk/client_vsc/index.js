@@ -2,7 +2,7 @@
 import path from 'path';
 import yaml from 'js-yaml';
 import fs from 'fs';
-import SdkApi from '../core/driver_vsc';
+import SdkApi from './driver_vsc';
 import cach from './cachdb';
 import {
     ipcMain, dialog

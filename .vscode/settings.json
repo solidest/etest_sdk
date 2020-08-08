@@ -15,6 +15,7 @@
         "recv",
         "async",
         "record",
-        "before_record"
+        "before_record",
+        "buf"
     ]
 }

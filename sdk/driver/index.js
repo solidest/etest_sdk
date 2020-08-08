@@ -45,8 +45,10 @@ function _xfn(method, params) {
     });
 }
 
-
 async function ping(ip, port) {
+    if(net.is_open()) {
+        net.close();
+    }
     let res = await net.open(ip, port);
     if(!res || res.result !=='ok') {
         return {

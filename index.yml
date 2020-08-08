@@ -1,103 +1,170 @@
 
 # 项目设置
 project:
-  id: 2923ffa5-d130-4b92-b808-343c3d9dfeb9  # 项目唯一id
-  path: proj_etl_test  # 项目文件根目录，绝对路径或相对路径
-  xtra: protocol/xtra.lua # 项目使用的协议解析插件
-  etestd_ip: 127.0.0.1 # etest守护服务的ip地址或主机名
+  id: 72f6f124-d355-403f-9f8d-842a75b3b2dc  # 项目唯一id
+  path: ./tests  # 项目文件根目录，绝对路径或相对路径
+  lib_path: libs
+  xtras:
+    pack: xtras/pack.lua
+    unpack: xtras/unpack.lua
+    check: xtras/check.lua
+    recvfilter: xtras/recvfilter.lua
+  etestd_ip: etest # etest守护服务的ip地址或主机名
   etestd_port: 1210 # etest守护服务的端口号
+
+# 批量执行设置
+runs:
+  all: # 无依赖的全部用例
+  - t_primitive
+  - t_array_string
+  - t_array
+  - t_bytesize
+  - t_tstring
+  - t_checkcode
+  - t_code
+  - t_com
+  - t_double
+  - t_float
+  - t_oneof
+  - t_recv
+  - t_send
+  - t_int
+  - t_uint
+  - t_message_now
+  - t_log
+  - t_time
+  - t_ask
+  - t_udp
+  - t_string
+  - t_tcp
+
+  env: #需要依赖硬件环境的用例
+  - t_serial
+  - t_rt
+  net: # 网络测试
+  - t_udp
+  - t_tcp
 
 # 执行程序设置
 program:
-  demo:  # 执行实例id，同一个项目内必须唯一
-    src: program/demo.lua  # 用例脚本文件路径，与project.path的相对路径
-    vars: {}  # 执行用例脚本时的输入参数
-    topology: topo_main # 执行用例脚本时使用的连接拓扑
-  hello: # 临时测试
-    src: program/hello_world.lua
-    topology: topo_main
-  test_api: # 全部api的基本测试
-    src: program/test_api.lua
-    topology: topo_main
+  demo:
+    src: program/demo.lua
+    topology: topo_udp
+    vars:
 
-  array: #测试数组元素 int与uint api
-    src: program/eTestProgram/array.lua
-    vars: {}  
-    topology: topo_main
+  t_primitive:
+    src: program/t_primitive.lua
+    topology: topo_udp
+    vars:
 
-  string: #测试发送函数
-    src: program/eTestProgram/string.lua
-    vars: {}  
+  t_udp:
+    src: program/t_udp.lua
+    topology: topo_udp
+    vars:
+    # option:
+    #   # 是否启用实时模式
+    #   real_time: true 
+    #   # 实时任务调度周期(us)
+    #   rt_cycle: 1000  
+    #   # 实时任务执行策略, auto:自动 speed_first:执行速度优先 memory_first:内存占用优先
+    #   rt_policy: auto
+  t_tcp:
+    src: program/t_tcp.lua
+    topology: topo_tcp
+    vars:
+  t_string:
+    src: program/t_string.lua
+    topology: topo_udp
+    vars:
+  t_serial:
+    src: program/t_serial.lua
+    topology: topo_serial
+    vars:
+  t_timer:
+    src: program/t_timer.lua
+    topology: topo_udp
+    vars:
+  t_rt:
+    src: program/t_rt.lua
+    topology: topo_rt
+    option:
+      # 是否启用实时模式
+      real_time: true 
+      # 实时任务调度周期(us)
+      rt_cycle: 1000  
+      # 实时任务执行策略, auto:自动 speed_first:执行速度优先 memory_first:内存占用优先
+      rt_policy: auto
+    vars:
+  t_array_string:
+    src: program/array_string.lua
     topology: topo11
-
-  array_string: #测试数组元素 string api
-    src: program/eTestProgram/array_string.lua
-    vars: {}  
-    topology: topo_main
-
-  bytesize: #测试ByteSize函数
-    src: program/eTestProgram/bytesize.lua
-    vars: {}  
-    topology: topo_main
-
-  checkcode: #测试校验函数
-    src: program/eTestProgram/checkcode.lua
-    vars: {}  
-    topology: topo_main
-
-  int_uint_float_one: #测试int uint float double 补码反码 大小端续 两者组合
-    src: program/eTestProgram/code.lua
-    vars: {}  
-    topology: topo_main
-
-  int_uint_float_some: #测试int uint float double 补码反码 大小端续等多种混合组合
-    src: program/eTestProgram/com_.lua
-    vars: {}  
-    topology: topo_main
-
-  double: #测试double数据类型
-    src: program/eTestProgram/double.lua
-    vars: {}  
-    topology: topo_main
-
-  float: #测试float数据类型
-    src: program/eTestProgram/float.lua
-    vars: {}  
-    topology: topo_main
-
-  int: #测试int数据类型
-    src: program/eTestProgram/int.lua
-    vars: {}  
-    topology: topo_main
-
-  uint: #测试int数据类型
-    src: program/eTestProgram/uint.lua
-    vars: {}  
-    topology: topo_main
-
-  oneof: #测试多层协议分之oneof
-    src: program/eTestProgram/oneof.lua
-    vars: {}  
-    topology: topo_main
-
-  recv: #测试接收函数
-    src: program/eTestProgram/recv.lua
-    vars: {}  
+    vars:
+  t_array:
+    src: program/array.lua
     topology: topo11
-
-  send: #测试发送函数
-    src: program/eTestProgram/send.lua
-    vars: {}  
+    vars:
+  t_bytesize:
+    src: program/bytesize.lua
     topology: topo11
-
-
-  
-
-
-
-  
-  
-  
-    
-
-
+    vars:
+  t_tstring:
+    src: program/string.lua
+    topology: topo11
+    vars:
+  t_checkcode:
+    src: program/checkcode.lua
+    topology: topo11
+    vars:
+  t_code:
+    src: program/code.lua
+    topology: topo11
+    vars:
+  t_com:
+    src: program/com_.lua
+    topology: topo11
+    vars:
+  t_double:
+    src: program/double.lua
+    topology: topo11
+    vars:
+  t_float:
+    src: program/float.lua
+    topology: topo11
+    vars:
+  t_int:
+    src: program/int.lua
+    topology: topo11
+    vars:
+  t_oneof:
+    src: program/oneof.lua
+    topology: topo11
+    vars:
+  t_recv:
+    src: program/recv.lua
+    topology: topo11
+    vars:
+  t_send:
+    src: program/send.lua
+    topology: topo11
+    vars:
+  t_uint:
+    src: program/uint.lua
+    topology: topo11
+    vars:
+  t_message_now:
+    src: program/message_now.lua
+    topology: topo11
+    vars: 
+  t_ask:
+    src: program/ask.lua
+    topology: topo11
+    vars:
+  t_log:
+    src: program/log.lua
+    topology: topo11
+    vars: 
+  t_time:
+    src: program/timer.lua
+    topology: topo11
+    vars: 
+   
