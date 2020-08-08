@@ -34,7 +34,7 @@ function save(run_id, data) {
     let rcd = _db.getCollection("record");
     for(let r of data) {
         if(r.catalog === 'record' && r.value) {
-            let rv = r.value;
+            let rv = JSON.parse(r.value);
             rv['$time'] = r.time;
             rcd.insert(rv);
             delete r.value;
@@ -49,7 +49,6 @@ function close() {
         return;
     }
     _db.saveDatabase();
-    _db = null;
 }
 
 module.exports = {

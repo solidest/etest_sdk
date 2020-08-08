@@ -58,20 +58,6 @@
             [
                 "*"
             ],
-            "\\bbitlr\\b",
-            "return 'BITLR' "
-        ],
-        [
-            [
-                "*"
-            ],
-            "\\bbitrl\\b",
-            "return 'BITRL' "
-        ],
-        [
-            [
-                "*"
-            ],
             "\\bprotocol\\b",
             "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('protocol'); return 'PROTOCOL';"
         ],

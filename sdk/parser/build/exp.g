@@ -376,306 +376,6 @@
         ]
     ],
     "bnf": {
-        "top_element_list": [
-            [
-                "top_element",
-                "$$ = newList($top_element);"
-            ],
-            [
-                "top_element_list top_element",
-                "$$ = joinList($top_element_list, $top_element);"
-            ]
-        ],
-        "top_element": [
-            [
-                "BITLR PROTOCOL ID { }",
-                "let res = newElement('protocol', $ID, 'seglist', null, @ID); res.bittype = 'lr'; $$ = res; "
-            ],
-            [
-                "BITRL PROTOCOL ID { }",
-                "let res = newElement('protocol', $ID, 'seglist', null, @ID); res.bittype = 'rl'; $$ = res; "
-            ],
-            [
-                "PROTOCOL ID { }",
-                "$$ = newElement('protocol', $ID, 'seglist', null, @ID);"
-            ],
-            [
-                "BITLR PROTOCOL ID { protocol_element_list }",
-                "let res = newElement('protocol', $ID, 'seglist', $protocol_element_list, @ID); res.bittype = 'lr'; $$ = res; "
-            ],
-            [
-                "BITRL PROTOCOL ID { protocol_element_list }",
-                "let res = newElement('protocol', $ID, 'seglist', $protocol_element_list, @ID); res.bittype = 'rl'; $$ = res; "
-            ],
-            [
-                "PROTOCOL ID { protocol_element_list }",
-                "$$ = newElement('protocol', $ID,'seglist', $protocol_element_list, @ID);"
-            ],
-            [
-                "DEVICE ID { }",
-                "$$ = {kind: 'device', name: $ID, value: null};"
-            ],
-            [
-                "DEVICE ID { device_element_list }",
-                "$$ = {kind: 'device', name: $ID, value: $device_element_list};"
-            ],
-            [
-                "TOPOLOGY ID { }",
-                "$$ = {kind: 'topology', name: $ID, value: null};"
-            ],
-            [
-                "TOPOLOGY ID { topology_element_list }",
-                "$$ = {kind: 'topology', name: $ID, value: $topology_element_list};"
-            ]
-        ],
-        "protocol_element_list": [
-            [
-                "protocol_element",
-                "$$ = newList($protocol_element);"
-            ],
-            [
-                "protocol_element_list protocol_element",
-                "$$ = joinList($protocol_element_list, $protocol_element)"
-            ]
-        ],
-        "protocol_element": [
-            [
-                "SEGMENT ID object_like",
-                "$$ = newElement('segment', $ID, 'props', $object_like, @ID);"
-            ],
-            [
-                "SEGMENT ID [ exp ] object_like",
-                "$$ = newElement('segment', $ID, 'props', $object_like, @ID, $exp);"
-            ],
-            [
-                "segments",
-                "$$ = $segments;"
-            ],
-            [
-                "branch",
-                "$$ = $branch;"
-            ]
-        ],
-        "segments": [
-            [
-                "SEGMENTS ID { }",
-                "$$ = newProtSeggroup($ID, null, @ID);"
-            ],
-            [
-                "SEGMENTS ID { protocol_element_list }",
-                "$$ = newProtSeggroup($ID, $protocol_element_list, @ID);"
-            ],
-            [
-                "SEGMENTS ID [ exp ] { protocol_element_list }",
-                "$$ = newProtSeggroup($ID, $protocol_element_list, @ID, $exp);"
-            ]
-        ],
-        "branch": [
-            [
-                "ONEOF ( exp ) { }",
-                "$$ = newProtBranch('oneof', $exp, null, @exp);"
-            ],
-            [
-                "ONEOF ( exp ) { protocol_element_list }",
-                "$$ = newProtBranch('oneof', $exp, $protocol_element_list, @exp);"
-            ]
-        ],
-        "device_element_list": [
-            [
-                "device_element",
-                "$$ = newList($device_element);"
-            ],
-            [
-                "device_element_list device_element",
-                "$$ = joinList($device_element_list, $device_element);"
-            ]
-        ],
-        "device_element": [
-            [
-                "INTFTYPE ID object_like",
-                "$$ = {kind: 'connector', name: $ID, type: $INTFTYPE, config: $object_like};"
-            ]
-        ],
-        "topology_element_list": [
-            [
-                "topology_element",
-                "$$ = $topology_element;"
-            ],
-            [
-                "topology_element_list topology_element",
-                "$$ = $topology_element_list.concat($topology_element);"
-            ]
-        ],
-        "topology_element": [
-            [
-                "LINKING : { }",
-                "$$ = [];"
-            ],
-            [
-                "LINKING : { topology_linking_elements }",
-                "$$ = $topology_linking_elements;"
-            ],
-            [
-                "MAPPING : { }",
-                "$$ = [];"
-            ],
-            [
-                "MAPPING : { topology_mapping_elements }",
-                "$$ = $topology_mapping_elements"
-            ],
-            [
-                "BINDING : { }",
-                "$$ = [];"
-            ],
-            [
-                "BINDING : { topology_bindinging_elements }",
-                "$$ = $topology_bindinging_elements;"
-            ]
-        ],
-        "topology_linking_elements": [
-            [
-                "topology_linking_element",
-                "$$ = newList($topology_linking_element);"
-            ],
-            [
-                "topology_linking_elements , topology_linking_element",
-                "$$ = joinList($topology_linking_elements, $topology_linking_element);"
-            ],
-            [
-                "topology_linking_elements ,",
-                "$$ = $topology_linking_elements;"
-            ]
-        ],
-        "topology_linking_element": [
-            [
-                "ID : [ ]",
-                "$$ = null;"
-            ],
-            [
-                "ID : [ topology_dev_intfs ]",
-                "$$ = { kind: 'linking', name: $ID, value: $topology_dev_intfs };"
-            ]
-        ],
-        "topology_mapping_elements": [
-            [
-                "topology_mapping_element",
-                "$$ = newList($topology_mapping_element);"
-            ],
-            [
-                "topology_mapping_elements , topology_mapping_element",
-                "$$ = joinList($topology_mapping_elements, $topology_mapping_element);"
-            ],
-            [
-                "topology_mapping_elements ,",
-                "$$ = $topology_mapping_elements;"
-            ]
-        ],
-        "topology_mapping_element": [
-            [
-                "UUT : [ ]",
-                "$$ = null;"
-            ],
-            [
-                "UUT : [ topology_devs ]",
-                "$$ = {kind: 'uut', value: $topology_devs};"
-            ],
-            [
-                "ETEST : [ ]",
-                "$$ = null;"
-            ],
-            [
-                "ETEST : [ topology_devs ]",
-                "$$ = {kind: 'etest', value: $topology_devs};"
-            ]
-        ],
-        "topology_bindinging_elements": [
-            [
-                "topology_bindinging_element",
-                "$$ = newList($topology_bindinging_element);"
-            ],
-            [
-                "topology_bindinging_elements , topology_bindinging_element",
-                "$$ = joinList($topology_bindinging_elements, $topology_bindinging_element);"
-            ],
-            [
-                "topology_bindinging_elements ,",
-                "$$ = $topology_bindinging_elements;"
-            ]
-        ],
-        "topology_bindinging_element": [
-            [
-                "topology_dev_intf : STRING_TRIPLE",
-                "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = eval($STRING_TRIPLE); $$ = $topology_dev_intf;"
-            ],
-            [
-                "topology_dev_intf : STRING_SINGLE",
-                "$topology_dev_intf.kind = 'binding'; $topology_dev_intf.bind = eval($STRING_SINGLE); $$ = $topology_dev_intf;"
-            ]
-        ],
-        "topology_dev_intfs": [
-            [
-                "topology_dev_intf",
-                "$$ = newList($topology_dev_intf)"
-            ],
-            [
-                "topology_dev_intfs , topology_dev_intf",
-                "$$ = joinList($topology_dev_intfs, $topology_dev_intf);"
-            ],
-            [
-                "topology_dev_intfs ,",
-                "$$ = $topology_dev_intfs"
-            ]
-        ],
-        "topology_dev_intf": [
-            [
-                "ID DOT ID",
-                "$$ = { kind: 'dev_connector', device: $1, connector: $3};"
-            ]
-        ],
-        "topology_devs": [
-            [
-                "ID",
-                "$$ = newList($ID);"
-            ],
-            [
-                "topology_devs , ID",
-                "$$ = joinList($topology_devs, $ID);"
-            ],
-            [
-                "topology_devs ,",
-                "$$ = $topology_devs;"
-            ]
-        ],
-        "object_like": [
-            [
-                "{ }",
-                "$$ = newList(null);"
-            ],
-            [
-                "{ property_list }",
-                "$$ = $property_list;"
-            ]
-        ],
-        "property_list": [
-            [
-                "property_setting",
-                "$$ = newList($property_setting);"
-            ],
-            [
-                "property_list , property_setting",
-                "$$ = joinList($property_list, $property_setting);"
-            ],
-            [
-                "property_list ,",
-                "$$ = $property_list;"
-            ]
-        ],
-        "property_setting": [
-            [
-                "ID : exp",
-                "$$ = newProp($ID, $exp, @ID, @exp);"
-            ]
-        ],
         "exp": [
             [
                 "literal",
@@ -847,6 +547,36 @@
             [
                 "STRING_HEX",
                 "$$ = {kind: 'strhex',  value: yytext.replace(/%/g, '')};"
+            ]
+        ],
+        "object_like": [
+            [
+                "{ }",
+                "$$ = newList(null);"
+            ],
+            [
+                "{ property_list }",
+                "$$ = $property_list;"
+            ]
+        ],
+        "property_list": [
+            [
+                "property_setting",
+                "$$ = newList($property_setting);"
+            ],
+            [
+                "property_list , property_setting",
+                "$$ = joinList($property_list, $property_setting);"
+            ],
+            [
+                "property_list ,",
+                "$$ = $property_list;"
+            ]
+        ],
+        "property_setting": [
+            [
+                "ID : exp",
+                "$$ = newProp($ID, $exp, @ID, @exp);"
             ]
         ]
     },

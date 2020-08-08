@@ -57,7 +57,6 @@ function getSrcAst(kind, proj_path, src_path) {
   let proj_apath = path.isAbsolute(proj_path) ? proj_path : path.resolve(proj_path);
   let src_apath = path.isAbsolute(src_path) ? src_path : path.resolve(proj_apath, src_path);
   let src_rpath = path.relative(proj_apath, src_apath);
-  src_rpath = src_rpath.replace('\\', '/');
 
   if(src_rpath.startsWith('.')) {
     throw new Error(`无法解析文件"${src_path}"`);
@@ -133,6 +132,5 @@ function getRunAstList(proj_path, src_path, asts) {
 }
 
 module.exports = {
-  getRunAstList,
-  getSrcAst
+  getRunAstList
 };

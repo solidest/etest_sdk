@@ -59,20 +59,6 @@
                 [
                     "*"
                 ],
-                "\\bbitlr\\b",
-                "return 'BITLR' "
-            ],
-            [
-                [
-                    "*"
-                ],
-                "\\bbitrl\\b",
-                "return 'BITRL' "
-            ],
-            [
-                [
-                    "*"
-                ],
                 "\\bprotocol\\b",
                 "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('protocol'); return 'PROTOCOL';"
             ],
@@ -388,24 +374,8 @@
         ],
         "top_element": [
             [
-                "BITLR PROTOCOL ID { }",
-                "let res = newElement('protocol', $ID, 'seglist', null, @ID); res.bittype = 'lr'; $$ = res; "
-            ],
-            [
-                "BITRL PROTOCOL ID { }",
-                "let res = newElement('protocol', $ID, 'seglist', null, @ID); res.bittype = 'rl'; $$ = res; "
-            ],
-            [
                 "PROTOCOL ID { }",
-                "$$ = newElement('protocol', $ID, 'seglist', null, @ID);"
-            ],
-            [
-                "BITLR PROTOCOL ID { protocol_element_list }",
-                "let res = newElement('protocol', $ID, 'seglist', $protocol_element_list, @ID); res.bittype = 'lr'; $$ = res; "
-            ],
-            [
-                "BITRL PROTOCOL ID { protocol_element_list }",
-                "let res = newElement('protocol', $ID, 'seglist', $protocol_element_list, @ID); res.bittype = 'rl'; $$ = res; "
+                "newElement('protocol', $ID, 'seglist', null, @ID);"
             ],
             [
                 "PROTOCOL ID { protocol_element_list }",

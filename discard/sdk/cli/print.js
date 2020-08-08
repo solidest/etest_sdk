@@ -37,34 +37,30 @@ function usr_print(info) {
 
 //USER::LOG UI <- ETL
 function usr_log(type, info) {
-    // let info = JSON.parse(inlog);
+    if(info) {
+        if(type=="check") {
+            let o = JSON.parse(info)
+            info = o.message + " : " + (o.result? 'true': 'false');
+        } else {
+            info = JSON.parse(info).message;
+        }
+    }
     let fmt = '';
     switch (type) {
         case "info":
-            fmt = '\x1B[30;42m INFO \x1B[32;49m%s\x1B[0m ';
+            fmt = '\x1B[30;42m INFO \x1B[32;49m%s\x1B[0m'
             break;
         case "error":
-            fmt = '\x1B[30;41m ERROR \x1B[31;49m%s\x1B[0m ';
+            fmt = '\x1B[30;41m ERROR \x1B[31;49m%s\x1B[0m';
             break;
         case "warn":
-            fmt = '\x1B[30;43m WARNING \x1B[33;49m%s\x1B[0m ';
-            break;
-        case "check": {
-            if(info.result) {
-                fmt = '\x1B[30;42m CHECK \x1B[32;49m%s\x1B[0m ';
-            } else {
-                fmt = '\x1B[30;41m CHECK \x1B[31;49m%s\x1B[0m ';
-            }
-            break;
-        }
-        case "doing": 
-            fmt = '\x1B[30;42m DOING \x1B[32;49m%s\x1B[0m ';
+            fmt = '\x1B[30;43m WARNING \x1B[33;49m%s\x1B[0m';
             break;
         default:
             fmt = `\x1B[44;30m ${type.toLocaleUpperCase()} \x1B[34;49m%s\x1B[0m`
             break;
     }
-    console.log(fmt, ' ' + info.message);
+    console.log(fmt, info);
 }
 
 

@@ -1,115 +1,389 @@
-
-/**
- * ETest驱动程序
- */
-
-const SdkApi = require('../index.js');
-const print = require('./print');
-const parse_out = require('./parse_out');
-const yaml = require('js-yaml');
+const path = require('path');
 const fs = require('fs');
+const RpcTask = require('./RpcTask');
+const NetWork = require('./NetWork');
 
-let _srv = null;
-let _run_id = null;
-let _timer = null;
+const net = new NetWork();
+const rpc = new RpcTask(net);
 
-//退出执行
-function _exit() {
-    if (_timer) {
-        clearInterval(_timer);
-        _timer = null;
-    }
-    process.exit(0);
+async function open(ip, port) {
+    return await net.open(ip, port);
 }
 
-//命令执行回调
-function _callback(err, res, id) {
-    if (err) {
-        return print.sys_error(err.message ? err.message : err, id);
-    }
-    return print.sys_recved(id, res);
+function close() {
+    net.close();
 }
 
-//读取执行输出
-function _read_out() {
-    if (!_run_id) {
-        return;
-    }
-    _srv.readout(_run_id, (err, res, id) => {
-        if (err) {
-            print.sys_error(id, err);
-            _exit();
-            return;
-        }
-        if(parse_out(res)) {
-            _exit();
-            return;
-        }
-    });
+function on_error(cb) {
+    net.on('error', cb);
 }
 
-//确认已连接服务器
-function _check_cfg(idxfile) {
-    if(_srv) {
-        return yaml.safeLoad(fs.readFileSync(idxfile, 'utf8'));
-    }
-    let cfg = yaml.safeLoad(fs.readFileSync(idxfile, 'utf8'));
-    _srv = new SdkApi(cfg.project.etestd_ip, cfg.project.etestd_port);
-    return cfg;
-}
-
-//查询下位机状态
-function cmd_state(idxfile) {
-    _check_cfg(idxfile);
-    let id = _srv.state((err, res, id) => {
-        _callback(err, res, id);
-        process.exit(0);
-    });
-    print.sys_sended(id, 'state');
-}
-
-//停止下位机执行
-function cmd_stop(idxfile) {
-    _check_cfg(idxfile);
-    let cid = _srv.state((err, res, id) => {
-        _callback(err, res, id);
-        if (res && res != 'idle') {
-            _srv.stop(res, (err, res, id) => {
-                _callback(err, res, id);
-                _exit();
+function _xfn(method, params) {
+    return new Promise(resolve => {
+        try {
+            rpc.sendTask({
+                method: method,
+                params: params
+            }, (err, value) => {
+                if (err) {
+                    return resolve({
+                        result: 'error',
+                        value: err.message || err,
+                    });
+                }
+                return resolve({
+                    result: 'ok',
+                    value: value
+                });
             });
-            print.sys_sended(id, 'stop');
-        } else {
-            _exit();
+        } catch (error) {
+            return resolve({
+                result: 'error',
+                value: error.message
+            });
         }
     });
-    print.sys_sended(cid, 'state');
 }
 
-//安装执行环境
-function cmd_setup(idxfile) {
-    let cfg = _check_cfg(idxfile);
-    let id = _srv.setup(cfg, (err, res, id)=>{
-        _callback(err, res, id);
-        _exit();
-    });
-    print.sys_sended(id, 'setup');
-}
 
-//执行实例
-function cmd_run(idxfile, runid) {
-    let cfg = _check_cfg(idxfile);
-    _run_id = null;
-    let id = _srv.start(cfg, runid, (err, res, id)=>{
-        _callback(err, res, id);
-        if (res) {
-            _run_id = res;
+async function ping(ip, port) {
+    let res = await net.open(ip, port);
+    if(!res || res.result !=='ok') {
+        return {
+            result: 'error',
+            value: '未能连接到执行器',
         }
+    }
+    return await _xfn('ping');
+}
+
+function pingSync(ip, port, callback) {
+    ping(ip, port).then(res => {
+        callback(null, res);
+    }).catch(err => {
+        callback(err);
     });
-    print.sys_sended(id || ' ', 'run ' + runid);
-    _timer = setInterval(_read_out, 40);
+}
+
+async function setup(proj_id, protocols, xtras, topologys, libs) {
+    let env = {
+        proj_id: proj_id,
+        prots: protocols,
+        xtras: xtras,
+        topos: topologys,
+        libs: libs
+    };
+    return await this._xfn('makeenv', env);
+}
+
+function is_open() {
+    return net.is_open();
 }
 
 module.exports = {
-    cmd_state, cmd_stop, cmd_setup, cmd_run
+    open,
+    is_open,
+    close,
+    ping,
+    pingSync,
+    setup,
+    on_error,
 }
+
+
+
+// class SdkApi {
+
+//     constructor(ip, port) {
+//         this._srv = new RpcTask(ip, port, false);
+//     }
+
+//     //执行服务器api
+    
+
+//     //获取目录下所有的etl文件
+//     _get_etl_files(pf, results) {
+//         if (!fs.existsSync(pf)) {
+//             return;
+//         }
+
+//         let st = fs.statSync(pf);
+//         if (st.isFile()) {
+//             if (path.extname(pf) !== '.etl') {
+//                 return;
+//             }
+//             results.push(pf);
+//             return;
+//         }
+
+//         if (st.isDirectory()) {
+//             let dir = fs.readdirSync(pf);
+//             for (let p of dir) {
+//                 this._get_etl_files(path.join(pf, p), results);
+//             }
+//         }
+//     }
+
+//     //解析etl文件列表
+//     _parse_etl(files, proj_apath) {
+//         let asts = [];
+//         for (let f of files) {
+//             let text = fs.readFileSync(f, "utf8");
+//             let ast = parser.parse(text);
+//             if (ast) {
+//                 for (let a of ast) {
+//                     a.src = path.relative(proj_apath, f);
+//                 }
+//                 asts = asts.concat(ast);
+//             }
+//         }
+//         return asts;
+//     }
+
+//     //读取文本文件内容
+//     _read_text(file, proj_apath) {
+//         let f = path.resolve(proj_apath, file);
+//         if (fs.existsSync(f)) {
+//             return fs.readFileSync(f, 'utf8');
+//         }
+//         throw new Error(`文件 ${f} 未找到`);
+//     }
+
+//     //安装执行环境
+//     setup(cfg, callback) {
+//         try {
+//             let pf = cfg.project.path;
+//             pf = path.isAbsolute(pf) ? pf : path.resolve(pf);
+//             let files = [];
+//             this._get_etl_files(pf, files);
+//             let asts = this._parse_etl(files, pf);
+
+//             let prots = protocols(asts);
+//             let topos = parseHardEnv(asts);
+//             let xtras = cfg.project.xtras ? JSON.parse(JSON.stringify(cfg.project.xtras)):{};
+
+//             if(xtras.pack) {
+//                 xtras.pack = this._read_text(xtras.pack, pf);
+//             }
+//             if(xtras.unpack) {
+//                 xtras.unpack = this._read_text(xtras.unpack, pf);
+//             }
+//             if(xtras.check) {
+//                 xtras.check = this._read_text(xtras.check, pf);
+//             }
+//             if(xtras.recvfilter) {
+//                 xtras.recvfilter = this._read_text(xtras.recvfilter, pf);
+//             }
+
+//             let libs = cfg.project.lib_path;
+//             if (libs) {
+//                 let plibs = path.resolve(pf, libs);
+//                 let dir = fs.readdirSync(plibs);
+//                 libs = [];
+//                 for (let p of dir) {
+//                     if (path.extname(p) !== '.lua') {
+//                         continue;
+//                     }
+//                     libs.push({file: p, code: this._read_text(p, plibs)});
+//                 }
+//             } else {
+//                 libs = [];
+//             }
+//             // console.log(libs);
+
+//             let env = {
+//                 proj_id: cfg.project.id,
+//                 prots: prots,
+//                 xtras: xtras,
+//                 topos: topos,
+//                 libs: libs
+//             };
+//             return this._xfn('makeenv', env, callback);
+//         } catch (error) {
+//             // console.log(error)
+//             if (callback) {
+//                 callback(error);
+//             }
+//         }
+//     }
+
+//     // start_quick(cfg, run_id, callback) {
+//     //     try {
+//     //         let pf = cfg.project.path;
+//     //         pf = path.isAbsolute(pf) ? pf : path.resolve(pf);
+//     //         let run = cfg.program[run_id];
+//     //         if (!run) {
+//     //             throw new Error(`实例"${run_id}"未找到`);
+//     //         }
+//     //         if (!run.src) {
+//     //             throw new Error(`实例"${run_id}"未设置src属性`);
+//     //         }
+//     //         let src = path.resolve(pf, run.src);
+//     //         if (!fs.existsSync(src)) {
+//     //             throw new Error(`文件"${src}"未找到`);
+//     //         }
+
+//     //         let asts = parser_run.getRunAstList(pf, src);
+//     //         if (!asts || asts.length === 0) {
+//     //             return;
+//     //         }
+//     //         let option = run.option || {};
+//     //         if (run.topology) {
+//     //             option.topology = run.topology;
+//     //         }
+
+//     //         asts[0].option = option;
+//     //         if(typeof run.vars === 'object') {
+//     //             if(Array.isArray(run.vars)) {
+//     //                 let vs = [];
+//     //                 for(let f of run.vars) {
+//     //                     vs = vs.concat(yaml.safeLoad(fs.readFileSync(f, 'utf8')));
+//     //                 }
+//     //                 // console.log(vs.length)
+//     //                 asts[0].vars = vs;
+//     //             } else {
+//     //                 asts[0].vars = run.vars;
+//     //             }
+//     //         } else if(typeof run.vars === 'string'){
+//     //             let f = path.resolve(pf, run.vars) 
+//     //             asts[0].vars = yaml.safeLoad(fs.readFileSync(f, 'utf8'));
+//     //         } else {
+//     //             console.log('type of vars is ', typeof run.vars)
+//     //         }
+//     //         asts[0].proj_id = cfg.project.id;
+
+//     //         return this._xfn('start', asts, callback);
+//     //     } catch (error) {
+//     //         if (callback) {
+//     //             callback(error);
+//     //         }
+//     //     }
+//     // }
+
+//     start_quick(cfg, run_id, callback) {
+//         try {
+//             let pf = cfg.project.path;
+//             pf = path.isAbsolute(pf) ? pf : path.resolve(pf);
+//             let run = cfg.program[run_id];
+//             if (!run) {
+//                 throw new Error(`实例"${run_id}"未找到`);
+//             }
+//             if (!run.src) {
+//                 throw new Error(`实例"${run_id}"未设置src属性`);
+//             }
+//             let src = path.resolve(pf, run.src);
+//             if (!fs.existsSync(src)) {
+//                 throw new Error(`文件"${src}"未找到`);
+//             }
+//             if (!src.endsWith('.lua')) {
+//                 throw new Error('无效脚本文件');
+//             }
+
+//             let ast = parser_run.getSrcAst('lua', pf, src);
+//             let option = run.option || {};
+//             if (run.topology) {
+//                 option.topology = run.topology;
+//             }
+
+//             ast.option = option;
+//             if(typeof run.vars === 'object') {
+//                 if(Array.isArray(run.vars)) {
+//                     let vs = [];
+//                     for(let f of run.vars) {
+//                         vs = vs.concat(yaml.safeLoad(fs.readFileSync(f, 'utf8')));
+//                     }
+//                     // console.log(vs.length)
+//                     ast.vars = vs;
+//                 } else {
+//                     ast.vars = run.vars;
+//                 }
+//             } else if(typeof run.vars === 'string'){
+//                 let f = path.resolve(pf, run.vars) 
+//                 ast.vars = yaml.safeLoad(fs.readFileSync(f, 'utf8'));
+//             } else {
+//                 console.log('type of vars is ', typeof run.vars)
+//             }
+//             ast.proj_id = cfg.project.id;
+//             //console.log('ast', ast);
+//             return this._xfn('start', ast, callback);
+//         } catch (error) {
+//             if (callback) {
+//                 callback(error);
+//             }
+//         }
+//     }
+
+//     start(cfg, run_id, callback) {
+//         return this.setup(cfg, (err) => {
+//             if (err) {
+//                 return callback(err);
+//             }
+//             return this.start_quick(cfg, run_id, callback);
+//         });
+//     }
+
+//     //读取执行输出
+//     readout(run_id, callback) {
+//         try {
+//             return this._xfn('readout', {
+//                 key: run_id
+//             }, callback);
+//         } catch (error) {
+//             if (callback) {
+//                 callback(error);
+//             }
+//         }
+//     }
+
+//     //查询执行状态
+//     state(callback) {
+//         try {
+//             return this._xfn('state', null, callback);
+//         } catch (error) {
+//             if (callback) {
+//                 callback(error);
+//             }
+//         }
+//     }
+
+//     //停止执行
+//     stop(run_id, callback) {
+//         try {
+//             return this._xfn('stop', {
+//                 key: run_id
+//             }, callback);
+//         } catch (error) {
+//             if (callback) {
+//                 callback(error);
+//             }
+//         }
+//     }
+
+//     //回复应答信息
+//     reply(run_id, answer, callback) {
+//         try {
+//             answer.key = run_id;
+//             return this._xfn('reply', answer, callback);
+//         } catch (error) {
+//             if (callback) {
+//                 callback(error);
+//             }
+//         }
+//     }
+
+//     //发送命令
+//     cmd(run_id, command, params, callback) {
+//         try {
+//             return this._xfn('command', {
+//                 key: run_id,
+//                 command: command,
+//                 params: params
+//             }, callback);
+//         } catch (error) {
+//             if (callback) {
+//                 callback(error);
+//             }
+//         }
+//     }
+
+// }

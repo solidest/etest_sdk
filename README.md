@@ -1,7 +1,8 @@
 
-# ETestDev更新说明
+## ETestDev SDK更新说明
 
-## SDK
+### 1.0.1
+- etl-cli 新增-v选项 查看当前版本
 
 
 ### 0.2.2
