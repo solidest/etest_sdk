@@ -36,7 +36,7 @@ function getPackUnpack(seg, pser, props, file) {
         if(v.kind==='pid' && v.list.length===1 && v.list[0]) {
             seg.pack = v.list[0];
         } else {
-            console.log(v)
+            // console.log(v)
             throw new Error(`"pack"属性设置错误(${file} : ${pack.value_line||''})`);
         }
     }
@@ -47,7 +47,7 @@ function getPackUnpack(seg, pser, props, file) {
         if(v.kind==='pid' && v.list.length===1 && v.list[0]) {
             seg.unpack = v.list[0];
         } else {
-            console.log(v)
+            // console.log(v)
             throw new Error(`"unpack"属性设置错误(${file} : ${unpack.value_line||''})`);
         }
     }
@@ -94,7 +94,7 @@ function checkSegProps(seg, file) {
     if(seg.kind !== 'nil') {
         for(let p of seg.props) {
             if(p.name === 'option') {
-                console.log(p);
+                // console.log(p);
             } else if(!_props_nams.includes(p.name)) {
                 throw new Error(`无法识别的属性"${p.name}" (${file} : ${p.name_line||''})`)
             } else {
