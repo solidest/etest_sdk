@@ -59,13 +59,6 @@ async function ping(ip, port) {
     return await _xfn('ping');
 }
 
-function pingSync(ip, port, callback) {
-    ping(ip, port).then(res => {
-        callback(null, res);
-    }).catch(err => {
-        callback(err);
-    });
-}
 
 async function setup(proj_id, protocols, xtras, topologys, libs) {
     let env = {
@@ -87,7 +80,6 @@ module.exports = {
     is_open,
     close,
     ping,
-    pingSync,
     setup,
     on_error,
 }

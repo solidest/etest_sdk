@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
-const etlParser = require("./etlParser");
-const etxParser = require("./etxParser");
+const etlParser = require("../parser/etlParser");
+const etxParser = require("../parser/etxParser");
 
 
 //构建完整的 etl ast

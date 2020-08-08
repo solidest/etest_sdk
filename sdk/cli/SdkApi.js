@@ -1,12 +1,12 @@
 const path = require('path');
 const fs = require('fs');
+const yaml = require('js-yaml');
+const runParser = require('./runParser');
+const parser = require("../parser/etxParser");
 const RpcTask = require('../driver/RpcTask');
 const NetWork = require('../driver/NetWork');
-const parser = require("../parser/etxParser")
-const parser_run = require('../parser');
 const protocols = require('../etl/protocols');
 const parseHardEnv = require('../etl/devices');
-const yaml = require('js-yaml');
 
 class SdkApi {
     constructor(ip, port) {
@@ -15,7 +15,6 @@ class SdkApi {
         net.open(ip, port);
     }
 
-    //执行服务器api
     _xfn(method, params, callback) {
         try {
             return this._srv.sendTask({
@@ -29,7 +28,6 @@ class SdkApi {
         }
     }
 
-    //获取目录下所有的etl文件
     _get_etl_files(pf, results) {
         if (!fs.existsSync(pf)) {
             return;
@@ -52,7 +50,6 @@ class SdkApi {
         }
     }
 
-    //解析etl文件列表
     _parse_etl(files, proj_apath) {
         let asts = [];
         for (let f of files) {
@@ -68,7 +65,6 @@ class SdkApi {
         return asts;
     }
 
-    //读取文本文件内容
     _read_text(file, proj_apath) {
         let f = path.resolve(proj_apath, file);
         if (fs.existsSync(f)) {
@@ -77,7 +73,6 @@ class SdkApi {
         throw new Error(`文件 ${f} 未找到`);
     }
 
-    //安装执行环境
     setup(cfg, callback) {
         try {
             let pf = cfg.project.path;
@@ -117,7 +112,6 @@ class SdkApi {
             } else {
                 libs = [];
             }
-            // console.log(libs);
 
             let env = {
                 proj_id: cfg.project.id,
@@ -128,7 +122,6 @@ class SdkApi {
             };
             return this._xfn('makeenv', env, callback);
         } catch (error) {
-            // console.log(error)
             if (callback) {
                 callback(error);
             }
@@ -155,7 +148,7 @@ class SdkApi {
                 throw new Error('无效脚本文件');
             }
 
-            let ast = parser_run.getSrcAst('lua', pf, src);
+            let ast = runParser.getSrcAst('lua', pf, src);
             let option = run.option || {};
             if (run.topology) {
                 option.topology = run.topology;
@@ -168,7 +161,6 @@ class SdkApi {
                     for(let f of run.vars) {
                         vs = vs.concat(yaml.safeLoad(fs.readFileSync(f, 'utf8')));
                     }
-                    // console.log(vs.length)
                     ast.vars = vs;
                 } else {
                     ast.vars = run.vars;
@@ -180,7 +172,6 @@ class SdkApi {
                 console.log('type of vars is ', typeof run.vars)
             }
             ast.proj_id = cfg.project.id;
-            //console.log('ast', ast);
             return this._xfn('start', ast, callback);
         } catch (error) {
             if (callback) {
@@ -198,7 +189,6 @@ class SdkApi {
         });
     }
 
-    //读取执行输出
     readout(run_id, callback) {
         try {
             return this._xfn('readout', {
@@ -211,7 +201,6 @@ class SdkApi {
         }
     }
 
-    //查询执行状态
     state(callback) {
         try {
             return this._xfn('state', null, callback);
@@ -232,7 +221,6 @@ class SdkApi {
         }
     }
 
-    //停止执行
     stop(run_id, callback) {
         try {
             return this._xfn('stop', {
@@ -245,7 +233,6 @@ class SdkApi {
         }
     }
 
-    //回复应答信息
     reply(run_id, answer, callback) {
         try {
             answer.key = run_id;
@@ -257,7 +244,6 @@ class SdkApi {
         }
     }
 
-    //发送命令
     cmd(run_id, command, params, callback) {
         try {
             return this._xfn('command', {
