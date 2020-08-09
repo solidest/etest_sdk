@@ -2,9 +2,10 @@
 bitrl protocol prot_demo {
 	segment sega {
 		parser: 'int10',
+		autovalue: [1,2,3],
 		scale: 0.009,
 	}
-	segments segs {
+	segments segs[this.sega * 8] {
 		segment seg1[this.seg - 10] {
 			parser: 'float ! >',
 			autovalue: this.seg3 + 10,
@@ -35,7 +36,7 @@ bitrl protocol prot_demo {
 		}
 		segment seg7 {
 			parser: 'int16 & <',
-			autovalue: 0,
+			autovalue: ["aaa","bbb"],
 		}
 	}
 	segment _ {
@@ -111,6 +112,7 @@ bitrl protocol prot_demo {
 					},
 				],
 			],
+			memo: '协议段说明',
 		},
 	}
 }

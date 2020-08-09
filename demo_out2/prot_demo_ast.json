@@ -28,17 +28,44 @@
                 },
                 {
                     "kind": "prop",
+                    "name": "autovalue",
+                    "value": {
+                        "kind": "array",
+                        "list": [
+                            {
+                                "kind": "number",
+                                "value": 1
+                            },
+                            {
+                                "kind": "number",
+                                "value": 2
+                            },
+                            {
+                                "kind": "number",
+                                "value": 3
+                            }
+                        ]
+                    },
+                    "name_from": 72,
+                    "name_to": 81,
+                    "name_line": 5,
+                    "value_from": 83,
+                    "value_to": 90,
+                    "value_line": 5
+                },
+                {
+                    "kind": "prop",
                     "name": "scale",
                     "value": {
                         "kind": "number",
                         "value": 0.009
                     },
-                    "name_from": 72,
-                    "name_to": 77,
-                    "name_line": 5,
-                    "value_from": 79,
-                    "value_to": 84,
-                    "value_line": 5
+                    "name_from": 94,
+                    "name_to": 99,
+                    "name_line": 6,
+                    "value_from": 101,
+                    "value_to": 106,
+                    "value_line": 6
                 }
             ]
         },
@@ -49,9 +76,9 @@
                 {
                     "kind": "segment",
                     "name": "seg1",
-                    "name_from": 116,
-                    "name_to": 120,
-                    "name_line": 8,
+                    "name_from": 153,
+                    "name_to": 157,
+                    "name_line": 9,
                     "props": [
                         {
                             "kind": "prop",
@@ -60,12 +87,12 @@
                                 "kind": "string",
                                 "value": "float ! >"
                             },
-                            "name_from": 141,
-                            "name_to": 147,
-                            "name_line": 9,
-                            "value_from": 149,
-                            "value_to": 160,
-                            "value_line": 9
+                            "name_from": 178,
+                            "name_to": 184,
+                            "name_line": 10,
+                            "value_from": 186,
+                            "value_to": 197,
+                            "value_line": 10
                         },
                         {
                             "kind": "prop",
@@ -84,12 +111,12 @@
                                     "value": 10
                                 }
                             },
-                            "name_from": 165,
-                            "name_to": 174,
-                            "name_line": 10,
-                            "value_from": 176,
-                            "value_to": 190,
-                            "value_line": 10
+                            "name_from": 202,
+                            "name_to": 211,
+                            "name_line": 11,
+                            "value_from": 213,
+                            "value_to": 227,
+                            "value_line": 11
                         }
                     ],
                     "repeated": {
@@ -110,9 +137,9 @@
                 {
                     "kind": "segment",
                     "name": "seg2",
-                    "name_from": 206,
-                    "name_to": 210,
-                    "name_line": 12,
+                    "name_from": 243,
+                    "name_to": 247,
+                    "name_line": 13,
                     "props": [
                         {
                             "kind": "prop",
@@ -121,12 +148,12 @@
                                 "kind": "string",
                                 "value": "double & <"
                             },
-                            "name_from": 216,
-                            "name_to": 222,
-                            "name_line": 13,
-                            "value_from": 224,
-                            "value_to": 236,
-                            "value_line": 13
+                            "name_from": 253,
+                            "name_to": 259,
+                            "name_line": 14,
+                            "value_from": 261,
+                            "value_to": 273,
+                            "value_line": 14
                         },
                         {
                             "kind": "prop",
@@ -156,21 +183,21 @@
                                     }
                                 ]
                             },
-                            "name_from": 241,
-                            "name_to": 250,
-                            "name_line": 14,
-                            "value_from": 252,
-                            "value_to": 298,
-                            "value_line": 14
+                            "name_from": 278,
+                            "name_to": 287,
+                            "name_line": 15,
+                            "value_from": 289,
+                            "value_to": 335,
+                            "value_line": 15
                         }
                     ]
                 },
                 {
                     "kind": "segment",
                     "name": "seg3",
-                    "name_from": 314,
-                    "name_to": 318,
-                    "name_line": 16,
+                    "name_from": 351,
+                    "name_to": 355,
+                    "name_line": 17,
                     "props": [
                         {
                             "kind": "prop",
@@ -179,12 +206,12 @@
                                 "kind": "string",
                                 "value": "int16 & >"
                             },
-                            "name_from": 324,
-                            "name_to": 330,
-                            "name_line": 17,
-                            "value_from": 332,
-                            "value_to": 343,
-                            "value_line": 17
+                            "name_from": 361,
+                            "name_to": 367,
+                            "name_line": 18,
+                            "value_from": 369,
+                            "value_to": 380,
+                            "value_line": 18
                         },
                         {
                             "kind": "prop",
@@ -233,19 +260,33 @@
                                     }
                                 ]
                             },
-                            "name_from": 348,
-                            "name_to": 357,
-                            "name_line": 18,
-                            "value_from": 359,
-                            "value_to": 446,
-                            "value_line": 18
+                            "name_from": 385,
+                            "name_to": 394,
+                            "name_line": 19,
+                            "value_from": 396,
+                            "value_to": 483,
+                            "value_line": 19
                         }
                     ]
                 }
             ],
-            "name_from": 99,
-            "name_to": 103,
-            "name_line": 7
+            "name_from": 121,
+            "name_to": 125,
+            "name_line": 8,
+            "repeated": {
+                "kind": "multiply",
+                "left": {
+                    "kind": "pid",
+                    "list": [
+                        "this",
+                        "sega"
+                    ]
+                },
+                "right": {
+                    "kind": "number",
+                    "value": 8
+                }
+            }
         },
         {
             "kind": "oneof",
@@ -277,9 +318,9 @@
                 {
                     "kind": "segment",
                     "name": "seg4",
-                    "name_from": 502,
-                    "name_to": 506,
-                    "name_line": 22,
+                    "name_from": 539,
+                    "name_to": 543,
+                    "name_line": 23,
                     "props": [
                         {
                             "kind": "prop",
@@ -288,12 +329,12 @@
                                 "kind": "string",
                                 "value": "int16 ! <"
                             },
-                            "name_from": 512,
-                            "name_to": 518,
-                            "name_line": 23,
-                            "value_from": 520,
-                            "value_to": 531,
-                            "value_line": 23
+                            "name_from": 549,
+                            "name_to": 555,
+                            "name_line": 24,
+                            "value_from": 557,
+                            "value_to": 568,
+                            "value_line": 24
                         },
                         {
                             "kind": "prop",
@@ -302,21 +343,21 @@
                                 "kind": "number",
                                 "value": 0
                             },
-                            "name_from": 536,
-                            "name_to": 545,
-                            "name_line": 24,
-                            "value_from": 547,
-                            "value_to": 548,
-                            "value_line": 24
+                            "name_from": 573,
+                            "name_to": 582,
+                            "name_line": 25,
+                            "value_from": 584,
+                            "value_to": 585,
+                            "value_line": 25
                         }
                     ]
                 },
                 {
                     "kind": "segment",
                     "name": "seg5",
-                    "name_from": 564,
-                    "name_to": 568,
-                    "name_line": 26,
+                    "name_from": 601,
+                    "name_to": 605,
+                    "name_line": 27,
                     "props": [
                         {
                             "kind": "prop",
@@ -325,12 +366,12 @@
                                 "kind": "string",
                                 "value": "int16 = >"
                             },
-                            "name_from": 574,
-                            "name_to": 580,
-                            "name_line": 27,
-                            "value_from": 582,
-                            "value_to": 593,
-                            "value_line": 27
+                            "name_from": 611,
+                            "name_to": 617,
+                            "name_line": 28,
+                            "value_from": 619,
+                            "value_to": 630,
+                            "value_line": 28
                         },
                         {
                             "kind": "prop",
@@ -339,19 +380,19 @@
                                 "kind": "number",
                                 "value": 0
                             },
-                            "name_from": 598,
-                            "name_to": 607,
-                            "name_line": 28,
-                            "value_from": 609,
-                            "value_to": 610,
-                            "value_line": 28
+                            "name_from": 635,
+                            "name_to": 644,
+                            "name_line": 29,
+                            "value_from": 646,
+                            "value_to": 647,
+                            "value_line": 29
                         }
                     ]
                 }
             ],
-            "exp_from": 462,
-            "exp_to": 488,
-            "exp_line": 21
+            "exp_from": 499,
+            "exp_to": 525,
+            "exp_line": 22
         },
         {
             "kind": "oneof",
@@ -373,9 +414,9 @@
                 {
                     "kind": "segment",
                     "name": "seg6",
-                    "name_from": 655,
-                    "name_to": 659,
-                    "name_line": 32,
+                    "name_from": 692,
+                    "name_to": 696,
+                    "name_line": 33,
                     "props": [
                         {
                             "kind": "prop",
@@ -384,12 +425,12 @@
                                 "kind": "string",
                                 "value": "int16"
                             },
-                            "name_from": 665,
-                            "name_to": 671,
-                            "name_line": 33,
-                            "value_from": 673,
-                            "value_to": 680,
-                            "value_line": 33
+                            "name_from": 702,
+                            "name_to": 708,
+                            "name_line": 34,
+                            "value_from": 710,
+                            "value_to": 717,
+                            "value_line": 34
                         },
                         {
                             "kind": "prop",
@@ -398,21 +439,21 @@
                                 "kind": "string",
                                 "value": "abcdefg"
                             },
-                            "name_from": 685,
-                            "name_to": 694,
-                            "name_line": 34,
-                            "value_from": 696,
-                            "value_to": 705,
-                            "value_line": 34
+                            "name_from": 722,
+                            "name_to": 731,
+                            "name_line": 35,
+                            "value_from": 733,
+                            "value_to": 742,
+                            "value_line": 35
                         }
                     ]
                 },
                 {
                     "kind": "segment",
                     "name": "seg7",
-                    "name_from": 721,
-                    "name_to": 725,
-                    "name_line": 36,
+                    "name_from": 758,
+                    "name_to": 762,
+                    "name_line": 37,
                     "props": [
                         {
                             "kind": "prop",
@@ -421,40 +462,49 @@
                                 "kind": "string",
                                 "value": "int16 & <"
                             },
-                            "name_from": 731,
-                            "name_to": 737,
-                            "name_line": 37,
-                            "value_from": 739,
-                            "value_to": 750,
-                            "value_line": 37
+                            "name_from": 768,
+                            "name_to": 774,
+                            "name_line": 38,
+                            "value_from": 776,
+                            "value_to": 787,
+                            "value_line": 38
                         },
                         {
                             "kind": "prop",
                             "name": "autovalue",
                             "value": {
-                                "kind": "number",
-                                "value": 0
+                                "kind": "array",
+                                "list": [
+                                    {
+                                        "kind": "string",
+                                        "value": "aaa"
+                                    },
+                                    {
+                                        "kind": "string",
+                                        "value": "bbb"
+                                    }
+                                ]
                             },
-                            "name_from": 755,
-                            "name_to": 764,
-                            "name_line": 38,
-                            "value_from": 766,
-                            "value_to": 767,
-                            "value_line": 38
+                            "name_from": 792,
+                            "name_to": 801,
+                            "name_line": 39,
+                            "value_from": 803,
+                            "value_to": 816,
+                            "value_line": 39
                         }
                     ]
                 }
             ],
-            "exp_from": 626,
-            "exp_to": 641,
-            "exp_line": 31
+            "exp_from": 663,
+            "exp_to": 678,
+            "exp_line": 32
         },
         {
             "kind": "segment",
             "name": "_",
-            "name_from": 785,
-            "name_to": 786,
-            "name_line": 41,
+            "name_from": 834,
+            "name_to": 835,
+            "name_line": 42,
             "props": []
         },
         {
@@ -531,9 +581,9 @@
                 {
                     "kind": "segment",
                     "name": "seg6",
-                    "name_from": 881,
-                    "name_to": 885,
-                    "name_line": 44,
+                    "name_from": 930,
+                    "name_to": 934,
+                    "name_line": 45,
                     "props": [
                         {
                             "kind": "prop",
@@ -542,12 +592,12 @@
                                 "kind": "string",
                                 "value": "int16"
                             },
-                            "name_from": 891,
-                            "name_to": 897,
-                            "name_line": 45,
-                            "value_from": 899,
-                            "value_to": 906,
-                            "value_line": 45
+                            "name_from": 940,
+                            "name_to": 946,
+                            "name_line": 46,
+                            "value_from": 948,
+                            "value_to": 955,
+                            "value_line": 46
                         },
                         {
                             "kind": "prop",
@@ -556,21 +606,21 @@
                                 "kind": "number",
                                 "value": 0
                             },
-                            "name_from": 911,
-                            "name_to": 920,
-                            "name_line": 46,
-                            "value_from": 922,
-                            "value_to": 923,
-                            "value_line": 46
+                            "name_from": 960,
+                            "name_to": 969,
+                            "name_line": 47,
+                            "value_from": 971,
+                            "value_to": 972,
+                            "value_line": 47
                         }
                     ]
                 },
                 {
                     "kind": "segment",
                     "name": "seg7",
-                    "name_from": 939,
-                    "name_to": 943,
-                    "name_line": 48,
+                    "name_from": 988,
+                    "name_to": 992,
+                    "name_line": 49,
                     "props": [
                         {
                             "kind": "prop",
@@ -579,12 +629,12 @@
                                 "kind": "string",
                                 "value": "int16 & <"
                             },
-                            "name_from": 949,
-                            "name_to": 955,
-                            "name_line": 49,
-                            "value_from": 957,
-                            "value_to": 968,
-                            "value_line": 49
+                            "name_from": 998,
+                            "name_to": 1004,
+                            "name_line": 50,
+                            "value_from": 1006,
+                            "value_to": 1017,
+                            "value_line": 50
                         },
                         {
                             "kind": "prop",
@@ -593,12 +643,12 @@
                                 "kind": "number",
                                 "value": 0
                             },
-                            "name_from": 973,
-                            "name_to": 982,
-                            "name_line": 50,
-                            "value_from": 984,
-                            "value_to": 985,
-                            "value_line": 50
+                            "name_from": 1022,
+                            "name_to": 1031,
+                            "name_line": 51,
+                            "value_from": 1033,
+                            "value_to": 1034,
+                            "value_line": 51
                         },
                         {
                             "kind": "prop",
@@ -607,26 +657,26 @@
                                 "kind": "string",
                                 "value": "\u0000"
                             },
-                            "name_from": 990,
-                            "name_to": 997,
-                            "name_line": 51,
-                            "value_from": 999,
-                            "value_to": 1003,
-                            "value_line": 51
+                            "name_from": 1039,
+                            "name_to": 1046,
+                            "name_line": 52,
+                            "value_from": 1048,
+                            "value_to": 1052,
+                            "value_line": 52
                         }
                     ]
                 }
             ],
-            "exp_from": 799,
-            "exp_to": 867,
-            "exp_line": 43
+            "exp_from": 848,
+            "exp_to": 916,
+            "exp_line": 44
         },
         {
             "kind": "segment",
             "name": "demo30",
-            "name_from": 1021,
-            "name_to": 1027,
-            "name_line": 54,
+            "name_from": 1070,
+            "name_to": 1076,
+            "name_line": 55,
             "props": [
                 {
                     "kind": "prop",
@@ -641,12 +691,12 @@
                                     "mypack"
                                 ]
                             },
-                            "name_from": 1042,
-                            "name_to": 1046,
-                            "name_line": 55,
-                            "value_from": 1048,
-                            "value_to": 1054,
-                            "value_line": 55
+                            "name_from": 1091,
+                            "name_to": 1095,
+                            "name_line": 56,
+                            "value_from": 1097,
+                            "value_to": 1103,
+                            "value_line": 56
                         },
                         {
                             "kind": "prop",
@@ -657,20 +707,20 @@
                                     "myunpack"
                                 ]
                             },
-                            "name_from": 1056,
-                            "name_to": 1062,
-                            "name_line": 55,
-                            "value_from": 1064,
-                            "value_to": 1072,
-                            "value_line": 55
+                            "name_from": 1105,
+                            "name_to": 1111,
+                            "name_line": 56,
+                            "value_from": 1113,
+                            "value_to": 1121,
+                            "value_line": 56
                         }
                     ],
-                    "name_from": 1032,
-                    "name_to": 1038,
-                    "name_line": 55,
-                    "value_from": 1040,
-                    "value_to": 1074,
-                    "value_line": 55
+                    "name_from": 1081,
+                    "name_to": 1087,
+                    "name_line": 56,
+                    "value_from": 1089,
+                    "value_to": 1123,
+                    "value_line": 56
                 },
                 {
                     "kind": "prop",
@@ -679,21 +729,21 @@
                         "kind": "string",
                         "value": "\u0000"
                     },
-                    "name_from": 1078,
-                    "name_to": 1087,
-                    "name_line": 56,
-                    "value_from": 1089,
-                    "value_to": 1093,
-                    "value_line": 56
+                    "name_from": 1127,
+                    "name_to": 1136,
+                    "name_line": 57,
+                    "value_from": 1138,
+                    "value_to": 1142,
+                    "value_line": 57
                 }
             ]
         },
         {
             "kind": "segment",
             "name": "demo3",
-            "name_from": 1107,
-            "name_to": 1112,
-            "name_line": 58,
+            "name_from": 1156,
+            "name_to": 1161,
+            "name_line": 59,
             "props": [
                 {
                     "kind": "prop",
@@ -717,12 +767,12 @@
                             "value": 20
                         }
                     },
-                    "name_from": 1121,
-                    "name_to": 1130,
-                    "name_line": 59,
-                    "value_from": 1132,
-                    "value_to": 1155,
-                    "value_line": 59
+                    "name_from": 1170,
+                    "name_to": 1179,
+                    "name_line": 60,
+                    "value_from": 1181,
+                    "value_to": 1204,
+                    "value_line": 60
                 },
                 {
                     "kind": "prop",
@@ -731,12 +781,12 @@
                         "kind": "string",
                         "value": "\u0000"
                     },
-                    "name_from": 1159,
-                    "name_to": 1166,
-                    "name_line": 60,
-                    "value_from": 1168,
-                    "value_to": 1172,
-                    "value_line": 60
+                    "name_from": 1208,
+                    "name_to": 1215,
+                    "name_line": 61,
+                    "value_from": 1217,
+                    "value_to": 1221,
+                    "value_line": 61
                 },
                 {
                     "kind": "prop",
@@ -745,12 +795,12 @@
                         "kind": "number",
                         "value": 99
                     },
-                    "name_from": 1176,
-                    "name_to": 1182,
-                    "name_line": 61,
-                    "value_from": 1184,
-                    "value_to": 1186,
-                    "value_line": 61
+                    "name_from": 1225,
+                    "name_to": 1231,
+                    "name_line": 62,
+                    "value_from": 1233,
+                    "value_to": 1235,
+                    "value_line": 62
                 }
             ],
             "repeated": {
@@ -761,9 +811,9 @@
         {
             "kind": "segment",
             "name": "demo1",
-            "name_from": 1200,
-            "name_to": 1205,
-            "name_line": 63,
+            "name_from": 1249,
+            "name_to": 1254,
+            "name_line": 64,
             "props": [
                 {
                     "kind": "prop",
@@ -772,12 +822,12 @@
                         "kind": "string",
                         "value": "int16 ! <"
                     },
-                    "name_from": 1210,
-                    "name_to": 1216,
-                    "name_line": 64,
-                    "value_from": 1218,
-                    "value_to": 1229,
-                    "value_line": 64
+                    "name_from": 1259,
+                    "name_to": 1265,
+                    "name_line": 65,
+                    "value_from": 1267,
+                    "value_to": 1278,
+                    "value_line": 65
                 },
                 {
                     "kind": "prop",
@@ -789,12 +839,12 @@
                             "value": 100
                         }
                     },
-                    "name_from": 1233,
-                    "name_to": 1242,
-                    "name_line": 65,
-                    "value_from": 1244,
-                    "value_to": 1248,
-                    "value_line": 65
+                    "name_from": 1282,
+                    "name_to": 1291,
+                    "name_line": 66,
+                    "value_from": 1293,
+                    "value_to": 1297,
+                    "value_line": 66
                 },
                 {
                     "kind": "prop",
@@ -807,12 +857,12 @@
                                 "kind": "number",
                                 "value": 10
                             },
-                            "name_from": 1265,
-                            "name_to": 1268,
-                            "name_line": 67,
-                            "value_from": 1270,
-                            "value_to": 1272,
-                            "value_line": 67
+                            "name_from": 1314,
+                            "name_to": 1317,
+                            "name_line": 68,
+                            "value_from": 1319,
+                            "value_to": 1321,
+                            "value_line": 68
                         },
                         {
                             "kind": "prop",
@@ -821,12 +871,12 @@
                                 "kind": "number",
                                 "value": 20
                             },
-                            "name_from": 1277,
-                            "name_to": 1280,
-                            "name_line": 68,
-                            "value_from": 1282,
-                            "value_to": 1284,
-                            "value_line": 68
+                            "name_from": 1326,
+                            "name_to": 1329,
+                            "name_line": 69,
+                            "value_from": 1331,
+                            "value_to": 1333,
+                            "value_line": 69
                         },
                         {
                             "kind": "prop",
@@ -848,12 +898,12 @@
                                     }
                                 ]
                             },
-                            "name_from": 1289,
-                            "name_to": 1295,
-                            "name_line": 69,
-                            "value_from": 1297,
-                            "value_to": 1324,
-                            "value_line": 69
+                            "name_from": 1338,
+                            "name_to": 1344,
+                            "name_line": 70,
+                            "value_from": 1346,
+                            "value_to": 1373,
+                            "value_line": 70
                         },
                         {
                             "kind": "prop",
@@ -862,12 +912,12 @@
                                 "kind": "bool",
                                 "value": true
                             },
-                            "name_from": 1329,
-                            "name_to": 1336,
-                            "name_line": 74,
-                            "value_from": 1338,
-                            "value_to": 1342,
-                            "value_line": 74
+                            "name_from": 1378,
+                            "name_to": 1385,
+                            "name_line": 75,
+                            "value_from": 1387,
+                            "value_to": 1391,
+                            "value_line": 75
                         },
                         {
                             "kind": "prop",
@@ -876,12 +926,12 @@
                                 "kind": "string",
                                 "value": "标题"
                             },
-                            "name_from": 1347,
-                            "name_to": 1352,
-                            "name_line": 75,
-                            "value_from": 1354,
-                            "value_to": 1358,
-                            "value_line": 75
+                            "name_from": 1396,
+                            "name_to": 1401,
+                            "name_line": 76,
+                            "value_from": 1403,
+                            "value_to": 1407,
+                            "value_line": 76
                         },
                         {
                             "kind": "prop",
@@ -890,29 +940,29 @@
                                 "kind": "string",
                                 "value": "sort1"
                             },
-                            "name_from": 1363,
-                            "name_to": 1366,
-                            "name_line": 76,
-                            "value_from": 1368,
-                            "value_to": 1375,
-                            "value_line": 76
+                            "name_from": 1412,
+                            "name_to": 1415,
+                            "name_line": 77,
+                            "value_from": 1417,
+                            "value_to": 1424,
+                            "value_line": 77
                         }
                     ],
-                    "name_from": 1252,
-                    "name_to": 1258,
-                    "name_line": 66,
-                    "value_from": 1260,
-                    "value_to": 1380,
-                    "value_line": 66
+                    "name_from": 1301,
+                    "name_to": 1307,
+                    "name_line": 67,
+                    "value_from": 1309,
+                    "value_to": 1429,
+                    "value_line": 67
                 }
             ]
         },
         {
             "kind": "segment",
             "name": "demo1",
-            "name_from": 1394,
-            "name_to": 1399,
-            "name_line": 79,
+            "name_from": 1443,
+            "name_to": 1448,
+            "name_line": 80,
             "props": [
                 {
                     "kind": "prop",
@@ -921,12 +971,12 @@
                         "kind": "string",
                         "value": "int16 ! <"
                     },
-                    "name_from": 1404,
-                    "name_to": 1410,
-                    "name_line": 80,
-                    "value_from": 1412,
-                    "value_to": 1423,
-                    "value_line": 80
+                    "name_from": 1453,
+                    "name_to": 1459,
+                    "name_line": 81,
+                    "value_from": 1461,
+                    "value_to": 1472,
+                    "value_line": 81
                 },
                 {
                     "kind": "prop",
@@ -935,12 +985,12 @@
                         "kind": "string",
                         "value": "aaaa\u0000"
                     },
-                    "name_from": 1427,
-                    "name_to": 1436,
-                    "name_line": 81,
-                    "value_from": 1438,
-                    "value_to": 1446,
-                    "value_line": 81
+                    "name_from": 1476,
+                    "name_to": 1485,
+                    "name_line": 82,
+                    "value_from": 1487,
+                    "value_to": 1495,
+                    "value_line": 82
                 },
                 {
                     "kind": "prop",
@@ -949,12 +999,12 @@
                         "kind": "string",
                         "value": "\u0000"
                     },
-                    "name_from": 1450,
-                    "name_to": 1457,
-                    "name_line": 82,
-                    "value_from": 1459,
-                    "value_to": 1463,
-                    "value_line": 82
+                    "name_from": 1499,
+                    "name_to": 1506,
+                    "name_line": 83,
+                    "value_from": 1508,
+                    "value_to": 1512,
+                    "value_line": 83
                 },
                 {
                     "kind": "prop",
@@ -967,12 +1017,12 @@
                                 "kind": "number",
                                 "value": 10
                             },
-                            "name_from": 1480,
-                            "name_to": 1483,
-                            "name_line": 84,
-                            "value_from": 1485,
-                            "value_to": 1487,
-                            "value_line": 84
+                            "name_from": 1529,
+                            "name_to": 1532,
+                            "name_line": 85,
+                            "value_from": 1534,
+                            "value_to": 1536,
+                            "value_line": 85
                         },
                         {
                             "kind": "prop",
@@ -981,12 +1031,12 @@
                                 "kind": "number",
                                 "value": 20
                             },
-                            "name_from": 1492,
-                            "name_to": 1495,
-                            "name_line": 85,
-                            "value_from": 1497,
-                            "value_to": 1499,
-                            "value_line": 85
+                            "name_from": 1541,
+                            "name_to": 1544,
+                            "name_line": 86,
+                            "value_from": 1546,
+                            "value_to": 1548,
+                            "value_line": 86
                         },
                         {
                             "kind": "prop",
@@ -1002,12 +1052,12 @@
                                                 "kind": "string",
                                                 "value": "aa"
                                             },
-                                            "name_from": 1525,
-                                            "name_to": 1529,
-                                            "name_line": 88,
-                                            "value_from": 1531,
-                                            "value_to": 1535,
-                                            "value_line": 88
+                                            "name_from": 1574,
+                                            "name_to": 1578,
+                                            "name_line": 89,
+                                            "value_from": 1580,
+                                            "value_to": 1584,
+                                            "value_line": 89
                                         },
                                         {
                                             "kind": "prop",
@@ -1016,12 +1066,12 @@
                                                 "kind": "number",
                                                 "value": 2
                                             },
-                                            "name_from": 1542,
-                                            "name_to": 1547,
-                                            "name_line": 89,
-                                            "value_from": 1549,
-                                            "value_to": 1550,
-                                            "value_line": 89
+                                            "name_from": 1591,
+                                            "name_to": 1596,
+                                            "name_line": 90,
+                                            "value_from": 1598,
+                                            "value_to": 1599,
+                                            "value_line": 90
                                         }
                                     ],
                                     [
@@ -1032,12 +1082,12 @@
                                                 "kind": "string",
                                                 "value": "bb"
                                             },
-                                            "name_from": 1570,
-                                            "name_to": 1574,
-                                            "name_line": 92,
-                                            "value_from": 1576,
-                                            "value_to": 1580,
-                                            "value_line": 92
+                                            "name_from": 1619,
+                                            "name_to": 1623,
+                                            "name_line": 93,
+                                            "value_from": 1625,
+                                            "value_to": 1629,
+                                            "value_line": 93
                                         },
                                         {
                                             "kind": "prop",
@@ -1046,22 +1096,22 @@
                                                 "kind": "number",
                                                 "value": 3
                                             },
-                                            "name_from": 1587,
-                                            "name_to": 1592,
-                                            "name_line": 93,
-                                            "value_from": 1594,
-                                            "value_to": 1595,
-                                            "value_line": 93
+                                            "name_from": 1636,
+                                            "name_to": 1641,
+                                            "name_line": 94,
+                                            "value_from": 1643,
+                                            "value_to": 1644,
+                                            "value_line": 94
                                         }
                                     ]
                                 ]
                             },
-                            "name_from": 1504,
-                            "name_to": 1510,
-                            "name_line": 86,
-                            "value_from": 1512,
-                            "value_to": 1608,
-                            "value_line": 86
+                            "name_from": 1553,
+                            "name_to": 1559,
+                            "name_line": 87,
+                            "value_from": 1561,
+                            "value_to": 1657,
+                            "value_line": 87
                         },
                         {
                             "kind": "prop",
@@ -1079,12 +1129,12 @@
                                     }
                                 ]
                             },
-                            "name_from": 1613,
-                            "name_to": 1616,
-                            "name_line": 96,
-                            "value_from": 1618,
-                            "value_to": 1650,
-                            "value_line": 96
+                            "name_from": 1662,
+                            "name_to": 1665,
+                            "name_line": 97,
+                            "value_from": 1667,
+                            "value_to": 1699,
+                            "value_line": 97
                         },
                         {
                             "kind": "prop",
@@ -1128,36 +1178,50 @@
                                                         "kind": "string",
                                                         "value": "adf"
                                                     },
-                                                    "name_from": 1749,
-                                                    "name_to": 1753,
-                                                    "name_line": 110,
-                                                    "value_from": 1755,
-                                                    "value_to": 1760,
-                                                    "value_line": 110
+                                                    "name_from": 1798,
+                                                    "name_to": 1802,
+                                                    "name_line": 111,
+                                                    "value_from": 1804,
+                                                    "value_to": 1809,
+                                                    "value_line": 111
                                                 }
                                             ]
                                         ]
                                     }
                                 ]
                             },
-                            "name_from": 1655,
-                            "name_to": 1659,
-                            "name_line": 100,
-                            "value_from": 1661,
-                            "value_to": 1781,
-                            "value_line": 100
+                            "name_from": 1704,
+                            "name_to": 1708,
+                            "name_line": 101,
+                            "value_from": 1710,
+                            "value_to": 1830,
+                            "value_line": 101
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "memo",
+                            "value": {
+                                "kind": "string",
+                                "value": "协议段说明"
+                            },
+                            "name_from": 1835,
+                            "name_to": 1839,
+                            "name_line": 115,
+                            "value_from": 1841,
+                            "value_to": 1848,
+                            "value_line": 115
                         }
                     ],
-                    "name_from": 1467,
-                    "name_to": 1473,
-                    "name_line": 83,
-                    "value_from": 1475,
-                    "value_to": 1786,
-                    "value_line": 83
+                    "name_from": 1516,
+                    "name_to": 1522,
+                    "name_line": 84,
+                    "value_from": 1524,
+                    "value_to": 1853,
+                    "value_line": 84
                 }
             ]
         }
     ],
     "bittype": "rl",
-    "src": "prot_demo_out.etl"
+    "src": "prot_demo.etl"
 }

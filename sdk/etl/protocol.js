@@ -1,6 +1,44 @@
 const shortid = require('shortid');
 const helper = require('./helper');
 
+
+function _set_props(obj, props) {
+    if (!props) {
+        return;
+    }
+    props.forEach(prop => {
+        let v = helper.exp2str(prop.value, true);
+        if(prop.name === 'autovalue') {
+            switch (prop.value.kind) {
+                case 'string':
+                    obj[prop.name] = `'${v}'`;
+                    break;
+                case 'array':
+                    obj[prop.name] = `${JSON.stringify(v)}`;
+                    break;
+                default:
+                    obj[prop.name] = v;
+                    break;
+            }
+        } else if(prop.name === 'endwith') {
+            obj[prop.name] = `'${v}'`;
+        } else if(prop.name === 'parser' && prop.value && helper.is_array(prop.value)) {
+            let res = [];
+            let pack = prop.value.find(it => it.name === 'pack');
+            if(pack && pack.value && pack.value.kind === 'pid') {
+                res.push(`pack: ${pack.value.list[0]}`);
+            }
+            let unpack = prop.value.find(it => it.name === 'unpack');
+            if(unpack && unpack.value && unpack.value.kind === 'pid') {
+                res.push(`unpack: ${unpack.value.list[0]}`);
+            }
+            obj.parser = `{ ${res.join(', ')} }`;
+        } else {
+            obj[prop.name] = v;
+        }
+    })
+}
+
 function _append_segment(items, seg) {
     let item = {
         id: shortid.generate(),
@@ -10,7 +48,7 @@ function _append_segment(items, seg) {
     if (seg.repeated) {
         item.arrlen = helper.exp2str(seg.repeated, true);
     }
-    helper.set_etl_props(item, seg.props);
+    _set_props(item, seg.props);
     items.push(item);
 }
 

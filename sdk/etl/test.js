@@ -1,54 +1,79 @@
 const path = require('path');
 const helper = require('./helper');
 const fs = require('fs');
-const etl_dev = require('./etl_dev_protocol');
+const etl_dev = require('./protocol');
 const shortid = require('shortid');
 const { assert } = require('console');
 
-function test_etl2dev(proj_apath, out_apath) {
+function test_etl_dev(proj_apath, out_apath, etl_outs) {
     let asts = helper.parse_proj_etl(proj_apath);
     let proj_id = shortid.generate();
     asts.forEach(ast => {
-        fs.writeFileSync(path.resolve(out_apath, ast.name + '_ast.json'), JSON.stringify(ast, null, 4));
-        let obj;
+        let ast_json = path.resolve(out_apath, ast.name + '_ast.json');
+        let db_json = path.resolve(out_apath, ast.name + '_db.json');
+        let out_etl = path.resolve(out_apath, ast.name + '.etl');
+        fs.writeFileSync(ast_json, JSON.stringify(ast, null, 4));
         switch (ast.kind) {
-            case 'protocol':
-                obj = etl_dev.protocol_etl2dev(ast, proj_id, shortid.generate(), 'memo text');
+            case 'protocol': {
+                let obj = etl_dev.protocol_etl2dev(ast, proj_id, shortid.generate(), 'memo text');
+                fs.writeFileSync(db_json, JSON.stringify(obj, null, 4));
+                let db_ctx = require(db_json);
+                db_ctx.content.memo = '说明文本';
+                let code = etl_dev.protocol_dev2etl(db_ctx, ast.name);
+                fs.writeFileSync(out_etl, code);
+                etl_outs.push({name: ast.name, file: out_etl});
                 break;
-        
+            }
             default:
                 break;
         }
-        fs.writeFileSync(path.resolve(out_apath, ast.name + '_db.json'), JSON.stringify(obj, null, 4));
     });
 
 }
 
-function test_protocol_dev2etl(db_path, out_apath) {
-    const prot = require(path.resolve(db_path, 'prot_demo_db.json'));
-    prot.content.memo = '说明文本';
-    let code = etl_dev.protocol_dev2etl(prot, 'prot_demo');
-    fs.writeFileSync(path.resolve(out_apath, 'prot_demo_out.etl'), code);
+function test_result(outs1, outs2) {
+    assert(outs1.length == outs2.length, outs1.length + ':' + outs2.length);
+    for(let info1 of outs1) {
+        let info2 = outs2.find(it => it.name === info1.name);
+        let code1 = fs.readFileSync(info1.file, 'utf8');
+        let code2 = fs.readFileSync(info2.file, 'utf8');
+        assert(code1 === code2, info1.name);
+    }
+    console.log('test passed') 
 }
 
-function test_result(path1, path2) {
-    let code1 = fs.readFileSync(path.resolve(path1, 'prot_demo_out.etl'), 'utf8');
-    let code2 = fs.readFileSync(path.resolve(path2, 'prot_demo_out.etl'), 'utf8');
-    assert(code1 === code2);
-    console.log('test passed')
+function deleteFolderRecursive(url) {
+    var files = [];
+    if (fs.existsSync(url)) {
+        files = fs.readdirSync(url);
+        files.forEach(function (file, index) {
+            var curPath = path.join(url, file);
+            if (fs.statSync(curPath).isDirectory()) { // recurse
+                deleteFolderRecursive(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(url);
+    } else {
+        console.log("给定的路径不存在，请给出正确的路径");
+    }
 }
 
 const demo_apath = path.resolve('./demo');
 const out_apath1 = path.resolve('./demo_out1');
 const out_apath2 = path.resolve('./demo_out2');
+deleteFolderRecursive(out_apath1);
+deleteFolderRecursive(out_apath2);
+fs.mkdirSync(out_apath1)
+fs.mkdirSync(out_apath2)
 
-test_etl2dev(demo_apath, out_apath1);
-test_protocol_dev2etl(out_apath1, out_apath1);
+let etl_outs1 = [];
+let etl_outs2 = [];
+test_etl_dev(demo_apath, out_apath1, etl_outs1);
+test_etl_dev(out_apath1, out_apath2, etl_outs2);
+test_result(etl_outs1, etl_outs2);
 
-test_etl2dev(out_apath1, out_apath2);
-test_protocol_dev2etl(out_apath2, out_apath2);
-
-test_result(out_apath1, out_apath2);
 
 
 

@@ -2,6 +2,15 @@ const path = require('path');
 const fs = require('fs');
 const parser = require("../parser");
 
+function _set_etl_props(obj, props) {
+    if (!props) {
+        return;
+    }
+    props.forEach(prop => {
+        obj[prop.name] = exp2str(prop.value, true);
+    });
+}
+
 function _get_etl_files(pf, results) {
     if (!fs.existsSync(pf)) {
         return;
@@ -57,31 +66,6 @@ function parse_proj_etl(proj_apath) {
     return _parse_etl(files, proj_apath);
 }
 
-function set_etl_props(obj, props) {
-    if (!props) {
-        return;
-    }
-    props.forEach(prop => {
-        let v = exp2str(prop.value, true);
-        if((prop.name === 'autovalue' && prop.value && prop.value.kind==='string') || (prop.name === 'endwith')) {
-            obj[prop.name] = `'${v}'`;
-        } else if(prop.name === 'parser' && prop.value && is_array(prop.value)) {
-            let res = [];
-            let pack = prop.value.find(it => it.name === 'pack');
-            if(pack && pack.value && pack.value.kind === 'pid') {
-                res.push(`pack: ${pack.value.list[0]}`);
-            }
-            let unpack = prop.value.find(it => it.name === 'unpack');
-            if(unpack && unpack.value && unpack.value.kind === 'pid') {
-                res.push(`unpack: ${unpack.value.list[0]}`);
-            }
-            obj.parser = `{ ${res.join(', ')} }`;
-        } else {
-            obj[prop.name] = v;
-        }
-    })
-}
-
 function exp2str(exp, is_top) {
     if (!exp) {
         return '';
@@ -110,12 +94,11 @@ function exp2str(exp, is_top) {
         }
         case 'array': {
             let arr = [];
-            if (!exp.list) {
-                return arr;
+            if (exp.list) {
+                exp.list.forEach(it => {
+                    arr.push(exp2str(it));
+                });
             }
-            exp.list.forEach(it => {
-                arr.push(exp2str(it));
-            });
             return arr;
         }
         case 'not':
@@ -176,7 +159,7 @@ function exp2str(exp, is_top) {
         default:
             if (is_array(exp)) {
                 let o = {};
-                set_etl_props(o, exp);
+                _set_etl_props(o, exp);
                 return o;
             } else {
                 console.error('unknow exp:', exp.kind);
@@ -269,7 +252,6 @@ function append_codes_obj(codes, level, value, key) {
 module.exports = {
     read_text,
     parse_proj_etl,
-    set_etl_props,
     is_array,
     exp2str,
     prop2str,
