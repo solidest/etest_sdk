@@ -28,7 +28,8 @@
     "enquirer": "^2.3.6",
     "js-yaml": "^3.13.1",
     "lokijs": "^1.5.8",
-    "msgpack-lite": "^0.1.26"
+    "msgpack-lite": "^0.1.26",
+    "shortid": "^2.2.15"
   },
   "bin": {
     "etl": "./sdk/cli/index.js"

@@ -1,10 +1,7 @@
 const path = require("path");
 const fs = require("fs");
-const etlParser = require("../parser/etlParser");
-const etxParser = require("../parser/etxParser");
+const parser = require('../parser');
 
-
-//构建完整的 etl ast
 function getEtlAst(proj_path, src_path, refs) {
 
   let proj_apath = path.isAbsolute(proj_path) ? proj_path : path.resolve(proj_path);
@@ -25,7 +22,7 @@ function getEtlAst(proj_path, src_path, refs) {
   }
 
   let text = fs.readFileSync(src_apath, "utf8");
-  let el_list = etlParser.parse(text);
+  let el_list = parser.parseEtl(text);
   let newContent = text.split('\n').map(line => ' '.repeat(line.length)).join('\n');
   let adir = path.dirname(src_apath);
 
@@ -42,7 +39,7 @@ function getEtlAst(proj_path, src_path, refs) {
         }
         ast.script_lua = script;
       } else if (a.kind === 'block_etx') {
-        ast.script_etx = etxParser.parse(script);
+        ast.script_etx = parser.parseBlock(script);
       }
     } else if (a.kind === 'using') {  //添加引用的文件到refs里
       let ap = path.resolve(adir, a.ref);
@@ -52,7 +49,6 @@ function getEtlAst(proj_path, src_path, refs) {
   return ast;
 }
 
-//构建执行代码的 ast
 function getSrcAst(kind, proj_path, src_path) {
   let proj_apath = path.isAbsolute(proj_path) ? proj_path : path.resolve(proj_path);
   let src_apath = path.isAbsolute(src_path) ? src_path : path.resolve(proj_apath, src_path);
@@ -92,7 +88,6 @@ function getBinAst(proj_path, src_path) {
   }
 }
 
-//循环解析所有引用到的文件
 function getRefAstList(proj_path, asts, refs) {
   if (!refs || refs.length === 0) {
     return;
@@ -116,7 +111,6 @@ function getRefAstList(proj_path, asts, refs) {
   }
 }
 
-//构建完整的运行时ast
 function getRunAstList(proj_path, src_path, asts) {
   if(src_path.endsWith('.etl')) {
     let refs = [];

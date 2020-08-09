@@ -174,7 +174,7 @@ protocol oneof_prot {
                             oneof(this.oneof_name.test.qs.ww == 24){
                                 segment tt[2] {parser:'string',endwith:"12",autovalue: ['qw',"er"]}
                             }
-                            oneof(this.oneof_name.test.qs.ww != 24){
+                            oneof(this.oneof_name.test.qs.ww ~= 24){
                                 segment string {parser:'string',endwith:"@@",autovalue: '123'}
                             }
                         } 

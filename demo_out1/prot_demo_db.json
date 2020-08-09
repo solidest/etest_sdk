@@ -1,0 +1,204 @@
+{
+    "id": "UkYRa74WtG",
+    "proj_id": "ga-1nD1av",
+    "kind": "protocol",
+    "name": "prot_demo",
+    "content": {
+        "items": [
+            {
+                "id": "wAusq0f4yJ",
+                "kind": "segment",
+                "name": "sega",
+                "parser": "int10",
+                "scale": 0.009
+            },
+            {
+                "id": "W940pZNNDY",
+                "kind": "segments",
+                "name": "segs",
+                "items": [
+                    {
+                        "id": "8oVrhIhp80",
+                        "kind": "segment",
+                        "name": "seg1",
+                        "arrlen": "this.seg - 10",
+                        "parser": "float ! >",
+                        "autovalue": "this.seg3 + 10"
+                    },
+                    {
+                        "id": "vNiRcnAQ0V",
+                        "kind": "segment",
+                        "name": "seg2",
+                        "parser": "double & <",
+                        "autovalue": "CheckCode(SUM_8, this.seg_begin, this.seg_end)"
+                    },
+                    {
+                        "id": "SeKC4Y9x39",
+                        "kind": "segment",
+                        "name": "seg3",
+                        "parser": "int16 & >",
+                        "autovalue": "CheckCode([79764919, 4294967295, 4294967295, true, true], this.seg_begin, this.seg_end)"
+                    }
+                ]
+            },
+            {
+                "id": "tG76yWEoGu",
+                "kind": "oneof",
+                "items": [
+                    {
+                        "id": "NglZmQysg7",
+                        "kind": "oneofitem",
+                        "condition": "(this.seg1 > -100) or true",
+                        "items": [
+                            {
+                                "id": "St7M1P2x1u",
+                                "kind": "segment",
+                                "name": "seg4",
+                                "parser": "int16 ! <",
+                                "autovalue": 0
+                            },
+                            {
+                                "id": "RH0asQRrEC",
+                                "kind": "segment",
+                                "name": "seg5",
+                                "parser": "int16 = >",
+                                "autovalue": 0
+                            }
+                        ]
+                    },
+                    {
+                        "id": "nYYKAABlXO",
+                        "kind": "oneofitem",
+                        "condition": "this.seg2 == 99",
+                        "items": [
+                            {
+                                "id": "6uw4NsxdQ-",
+                                "kind": "segment",
+                                "name": "seg6",
+                                "parser": "int16",
+                                "autovalue": "'abcdefg'"
+                            },
+                            {
+                                "id": "Wgvc_ii8CZ",
+                                "kind": "segment",
+                                "name": "seg7",
+                                "parser": "int16 & <",
+                                "autovalue": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "AFtt648l7V",
+                "kind": "segment",
+                "name": "_"
+            },
+            {
+                "id": "Z_W-0lTQKp",
+                "kind": "oneof",
+                "items": [
+                    {
+                        "id": "vV0VTiNE_5T",
+                        "kind": "oneofitem",
+                        "condition": "(((this.a + ((10 * 9) / this.g)) < 9) and this.b) or (this.a ~= -99)",
+                        "items": [
+                            {
+                                "id": "aaOifto7ec1",
+                                "kind": "segment",
+                                "name": "seg6",
+                                "parser": "int16",
+                                "autovalue": 0
+                            },
+                            {
+                                "id": "uuk0VMa0gyZ",
+                                "kind": "segment",
+                                "name": "seg7",
+                                "parser": "int16 & <",
+                                "autovalue": 0,
+                                "endwith": "'\\0'"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "D-4XvZzuy4j",
+                "kind": "segment",
+                "name": "demo30",
+                "parser": "{ pack: mypack, unpack: myunpack }",
+                "autovalue": "'\\0'"
+            },
+            {
+                "id": "3u1xVkdyclL",
+                "kind": "segment",
+                "name": "demo3",
+                "arrlen": 99,
+                "autovalue": "ByteSize(this.seg) + 20",
+                "endwith": "'\\0'",
+                "length": 99
+            },
+            {
+                "id": "fI6CyIJ5Zlb",
+                "kind": "segment",
+                "name": "demo1",
+                "parser": "int16 ! <",
+                "autovalue": "-100",
+                "option": {
+                    "max": 10,
+                    "min": 20,
+                    "select": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "reverse": true,
+                    "label": "标题",
+                    "tag": "sort1"
+                }
+            },
+            {
+                "id": "4c_ALE1gfnb",
+                "kind": "segment",
+                "name": "demo1",
+                "parser": "int16 ! <",
+                "autovalue": "'aaaa\\0'",
+                "endwith": "'\\0'",
+                "option": {
+                    "max": 10,
+                    "min": 20,
+                    "select": [
+                        {
+                            "text": "aa",
+                            "value": 2
+                        },
+                        {
+                            "text": "bb",
+                            "value": 3
+                        }
+                    ],
+                    "tag": [
+                        "sort1",
+                        "sort3"
+                    ],
+                    "test": [
+                        [
+                            "aa",
+                            "bbb"
+                        ],
+                        [
+                            1,
+                            true,
+                            false,
+                            {
+                                "text": "adf"
+                            }
+                        ]
+                    ]
+                }
+            }
+        ],
+        "bitalign": "rl",
+        "memo": "memo text"
+    }
+}

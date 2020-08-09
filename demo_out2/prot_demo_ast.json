@@ -1,0 +1,1163 @@
+{
+    "kind": "protocol",
+    "name": "prot_demo",
+    "name_from": 23,
+    "name_to": 32,
+    "name_line": 2,
+    "seglist": [
+        {
+            "kind": "segment",
+            "name": "sega",
+            "name_from": 44,
+            "name_to": 48,
+            "name_line": 3,
+            "props": [
+                {
+                    "kind": "prop",
+                    "name": "parser",
+                    "value": {
+                        "kind": "string",
+                        "value": "int10"
+                    },
+                    "name_from": 53,
+                    "name_to": 59,
+                    "name_line": 4,
+                    "value_from": 61,
+                    "value_to": 68,
+                    "value_line": 4
+                },
+                {
+                    "kind": "prop",
+                    "name": "scale",
+                    "value": {
+                        "kind": "number",
+                        "value": 0.009
+                    },
+                    "name_from": 72,
+                    "name_to": 77,
+                    "name_line": 5,
+                    "value_from": 79,
+                    "value_to": 84,
+                    "value_line": 5
+                }
+            ]
+        },
+        {
+            "kind": "seggroup",
+            "name": "segs",
+            "seglist": [
+                {
+                    "kind": "segment",
+                    "name": "seg1",
+                    "name_from": 116,
+                    "name_to": 120,
+                    "name_line": 8,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "float ! >"
+                            },
+                            "name_from": 141,
+                            "name_to": 147,
+                            "name_line": 9,
+                            "value_from": 149,
+                            "value_to": 160,
+                            "value_line": 9
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "add",
+                                "left": {
+                                    "kind": "pid",
+                                    "list": [
+                                        "this",
+                                        "seg3"
+                                    ]
+                                },
+                                "right": {
+                                    "kind": "number",
+                                    "value": 10
+                                }
+                            },
+                            "name_from": 165,
+                            "name_to": 174,
+                            "name_line": 10,
+                            "value_from": 176,
+                            "value_to": 190,
+                            "value_line": 10
+                        }
+                    ],
+                    "repeated": {
+                        "kind": "subtract",
+                        "left": {
+                            "kind": "pid",
+                            "list": [
+                                "this",
+                                "seg"
+                            ]
+                        },
+                        "right": {
+                            "kind": "number",
+                            "value": 10
+                        }
+                    }
+                },
+                {
+                    "kind": "segment",
+                    "name": "seg2",
+                    "name_from": 206,
+                    "name_to": 210,
+                    "name_line": 12,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "double & <"
+                            },
+                            "name_from": 216,
+                            "name_to": 222,
+                            "name_line": 13,
+                            "value_from": 224,
+                            "value_to": 236,
+                            "value_line": 13
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "CheckCode",
+                                "params": [
+                                    {
+                                        "kind": "pid",
+                                        "list": [
+                                            "SUM_8"
+                                        ]
+                                    },
+                                    {
+                                        "kind": "pid",
+                                        "list": [
+                                            "this",
+                                            "seg_begin"
+                                        ]
+                                    },
+                                    {
+                                        "kind": "pid",
+                                        "list": [
+                                            "this",
+                                            "seg_end"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "name_from": 241,
+                            "name_to": 250,
+                            "name_line": 14,
+                            "value_from": 252,
+                            "value_to": 298,
+                            "value_line": 14
+                        }
+                    ]
+                },
+                {
+                    "kind": "segment",
+                    "name": "seg3",
+                    "name_from": 314,
+                    "name_to": 318,
+                    "name_line": 16,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "int16 & >"
+                            },
+                            "name_from": 324,
+                            "name_to": 330,
+                            "name_line": 17,
+                            "value_from": 332,
+                            "value_to": 343,
+                            "value_line": 17
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "CheckCode",
+                                "params": [
+                                    {
+                                        "kind": "array",
+                                        "list": [
+                                            {
+                                                "kind": "number",
+                                                "value": 79764919
+                                            },
+                                            {
+                                                "kind": "number",
+                                                "value": 4294967295
+                                            },
+                                            {
+                                                "kind": "number",
+                                                "value": 4294967295
+                                            },
+                                            {
+                                                "kind": "bool",
+                                                "value": true
+                                            },
+                                            {
+                                                "kind": "bool",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "pid",
+                                        "list": [
+                                            "this",
+                                            "seg_begin"
+                                        ]
+                                    },
+                                    {
+                                        "kind": "pid",
+                                        "list": [
+                                            "this",
+                                            "seg_end"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "name_from": 348,
+                            "name_to": 357,
+                            "name_line": 18,
+                            "value_from": 359,
+                            "value_to": 446,
+                            "value_line": 18
+                        }
+                    ]
+                }
+            ],
+            "name_from": 99,
+            "name_to": 103,
+            "name_line": 7
+        },
+        {
+            "kind": "oneof",
+            "exp": {
+                "kind": "or",
+                "left": {
+                    "kind": "gt",
+                    "left": {
+                        "kind": "pid",
+                        "list": [
+                            "this",
+                            "seg1"
+                        ]
+                    },
+                    "right": {
+                        "kind": "uminus",
+                        "exp": {
+                            "kind": "number",
+                            "value": 100
+                        }
+                    }
+                },
+                "right": {
+                    "kind": "bool",
+                    "value": true
+                }
+            },
+            "seglist": [
+                {
+                    "kind": "segment",
+                    "name": "seg4",
+                    "name_from": 502,
+                    "name_to": 506,
+                    "name_line": 22,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "int16 ! <"
+                            },
+                            "name_from": 512,
+                            "name_to": 518,
+                            "name_line": 23,
+                            "value_from": 520,
+                            "value_to": 531,
+                            "value_line": 23
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "number",
+                                "value": 0
+                            },
+                            "name_from": 536,
+                            "name_to": 545,
+                            "name_line": 24,
+                            "value_from": 547,
+                            "value_to": 548,
+                            "value_line": 24
+                        }
+                    ]
+                },
+                {
+                    "kind": "segment",
+                    "name": "seg5",
+                    "name_from": 564,
+                    "name_to": 568,
+                    "name_line": 26,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "int16 = >"
+                            },
+                            "name_from": 574,
+                            "name_to": 580,
+                            "name_line": 27,
+                            "value_from": 582,
+                            "value_to": 593,
+                            "value_line": 27
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "number",
+                                "value": 0
+                            },
+                            "name_from": 598,
+                            "name_to": 607,
+                            "name_line": 28,
+                            "value_from": 609,
+                            "value_to": 610,
+                            "value_line": 28
+                        }
+                    ]
+                }
+            ],
+            "exp_from": 462,
+            "exp_to": 488,
+            "exp_line": 21
+        },
+        {
+            "kind": "oneof",
+            "exp": {
+                "kind": "eq_eq",
+                "left": {
+                    "kind": "pid",
+                    "list": [
+                        "this",
+                        "seg2"
+                    ]
+                },
+                "right": {
+                    "kind": "number",
+                    "value": 99
+                }
+            },
+            "seglist": [
+                {
+                    "kind": "segment",
+                    "name": "seg6",
+                    "name_from": 655,
+                    "name_to": 659,
+                    "name_line": 32,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "int16"
+                            },
+                            "name_from": 665,
+                            "name_to": 671,
+                            "name_line": 33,
+                            "value_from": 673,
+                            "value_to": 680,
+                            "value_line": 33
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "string",
+                                "value": "abcdefg"
+                            },
+                            "name_from": 685,
+                            "name_to": 694,
+                            "name_line": 34,
+                            "value_from": 696,
+                            "value_to": 705,
+                            "value_line": 34
+                        }
+                    ]
+                },
+                {
+                    "kind": "segment",
+                    "name": "seg7",
+                    "name_from": 721,
+                    "name_to": 725,
+                    "name_line": 36,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "int16 & <"
+                            },
+                            "name_from": 731,
+                            "name_to": 737,
+                            "name_line": 37,
+                            "value_from": 739,
+                            "value_to": 750,
+                            "value_line": 37
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "number",
+                                "value": 0
+                            },
+                            "name_from": 755,
+                            "name_to": 764,
+                            "name_line": 38,
+                            "value_from": 766,
+                            "value_to": 767,
+                            "value_line": 38
+                        }
+                    ]
+                }
+            ],
+            "exp_from": 626,
+            "exp_to": 641,
+            "exp_line": 31
+        },
+        {
+            "kind": "segment",
+            "name": "_",
+            "name_from": 785,
+            "name_to": 786,
+            "name_line": 41,
+            "props": []
+        },
+        {
+            "kind": "oneof",
+            "exp": {
+                "kind": "or",
+                "left": {
+                    "kind": "and",
+                    "left": {
+                        "kind": "lt",
+                        "left": {
+                            "kind": "add",
+                            "left": {
+                                "kind": "pid",
+                                "list": [
+                                    "this",
+                                    "a"
+                                ]
+                            },
+                            "right": {
+                                "kind": "divide",
+                                "left": {
+                                    "kind": "multiply",
+                                    "left": {
+                                        "kind": "number",
+                                        "value": 10
+                                    },
+                                    "right": {
+                                        "kind": "number",
+                                        "value": 9
+                                    }
+                                },
+                                "right": {
+                                    "kind": "pid",
+                                    "list": [
+                                        "this",
+                                        "g"
+                                    ]
+                                }
+                            }
+                        },
+                        "right": {
+                            "kind": "number",
+                            "value": 9
+                        }
+                    },
+                    "right": {
+                        "kind": "pid",
+                        "list": [
+                            "this",
+                            "b"
+                        ]
+                    }
+                },
+                "right": {
+                    "kind": "not_eq",
+                    "left": {
+                        "kind": "pid",
+                        "list": [
+                            "this",
+                            "a"
+                        ]
+                    },
+                    "right": {
+                        "kind": "uminus",
+                        "exp": {
+                            "kind": "number",
+                            "value": 99
+                        }
+                    }
+                }
+            },
+            "seglist": [
+                {
+                    "kind": "segment",
+                    "name": "seg6",
+                    "name_from": 881,
+                    "name_to": 885,
+                    "name_line": 44,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "int16"
+                            },
+                            "name_from": 891,
+                            "name_to": 897,
+                            "name_line": 45,
+                            "value_from": 899,
+                            "value_to": 906,
+                            "value_line": 45
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "number",
+                                "value": 0
+                            },
+                            "name_from": 911,
+                            "name_to": 920,
+                            "name_line": 46,
+                            "value_from": 922,
+                            "value_to": 923,
+                            "value_line": 46
+                        }
+                    ]
+                },
+                {
+                    "kind": "segment",
+                    "name": "seg7",
+                    "name_from": 939,
+                    "name_to": 943,
+                    "name_line": 48,
+                    "props": [
+                        {
+                            "kind": "prop",
+                            "name": "parser",
+                            "value": {
+                                "kind": "string",
+                                "value": "int16 & <"
+                            },
+                            "name_from": 949,
+                            "name_to": 955,
+                            "name_line": 49,
+                            "value_from": 957,
+                            "value_to": 968,
+                            "value_line": 49
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "autovalue",
+                            "value": {
+                                "kind": "number",
+                                "value": 0
+                            },
+                            "name_from": 973,
+                            "name_to": 982,
+                            "name_line": 50,
+                            "value_from": 984,
+                            "value_to": 985,
+                            "value_line": 50
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "endwith",
+                            "value": {
+                                "kind": "string",
+                                "value": "\u0000"
+                            },
+                            "name_from": 990,
+                            "name_to": 997,
+                            "name_line": 51,
+                            "value_from": 999,
+                            "value_to": 1003,
+                            "value_line": 51
+                        }
+                    ]
+                }
+            ],
+            "exp_from": 799,
+            "exp_to": 867,
+            "exp_line": 43
+        },
+        {
+            "kind": "segment",
+            "name": "demo30",
+            "name_from": 1021,
+            "name_to": 1027,
+            "name_line": 54,
+            "props": [
+                {
+                    "kind": "prop",
+                    "name": "parser",
+                    "value": [
+                        {
+                            "kind": "prop",
+                            "name": "pack",
+                            "value": {
+                                "kind": "pid",
+                                "list": [
+                                    "mypack"
+                                ]
+                            },
+                            "name_from": 1042,
+                            "name_to": 1046,
+                            "name_line": 55,
+                            "value_from": 1048,
+                            "value_to": 1054,
+                            "value_line": 55
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "unpack",
+                            "value": {
+                                "kind": "pid",
+                                "list": [
+                                    "myunpack"
+                                ]
+                            },
+                            "name_from": 1056,
+                            "name_to": 1062,
+                            "name_line": 55,
+                            "value_from": 1064,
+                            "value_to": 1072,
+                            "value_line": 55
+                        }
+                    ],
+                    "name_from": 1032,
+                    "name_to": 1038,
+                    "name_line": 55,
+                    "value_from": 1040,
+                    "value_to": 1074,
+                    "value_line": 55
+                },
+                {
+                    "kind": "prop",
+                    "name": "autovalue",
+                    "value": {
+                        "kind": "string",
+                        "value": "\u0000"
+                    },
+                    "name_from": 1078,
+                    "name_to": 1087,
+                    "name_line": 56,
+                    "value_from": 1089,
+                    "value_to": 1093,
+                    "value_line": 56
+                }
+            ]
+        },
+        {
+            "kind": "segment",
+            "name": "demo3",
+            "name_from": 1107,
+            "name_to": 1112,
+            "name_line": 58,
+            "props": [
+                {
+                    "kind": "prop",
+                    "name": "autovalue",
+                    "value": {
+                        "kind": "add",
+                        "left": {
+                            "kind": "ByteSize",
+                            "params": [
+                                {
+                                    "kind": "pid",
+                                    "list": [
+                                        "this",
+                                        "seg"
+                                    ]
+                                }
+                            ]
+                        },
+                        "right": {
+                            "kind": "number",
+                            "value": 20
+                        }
+                    },
+                    "name_from": 1121,
+                    "name_to": 1130,
+                    "name_line": 59,
+                    "value_from": 1132,
+                    "value_to": 1155,
+                    "value_line": 59
+                },
+                {
+                    "kind": "prop",
+                    "name": "endwith",
+                    "value": {
+                        "kind": "string",
+                        "value": "\u0000"
+                    },
+                    "name_from": 1159,
+                    "name_to": 1166,
+                    "name_line": 60,
+                    "value_from": 1168,
+                    "value_to": 1172,
+                    "value_line": 60
+                },
+                {
+                    "kind": "prop",
+                    "name": "length",
+                    "value": {
+                        "kind": "number",
+                        "value": 99
+                    },
+                    "name_from": 1176,
+                    "name_to": 1182,
+                    "name_line": 61,
+                    "value_from": 1184,
+                    "value_to": 1186,
+                    "value_line": 61
+                }
+            ],
+            "repeated": {
+                "kind": "number",
+                "value": 99
+            }
+        },
+        {
+            "kind": "segment",
+            "name": "demo1",
+            "name_from": 1200,
+            "name_to": 1205,
+            "name_line": 63,
+            "props": [
+                {
+                    "kind": "prop",
+                    "name": "parser",
+                    "value": {
+                        "kind": "string",
+                        "value": "int16 ! <"
+                    },
+                    "name_from": 1210,
+                    "name_to": 1216,
+                    "name_line": 64,
+                    "value_from": 1218,
+                    "value_to": 1229,
+                    "value_line": 64
+                },
+                {
+                    "kind": "prop",
+                    "name": "autovalue",
+                    "value": {
+                        "kind": "uminus",
+                        "exp": {
+                            "kind": "number",
+                            "value": 100
+                        }
+                    },
+                    "name_from": 1233,
+                    "name_to": 1242,
+                    "name_line": 65,
+                    "value_from": 1244,
+                    "value_to": 1248,
+                    "value_line": 65
+                },
+                {
+                    "kind": "prop",
+                    "name": "option",
+                    "value": [
+                        {
+                            "kind": "prop",
+                            "name": "max",
+                            "value": {
+                                "kind": "number",
+                                "value": 10
+                            },
+                            "name_from": 1265,
+                            "name_to": 1268,
+                            "name_line": 67,
+                            "value_from": 1270,
+                            "value_to": 1272,
+                            "value_line": 67
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "min",
+                            "value": {
+                                "kind": "number",
+                                "value": 20
+                            },
+                            "name_from": 1277,
+                            "name_to": 1280,
+                            "name_line": 68,
+                            "value_from": 1282,
+                            "value_to": 1284,
+                            "value_line": 68
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "select",
+                            "value": {
+                                "kind": "array",
+                                "list": [
+                                    {
+                                        "kind": "number",
+                                        "value": 1
+                                    },
+                                    {
+                                        "kind": "number",
+                                        "value": 2
+                                    },
+                                    {
+                                        "kind": "number",
+                                        "value": 3
+                                    }
+                                ]
+                            },
+                            "name_from": 1289,
+                            "name_to": 1295,
+                            "name_line": 69,
+                            "value_from": 1297,
+                            "value_to": 1324,
+                            "value_line": 69
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "reverse",
+                            "value": {
+                                "kind": "bool",
+                                "value": true
+                            },
+                            "name_from": 1329,
+                            "name_to": 1336,
+                            "name_line": 74,
+                            "value_from": 1338,
+                            "value_to": 1342,
+                            "value_line": 74
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "label",
+                            "value": {
+                                "kind": "string",
+                                "value": "标题"
+                            },
+                            "name_from": 1347,
+                            "name_to": 1352,
+                            "name_line": 75,
+                            "value_from": 1354,
+                            "value_to": 1358,
+                            "value_line": 75
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "tag",
+                            "value": {
+                                "kind": "string",
+                                "value": "sort1"
+                            },
+                            "name_from": 1363,
+                            "name_to": 1366,
+                            "name_line": 76,
+                            "value_from": 1368,
+                            "value_to": 1375,
+                            "value_line": 76
+                        }
+                    ],
+                    "name_from": 1252,
+                    "name_to": 1258,
+                    "name_line": 66,
+                    "value_from": 1260,
+                    "value_to": 1380,
+                    "value_line": 66
+                }
+            ]
+        },
+        {
+            "kind": "segment",
+            "name": "demo1",
+            "name_from": 1394,
+            "name_to": 1399,
+            "name_line": 79,
+            "props": [
+                {
+                    "kind": "prop",
+                    "name": "parser",
+                    "value": {
+                        "kind": "string",
+                        "value": "int16 ! <"
+                    },
+                    "name_from": 1404,
+                    "name_to": 1410,
+                    "name_line": 80,
+                    "value_from": 1412,
+                    "value_to": 1423,
+                    "value_line": 80
+                },
+                {
+                    "kind": "prop",
+                    "name": "autovalue",
+                    "value": {
+                        "kind": "string",
+                        "value": "aaaa\u0000"
+                    },
+                    "name_from": 1427,
+                    "name_to": 1436,
+                    "name_line": 81,
+                    "value_from": 1438,
+                    "value_to": 1446,
+                    "value_line": 81
+                },
+                {
+                    "kind": "prop",
+                    "name": "endwith",
+                    "value": {
+                        "kind": "string",
+                        "value": "\u0000"
+                    },
+                    "name_from": 1450,
+                    "name_to": 1457,
+                    "name_line": 82,
+                    "value_from": 1459,
+                    "value_to": 1463,
+                    "value_line": 82
+                },
+                {
+                    "kind": "prop",
+                    "name": "option",
+                    "value": [
+                        {
+                            "kind": "prop",
+                            "name": "max",
+                            "value": {
+                                "kind": "number",
+                                "value": 10
+                            },
+                            "name_from": 1480,
+                            "name_to": 1483,
+                            "name_line": 84,
+                            "value_from": 1485,
+                            "value_to": 1487,
+                            "value_line": 84
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "min",
+                            "value": {
+                                "kind": "number",
+                                "value": 20
+                            },
+                            "name_from": 1492,
+                            "name_to": 1495,
+                            "name_line": 85,
+                            "value_from": 1497,
+                            "value_to": 1499,
+                            "value_line": 85
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "select",
+                            "value": {
+                                "kind": "array",
+                                "list": [
+                                    [
+                                        {
+                                            "kind": "prop",
+                                            "name": "text",
+                                            "value": {
+                                                "kind": "string",
+                                                "value": "aa"
+                                            },
+                                            "name_from": 1525,
+                                            "name_to": 1529,
+                                            "name_line": 88,
+                                            "value_from": 1531,
+                                            "value_to": 1535,
+                                            "value_line": 88
+                                        },
+                                        {
+                                            "kind": "prop",
+                                            "name": "value",
+                                            "value": {
+                                                "kind": "number",
+                                                "value": 2
+                                            },
+                                            "name_from": 1542,
+                                            "name_to": 1547,
+                                            "name_line": 89,
+                                            "value_from": 1549,
+                                            "value_to": 1550,
+                                            "value_line": 89
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "kind": "prop",
+                                            "name": "text",
+                                            "value": {
+                                                "kind": "string",
+                                                "value": "bb"
+                                            },
+                                            "name_from": 1570,
+                                            "name_to": 1574,
+                                            "name_line": 92,
+                                            "value_from": 1576,
+                                            "value_to": 1580,
+                                            "value_line": 92
+                                        },
+                                        {
+                                            "kind": "prop",
+                                            "name": "value",
+                                            "value": {
+                                                "kind": "number",
+                                                "value": 3
+                                            },
+                                            "name_from": 1587,
+                                            "name_to": 1592,
+                                            "name_line": 93,
+                                            "value_from": 1594,
+                                            "value_to": 1595,
+                                            "value_line": 93
+                                        }
+                                    ]
+                                ]
+                            },
+                            "name_from": 1504,
+                            "name_to": 1510,
+                            "name_line": 86,
+                            "value_from": 1512,
+                            "value_to": 1608,
+                            "value_line": 86
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "tag",
+                            "value": {
+                                "kind": "array",
+                                "list": [
+                                    {
+                                        "kind": "string",
+                                        "value": "sort1"
+                                    },
+                                    {
+                                        "kind": "string",
+                                        "value": "sort3"
+                                    }
+                                ]
+                            },
+                            "name_from": 1613,
+                            "name_to": 1616,
+                            "name_line": 96,
+                            "value_from": 1618,
+                            "value_to": 1650,
+                            "value_line": 96
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "test",
+                            "value": {
+                                "kind": "array",
+                                "list": [
+                                    {
+                                        "kind": "array",
+                                        "list": [
+                                            {
+                                                "kind": "string",
+                                                "value": "aa"
+                                            },
+                                            {
+                                                "kind": "string",
+                                                "value": "bbb"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "array",
+                                        "list": [
+                                            {
+                                                "kind": "number",
+                                                "value": 1
+                                            },
+                                            {
+                                                "kind": "bool",
+                                                "value": true
+                                            },
+                                            {
+                                                "kind": "bool",
+                                                "value": false
+                                            },
+                                            [
+                                                {
+                                                    "kind": "prop",
+                                                    "name": "text",
+                                                    "value": {
+                                                        "kind": "string",
+                                                        "value": "adf"
+                                                    },
+                                                    "name_from": 1749,
+                                                    "name_to": 1753,
+                                                    "name_line": 110,
+                                                    "value_from": 1755,
+                                                    "value_to": 1760,
+                                                    "value_line": 110
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            },
+                            "name_from": 1655,
+                            "name_to": 1659,
+                            "name_line": 100,
+                            "value_from": 1661,
+                            "value_to": 1781,
+                            "value_line": 100
+                        }
+                    ],
+                    "name_from": 1467,
+                    "name_to": 1473,
+                    "name_line": 83,
+                    "value_from": 1475,
+                    "value_to": 1786,
+                    "value_line": 83
+                }
+            ]
+        }
+    ],
+    "bittype": "rl",
+    "src": "prot_demo_out.etl"
+}

@@ -2,11 +2,11 @@ const path = require('path');
 const fs = require('fs');
 const yaml = require('js-yaml');
 const runParser = require('./runParser');
-const parser = require("../parser/etxParser");
 const RpcTask = require('../driver/RpcTask');
 const NetWork = require('../driver/NetWork');
 const protocols = require('../etl/protocols');
 const parseHardEnv = require('../etl/devices');
+const etlHelper = require('../etl/helper');
 
 class SdkApi {
     constructor(ip, port) {
@@ -28,74 +28,27 @@ class SdkApi {
         }
     }
 
-    _get_etl_files(pf, results) {
-        if (!fs.existsSync(pf)) {
-            return;
-        }
-
-        let st = fs.statSync(pf);
-        if (st.isFile()) {
-            if (path.extname(pf) !== '.etl') {
-                return;
-            }
-            results.push(pf);
-            return;
-        }
-
-        if (st.isDirectory()) {
-            let dir = fs.readdirSync(pf);
-            for (let p of dir) {
-                this._get_etl_files(path.join(pf, p), results);
-            }
-        }
-    }
-
-    _parse_etl(files, proj_apath) {
-        let asts = [];
-        for (let f of files) {
-            let text = fs.readFileSync(f, "utf8");
-            let ast = parser.parse(text);
-            if (ast) {
-                for (let a of ast) {
-                    a.src = path.relative(proj_apath, f);
-                }
-                asts = asts.concat(ast);
-            }
-        }
-        return asts;
-    }
-
-    _read_text(file, proj_apath) {
-        let f = path.resolve(proj_apath, file);
-        if (fs.existsSync(f)) {
-            return fs.readFileSync(f, 'utf8');
-        }
-        throw new Error(`文件 ${f} 未找到`);
-    }
-
     setup(cfg, callback) {
         try {
-            let pf = cfg.project.path;
-            pf = path.isAbsolute(pf) ? pf : path.resolve(pf);
-            let files = [];
-            this._get_etl_files(pf, files);
-            let asts = this._parse_etl(files, pf);
+
+            let pf = path.isAbsolute(cfg.project.path) ? cfg.project.path : path.resolve(cfg.project.path);
+            let asts = etlHelper.parse_proj_etl(pf);
 
             let prots = protocols(asts);
             let topos = parseHardEnv(asts);
             let xtras = cfg.project.xtras ? JSON.parse(JSON.stringify(cfg.project.xtras)):{};
 
             if(xtras.pack) {
-                xtras.pack = this._read_text(xtras.pack, pf);
+                xtras.pack = etlHelper.read_text(xtras.pack, pf);
             }
             if(xtras.unpack) {
-                xtras.unpack = this._read_text(xtras.unpack, pf);
+                xtras.unpack = etlHelper.read_text(xtras.unpack, pf);
             }
             if(xtras.check) {
-                xtras.check = this._read_text(xtras.check, pf);
+                xtras.check = etlHelper.read_text(xtras.check, pf);
             }
             if(xtras.recvfilter) {
-                xtras.recvfilter = this._read_text(xtras.recvfilter, pf);
+                xtras.recvfilter = etlHelper.read_text(xtras.recvfilter, pf);
             }
 
             let libs = cfg.project.lib_path;
@@ -107,7 +60,7 @@ class SdkApi {
                     if (path.extname(p) !== '.lua') {
                         continue;
                     }
-                    libs.push({file: p, code: this._read_text(p, plibs)});
+                    libs.push({file: p, code: etlHelper.read_text(p, plibs)});
                 }
             } else {
                 libs = [];

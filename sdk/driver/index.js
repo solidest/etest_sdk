@@ -59,7 +59,6 @@ async function ping(ip, port) {
     return await _xfn('ping');
 }
 
-
 async function setup(proj_id, protocols, xtras, topologys, libs) {
     let env = {
         proj_id: proj_id,

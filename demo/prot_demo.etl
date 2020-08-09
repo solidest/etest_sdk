@@ -1,0 +1,102 @@
+// 协议的说明文字
+bitrl protocol prot_demo {
+      segment sega {
+            parser: 'int10',
+            scale: 0.009
+      }
+      segments segs {
+            segment seg1 [this.seg-10] {
+                  parser: 'float ! >',
+                  autovalue: this.seg3+10
+            }
+            segment seg2 {
+                  parser: 'double & <',
+                  autovalue: CheckCode(SUM_8, this.seg_begin, this.seg_end)
+            }
+            segment seg3 {
+                  parser: 'int16 & >',
+                  autovalue: CheckCode([0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true], this.seg_begin, this.seg_end)
+            }
+      }
+
+      oneof(this.seg1 > -100 or true) {
+            segment seg4 {
+                  parser: 'int16 ! <',
+                  autovalue: 0
+            }
+            segment seg5 {
+                  parser: 'int16 = >',
+                  autovalue: 0
+            }
+      }
+
+      oneof(this.seg2 == 99) {
+            segment seg6 {
+                  parser: 'int16',
+                  autovalue: 'abcdefg'
+            }
+            segment seg7 {
+                  parser: 'int16 & <',
+                  autovalue: 0
+            }
+      }
+
+      segment _ {}
+
+      oneof(this.a+10*9/this.g<9 and this.b or this.a~=-99) {
+            segment seg6 {
+                  parser: 'int16',
+                  autovalue: 0
+            }
+
+            segment seg7 {
+                  parser: 'int16 & <',
+                  autovalue: 0,
+                  endwith: '\0',
+            }
+      }
+
+      segment demo30 {
+            parser: {pack: mypack, unpack: myunpack},
+            autovalue: '\0',
+      }
+
+      segment demo3 [99] {
+            autovalue: ByteSize(this.seg)+20,
+            endwith: '\0',
+            length: 99,
+      }
+
+      segment demo1 {
+            parser: 'int16 ! <',
+            autovalue: -100,
+            option: {
+                  max: 10,
+                  min: 20,
+                  select: [1, 2, 3],
+                  reverse: true,
+                  label: '标题',
+                  tag: 'sort1'
+            }
+      }
+
+      segment demo1 {
+
+            parser: 'int16 ! <',
+            autovalue: 'aaaa\0',
+            endwith: '\0',
+            option: {
+                  max: 10,
+                  min: 20,
+                  select: [{
+                        text: 'aa',
+                        value: 2
+                  }, {
+                        text: 'bb',
+                        value: 3
+                  }],
+                  tag: ['sort1', 'sort3'],
+                  test:[[aa, 'bbb'], [1, true, false, {text: 'adf'}]]
+            }
+      }
+}
