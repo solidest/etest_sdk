@@ -1,12 +1,11 @@
 {
-    "id": "hspY5VYIjxd",
-    "proj_id": "bYa4eG-yitQ",
+    "id": "UqxztZkqapy",
+    "proj_id": "O8nW6uRaXtB",
     "kind": "protocol",
-    "name": "prot_demo",
     "content": {
         "items": [
             {
-                "id": "eOLqKEPviFV",
+                "id": "RMsmFQXKskP",
                 "kind": "segment",
                 "name": "sega",
                 "parser": "int10",
@@ -14,12 +13,12 @@
                 "scale": 0.009
             },
             {
-                "id": "qraiTghMgG4",
+                "id": "ls7p6EPuH8E",
                 "kind": "segments",
                 "name": "segs",
                 "items": [
                     {
-                        "id": "Oc8hFvDwtN_",
+                        "id": "uxFUXJUwRkM",
                         "kind": "segment",
                         "name": "seg1",
                         "arrlen": "this.seg - 10",
@@ -27,14 +26,14 @@
                         "autovalue": "this.seg3 + 10"
                     },
                     {
-                        "id": "bYU1ImbgEaR",
+                        "id": "jwzwZx23QD0",
                         "kind": "segment",
                         "name": "seg2",
                         "parser": "double & <",
                         "autovalue": "CheckCode(SUM_8, this.seg_begin, this.seg_end)"
                     },
                     {
-                        "id": "PAybKWHNVDE",
+                        "id": "ISc8y0lzs-z",
                         "kind": "segment",
                         "name": "seg3",
                         "parser": "int16 & >",
@@ -44,23 +43,23 @@
                 "arrlen": "this.sega * 8"
             },
             {
-                "id": "-vNFPiq4lNr",
+                "id": "kT0-FqLvaFo",
                 "kind": "oneof",
                 "items": [
                     {
-                        "id": "TFj3M1XOnDT",
+                        "id": "d3RA4P4OHl-",
                         "kind": "oneofitem",
                         "condition": "(this.seg1 > -100) or true",
                         "items": [
                             {
-                                "id": "wAPt2a-8TVp",
+                                "id": "OkyWx8T0R4t",
                                 "kind": "segment",
                                 "name": "seg4",
                                 "parser": "int16 ! <",
                                 "autovalue": 0
                             },
                             {
-                                "id": "M-4t5ExnJgK",
+                                "id": "3dWMlzYK_yf",
                                 "kind": "segment",
                                 "name": "seg5",
                                 "parser": "int16 = >",
@@ -69,19 +68,19 @@
                         ]
                     },
                     {
-                        "id": "JiOS8dod6Qg",
+                        "id": "C3defTofgsC",
                         "kind": "oneofitem",
                         "condition": "this.seg2 == 99",
                         "items": [
                             {
-                                "id": "WRlQ9grdbZE",
+                                "id": "Hs6w1TzwPcC",
                                 "kind": "segment",
                                 "name": "seg6",
                                 "parser": "int16",
                                 "autovalue": "'abcdefg'"
                             },
                             {
-                                "id": "oLLfL4WHRt7",
+                                "id": "AhGPbMp7OWv",
                                 "kind": "segment",
                                 "name": "seg7",
                                 "parser": "int16 & <",
@@ -92,28 +91,28 @@
                 ]
             },
             {
-                "id": "s3qV5bzrZl8",
+                "id": "Y2ZehCF1K2G",
                 "kind": "segment",
                 "name": "_"
             },
             {
-                "id": "3hBzRoQA7rc",
+                "id": "udsJ3-ot9nd",
                 "kind": "oneof",
                 "items": [
                     {
-                        "id": "guepWvOayY8",
+                        "id": "535mCZAL-fR",
                         "kind": "oneofitem",
                         "condition": "(((this.a + ((10 * 9) / this.g)) < 9) and this.b) or (this.a ~= -99)",
                         "items": [
                             {
-                                "id": "-ZkuncKFRWL",
+                                "id": "ZsimPzVRVl1",
                                 "kind": "segment",
                                 "name": "seg6",
                                 "parser": "int16",
                                 "autovalue": 0
                             },
                             {
-                                "id": "6wDYOnD7D_u",
+                                "id": "nqfI-UNJlo-",
                                 "kind": "segment",
                                 "name": "seg7",
                                 "parser": "int16 & <",
@@ -125,14 +124,14 @@
                 ]
             },
             {
-                "id": "QKE1M7IxsFj",
+                "id": "cTWDRFeBi8L",
                 "kind": "segment",
                 "name": "demo30",
                 "parser": "{ pack: mypack, unpack: myunpack }",
                 "autovalue": "'\\0'"
             },
             {
-                "id": "-WIw98KTtvB",
+                "id": "uKocaNz8dT_",
                 "kind": "segment",
                 "name": "demo3",
                 "arrlen": 99,
@@ -141,11 +140,11 @@
                 "length": 99
             },
             {
-                "id": "xgDBv9Mf2Fr",
+                "id": "3WuNyHvzrJz",
                 "kind": "segment",
                 "name": "demo1",
                 "parser": "int16 ! <",
-                "autovalue": "-100",
+                "autovalue": -100,
                 "option": {
                     "max": 10,
                     "min": 20,
@@ -160,7 +159,7 @@
                 }
             },
             {
-                "id": "wVOWlNqj7zQ",
+                "id": "DwZyEU6cvj6",
                 "kind": "segment",
                 "name": "demo1",
                 "parser": "int16 ! <",

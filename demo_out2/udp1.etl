@@ -1,0 +1,16 @@
+// 说明文本
+device udp1 {
+	udp conn1{
+		ip: '0.0.0.0',
+		port: 3000,
+		ttl: 20,
+		reuseaddr: true,
+	}
+	udp conn2{
+		ip: '0.0.0.0',
+		port: 4000,
+		before_recv: 'aaa',
+	}
+	udp conn3{
+	}
+}

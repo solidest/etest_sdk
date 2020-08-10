@@ -1,0 +1,47 @@
+{
+    "id": "E4XWFrb6R7a",
+    "proj_id": "O8nW6uRaXtB",
+    "kind": "device",
+    "content": {
+        "items": [
+            {
+                "id": "8TquR_4on49",
+                "kind": "udp",
+                "name": "conn1",
+                "config": {
+                    "ip": "0.0.0.0",
+                    "port": 5000,
+                    "ttl": 20
+                }
+            },
+            {
+                "id": "ps0dVqnnewP",
+                "kind": "udp",
+                "name": "conn2",
+                "config": {
+                    "ip": "0.0.0.0",
+                    "port": 6000
+                }
+            },
+            {
+                "id": "I6uIe7k3_Hw",
+                "kind": "udp",
+                "name": "conn3",
+                "config": {
+                    "ip": "0.0.0.0",
+                    "port": 7000
+                }
+            },
+            {
+                "id": "p9cnkWd63g-",
+                "kind": "udp",
+                "name": "conn4",
+                "config": {
+                    "ip": "0.0.0.0",
+                    "port": 8000
+                }
+            }
+        ],
+        "memo": "memo text"
+    }
+}

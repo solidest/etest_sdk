@@ -1,0 +1,42 @@
+{
+    "id": "x9gMY5SHgtx",
+    "proj_id": "_28YLTpFN",
+    "kind": "topology",
+    "content": {
+        "mapping": [
+            {
+                "dev_id": "-kkysczraPj",
+                "used": "etest"
+            },
+            {
+                "dev_id": "0GdnK5Q0i25",
+                "used": "etest"
+            }
+        ],
+        "linking": [
+            {
+                "id": "LvDuhUqJWPN",
+                "conns": [
+                    "jtcIuK1Z1no",
+                    "DImlXt0FSJ-"
+                ]
+            },
+            {
+                "id": "vQVQtS0feRO",
+                "conns": [
+                    "DGhYYFfl4x-",
+                    "TgtKjgUf7q9",
+                    "1WDSp97_27u"
+                ]
+            },
+            {
+                "id": "uRhyVqEw5kJ",
+                "conns": [
+                    "woYnq44Gy10",
+                    "M8Ri1V33I3Z"
+                ]
+            }
+        ],
+        "memo": "memo text"
+    }
+}

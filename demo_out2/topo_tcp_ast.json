@@ -1,0 +1,114 @@
+{
+    "kind": "topology",
+    "name": "topo_tcp",
+    "value": [
+        {
+            "kind": "etest",
+            "value": [
+                "client",
+                "server"
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "_",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srva"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp1"
+                }
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "_",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp2"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp3"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvb"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvc"
+                }
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "_",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvd"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp4"
+                }
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "_",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srve"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp5"
+                }
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "_",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp6"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp7"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvf"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvg"
+                }
+            ]
+        }
+    ],
+    "src": "topo_tcp.etl"
+}

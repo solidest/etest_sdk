@@ -117,7 +117,6 @@ function protocol_etl2dev(ast, proj_id, kind_id, memo) {
         id: kind_id,
         proj_id: proj_id,
         kind: 'protocol',
-        name: ast.name,
         content: {
             items: items,
             bitalign: ast.bittype || 'lr',

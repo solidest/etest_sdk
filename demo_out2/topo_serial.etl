@@ -1,0 +1,10 @@
+// 说明文本
+topology topo_serial {
+	mapping: {
+		uut: [dev1],
+		etest: [dev2],
+	}
+	linking: {
+		_ : [dev1.conn1, dev2.conn1], 
+	}
+}

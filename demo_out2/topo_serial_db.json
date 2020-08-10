@@ -1,0 +1,27 @@
+{
+    "id": "PPIRQgaXC5R",
+    "proj_id": "O8nW6uRaXtB",
+    "kind": "topology",
+    "content": {
+        "mapping": [
+            {
+                "dev_id": "MrAnxizYDTP",
+                "used": "uut"
+            },
+            {
+                "dev_id": "Uow5uPweBqw",
+                "used": "etest"
+            }
+        ],
+        "linking": [
+            {
+                "id": "uBjjk5YmQ38",
+                "conns": [
+                    "A5ZTvRIJ9Sb",
+                    "WBDyLazqWNM"
+                ]
+            }
+        ],
+        "memo": "memo text"
+    }
+}

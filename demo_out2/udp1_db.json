@@ -1,0 +1,37 @@
+{
+    "id": "FczoGXbx3-F",
+    "proj_id": "O8nW6uRaXtB",
+    "kind": "device",
+    "content": {
+        "items": [
+            {
+                "id": "dM0Cr5w6t01",
+                "kind": "udp",
+                "name": "conn1",
+                "config": {
+                    "ip": "0.0.0.0",
+                    "port": 3000,
+                    "ttl": 20,
+                    "reuseaddr": true
+                }
+            },
+            {
+                "id": "sHotmaL1_Uk",
+                "kind": "udp",
+                "name": "conn2",
+                "config": {
+                    "ip": "0.0.0.0",
+                    "port": 4000,
+                    "before_recv": "aaa"
+                }
+            },
+            {
+                "id": "iwDqwZTE8hp",
+                "kind": "udp",
+                "name": "conn3",
+                "config": {}
+            }
+        ],
+        "memo": "memo text"
+    }
+}

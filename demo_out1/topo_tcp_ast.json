@@ -1,0 +1,198 @@
+{
+    "kind": "topology",
+    "name": "topo_tcp",
+    "value": [
+        {
+            "kind": "linking",
+            "name": "link1",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srva"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp1"
+                }
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "link2",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp2"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp3"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvb"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvc"
+                }
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "link3",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvd"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp4"
+                }
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "link4",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srve"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp5"
+                }
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "link5",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp6"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "client",
+                    "connector": "tcp7"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvf"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "server",
+                    "connector": "srvg"
+                }
+            ]
+        },
+        {
+            "kind": "etest",
+            "value": [
+                "client",
+                "server"
+            ]
+        },
+        {
+            "kind": "binding",
+            "device": "server",
+            "connector": "srva",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "server",
+            "connector": "srvb",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "server",
+            "connector": "srvc",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "server",
+            "connector": "srvd",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "server",
+            "connector": "srve",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "server",
+            "connector": "srvf",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "server",
+            "connector": "srvg",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "client",
+            "connector": "tcp1",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "client",
+            "connector": "tcp2",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "client",
+            "connector": "tcp3",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "client",
+            "connector": "tcp4",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "client",
+            "connector": "tcp5",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "client",
+            "connector": "tcp6",
+            "bind": "auto"
+        },
+        {
+            "kind": "binding",
+            "device": "client",
+            "connector": "tcp7",
+            "bind": "auto"
+        }
+    ],
+    "src": "tcp.etl"
+}

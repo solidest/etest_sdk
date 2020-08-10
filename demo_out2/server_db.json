@@ -1,0 +1,83 @@
+{
+    "id": "DYzwT2nkWz0",
+    "proj_id": "O8nW6uRaXtB",
+    "kind": "device",
+    "content": {
+        "items": [
+            {
+                "id": "W2zePfExYOk",
+                "kind": "tcp_server",
+                "name": "srva",
+                "config": {
+                    "ip": "127.0.0.1",
+                    "port": 8080,
+                    "keepalive": true,
+                    "nodelay": true,
+                    "acceptany": false
+                }
+            },
+            {
+                "id": "n6H8z7aUATD",
+                "kind": "tcp_server",
+                "name": "srvb",
+                "config": {
+                    "ip": "127.0.0.1",
+                    "port": 8088,
+                    "keepalive": false,
+                    "nodelay": true
+                }
+            },
+            {
+                "id": "rS6_T0jDZ4j",
+                "kind": "tcp_server",
+                "name": "srvc",
+                "config": {
+                    "ip": "127.0.0.1",
+                    "port": 8089,
+                    "acceptany": true
+                }
+            },
+            {
+                "id": "C6Bvwkq17_z",
+                "kind": "tcp_server",
+                "name": "srvd",
+                "config": {
+                    "ip": "127.0.0.1",
+                    "port": 8090,
+                    "keepalive": true,
+                    "nodelay": false
+                }
+            },
+            {
+                "id": "5eRfrUrS43t",
+                "kind": "tcp_server",
+                "name": "srve",
+                "config": {
+                    "ip": "127.0.0.1",
+                    "port": 8091,
+                    "keepalive": false,
+                    "nodelay": false
+                }
+            },
+            {
+                "id": "6OZXIW_HqyU",
+                "kind": "tcp_server",
+                "name": "srvf",
+                "config": {
+                    "ip": "127.0.0.1",
+                    "port": 8092
+                }
+            },
+            {
+                "id": "h2ux2n-q7-4",
+                "kind": "tcp_server",
+                "name": "srvg",
+                "config": {
+                    "ip": "127.0.0.1",
+                    "port": 8093
+                }
+            }
+        ],
+        "memo": "memo text"
+    }
+}

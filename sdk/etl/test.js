@@ -1,35 +1,67 @@
 const path = require('path');
 const helper = require('./helper');
 const fs = require('fs');
-const etl_dev = require('./protocol');
 const shortid = require('shortid');
 const { assert } = require('console');
+const etl_dev = require('./index');
 
 function test_etl_dev(proj_apath, out_apath, etl_outs) {
     let asts = helper.parse_proj_etl(proj_apath);
     let proj_id = shortid.generate();
+
     asts.forEach(ast => {
         let ast_json = path.resolve(out_apath, ast.name + '_ast.json');
         let db_json = path.resolve(out_apath, ast.name + '_db.json');
         let out_etl = path.resolve(out_apath, ast.name + '.etl');
         fs.writeFileSync(ast_json, JSON.stringify(ast, null, 4));
-        switch (ast.kind) {
-            case 'protocol': {
-                let obj = etl_dev.protocol_etl2dev(ast, proj_id, shortid.generate(), 'memo text');
-                fs.writeFileSync(db_json, JSON.stringify(obj, null, 4));
-                let db_ctx = require(db_json);
-                db_ctx.content.memo = '说明文本';
-                let code = etl_dev.protocol_dev2etl(db_ctx, ast.name);
-                fs.writeFileSync(out_etl, code);
-                etl_outs.push({name: ast.name, file: out_etl});
-                break;
-            }
-            default:
-                break;
+        if (ast.kind === 'protocol') {
+            let obj = etl_dev.protocol_etl2dev(ast, proj_id, shortid.generate(), 'memo text');
+            fs.writeFileSync(db_json, JSON.stringify(obj, null, 4));
+            let db_ctx = require(db_json);
+            db_ctx.content.memo = '说明文本';
+            let code = etl_dev.protocol_dev2etl(db_ctx, ast.name);
+            fs.writeFileSync(out_etl, code);
+            etl_outs.push({name: ast.name, file: out_etl});
         }
     });
 
+    let devs = [];
+
+    asts.forEach(ast => {
+        let ast_json = path.resolve(out_apath, ast.name + '_ast.json');
+        let db_json = path.resolve(out_apath, ast.name + '_db.json');
+        let out_etl = path.resolve(out_apath, ast.name + '.etl');
+        fs.writeFileSync(ast_json, JSON.stringify(ast, null, 4));
+        if (ast.kind === 'device') {
+            let obj = etl_dev.device_etl2dev(ast, proj_id, shortid.generate(), 'memo text');
+            devs.push({name: ast.name, ctx: obj});
+            fs.writeFileSync(db_json, JSON.stringify(obj, null, 4));
+            let db_ctx = require(db_json);
+            db_ctx.content.memo = '说明文本';
+            let code = etl_dev.device_dev2etl(db_ctx, ast.name);
+            fs.writeFileSync(out_etl, code);
+            etl_outs.push({name: ast.name, file: out_etl});
+        }
+    });
+
+    asts.forEach(ast => {
+        let ast_json = path.resolve(out_apath, ast.name + '_ast.json');
+        let db_json = path.resolve(out_apath, ast.name + '_db.json');
+        let out_etl = path.resolve(out_apath, ast.name + '.etl');
+        fs.writeFileSync(ast_json, JSON.stringify(ast, null, 4));
+        if (ast.kind === 'topology') {
+            let obj = etl_dev.topology_etl2dev(ast, proj_id, shortid.generate(), 'memo text', devs);
+            fs.writeFileSync(db_json, JSON.stringify(obj, null, 4));
+            let db_ctx = require(db_json);
+            db_ctx.content.memo = '说明文本';
+            let code = etl_dev.topology_dev2etl(db_ctx, ast.name, devs);
+            fs.writeFileSync(out_etl, code);
+            etl_outs.push({name: ast.name, file: out_etl});
+        }
+    });
 }
+
+
 
 function test_result(outs1, outs2) {
     assert(outs1.length == outs2.length, outs1.length + ':' + outs2.length);

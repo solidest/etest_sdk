@@ -1,0 +1,161 @@
+{
+    "kind": "device",
+    "name": "udp2",
+    "value": [
+        {
+            "kind": "connector",
+            "name": "conn1",
+            "type": "udp",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "ip",
+                    "value": {
+                        "kind": "string",
+                        "value": "0.0.0.0"
+                    },
+                    "name_from": 208,
+                    "name_to": 210,
+                    "name_line": 9,
+                    "value_from": 212,
+                    "value_to": 221,
+                    "value_line": 9
+                },
+                {
+                    "kind": "prop",
+                    "name": "port",
+                    "value": {
+                        "kind": "number",
+                        "value": 5000
+                    },
+                    "name_from": 223,
+                    "name_to": 227,
+                    "name_line": 9,
+                    "value_from": 229,
+                    "value_to": 233,
+                    "value_line": 9
+                },
+                {
+                    "kind": "prop",
+                    "name": "ttl",
+                    "value": {
+                        "kind": "number",
+                        "value": 20
+                    },
+                    "name_from": 235,
+                    "name_to": 238,
+                    "name_line": 9,
+                    "value_from": 240,
+                    "value_to": 242,
+                    "value_line": 9
+                }
+            ]
+        },
+        {
+            "kind": "connector",
+            "name": "conn2",
+            "type": "udp",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "ip",
+                    "value": {
+                        "kind": "string",
+                        "value": "0.0.0.0"
+                    },
+                    "name_from": 261,
+                    "name_to": 263,
+                    "name_line": 10,
+                    "value_from": 265,
+                    "value_to": 274,
+                    "value_line": 10
+                },
+                {
+                    "kind": "prop",
+                    "name": "port",
+                    "value": {
+                        "kind": "number",
+                        "value": 6000
+                    },
+                    "name_from": 276,
+                    "name_to": 280,
+                    "name_line": 10,
+                    "value_from": 282,
+                    "value_to": 286,
+                    "value_line": 10
+                }
+            ]
+        },
+        {
+            "kind": "connector",
+            "name": "conn3",
+            "type": "udp",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "ip",
+                    "value": {
+                        "kind": "string",
+                        "value": "0.0.0.0"
+                    },
+                    "name_from": 306,
+                    "name_to": 308,
+                    "name_line": 11,
+                    "value_from": 310,
+                    "value_to": 319,
+                    "value_line": 11
+                },
+                {
+                    "kind": "prop",
+                    "name": "port",
+                    "value": {
+                        "kind": "number",
+                        "value": 7000
+                    },
+                    "name_from": 321,
+                    "name_to": 325,
+                    "name_line": 11,
+                    "value_from": 327,
+                    "value_to": 331,
+                    "value_line": 11
+                }
+            ]
+        },
+        {
+            "kind": "connector",
+            "name": "conn4",
+            "type": "udp",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "ip",
+                    "value": {
+                        "kind": "string",
+                        "value": "0.0.0.0"
+                    },
+                    "name_from": 351,
+                    "name_to": 353,
+                    "name_line": 12,
+                    "value_from": 355,
+                    "value_to": 364,
+                    "value_line": 12
+                },
+                {
+                    "kind": "prop",
+                    "name": "port",
+                    "value": {
+                        "kind": "number",
+                        "value": 8000
+                    },
+                    "name_from": 366,
+                    "name_to": 370,
+                    "name_line": 12,
+                    "value_from": 372,
+                    "value_to": 376,
+                    "value_line": 12
+                }
+            ]
+        }
+    ],
+    "src": "udp.etl"
+}

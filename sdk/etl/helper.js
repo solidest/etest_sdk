@@ -80,7 +80,7 @@ function exp2str(exp, is_top) {
         }
         case 'uminus': {
             if (exp.exp && exp.exp.kind === 'number') {
-                return `-${exp.exp.value}`;
+                return -exp.exp.value;
             } else {
                 return is_top ? `-${exp2str(exp.exp)}` : `(-${exp2str(exp.exp)})`;
             }
@@ -215,29 +215,28 @@ function append_codes_arr(codes, level, arr) {
     }
 }
 
-function append_codes_obj(codes, level, value, key) {
-    if (!value) {
+function append_codes_objprops(codes, level, obj) {
+    if (!obj) {
         return;
     }
-    codes.push({level: level, code: key ? `${key}: {`: '{'});
-    for(let k in value) {
-        let v = value[k];
-        let t = typeof value[k];
+    for(let k in obj) {
+        let v = obj[k];
+        let t = typeof v;
         switch (t) {
             case 'string':
-                codes.push({level: level + 1, code: `${k}: '${v}',`})
+                codes.push({level: level, code: `${k}: '${v}',`})
                 break;
             case 'boolean':
             case 'number':
-                codes.push({level: level + 1, code: `${k}: ${v},`})
+                codes.push({level: level, code: `${k}: ${v},`})
                 break;
             case 'object':{
                 if(is_array(v)) {
-                    codes.push({level: level+1, code: `${k}: [`});
-                    append_codes_arr(codes, level+2, v);
-                    codes.push({level: level+1, code: '],'});
+                    codes.push({level: level, code: `${k}: [`});
+                    append_codes_arr(codes, level+1, v);
+                    codes.push({level: level, code: '],'});
                 } else {
-                    append_codes_obj(codes, level+1, value, k);
+                    append_codes_obj(codes, level+1, v, k);
                 }
                 break;
             }
@@ -246,6 +245,14 @@ function append_codes_obj(codes, level, value, key) {
                 break;
         }
     }
+}
+
+function append_codes_obj(codes, level, value, key) {
+    if (!value) {
+        return;
+    }
+    codes.push({level: level, code: key ? `${key}: {`: '{'});
+    append_codes_objprops(codes, level+1, value);
     codes.push({level: level, code: '},'});
 }
 
@@ -258,4 +265,5 @@ module.exports = {
     prop2raw,
     append_codes_obj,
     append_codes_arr,
+    append_codes_objprops,
 };

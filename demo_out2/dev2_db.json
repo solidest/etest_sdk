@@ -1,0 +1,18 @@
+{
+    "id": "Uow5uPweBqw",
+    "proj_id": "O8nW6uRaXtB",
+    "kind": "device",
+    "content": {
+        "items": [
+            {
+                "id": "WBDyLazqWNM",
+                "kind": "serial_232",
+                "name": "conn1",
+                "config": {
+                    "baudrate": 115200
+                }
+            }
+        ],
+        "memo": "memo text"
+    }
+}

@@ -1,0 +1,207 @@
+{
+    "kind": "device",
+    "name": "client",
+    "value": [
+        {
+            "kind": "connector",
+            "name": "tcp1",
+            "type": "tcp_client",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "ip",
+                    "value": {
+                        "kind": "string",
+                        "value": "127.0.0.1"
+                    },
+                    "name_from": 53,
+                    "name_to": 55,
+                    "name_line": 5,
+                    "value_from": 57,
+                    "value_to": 68,
+                    "value_line": 5
+                },
+                {
+                    "kind": "prop",
+                    "name": "port",
+                    "value": {
+                        "kind": "number",
+                        "value": 3333
+                    },
+                    "name_from": 70,
+                    "name_to": 74,
+                    "name_line": 5,
+                    "value_from": 76,
+                    "value_to": 80,
+                    "value_line": 5
+                },
+                {
+                    "kind": "prop",
+                    "name": "keepalive",
+                    "value": {
+                        "kind": "bool",
+                        "value": true
+                    },
+                    "name_from": 82,
+                    "name_to": 91,
+                    "name_line": 5,
+                    "value_from": 93,
+                    "value_to": 97,
+                    "value_line": 5
+                },
+                {
+                    "kind": "prop",
+                    "name": "nodelay",
+                    "value": {
+                        "kind": "bool",
+                        "value": false
+                    },
+                    "name_from": 99,
+                    "name_to": 106,
+                    "name_line": 5,
+                    "value_from": 108,
+                    "value_to": 113,
+                    "value_line": 5
+                },
+                {
+                    "kind": "prop",
+                    "name": "autoconnect",
+                    "value": {
+                        "kind": "bool",
+                        "value": true
+                    },
+                    "name_from": 115,
+                    "name_to": 126,
+                    "name_line": 5,
+                    "value_from": 128,
+                    "value_to": 132,
+                    "value_line": 5
+                }
+            ]
+        },
+        {
+            "kind": "connector",
+            "name": "tcp2",
+            "type": "tcp_client",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "ip",
+                    "value": {
+                        "kind": "string",
+                        "value": "127.0.0.1"
+                    },
+                    "name_from": 158,
+                    "name_to": 160,
+                    "name_line": 6,
+                    "value_from": 162,
+                    "value_to": 173,
+                    "value_line": 6
+                },
+                {
+                    "kind": "prop",
+                    "name": "port",
+                    "value": {
+                        "kind": "number",
+                        "value": 8888
+                    },
+                    "name_from": 175,
+                    "name_to": 179,
+                    "name_line": 6,
+                    "value_from": 181,
+                    "value_to": 185,
+                    "value_line": 6
+                }
+            ]
+        },
+        {
+            "kind": "connector",
+            "name": "tcp3",
+            "type": "tcp_client",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "ip",
+                    "value": {
+                        "kind": "string",
+                        "value": "127.0.0.1"
+                    },
+                    "name_from": 210,
+                    "name_to": 212,
+                    "name_line": 7,
+                    "value_from": 214,
+                    "value_to": 225,
+                    "value_line": 7
+                }
+            ]
+        },
+        {
+            "kind": "connector",
+            "name": "tcp4",
+            "type": "tcp_client",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "ip",
+                    "value": {
+                        "kind": "string",
+                        "value": "127.0.0.1"
+                    },
+                    "name_from": 251,
+                    "name_to": 253,
+                    "name_line": 8,
+                    "value_from": 255,
+                    "value_to": 266,
+                    "value_line": 8
+                },
+                {
+                    "kind": "prop",
+                    "name": "autoconnect",
+                    "value": {
+                        "kind": "bool",
+                        "value": false
+                    },
+                    "name_from": 268,
+                    "name_to": 279,
+                    "name_line": 8,
+                    "value_from": 281,
+                    "value_to": 286,
+                    "value_line": 8
+                },
+                {
+                    "kind": "prop",
+                    "name": "port",
+                    "value": {
+                        "kind": "number",
+                        "value": 5666
+                    },
+                    "name_from": 288,
+                    "name_to": 292,
+                    "name_line": 8,
+                    "value_from": 294,
+                    "value_to": 298,
+                    "value_line": 8
+                }
+            ]
+        },
+        {
+            "kind": "connector",
+            "name": "tcp5",
+            "type": "tcp_client",
+            "config": []
+        },
+        {
+            "kind": "connector",
+            "name": "tcp6",
+            "type": "tcp_client",
+            "config": []
+        },
+        {
+            "kind": "connector",
+            "name": "tcp7",
+            "type": "tcp_client",
+            "config": []
+        }
+    ],
+    "src": "tcp.etl"
+}

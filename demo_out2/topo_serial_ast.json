@@ -1,0 +1,35 @@
+{
+    "kind": "topology",
+    "name": "topo_serial",
+    "value": [
+        {
+            "kind": "uut",
+            "value": [
+                "dev1"
+            ]
+        },
+        {
+            "kind": "etest",
+            "value": [
+                "dev2"
+            ]
+        },
+        {
+            "kind": "linking",
+            "name": "_",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "dev1",
+                    "connector": "conn1"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "dev2",
+                    "connector": "conn1"
+                }
+            ]
+        }
+    ],
+    "src": "topo_serial.etl"
+}

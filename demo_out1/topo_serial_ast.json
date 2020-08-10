@@ -1,0 +1,47 @@
+{
+    "kind": "topology",
+    "name": "topo_serial",
+    "value": [
+        {
+            "kind": "linking",
+            "name": "link1",
+            "value": [
+                {
+                    "kind": "dev_connector",
+                    "device": "dev1",
+                    "connector": "conn1"
+                },
+                {
+                    "kind": "dev_connector",
+                    "device": "dev2",
+                    "connector": "conn1"
+                }
+            ]
+        },
+        {
+            "kind": "etest",
+            "value": [
+                "dev2"
+            ]
+        },
+        {
+            "kind": "uut",
+            "value": [
+                "dev1"
+            ]
+        },
+        {
+            "kind": "binding",
+            "device": "dev1",
+            "connector": "conn1",
+            "bind": "COM1"
+        },
+        {
+            "kind": "binding",
+            "device": "dev2",
+            "connector": "conn1",
+            "bind": "COM2"
+        }
+    ],
+    "src": "serial.etl"
+}

@@ -1,0 +1,185 @@
+{
+    "kind": "device",
+    "name": "dev1",
+    "value": [
+        {
+            "kind": "connector",
+            "name": "conn1",
+            "type": "serial_232",
+            "config": [
+                {
+                    "kind": "prop",
+                    "name": "baudrate",
+                    "value": {
+                        "kind": "number",
+                        "value": 115200
+                    },
+                    "name_from": 43,
+                    "name_to": 51,
+                    "name_line": 4,
+                    "value_from": 53,
+                    "value_to": 59,
+                    "value_line": 4
+                },
+                {
+                    "kind": "prop",
+                    "name": "bytesize",
+                    "value": {
+                        "kind": "number",
+                        "value": 8
+                    },
+                    "name_from": 63,
+                    "name_to": 71,
+                    "name_line": 5,
+                    "value_from": 73,
+                    "value_to": 74,
+                    "value_line": 5
+                },
+                {
+                    "kind": "prop",
+                    "name": "parity",
+                    "value": {
+                        "kind": "string",
+                        "value": "none"
+                    },
+                    "name_from": 78,
+                    "name_to": 84,
+                    "name_line": 6,
+                    "value_from": 86,
+                    "value_to": 92,
+                    "value_line": 6
+                },
+                {
+                    "kind": "prop",
+                    "name": "stopbits",
+                    "value": {
+                        "kind": "uminus",
+                        "exp": {
+                            "kind": "number",
+                            "value": 1
+                        }
+                    },
+                    "name_from": 96,
+                    "name_to": 104,
+                    "name_line": 7,
+                    "value_from": 106,
+                    "value_to": 108,
+                    "value_line": 7
+                },
+                {
+                    "kind": "prop",
+                    "name": "flowcontrol",
+                    "value": {
+                        "kind": "string",
+                        "value": "none"
+                    },
+                    "name_from": 112,
+                    "name_to": 123,
+                    "name_line": 8,
+                    "value_from": 125,
+                    "value_to": 131,
+                    "value_line": 8
+                },
+                {
+                    "kind": "prop",
+                    "name": "option",
+                    "value": [
+                        {
+                            "kind": "prop",
+                            "name": "memo",
+                            "value": {
+                                "kind": "string",
+                                "value": "注释"
+                            },
+                            "name_from": 150,
+                            "name_to": 154,
+                            "name_line": 10,
+                            "value_from": 156,
+                            "value_to": 160,
+                            "value_line": 10
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "tests",
+                            "value": {
+                                "kind": "array",
+                                "list": [
+                                    {
+                                        "kind": "number",
+                                        "value": 1
+                                    },
+                                    {
+                                        "kind": "number",
+                                        "value": 2
+                                    },
+                                    {
+                                        "kind": "number",
+                                        "value": 3
+                                    }
+                                ]
+                            },
+                            "name_from": 166,
+                            "name_to": 171,
+                            "name_line": 11,
+                            "value_from": 173,
+                            "value_to": 204,
+                            "value_line": 11
+                        },
+                        {
+                            "kind": "prop",
+                            "name": "objarr",
+                            "value": {
+                                "kind": "array",
+                                "list": [
+                                    [
+                                        {
+                                            "kind": "prop",
+                                            "name": "a",
+                                            "value": {
+                                                "kind": "number",
+                                                "value": 9
+                                            },
+                                            "name_from": 233,
+                                            "name_to": 234,
+                                            "name_line": 18,
+                                            "value_from": 236,
+                                            "value_to": 237,
+                                            "value_line": 18
+                                        },
+                                        {
+                                            "kind": "prop",
+                                            "name": "b",
+                                            "value": {
+                                                "kind": "string",
+                                                "value": "dsf"
+                                            },
+                                            "name_from": 245,
+                                            "name_to": 246,
+                                            "name_line": 19,
+                                            "value_from": 248,
+                                            "value_to": 253,
+                                            "value_line": 19
+                                        }
+                                    ]
+                                ]
+                            },
+                            "name_from": 210,
+                            "name_to": 216,
+                            "name_line": 16,
+                            "value_from": 218,
+                            "value_to": 268,
+                            "value_line": 16
+                        }
+                    ],
+                    "name_from": 136,
+                    "name_to": 142,
+                    "name_line": 9,
+                    "value_from": 144,
+                    "value_to": 274,
+                    "value_line": 9
+                }
+            ]
+        }
+    ],
+    "src": "dev1.etl"
+}
