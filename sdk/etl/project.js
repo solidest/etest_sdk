@@ -105,7 +105,7 @@ function _append_run(items, all_run) {
         return all_run;
     }
     items.forEach(it => {
-        if(it)
+       
     })
 }
 
