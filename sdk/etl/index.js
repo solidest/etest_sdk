@@ -2,6 +2,7 @@
 const protocol = require('./protocol');
 const device = require('./device');
 const topology = require('./topology');
+const project = require('./project');
 
 module.exports = {
     device_etl2dev: device.device_etl2dev,
@@ -10,4 +11,6 @@ module.exports = {
     protocol_dev2etl: protocol.protocol_dev2etl,
     topology_etl2dev: topology.topology_etl2dev,
     topology_dev2etl: topology.topology_dev2etl,
+    project_etlenv: project.project_etlenv,
+
 };

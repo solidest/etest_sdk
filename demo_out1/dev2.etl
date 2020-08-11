@@ -1,6 +1,0 @@
-// 说明文本
-device dev2 {
-	serial_232 conn1{
-		baudrate: 115200,
-	}
-}

@@ -60,7 +60,7 @@ program:
   t_udp:
     src: program/t_udp.lua
     topology: topo_udp
-    vars:
+    vars: aa
     # option:
     #   # 是否启用实时模式
     #   real_time: true 
