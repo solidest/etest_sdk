@@ -44,7 +44,7 @@ function load_projs(db) {
         let db_proj = {};
         let proj_id = proj.id;
         db_proj.project = proj;
-        ['protocol', 'device', 'topology', 'panel'].forEach(kind => {
+        ['protocol', 'device', 'topology'].forEach(kind => {
             let items = db.getCollection(kind).find({'proj_id': { '$eq' : proj_id }});
             let objs = [];
             items.forEach(it => {

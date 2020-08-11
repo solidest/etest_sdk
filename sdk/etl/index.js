@@ -12,5 +12,5 @@ module.exports = {
     topology_etl2dev: topology.topology_etl2dev,
     topology_dev2etl: topology.topology_dev2etl,
     project_etlenv: project.project_etlenv,
-
+    project_devenv: project.project_devenv,
 };

@@ -100,21 +100,28 @@ function project_devenv(oproj) {
     }
 }
 
-function project_devprogram(tree_items) {
-    let res = {};
-    if(!tree_items) {
-        return res;
+function _append_run(items, all_run) {
+    if(!items) {
+        return all_run;
     }
+    items.forEach(it => {
+        if(it)
+    })
+}
 
+function project_devprogram(tree_items) {
+    let all_run = {};
+    _append_run(tree_items, all_run);
+    return all_run;
 }
 
 function project_etlprogram(idx_cfg) {
     let proj = idx_cfg.project;
     let proj_apath = path.resolve(proj.path);
-    let res = {};
+    let all_run = {};
 
     if(!idx_cfg.program) {
-        return res;
+        return all_run;
     }
     for(let k in idx_cfg.program) {
         let r = {};
@@ -125,9 +132,9 @@ function project_etlprogram(idx_cfg) {
         r.vars = run.vars;
         r.option = run.option || {};
         r.option.topology = run.topology;
-        res[k] = r;
+        all_run[k] = r;
     }
-    return res;
+    return all_run;
 }
 
 module.exports = {
