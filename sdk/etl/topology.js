@@ -46,9 +46,27 @@ function _get_maps(devs, items, kind) {
     return maps;
 }
 
+function _get_bind(devs, item) {
+    if(!item || !item.bind) {
+        return null;
+    }
+    let dev = devs.find(d => d.name === item.device);
+    if(dev && dev.ctx.content && dev.ctx.content.items) {
+        let conn = dev.ctx.content.items.find(c => c.name === item.connector);
+        if(conn) {
+            return {
+                conn_id: conn.id,
+                uri: item.bind,
+            }
+        }
+    }
+    return null;
+}
+
 function topology_etl2dev(ast, proj_id, kind_id, memo, devs) {
     let mapping = [];
     let linking = [];
+    let binding = [];
     if(!devs) {
         devs = [];
     }
@@ -65,6 +83,11 @@ function topology_etl2dev(ast, proj_id, kind_id, memo, devs) {
                 if(maps) {
                     mapping.push(...maps);
                 }
+            } else if(item.kind === 'binding') {
+                let bind = _get_bind(devs, item);
+                if(bind) {
+                    binding.push(bind);
+                }
             }
         });
     }
@@ -76,6 +99,7 @@ function topology_etl2dev(ast, proj_id, kind_id, memo, devs) {
         content: {
             mapping: mapping,
             linking: linking,
+            binding: binding,
             memo: memo,
         }
     };

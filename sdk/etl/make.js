@@ -112,9 +112,9 @@ function _makeout_topos(devs, topos) {
     return otopos.map(otopo => otopo.make_out());
 }
 
-function _makeout_env(oenv) {
-    let s1 = JSON.stringify(oenv);
+function _makeout_env(oenv, proj_id) {
     let res = {
+        proj_id,
         xtra: oenv.xtra,
         libs: oenv.libs.map(it => {
             return {
@@ -128,32 +128,87 @@ function _makeout_env(oenv) {
         }),
         topos: _makeout_topos(oenv.devs, oenv.topos),
     }
-    let s2 = JSON.stringify(oenv);
-    assert(s1 === s2, 'changed')
     return res;
 }
 
 function makeout_etl2env(idx_cfg) {
     try {
         let oenv = _project_etlenv(idx_cfg);
-        return _makeout_env(oenv);        
+        return _makeout_env(oenv, idx_cfg.project.id);        
     } catch (error) {
         console.error(error.message, error.stack);
     }
 }
 
-function makeout_dev2env(oproj) {
+function makeout_dev2env(oproj, proj_id) {
     try {
         let oenv = _project_devenv(oproj);
-        return _makeout_env(oenv);
+        return _makeout_env(oenv, proj_id);
     } catch (error) {
         console.error(error.message, error.stack);
     }
-
 }
+
+function _load_etl_vars(run) {
+    let vars
+    if(typeof run.vars === 'object') {
+        if(Array.isArray(run.vars)) {
+            let vs = [];
+            for(let f of run.vars) {
+                vs = vs.concat(yaml.safeLoad(fs.readFileSync(f, 'utf8')));
+            }
+            vars = vs;
+        } else {
+            vars = run.vars;
+        }
+    } else if(typeof run.vars === 'string'){
+        let f = path.resolve(pf, run.vars) 
+        vars = yaml.safeLoad(fs.readFileSync(f, 'utf8'));
+    } else {
+        console.log('type of vars is ', typeof run.vars)
+    }
+    return vars;
+}
+
+function makeout_etl2run(proj_id, proj_path, run) {
+    if (!run.src) {
+        throw new Error(`实例"${run_id}"未设置src属性`);
+    }
+    let src_path = path.resolve(proj_path, run.src);
+    if (!fs.existsSync(src_path)) {
+        throw new Error(`文件"${src_path}"未找到`);
+    }
+    if (!src_path.endsWith('.lua')) {
+        throw new Error('无效脚本文件');
+    }
+
+    let proj_apath = path.isAbsolute(proj_path) ? proj_path : path.resolve(proj_path);
+    let src_apath = path.isAbsolute(src_path) ? src_path : path.resolve(proj_apath, src_path);
+    let src_rpath = path.relative(proj_apath, src_apath);
+    src_rpath = src_rpath.replace('\\', '/');
+  
+    if(src_rpath.startsWith('.')) {
+      throw new Error(`无法解析文件"${src_path}"`);
+    }
+  
+    let code = fs.readFileSync(src_apath, "utf8");
+    let option = run.option || {};
+    if (run.topology) {
+        option.topology = run.topology;
+    }    
+
+    return {
+        proj_id,
+        script: code,
+        rpath_src: src_rpath,
+        vars: _load_etl_vars(run),
+        option,
+    }
+  }
 
 
 module.exports = {
     makeout_etl2env,
     makeout_dev2env,
+    makeout_etl2run,
 };

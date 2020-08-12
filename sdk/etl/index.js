@@ -2,7 +2,7 @@
 const protocol = require('./protocol');
 const device = require('./device');
 const topology = require('./topology');
-const project = require('./project');
+const project = require('./make');
 const program = require('./program');
 
 module.exports = {
@@ -12,9 +12,10 @@ module.exports = {
     protocol_dev2etl: protocol.protocol_dev2etl,
     topology_etl2dev: topology.topology_etl2dev,
     topology_dev2etl: topology.topology_dev2etl,
-    makeout_etl2env: project.makeout_etl2env,
-    makeout_dev2env: project.makeout_dev2env,
     program_tree_etl2dev: program.program_tree_etl2dev,
     program_runs_etl2dev: program.program_runs_etl2dev,
     program_runs_dev2etl: program.program_runs_dev2etl,
+    makeout_etl2env: project.makeout_etl2env,
+    makeout_dev2env: project.makeout_dev2env,
+    makeout_etl2run: project.makeout_etl2run,
 };

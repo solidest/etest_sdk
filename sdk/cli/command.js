@@ -129,18 +129,6 @@ function cmd_stop(idxfile) {
 //安装执行环境
 function cmd_setup(idxfile) {
     _initial(idxfile);
-    let c = 0;
-    let res = [];
-    for(let _ in _cfg.program) {
-        if(_){
-            c++;
-        }
-        res.push(_);
-    }
-    res = res.sort();
-    // console.log(yaml.safeDump(res));
-
-    console.log('programt total :', c)
     let id = _srv.setup(_cfg, (err, res, id)=>{
         _callback(err, res, id);
         _exit();

@@ -1,0 +1,107 @@
+demo:
+  vars: null
+  option:
+    topology: topo_udp
+t_primitive:
+  vars: null
+  option:
+    topology: topo_udp
+t_udp:
+  vars: null
+  option:
+    topology: topo_udp
+t_tcp:
+  vars: null
+  option:
+    topology: topo_tcp
+t_string:
+  vars: null
+  option:
+    topology: topo_udp
+t_serial:
+  vars: null
+  option:
+    topology: topo_serial
+t_timer:
+  vars: null
+  option:
+    topology: topo_udp
+t_rt:
+  vars: null
+  option:
+    real_time: true
+    rt_cycle: 1000
+    rt_policy: auto
+    topology: topo_rt
+t_array_string:
+  vars: null
+  option:
+    topology: topo11
+t_array:
+  vars: null
+  option:
+    topology: topo11
+t_bytesize:
+  vars: null
+  option:
+    topology: topo11
+t_tstring:
+  vars: null
+  option:
+    topology: topo11
+t_checkcode:
+  vars: null
+  option:
+    topology: topo11
+t_code:
+  vars: null
+  option:
+    topology: topo11
+t_com:
+  vars: null
+  option:
+    topology: topo11
+t_double:
+  vars: null
+  option:
+    topology: topo11
+t_float:
+  vars: null
+  option:
+    topology: topo11
+t_int:
+  vars: null
+  option:
+    topology: topo11
+t_oneof:
+  vars: null
+  option:
+    topology: topo11
+t_recv:
+  vars: null
+  option:
+    topology: topo11
+t_send:
+  vars: null
+  option:
+    topology: topo11
+t_uint:
+  vars: null
+  option:
+    topology: topo11
+t_message_now:
+  vars: null
+  option:
+    topology: topo11
+t_ask:
+  vars: null
+  option:
+    topology: topo11
+t_log:
+  vars: null
+  option:
+    topology: topo11
+t_time:
+  vars: null
+  option:
+    topology: topo11

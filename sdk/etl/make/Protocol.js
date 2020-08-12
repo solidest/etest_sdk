@@ -23,7 +23,12 @@ class Protocol {
     }
 
     _make_autovalue(seg) {
-        let av = '' + (seg.autovalue || '');
+        let av;
+        if(seg.autovalue === 0) {
+            av = '0';
+        } else {
+            av = '' + (seg.autovalue || '');
+        }
         if (!av || !av.trim()) {
             return;
         }
@@ -68,7 +73,6 @@ class Protocol {
     }
 
     make_segments(segs) {
-        this._make_autovalue(segs);
         this._make_arrlen(segs);
         if (segs.items) {
             segs.items.forEach(seg => this['make_' + seg.kind](seg));
@@ -140,9 +144,6 @@ class Protocol {
         }
         
         let res = {kind: 'seggroup', name: segs.name, seglist: seglist};
-        if (segs.autovalue) {
-            res.autovalue = segs.autovalue;
-        }
         if (segs.arrlen) {
             res.repeated = segs.arrlen;
         }

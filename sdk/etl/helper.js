@@ -66,7 +66,7 @@ function parse_proj_etl(proj_apath) {
     return _parse_etl(files, proj_apath);
 }
 
-function exp2str(exp, is_top) {
+function exp2str(exp, is_top, need_str_quot) {
     if (!exp) {
         return '';
     }
@@ -76,7 +76,7 @@ function exp2str(exp, is_top) {
             return exp.value;
         case 'string': {
             let res = exp.value.replace('\0', '\\0');
-            return res;
+            return need_str_quot ? `'${res}'` : res;
         }
         case 'uminus': {
             if (exp.exp && exp.exp.kind === 'number') {
@@ -109,10 +109,10 @@ function exp2str(exp, is_top) {
         case 'pid':
             return exp.list.join('.');
         case 'eq_eq': {
-            return is_top ? `${exp2str(exp.left)} == ${exp2str(exp.right)}` : `(${exp2str(exp.left)} == ${exp2str(exp.right)})`;
+            return is_top ? `${exp2str(exp.left, false, true)} == ${exp2str(exp.right, false, true)}` : `(${exp2str(exp.left, false, true)} == ${exp2str(exp.right, false, true)})`;
         }
         case 'not_eq': {
-            return is_top ? `${exp2str(exp.left)} ~= ${exp2str(exp.right)}` : `(${exp2str(exp.left)} ~= ${exp2str(exp.right)})`;
+            return is_top ? `${exp2str(exp.left, false, true)} ~= ${exp2str(exp.right, false, true)}` : `(${exp2str(exp.left, false, true)} ~= ${exp2str(exp.right, false, true)})`;
         }
         case 'gt': {
             return is_top ? `${exp2str(exp.left)} > ${exp2str(exp.right)}` : `(${exp2str(exp.left)} > ${exp2str(exp.right)})`;

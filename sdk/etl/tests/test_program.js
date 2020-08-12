@@ -39,8 +39,6 @@ function deleteFolderRecursive(url) {
     }
 }
 
-
-
 const out_apath1 = path.resolve('./demo_out1');
 const out_apath2 = path.resolve('./demo_out2');
 deleteFolderRecursive(out_apath1);
