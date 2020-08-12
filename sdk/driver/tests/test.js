@@ -1,4 +1,4 @@
-const driver = require('.');
+const driver = require('../index');
 const assert = require('assert');
 
 const ip = 'etest';
@@ -38,3 +38,5 @@ function on_error(err) {
 driver.on_error(on_error);
 
 test_all();
+
+console.log('test passed')

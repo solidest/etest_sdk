@@ -1,12 +1,11 @@
 
-import helper from '../../helper/helper';
-import segparser from '../../../sdk/core/parser/segParser';
-import expparser from '../../../sdk/core/parser/expParser';
+const segparser = require('../../parser/segParser');
+const expparser = require('../../parser/expParser');
+const utility = require('../../helper/utility');
 
 class Protocol {
-    constructor(data, proj, name) {
-        this.data = helper.deep_copy(data);
-        this.proj = proj;
+    constructor(data, name) {
+        this.data = utility.deep_copy(data);
         this.name = name;
     }
 
@@ -28,7 +27,7 @@ class Protocol {
         if (!av || !av.trim()) {
             return;
         }
-        seg.autovalue = expparser.parse(seg.autovalue);
+        seg.autovalue = expparser.parse(av);
     }
 
     _make_arrlen(seg) {
@@ -36,11 +35,14 @@ class Protocol {
         if (!len || !len.trim()) {
             return;
         }
-        seg.arrlen = expparser.parse(seg.arrlen);
+        seg.arrlen = expparser.parse(len);
     }
 
-    make_segment(seg) {
-   
+    _make_parser(seg) {
+        if(!seg.parser) {
+            seg.parser = {type: 'nil'}
+            return;
+        }
         let p = seg.parser.trim();
         if (p.startsWith('{')) {
             seg.parser = expparser.parse(seg.parser);
@@ -48,13 +50,16 @@ class Protocol {
         } else {
             seg.parser = segparser.parse(seg.parser);
         }
+    }
 
+    make_segment(seg) {
+        this._make_parser(seg);
         this._make_autovalue(seg);
         this._make_arrlen(seg);
 
         if (seg.parser.type === 'string' && !seg.parser.pack && !seg.parser.unpack) {
             if (seg.length) {
-                seg.length = expparser.parse(seg.length);
+                seg.length = expparser.parse(seg.length + '');
             }
             if (seg.endwith && seg.endwith.trim()) {
                 seg.endwith = expparser.parse(seg.endwith);
@@ -81,7 +86,6 @@ class Protocol {
             }
         });
     }
-
 
     make() {
         if (!this.data || !this.data.content || !this.data.content.items) {
@@ -177,4 +181,4 @@ class Protocol {
     }
 }
 
-export default Protocol;
+module.exports = Protocol;

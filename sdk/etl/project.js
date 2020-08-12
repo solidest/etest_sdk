@@ -7,7 +7,13 @@ const device = require('./device');
 const topology = require('./topology');
 const helper = require('./helper');
 
-function project_etlenv(idx_cfg) {
+const MKPprotocol = require('./make/Protocol');
+const MKDevice = require('./make/Device');
+const MKTopology = require('./make/Topology');
+const { assert } = require('console');
+
+
+function _project_etlenv(idx_cfg) {
     let proj = idx_cfg.project;
     let proj_apath = path.resolve(proj.path);
     let proj_id = proj.id;
@@ -71,11 +77,11 @@ function project_etlenv(idx_cfg) {
     }
 }
 
-function project_devenv(oproj) {
-    let prots = oproj.protocol;
-    let devs = oproj.device;
-    let topos = oproj.topology;
-    let libs = oproj.libs;
+function _project_devenv(oproj) {
+    let prots = oproj.protocol||[];
+    let devs = oproj.device||[];
+    let topos = oproj.topology||[];
+    let libs = oproj.libs||[];
     let xtra = {};
     if(oproj.xtra) {
         if(oproj.xtra.pack) {
@@ -100,46 +106,54 @@ function project_devenv(oproj) {
     }
 }
 
-function _append_run(items, all_run) {
-    if(!items) {
-        return all_run;
-    }
-    items.forEach(it => {
-       
-    })
+function _makeout_topos(devs, topos) {
+    let odevs = devs.map(dev=>new MKDevice(dev.ctx, dev.name));
+    let otopos = topos.map(topo => new MKTopology(topo.ctx, topo.name, odevs));
+    return otopos.map(otopo => otopo.make_out());
 }
 
-function project_devprogram(tree_items) {
-    let all_run = {};
-    _append_run(tree_items, all_run);
-    return all_run;
+function _makeout_env(oenv) {
+    let s1 = JSON.stringify(oenv);
+    let res = {
+        xtra: oenv.xtra,
+        libs: oenv.libs.map(it => {
+            return {
+                file: it.name,
+                code: it.ctx,
+            }
+        }),
+        prots: oenv.prots.map(it => {
+            let mk = new MKPprotocol(it.ctx, it.name);
+            return mk.make_out();
+        }),
+        topos: _makeout_topos(oenv.devs, oenv.topos),
+    }
+    let s2 = JSON.stringify(oenv);
+    assert(s1 === s2, 'changed')
+    return res;
 }
 
-function project_etlprogram(idx_cfg) {
-    let proj = idx_cfg.project;
-    let proj_apath = path.resolve(proj.path);
-    let all_run = {};
-
-    if(!idx_cfg.program) {
-        return all_run;
+function makeout_etl2env(idx_cfg) {
+    try {
+        let oenv = _project_etlenv(idx_cfg);
+        return _makeout_env(oenv);        
+    } catch (error) {
+        console.error(error.message, error.stack);
     }
-    for(let k in idx_cfg.program) {
-        let r = {};
-        let run = idx_cfg.program[k];
-        let run_apath = path.resolve(proj_apath, run.src);
-        r.path = path.relative(proj_apath, run_apath);
-        r.code = helper.read_text(run.src, proj_apath);
-        r.vars = run.vars;
-        r.option = run.option || {};
-        r.option.topology = run.topology;
-        all_run[k] = r;
-    }
-    return all_run;
 }
+
+function makeout_dev2env(oproj) {
+    try {
+        let oenv = _project_devenv(oproj);
+        return _makeout_env(oenv);
+    } catch (error) {
+        console.error(error.message, error.stack);
+    }
+
+}
+
 
 module.exports = {
-    project_etlenv,
-    project_etlprogram,
-    project_devenv,
-    project_devprogram,
+    makeout_etl2env,
+    makeout_dev2env,
 };

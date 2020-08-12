@@ -62,8 +62,6 @@ function test_etl_dev(proj_apath, out_apath, etl_outs) {
     });
 }
 
-
-
 function test_result(outs1, outs2) {
     assert(outs1.length == outs2.length, outs1.length + ':' + outs2.length);
     for(let info1 of outs1) {

@@ -1,6 +1,7 @@
 
-import helper from '../../helper/helper';
-import dev_cfg from '../../helper/cfg_device';
+const num_propers = [
+    'port', 'keepalive', 'baudrate', 'bytesize', 'stopbits', 'ttl'
+];
 
 function _get_mapping(doc, all_devs) {
     let raw = doc.mapping || [];
@@ -82,9 +83,9 @@ function load_topo(devs, content) {
 }
 
 class Topology {
-    constructor(data, proj, name) {
-        this.data = helper.deep_copy(data);
-        this.proj = proj;
+    constructor(data, name, devs) {
+        this.data = data;
+        this.devs = devs;
         this.name = name;
     }
 
@@ -99,7 +100,7 @@ class Topology {
         }
         let res = {};
         for(let k in cfg) {
-            if(dev_cfg.num_propers.includes(k)) {
+            if(num_propers.includes(k)) {
                 if(isNaN(cfg[k])) {
                     continue;
                 }
@@ -115,11 +116,7 @@ class Topology {
     }
 
     get_dev_name(id) {
-        let devlist = this.proj.device;
-        if(!id || !devlist) {
-            return '';
-        }
-        let dev = devlist.find(it => it.id === id);
+        let dev = this.devs.find(it => it.id === id);
         return dev ? dev.name : '';
     }
 
@@ -169,11 +166,7 @@ class Topology {
     }
 
     get_dev_conns(id) {
-        let devlist = this.proj.device;
-        if(!id || !devlist) {
-            return '';
-        }
-        let dev = devlist.find(it => it.id === id);
+        let dev = this.devs.find(it => it.id === id);
         let res = [];
         let conns = dev.connectors;
         conns.forEach(conn => {
@@ -190,14 +183,13 @@ class Topology {
     }
 
     make_out() {
-        let devlist = this.proj.device;
-        let devs = devlist ? devlist.map(it => {
+        let devs = this.devs.map(it => {
             return {
                 id: it.id,
                 name: it.name,
                 items: it.items
             }
-        }) : [];
+        });
         let doc = (this.data && this.data.content) ? this.data.content : {};
         this.topo = load_topo(devs, doc);
 
@@ -206,8 +198,8 @@ class Topology {
         if(mapping) {
             mapping.forEach(dev => devs.push({'map': dev.used, name: this.get_dev_name(dev.dev_id), connectors: this.get_dev_conns(dev.dev_id)}))
         }
-        return {name: this.name, devices: devs}
+        return {name: this.name, devices: devs};
     }
 }
 
-export default Topology;
+module.exports = Topology;

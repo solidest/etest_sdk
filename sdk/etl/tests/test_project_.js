@@ -8,15 +8,14 @@ const helper = require('../helper');
 
 function test_etl_proj(idx_obj) {
     let env = project.project_etlenv(idx_obj);
-    let program = project.project_etlprogram(idx_obj);
-    assert(env && program);
+
+    assert(env);
 }
 
 function test_dev_proj(oproj) {
     let env = project.project_devenv(oproj);
-    let program = project.project_devprogram(oproj.program.items);
-    assert(env && program);
 
+    assert(env);
 }
 
 function deleteFolderRecursive(url) {
@@ -55,7 +54,7 @@ function load_projs(db) {
             });
             db_proj[kind] = objs;
         });
-        db_proj.program = db.getCollection('program').findOne({'id': { '$eq' : proj.id }});
+        //db_proj.program = db.getCollection('program').findOne({'id': { '$eq' : proj.id }});
         res.push(db_proj);
     });
     return res;

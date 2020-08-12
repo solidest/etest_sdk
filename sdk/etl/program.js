@@ -1,46 +1,121 @@
 
-function program_dev2etl() {
+const path = require('path');
+const helper = require('./helper');
+const tman = require('../helper/tree_man');
+const shortid = require('shortid');
 
+function _get_name_list(p) {
+    let dir = path.dirname(p);
+    let idx = 0;
+    let names = [];
+    do {
+        idx++;
+        if(dir!=='.') {
+            names.unshift(path.basename(dir));
+        }
+        dir = path.dirname(dir);
+    } while(idx<10);
+    return names;
 }
 
-function program_etl2dev() {
-
-}
-
-
-function _load_run(result, items, path) {
-    if(!items) {
+function _append_tree_run(root, src_rpath) {
+    let names = _get_name_list(src_rpath);
+    let p = root;
+    names.forEach(name => {
+        let child = p.children.find(ch => ch.name === name);
+        if(!child) {
+            let item = { id: shortid.generate(), name: name, kind: 'dir', children: [] }
+            tman.insert(p.children, item);
+            p = item;
+        } else {
+            p = child;
+        }
+    });
+    let file = path.basename(src_rpath, '.lua');
+    let target = p.children.find(it => it.name === file);
+    if(target) {
         return;
     }
-    items.forEach(it => {
-        if(it.kind === 'dir') {
-            _load_run(result, it.children);
-        } else if(it.kind === 'lua') {
-            let r = {
-                path: `${path}${it.name}.lua`,
-                code
-            };
+    tman.insert(p.children, {
+        id: shortid.generate(),
+        kind: 'lua',
+        name: file,
+    });
+}
 
-            
-            r.path = path.relative(proj_apath, run_apath);
-            r.code = helper.read_text(run.src, proj_apath);
-            r.vars = run.vars;
-            r.option = run.option || {};
-            r.option.topology = run.topology;
-            result[it.id] = r;
+function program_tree_etl2dev(idx_cfg) {
+    let proj = idx_cfg.project;
+    let proj_apath = path.resolve(proj.path);
+    let root = { children: [], kind: 'dir' };
+    let prog = idx_cfg.program;
+    if(!prog) {
+        return root.children;
+    }
+    for(let run_id in prog) {
+        let run = prog[run_id];
+        let run_apath = path.resolve(proj_apath, run.src);
+        let src_rpath = path.relative(proj_apath, run_apath);
+        _append_tree_run(root, src_rpath);
+    }
+    return root.children;
+}
+
+function _find_item(items, src_rpath) {
+    let file = path.basename(src_rpath, '.lua');
+    let dirs = _get_name_list(src_rpath);
+    dirs.forEach(d => {
+        items = items.find(it => it.name === d).children;
+    });
+    return items.find(it => it.name === file);
+}
+
+function program_runs_etl2dev(idx_cfg, tree) {
+    let prog = idx_cfg.program;
+    let proj_apath = path.resolve(idx_cfg.project.path);
+    let runs = [];
+    for(let run_id in prog) {
+        let run = prog[run_id];
+        let run_apath = path.resolve(proj_apath, run.src);
+        let src_rpath = path.relative(proj_apath, run_apath);
+        let item = _find_item(tree, src_rpath);
+        let run_item = runs.find(it => it.id === item.id);
+        let param = {
+            id: run_id,
+            vars: run.vars,
+            option: run.option || {},             
+        };
+        if(run.topology) {
+            param.option.topology = run.topology;
         }
-    })
+
+        if(!run_item) {
+            runs.push({
+                id: item.id,
+                code: helper.read_text(run.src, proj_apath),
+                params: [param],
+            });
+        } else {
+            run_item.params.push(param);
+        }
+    }
+    return runs;
 }
 
-// 加载全部执行程序对象
-function program_load(root_items, topos) {
-    let res = {};
-    _load_run(res, items, '');
+function program_runs_dev2etl(runs) {
+    let prog = {};
+    runs.forEach(dbr => {
+        dbr.params.forEach(para => {
+            prog[para.id] = {
+                vars: para.vars,
+                option: para.option,
+            }
+        })
+    });
+    return prog;
 }
-
 
 module.exports = {
-    program_etl2dev,
-    program_dev2etl,
-    program_load,
+    program_tree_etl2dev,
+    program_runs_etl2dev,
+    program_runs_dev2etl,
 };

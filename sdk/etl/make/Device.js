@@ -1,10 +1,7 @@
 
-import helper from '../../helper/helper';
-
 class Device {
-    constructor(data, proj, name) {
-        this.data = helper.deep_copy(data);
-        this.proj = proj;
+    constructor(data, name) {
+        this.data = data;
         this.name = name;
     }
 
@@ -27,4 +24,4 @@ class Device {
     }
 }
 
-export default Device;
+module.exports = Device;

@@ -4,7 +4,7 @@ project:
   id: 72f6f124-d355-403f-9f8d-842a75b3b2dc  # 项目唯一id
   path: ./tests  # 项目文件根目录，绝对路径或相对路径
   lib_path: libs
-  xtras:
+  xtra:
     pack: xtras/pack.lua
     unpack: xtras/unpack.lua
     check: xtras/check.lua
@@ -48,7 +48,7 @@ runs:
 # 执行程序设置
 program:
   demo:
-    src: program/demo.lua
+    src: program/demo/demo1.lua
     topology: topo_udp
     vars:
 
