@@ -81,6 +81,7 @@ function program_runs_etl2dev(idx_cfg, tree) {
         let run_item = runs.find(it => it.id === item.id);
         let param = {
             id: run_id,
+            title: run_id,
             vars: run.vars,
             option: run.option || {},             
         };
