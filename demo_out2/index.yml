@@ -1,0 +1,199 @@
+project:
+  id: vJ4sHlLUU
+  path: .
+  lib_path: libs
+  xtra:
+    pack: xtra/pack.lua
+    unpack: xtra/unpack.lua
+    check: xtra/check.lua
+    recvfilter: xtra/recvfilter.lua
+  etestd_ip: etest
+  etestd_port: 1210
+program:
+  demo:
+    src: program/demo/demo1.lua
+    title: demo
+    vars: null
+    option:
+      topology: topo_udp
+  t_primitive:
+    src: program/t_primitive.lua
+    title: t_primitive
+    vars: null
+    option:
+      topology: topo_udp
+  t_udp:
+    src: program/t_udp.lua
+    title: t_udp
+    vars: null
+    option:
+      topology: topo_udp
+  t_tcp:
+    src: program/t_tcp.lua
+    title: t_tcp
+    vars: null
+    option:
+      topology: topo_tcp
+  t_string:
+    src: program/t_string.lua
+    title: t_string
+    vars: null
+    option:
+      topology: topo_udp
+  t_serial:
+    src: program/t_serial.lua
+    title: t_serial
+    vars: null
+    option:
+      topology: topo_serial
+  t_timer:
+    src: program/t_timer.lua
+    title: t_timer
+    vars: null
+    option:
+      topology: topo_udp
+  t_rt:
+    src: program/t_rt.lua
+    title: t_rt
+    vars: null
+    option:
+      real_time: true
+      rt_cycle: 1000
+      rt_policy: auto
+      topology: topo_rt
+  t_array_string:
+    src: program/array_string.lua
+    title: t_array_string
+    vars: null
+    option:
+      topology: topo11
+  t_array:
+    src: program/array.lua
+    title: t_array
+    vars: null
+    option:
+      topology: topo11
+  t_bytesize:
+    src: program/bytesize.lua
+    title: t_bytesize
+    vars: null
+    option:
+      topology: topo11
+  t_tstring:
+    src: program/string.lua
+    title: t_tstring
+    vars: null
+    option:
+      topology: topo11
+  t_checkcode:
+    src: program/checkcode.lua
+    title: t_checkcode
+    vars: null
+    option:
+      topology: topo11
+  t_code:
+    src: program/code.lua
+    title: t_code
+    vars: null
+    option:
+      topology: topo11
+  t_com:
+    src: program/com_.lua
+    title: t_com
+    vars: null
+    option:
+      topology: topo11
+  t_double:
+    src: program/double.lua
+    title: t_double
+    vars: null
+    option:
+      topology: topo11
+  t_float:
+    src: program/float.lua
+    title: t_float
+    vars: null
+    option:
+      topology: topo11
+  t_int:
+    src: program/int.lua
+    title: t_int
+    vars: null
+    option:
+      topology: topo11
+  t_oneof:
+    src: program/oneof.lua
+    title: t_oneof
+    vars: null
+    option:
+      topology: topo11
+  t_recv:
+    src: program/recv.lua
+    title: t_recv
+    vars: null
+    option:
+      topology: topo11
+  t_send:
+    src: program/send.lua
+    title: t_send
+    vars: null
+    option:
+      topology: topo11
+  t_uint:
+    src: program/uint.lua
+    title: t_uint
+    vars: null
+    option:
+      topology: topo11
+  t_message_now:
+    src: program/message_now.lua
+    title: t_message_now
+    vars: null
+    option:
+      topology: topo11
+  t_ask:
+    src: program/ask.lua
+    title: t_ask
+    vars: null
+    option:
+      topology: topo11
+  t_log:
+    src: program/log.lua
+    title: t_log
+    vars: null
+    option:
+      topology: topo11
+  t_time:
+    src: program/timer.lua
+    title: t_time
+    vars: null
+    option:
+      topology: topo11
+runs:
+  all:
+    - demo
+    - t_primitive
+    - t_udp
+    - t_tcp
+    - t_string
+    - t_serial
+    - t_timer
+    - t_rt
+    - t_array_string
+    - t_array
+    - t_bytesize
+    - t_tstring
+    - t_checkcode
+    - t_code
+    - t_com
+    - t_double
+    - t_float
+    - t_int
+    - t_oneof
+    - t_recv
+    - t_send
+    - t_uint
+    - t_message_now
+    - t_ask
+    - t_log
+    - t_time

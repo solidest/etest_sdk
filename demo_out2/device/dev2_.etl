@@ -1,0 +1,5 @@
+device dev2_ {
+	serial_232 conn1{
+		baudrate: 115200,
+	}
+}

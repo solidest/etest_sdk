@@ -1,0 +1,21 @@
+bitlr protocol one_prot {
+	segment str {
+		parser: 'string',
+		autovalue: '3',
+		endwith: '#',
+	}
+	segment int {
+		parser: 'uint64',
+		autovalue: 0,
+	}
+	oneof(this.str == '123') {
+		segment name {
+			parser: 'int32',
+			autovalue: 0,
+		}
+		segment float {
+			parser: 'float',
+			autovalue: 0,
+		}
+	}
+}

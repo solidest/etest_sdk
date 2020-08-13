@@ -103,7 +103,6 @@ function topology_etl2dev(ast, proj_id, kind_id, memo, devs) {
             memo: memo,
         }
     };
-
     return topo;
 }
 
@@ -180,6 +179,20 @@ function _append_code_linking(codes, level, linking, devs) {
     _append_code(codes, level, '}');
 }
 
+
+function _append_code_binding(codes, level, binding, devs) {
+    if(!binding) {
+        binding = [];
+    }
+
+    _append_code(codes, level, 'binding: {');
+    binding.forEach(bind => {
+        _append_code(codes, level+1, `${_get_devconn_name(devs, bind.conn_id)}: '${bind.uri}',`)
+    });
+    _append_code(codes, level, '}');
+}
+
+
 function topology_dev2etl(topo, name, devs) {
     if (!topo || !topo.content) {
         return `topology ${name} {\n}`;
@@ -195,6 +208,7 @@ function topology_dev2etl(topo, name, devs) {
     _append_code(codes, 0, `topology ${name} {`);
     _append_code_mapping(codes, 1, content.mapping, devs);
     _append_code_linking(codes, 1, content.linking, devs);
+    _append_code_binding(codes, 1, content.binding, devs);
     _append_code(codes, 0, '}');
     let texts = codes.map(it => `${'\t'.repeat(it.level)}${it.code}`);
     return texts.join('\n');

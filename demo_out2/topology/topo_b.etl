@@ -1,0 +1,12 @@
+topology topo_b {
+	mapping: {
+		uut: [main_ctr],
+		etest: [dev_b],
+	}
+	linking: {
+		_ : [main_ctr.conn, dev_b.conn], 
+	}
+	binding: {
+		dev_b.conn: 'auto',
+	}
+}

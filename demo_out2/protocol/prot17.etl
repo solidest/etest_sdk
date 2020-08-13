@@ -1,0 +1,18 @@
+bitlr protocol prot17 {
+	segment seg_1 {
+		parser: 'string',
+		length: 2 + 2,
+	}
+	segment seg_2 {
+		parser: 'string',
+		length: 6 - 2,
+	}
+	segment seg_3 {
+		parser: 'string',
+		length: 2 * 2,
+	}
+	segment seg_4 {
+		parser: 'string',
+		length: 8 / 2,
+	}
+}

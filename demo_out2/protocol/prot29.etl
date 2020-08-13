@@ -1,0 +1,5 @@
+bitlr protocol prot29 {
+	segment seg_3 {
+		parser: 'double <',
+	}
+}

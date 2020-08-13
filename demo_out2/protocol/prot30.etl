@@ -1,0 +1,17 @@
+bitlr protocol prot30 {
+	segment seg_1 {
+		parser: 'int8',
+		autovalue: 21930,
+	}
+	segment seg_2 {
+		parser: 'string',
+	}
+	segment seg_3 {
+		parser: 'int16',
+		autovalue: 1,
+	}
+	segment seg_4 {
+		parser: 'int32',
+		autovalue: ByteSize(this.seg_3),
+	}
+}

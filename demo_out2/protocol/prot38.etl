@@ -1,0 +1,6 @@
+bitlr protocol prot38 {
+	segment seg_1 {
+		parser: 'uint32',
+		autovalue: CheckCode(CRC_64),
+	}
+}

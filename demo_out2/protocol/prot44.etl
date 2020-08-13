@@ -1,0 +1,6 @@
+bitlr protocol prot44 {
+	segment seg_1[2] {
+		parser: 'int16',
+		autovalue: CheckCode(CRC_16_XMODEM),
+	}
+}

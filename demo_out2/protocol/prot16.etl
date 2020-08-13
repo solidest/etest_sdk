@@ -1,0 +1,21 @@
+bitlr protocol prot16 {
+	segment seg_1 {
+		parser: 'uint8',
+		autovalue: 0,
+	}
+	segment seg_2 {
+		parser: 'string',
+		length: 4,
+	}
+	segment seg_3 {
+		parser: 'string',
+		endwith: '$',
+	}
+	segment seg_4 {
+		parser: 'string',
+	}
+	segment seg_5 {
+		parser: 'string',
+		length: 3,
+	}
+}

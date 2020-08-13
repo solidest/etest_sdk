@@ -7,10 +7,9 @@ const device = require('./device');
 const topology = require('./topology');
 const helper = require('./helper');
 
-const MKPprotocol = require('./make/Protocol');
-const MKDevice = require('./make/Device');
-const MKTopology = require('./make/Topology');
-const { assert } = require('console');
+const MKPprotocol = require('./wrapper/Protocol');
+const MKDevice = require('./wrapper/Device');
+const MKTopology = require('./wrapper/Topology');
 
 
 function _project_etlenv(idx_cfg) {

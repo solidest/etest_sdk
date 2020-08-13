@@ -1,0 +1,6 @@
+bitlr protocol prot36 {
+	segment seg_1[2] {
+		parser: 'int16',
+		autovalue: CheckCode(XOR_32_FALSE),
+	}
+}

@@ -1,0 +1,6 @@
+bitlr protocol prot34 {
+	segment seg_1 {
+		parser: 'int32 > &',
+		autovalue: CheckCode(XOR_32),
+	}
+}

@@ -1,0 +1,5 @@
+bitlr protocol prot18 {
+	segment seg_1 {
+		parser: 'string',
+	}
+}

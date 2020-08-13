@@ -1,0 +1,19 @@
+device udp2 {
+	udp conn1{
+		ip: '0.0.0.0',
+		port: 5000,
+		ttl: 20,
+	}
+	udp conn2{
+		ip: '0.0.0.0',
+		port: 6000,
+	}
+	udp conn3{
+		ip: '0.0.0.0',
+		port: 7000,
+	}
+	udp conn4{
+		ip: '0.0.0.0',
+		port: 8000,
+	}
+}

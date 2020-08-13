@@ -1,0 +1,30 @@
+bitlr protocol prot_primitive {
+	segment seg1 {
+		parser: 'float ! >',
+		autovalue: 0,
+	}
+	segment seg2 {
+		parser: 'double & <',
+		autovalue: 0,
+	}
+	segment seg3 {
+		parser: 'int16 & >',
+		autovalue: 0,
+	}
+	segment seg4 {
+		parser: 'int16 ! <',
+		autovalue: 0,
+	}
+	segment seg5 {
+		parser: 'int16 = >',
+		autovalue: 0,
+	}
+	segment seg6 {
+		parser: 'int16',
+		autovalue: 0,
+	}
+	segment seg7 {
+		parser: 'int16 & <',
+		autovalue: 0,
+	}
+}

@@ -1,0 +1,6 @@
+bitlr protocol prot40 {
+	segment seg_1[2] {
+		parser: 'string',
+		autovalue: CheckCode(CRC_32_Q),
+	}
+}

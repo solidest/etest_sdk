@@ -1,0 +1,7 @@
+bitlr protocol prot37 {
+	segment seg_1 {
+		parser: 'string',
+		autovalue: CheckCode(CRC_4_ITU),
+		length: 3,
+	}
+}

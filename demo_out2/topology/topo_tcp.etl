@@ -1,0 +1,28 @@
+topology topo_tcp {
+	mapping: {
+		etest: [client, server],
+	}
+	linking: {
+		_ : [server.srva, client.tcp1], 
+		_ : [client.tcp2, client.tcp3, server.srvb, server.srvc], 
+		_ : [server.srvd, client.tcp4], 
+		_ : [server.srve, client.tcp5], 
+		_ : [client.tcp6, client.tcp7, server.srvf, server.srvg], 
+	}
+	binding: {
+		server.srva: 'auto',
+		server.srvb: 'auto',
+		server.srvc: 'auto',
+		server.srvd: 'auto',
+		server.srve: 'auto',
+		server.srvf: 'auto',
+		server.srvg: 'auto',
+		client.tcp1: 'auto',
+		client.tcp2: 'auto',
+		client.tcp3: 'auto',
+		client.tcp4: 'auto',
+		client.tcp5: 'auto',
+		client.tcp6: 'auto',
+		client.tcp7: 'auto',
+	}
+}

@@ -1,0 +1,22 @@
+bitlr protocol string_ {
+	segments test {
+		segment int {
+			parser: 'int32',
+			autovalue: 2 - 1,
+		}
+		segment str {
+			parser: 'string',
+			endwith: '#',
+		}
+		segment str1 {
+			parser: 'string',
+			autovalue: '12',
+			endwith: '\0',
+		}
+	}
+	segment te {
+		parser: 'string',
+		autovalue: '23',
+		length: 2,
+	}
+}
