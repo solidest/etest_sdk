@@ -62,7 +62,11 @@ class Protocol {
         this._make_autovalue(seg);
         this._make_arrlen(seg);
 
-        if (seg.parser.type === 'string' && !seg.parser.pack && !seg.parser.unpack) {
+        if(seg.parser.type !== 'string') {
+            if(seg.scale && !isNaN(seg.scale)) {
+                seg.scale = Number.parseFloat(seg.scale);
+            }
+        } else if (!seg.parser.pack && !seg.parser.unpack) {
             if (seg.length) {
                 seg.length = expparser.parse(seg.length + '');
             }
@@ -130,6 +134,9 @@ class Protocol {
         }
         if (seg.endwith) {
             res.endwith = seg.endwith;
+        }
+        if (seg.scale) {
+            res.scale = seg.scale;
         }
         return res;
     }

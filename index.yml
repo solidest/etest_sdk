@@ -52,10 +52,8 @@ program:
     topology: topo_udp
     vars:
 
-  t_primitive:
-    src: program/t_primitive.lua
-    topology: topo_udp
-    vars:
+  t_option_other:
+    src: program/t_option_other.lua
 
   t_udp:
     src: program/t_udp.lua

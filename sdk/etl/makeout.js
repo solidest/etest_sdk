@@ -164,7 +164,9 @@ function _load_etl_vars(run) {
         let f = path.resolve(pf, run.vars) 
         vars = yaml.safeLoad(fs.readFileSync(f, 'utf8'));
     } else {
-        console.log('type of vars is ', typeof run.vars)
+        if(run.vars !== undefined) {
+            console.log('type of vars is ', typeof run.vars);
+        }
     }
     return vars;
 }
