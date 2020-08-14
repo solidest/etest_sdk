@@ -15,7 +15,7 @@ project:
 # 批量执行设置
 runs:
   all: # 无依赖的全部用例
-  - t_primitive
+  - t_option_other
   - t_array_string
   - t_array
   - t_bytesize
