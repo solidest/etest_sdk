@@ -6,12 +6,12 @@ bitlr protocol string_ {
 		}
 		segment str {
 			parser: 'string',
-			endwith: '#',
+			endswith: '#',
 		}
 		segment str1 {
 			parser: 'string',
 			autovalue: '12',
-			endwith: '\0',
+			endswith: '\0',
 		}
 	}
 	segment te {

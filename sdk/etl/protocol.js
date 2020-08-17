@@ -20,7 +20,7 @@ function _set_props(obj, props) {
                     obj[prop.name] = v;
                     break;
             }
-        } else if(prop.name === 'endwith') {
+        } else if(prop.name === 'endswith') {
             obj[prop.name] = `'${v}'`;
         } else if(prop.name === 'parser' && prop.value && helper.is_array(prop.value)) {
             let res = [];
@@ -155,7 +155,7 @@ function _append_code_segment(codes, level, it) {
         _append_code(codes, level + 1, helper.prop2str(it, 'parser'));
     }
 
-    ['autovalue', 'endwith', 'length', 'scale'].forEach(key => {
+    ['autovalue', 'endswith', 'length', 'scale'].forEach(key => {
         _append_code(codes, level + 1, helper.prop2raw(it, key));
     });
 

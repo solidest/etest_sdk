@@ -39,7 +39,7 @@ protocol prot_arrays {
         segment number { parser: 'uint8', autovalue: 1 }
         segments list {
             segment seg_1 {parser: 'uint16',autovalue: 1 }
-            segment seg_2 {parser: "string", endwith: "#3x@#@##$%", autovalue: "12"}
+            segment seg_2 {parser: "string", endswith: "#3x@#@##$%", autovalue: "12"}
         }
     }
     

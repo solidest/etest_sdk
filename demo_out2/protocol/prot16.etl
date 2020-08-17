@@ -9,7 +9,7 @@ bitlr protocol prot16 {
 	}
 	segment seg_3 {
 		parser: 'string',
-		endwith: '$',
+		endswith: '$',
 	}
 	segment seg_4 {
 		parser: 'string',

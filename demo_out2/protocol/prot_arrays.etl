@@ -16,7 +16,7 @@ bitlr protocol prot_arrays {
 			segment seg_2 {
 				parser: 'string',
 				autovalue: '12',
-				endwith: '#3x@#@##$%',
+				endswith: '#3x@#@##$%',
 			}
 		}
 	}

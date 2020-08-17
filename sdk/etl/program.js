@@ -106,10 +106,14 @@ function program_runs_dev2etl(runs) {
     let prog = {};
     runs.forEach(dbr => {
         dbr.params.forEach(para => {
-            prog[para.id] = {
-                vars: para.vars,
-                option: para.option,
+            let r = {};
+            if(para.vars && para.vars!==0) {
+                r.vars = para.vars;
             }
+            if(para.option) {
+                r.option = para.option;
+            }
+            prog[para.id] = r;
         })
     });
     return prog;

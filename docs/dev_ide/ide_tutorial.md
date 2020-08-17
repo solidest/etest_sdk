@@ -177,7 +177,7 @@ ETestDev是嵌入式系统测试开发工具套件，由多个开发组件构成
 #### 协议段、协议分组的解析方式
 + int1至int64 表示有符号整数1至64位
 + uint1至uint64 表示无符号整数1至64位
-+ string 表示字符串，当解析方式设置为string时需要设置length(长度)属性或endwith(结尾符)属性(二者均赋值时，属性length有效)
++ string 表示字符串，当解析方式设置为string时需要设置length(长度)属性或endswith(结尾符)属性(二者均赋值时，属性length有效)
 + float 表示单精度型浮点数据
 + double 表示双精度型浮点数据
 + autovalue属性赋值要遵循协议解析原则，不能超出解析方式范围

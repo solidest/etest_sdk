@@ -53,7 +53,7 @@ bitrl protocol prot_demo {
             segment seg7 {
                   parser: 'int16 & <',
                   autovalue: 0,
-                  endwith: '\0',
+                  endswith: '\0',
             }
       }
 
@@ -64,7 +64,7 @@ bitrl protocol prot_demo {
 
       segment demo3 [99] {
             autovalue: ByteSize(this.seg)+20,
-            endwith: '\0',
+            endswith: '\0',
             length: 99,
       }
 
@@ -85,7 +85,7 @@ bitrl protocol prot_demo {
 
             parser: 'int16 ! <',
             autovalue: 'aaaa\0',
-            endwith: '\0',
+            endswith: '\0',
             option: {
                   max: 10,
                   min: 20,

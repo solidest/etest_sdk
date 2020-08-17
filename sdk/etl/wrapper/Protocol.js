@@ -70,8 +70,8 @@ class Protocol {
             if (seg.length) {
                 seg.length = expparser.parse(seg.length + '');
             }
-            if (seg.endwith && seg.endwith.trim()) {
-                seg.endwith = expparser.parse(seg.endwith);
+            if (seg.endswith && seg.endswith.trim()) {
+                seg.endswith = expparser.parse(seg.endswith);
             }
         }
     }
@@ -132,8 +132,8 @@ class Protocol {
         if (seg.length) {
             res.length = seg.length;
         }
-        if (seg.endwith) {
-            res.endwith = seg.endwith;
+        if (seg.endswith) {
+            res.endswith = seg.endswith;
         }
         if (seg.scale) {
             res.scale = seg.scale;

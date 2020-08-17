@@ -1,5 +1,5 @@
 project:
-  id: vJ4sHlLUU
+  id: 45hfxWt9S
   path: .
   lib_path: libs
   xtra:
@@ -16,12 +16,11 @@ program:
     vars: null
     option:
       topology: topo_udp
-  t_primitive:
-    src: program/t_primitive.lua
-    title: t_primitive
+  t_option_other:
+    src: program/t_option_other.lua
+    title: t_option_other
     vars: null
-    option:
-      topology: topo_udp
+    option: {}
   t_udp:
     src: program/t_udp.lua
     title: t_udp
@@ -172,7 +171,7 @@ program:
 runs:
   all:
     - demo
-    - t_primitive
+    - t_option_other
     - t_udp
     - t_tcp
     - t_string

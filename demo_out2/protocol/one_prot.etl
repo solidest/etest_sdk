@@ -2,7 +2,7 @@ bitlr protocol one_prot {
 	segment str {
 		parser: 'string',
 		autovalue: '3',
-		endwith: '#',
+		endswith: '#',
 	}
 	segment int {
 		parser: 'uint64',

@@ -2,11 +2,11 @@ const path = require('path');
 const fs = require('fs');
 const yaml = require('js-yaml');
 const { assert } = require('console');
-const project = require('../project');
+const makeout = require('../makeout');
 const helper = require('../helper');
 
 function test_make_env(idx_obj) {
-    let env1 = project.makeout_etl2env(idx_obj);
+    let env1 = makeout.makeout_etl2env(idx_obj);
     assert(env1);
 }
 

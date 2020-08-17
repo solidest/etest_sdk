@@ -7,7 +7,7 @@ bitlr protocol prot_message {
 		segment msg_string {
 			parser: 'string',
 			autovalue: '123',
-			endwith: '~',
+			endswith: '~',
 		}
 		segment msg[2] {
 			parser: 'string',
