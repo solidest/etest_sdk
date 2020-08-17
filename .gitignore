@@ -21,6 +21,8 @@ logdb/
 bin/
 logs/
 runs/
+demo_out1/
+demo_out2/
 
 *.zip
 *.vsix
