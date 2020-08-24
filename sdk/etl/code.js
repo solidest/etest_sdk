@@ -1,5 +1,4 @@
-const shortid = require('shortid');
-const helper = require('./helper');
+
 
 function code2db(script, proj_id, kind_id, memo, kind) {
     return {

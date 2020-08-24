@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const shortid = require('shortid');
+const yaml = require('js-yaml');
 
 const protocol = require('./protocol');
 const device = require('./device');
@@ -86,14 +87,14 @@ function _project_devenv(oproj) {
         if(oproj.xtra.pack) {
             xtra.pack = oproj.xtra.pack;
         }
-        if(proj.xtra.unpack) {
-            xtra.unpack = proj.xtra.unpack
+        if(oproj.xtra.unpack) {
+            xtra.unpack = oproj.xtra.unpack
         }
-        if(proj.xtra.check) {
-            xtra.check = proj.xtra.check;
+        if(oproj.xtra.check) {
+            xtra.check = oproj.xtra.check;
         }
-        if(proj.xtra.recvfilter) {
-            xtra.recvfilter = proj.xtra.recvfilter;
+        if(oproj.xtra.recvfilter) {
+            xtra.recvfilter = oproj.xtra.recvfilter;
         }
     }
     return {
@@ -148,7 +149,7 @@ function makeout_dev2env(oproj, proj_id) {
     }
 }
 
-function _load_etl_vars(run) {
+function _load_etl_vars(run, proj_apath) {
     let vars
     if(typeof run.vars === 'object') {
         if(Array.isArray(run.vars)) {
@@ -161,7 +162,7 @@ function _load_etl_vars(run) {
             vars = run.vars;
         }
     } else if(typeof run.vars === 'string'){
-        let f = path.resolve(pf, run.vars) 
+        let f = path.resolve(proj_apath, run.vars) 
         vars = yaml.safeLoad(fs.readFileSync(f, 'utf8'));
     } else {
         if(run.vars !== undefined) {
@@ -173,7 +174,7 @@ function _load_etl_vars(run) {
 
 function makeout_etl2run(proj_id, proj_path, run) {
     if (!run.src) {
-        throw new Error(`实例"${run_id}"未设置src属性`);
+        throw new Error(`未设置src属性`);
     }
     let src_path = path.resolve(proj_path, run.src);
     if (!fs.existsSync(src_path)) {
@@ -202,7 +203,7 @@ function makeout_etl2run(proj_id, proj_path, run) {
         proj_id,
         script: code,
         rpath_src: src_rpath,
-        vars: _load_etl_vars(run),
+        vars: _load_etl_vars(run, proj_apath),
         option,
     }
   }

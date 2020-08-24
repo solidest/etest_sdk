@@ -103,11 +103,6 @@ function exp2str(exp, is_top, need_str_quot) {
         }
         case 'not':
             return is_top ? `not ${exp2str(exp.exp)}` : `(not ${exp2str(exp.exp)})`;
-        case 'bool':
-        case 'number':
-            return exp.value;
-        case 'pid':
-            return exp.list.join('.');
         case 'eq_eq': {
             return is_top ? `${exp2str(exp.left, false, true)} == ${exp2str(exp.right, false, true)}` : `(${exp2str(exp.left, false, true)} == ${exp2str(exp.right, false, true)})`;
         }
