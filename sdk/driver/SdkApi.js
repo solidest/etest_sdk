@@ -23,9 +23,10 @@ class SdkApi {
     }
 
     on_error(cb) {
-        this._on_error = cb;
         this._net.on('error', cb);
     }
+
+    
 
     _xfnSync(method, params, callback) {
         try {
