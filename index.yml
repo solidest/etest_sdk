@@ -44,6 +44,8 @@ runs:
   net: # 网络测试
   - t_udp
   - t_tcp
+  cmd: # 需要手动测试
+  - t_cmd
 
 # 执行程序设置
 program:
@@ -51,6 +53,9 @@ program:
     src: program/demo/demo1.lua
     topology: topo_udp
     vars:
+
+  t_cmd:
+    src: program/t_cmd.lua
 
   t_option_other:
     src: program/t_option_other.lua

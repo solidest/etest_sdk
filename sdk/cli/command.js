@@ -6,11 +6,11 @@
 const yaml = require('js-yaml');
 const fs = require('fs');
 const logdb = require('./logdb');
-const SdkApi = require('./SdkApi');
+const SdkApi = require('../driver/SdkApi');
 const print = require('./print');
 const parse_out = require('./parse_out');
 
-let _srv = null;
+let _sdk = null;
 let _run_uuid = null;
 let _run_id = null;
 let _timer = null;
@@ -63,7 +63,7 @@ function _read_out() {
         return;
     }
 
-    _srv.readout(_run_uuid, (err, res, id) => {
+    _sdk.readoutSync(_run_uuid, (err, res, id) => {
         if (err) {
             print.sys_error(id, err);
             _exit();
@@ -82,8 +82,8 @@ function _initial(idxfile) {
     if(!_cfg) {
         _cfg = yaml.safeLoad(fs.readFileSync(idxfile, 'utf8'))
     }
-    if(!_srv) {
-        _srv = new SdkApi(_cfg.project.etestd_ip, _cfg.project.etestd_port);        
+    if(!_sdk) {
+        _sdk = new SdkApi(_cfg.project.etestd_ip, _cfg.project.etestd_port);        
     }
 }
 
@@ -101,7 +101,7 @@ function _clear_exit_timers() {
 //查询下位机状态
 function cmd_state(idxfile) {
     _initial(idxfile);
-    let id = _srv.state((err, res, id) => {
+    let id = _sdk.stateSync((err, res, id) => {
         _callback(err, res, id);
         process.exit(0);
     });
@@ -111,10 +111,10 @@ function cmd_state(idxfile) {
 //停止下位机执行
 function cmd_stop(idxfile) {
     _initial(idxfile);
-    let cid = _srv.state((err, res, id) => {
+    let cid = _sdk.stateSync((err, res, id) => {
         _callback(err, res, id);
         if (res && res != 'idle') {
-            _srv.stop(res, (err, res, id) => {
+            _sdk.stopSync(res, (err, res, id) => {
                 _callback(err, res, id);
                 _exit();
             });
@@ -129,7 +129,7 @@ function cmd_stop(idxfile) {
 //安装执行环境
 function cmd_setup(idxfile) {
     _initial(idxfile);
-    let id = _srv.setup(_cfg, (err, res, id)=>{
+    let id = _sdk.setupSync(_cfg, (err, res, id)=>{
         _callback(err, res, id);
         _exit();
     });
@@ -153,7 +153,7 @@ function cmd_run(idxfile, runid) {
     _initial(idxfile);
     _run_uuid = null;
     _run_id = runid;
-    let id = _srv.start(_cfg, runid, (err, res, id)=>{
+    let id = _sdk.startSync(_cfg, runid, (err, res, id)=>{
         _callback(err, res, id);
         if (res) {
             _run_uuid = res;
@@ -178,24 +178,24 @@ function cmd_runs(idxfile, runsid) {
 
 //回复信息
 function do_reply(answer) {
-    _srv.reply(_run_uuid, answer, _callback);
+    _sdk.replySync(_run_uuid, answer, _callback);
 }
 
 //发送命令
 function cmd_cmd(idxfile, cmd_id, params) {
     _initial(idxfile);
     if(!_run_uuid) {
-        _srv.state((err, res, id) => {
+        _sdk.stateSync((err, res, id) => {
             if (res && res != 'idle') {
                 _run_uuid = res;
-                let sid = _srv.cmd(_run_uuid, cmd_id, params, _callback);
+                let sid = _sdk.cmdSync(_run_uuid, cmd_id, params, _callback);
                 print.sys_sended(sid || ' ', 'cmd ' + cmd_id);
             } else {
                 print.sys_error(err || 'ETestX已经停止运行', id);
             }
         });
     } else {
-        let sid = _srv.cmd(_run_uuid, cmd_id, params, _callback);
+        let sid = _sdk.cmdSync(_run_uuid, cmd_id, params, _callback);
         print.sys_sended(sid || ' ', 'cmd ' + cmd_id);
     }
     setTimeout(() => {
@@ -210,7 +210,7 @@ function set_auto_exit(duration) {
 
 function cmd_ping(idxfile) {
     _initial(idxfile);
-    let id = _srv.ping((err, res, id) => {
+    let id = _sdk.pingSync((err, res, id) => {
         _callback(err, res, id);
         process.exit(0);
     });

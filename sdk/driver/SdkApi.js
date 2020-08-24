@@ -1,18 +1,35 @@
 const path = require('path');
-const RpcTask = require('../driver/RpcTask');
-const NetWork = require('../driver/NetWork');
+const RpcTask = require('./RpcTask');
+const NetWork = require('./NetWork');
 const ETL = require('../etl');
 
 class SdkApi {
     constructor(ip, port) {
-        let net = new NetWork();
-        this._srv = new RpcTask(net);
-        net.open(ip, port);
+        this._net = new NetWork();
+        this._rpc = new RpcTask(this._net);
+        if(ip && port) {
+            this._ip = ip;
+            this._port = port;
+            this._net.open(ip, port);
+        }
     }
 
-    _xfn(method, params, callback) {
+    async open(ip, port) {
+        if(ip && port) {
+            this._ip = ip;
+            this._port = port;
+        }
+        return await this._net.open(this._ip, this._port);
+    }
+
+    on_error(cb) {
+        this._on_error = cb;
+        this._net.on('error', cb);
+    }
+
+    _xfnSync(method, params, callback) {
         try {
-            return this._srv.sendTask({
+            return this._rpc.sendTask({
                 method: method,
                 params: params
             }, callback);
@@ -23,10 +40,10 @@ class SdkApi {
         }
     }
 
-    setup(cfg, callback) {
+    setupSync(cfg, callback) {
         try {
             let env = ETL.makeout_etl2env(cfg);
-            return this._xfn('makeenv', env, callback);
+            return this._xfnSync('makeenv', env, callback);
         } catch (error) {
             if (callback) {
                 callback(error);
@@ -34,7 +51,7 @@ class SdkApi {
         }
     }
 
-    start_quick(cfg, run_id, callback) {
+    start_quickSync(cfg, run_id, callback) {
         try {
             let pf = cfg.project.path;
             pf = path.isAbsolute(pf) ? pf : path.resolve(pf);
@@ -43,7 +60,7 @@ class SdkApi {
                 throw new Error(`实例"${run_id}"未找到`);
             }
             let run_info = ETL.makeout_etl2run(cfg.project.id, pf, run);
-            return this._xfn('start', run_info, callback);
+            return this._xfnSync('start', run_info, callback);
         } catch (error) {
             if (callback) {
                 callback(error);
@@ -51,18 +68,18 @@ class SdkApi {
         }
     }
 
-    start(cfg, run_id, callback) {
-        return this.setup(cfg, (err) => {
+    startSync(cfg, run_id, callback) {
+        return this.setupSync(cfg, (err) => {
             if (err) {
                 return callback(err);
             }
-            return this.start_quick(cfg, run_id, callback);
+            return this.start_quickSync(cfg, run_id, callback);
         });
     }
 
-    readout(run_id, callback) {
+    readoutSync(run_id, callback) {
         try {
-            return this._xfn('readout', {
+            return this._xfnSync('readout', {
                 key: run_id
             }, callback);
         } catch (error) {
@@ -72,9 +89,9 @@ class SdkApi {
         }
     }
 
-    state(callback) {
+    stateSync(callback) {
         try {
-            return this._xfn('state', null, callback);
+            return this._xfnSync('state', null, callback);
         } catch (error) {
             if (callback) {
                 callback(error);
@@ -82,9 +99,9 @@ class SdkApi {
         }
     }
 
-    ping(callback) {
+    pingSync(callback) {
         try {
-            return this._xfn('ping', null, callback);
+            return this._xfnSync('ping', null, callback);
         } catch (error) {
             if (callback) {
                 callback(error);
@@ -92,9 +109,9 @@ class SdkApi {
         }
     }
 
-    stop(run_id, callback) {
+    stopSync(run_id, callback) {
         try {
-            return this._xfn('stop', {
+            return this._xfnSync('stop', {
                 key: run_id
             }, callback);
         } catch (error) {
@@ -104,10 +121,10 @@ class SdkApi {
         }
     }
 
-    reply(run_id, answer, callback) {
+    replySync(run_id, answer, callback) {
         try {
             answer.key = run_id;
-            return this._xfn('reply', answer, callback);
+            return this._xfnSync('reply', answer, callback);
         } catch (error) {
             if (callback) {
                 callback(error);
@@ -115,9 +132,9 @@ class SdkApi {
         }
     }
 
-    cmd(run_id, command, params, callback) {
+    cmdSync(run_id, command, params, callback) {
         try {
-            return this._xfn('command', {
+            return this._xfnSync('command', {
                 key: run_id,
                 command: command,
                 params: params

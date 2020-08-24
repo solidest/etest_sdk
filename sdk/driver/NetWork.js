@@ -15,76 +15,26 @@ class NetWork {
         return !!this._socket;
     }
 
-    openSync(ip, port) {
-        if(ip && port) {
-            this._ip = ip;
-            this._port = port;            
+    
+    close(reason) {
+        if(reason) {
+            // console.log('net closed, reason:', reason)
         }
-        if(!this._ip || !this._port) {
-            throw new Error('未设置网络连接');
+        this.on_error = null;
+        this.on_recv = null;
+        if(this._timer) {
+            clearTimeout(this._timer);
+            this._timer = null;
         }
-        this._frm = new Frame();
-
-        this._timer = setTimeout(() => {
-            self._timer = null;
-            self.close('timeout1');
-            return {
-                result: 'error',
-                value: '连接执行器失败',
-            }
-        }, 600);
-
-        let self = this;
-        try {
-            self._socket = net.connect(this._port, this._ip, ()=> {
-                clearTimeout(self._timer);
-                self._timer = null;
-                self._socket.on('data', function (data) {
-                    let body = self._frm.unpack(data);
-                    while (body) {
-                        self.on_recv(body);
-                        body = self._frm.unpack(null);
-                    }
-                });
-            });
-            self._socket.setKeepAlive(true, 1);
-
-            self._socket.on('close', function () {
-                let is_conning = !!self._timer;
-                self.close('close');
-                if(is_conning) {
-                    console.log('socket closed');
-                }
-            });
-
-            self._socket.on('error', function (err) {
-                let is_conning = !!self._timer;
-                self.close('error:' + err.message);
-                if(is_conning) {
-                    console.log('socket error', err.message);
-                } else if(self.on_error) {
-                    self.on_error(err.message);
-                }
-            });
-
-            self._socket.on('end', function () {
-                self.close('end');
-                if (self.on_error) {
-                    return self.on_error('与执行器的连接已断开');
-                }
-            });
-
-            self._socket.on('timeout', function () {
-                self.close('timeout2');
-                if (self.on_error) {
-                    return self.on_error('连接执行器超时');
-                }
-            });
-
-        } catch (error) {
-            console.error('net error', error.message);
+        if (this._socket) {
+            this._socket.removeAllListeners('close');
+            this._socket.removeAllListeners('error');
+            this._socket.removeAllListeners('end');
+            this._socket.removeAllListeners('timeout');
+            this._socket.removeAllListeners('data');
+            this._socket.destroy();
+            this._socket = null;
         }
-
     }
 
     open(ip, port) {
@@ -169,26 +119,6 @@ class NetWork {
         });
     }
 
-    close(reason) {
-        if(reason) {
-            // console.log('net closed, reason:', reason)
-        }
-        this.on_error = null;
-        this.on_recv = null;
-        if(this._timer) {
-            clearTimeout(this._timer);
-            this._timer = null;
-        }
-        if (this._socket) {
-            this._socket.removeAllListeners('close');
-            this._socket.removeAllListeners('error');
-            this._socket.removeAllListeners('end');
-            this._socket.removeAllListeners('timeout');
-            this._socket.removeAllListeners('data');
-            this._socket.destroy();
-            this._socket = null;
-        }
-    }
 
     send(body) {
         if (!this._socket) {
