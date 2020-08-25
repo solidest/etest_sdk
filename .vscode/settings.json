@@ -18,6 +18,7 @@
         "before_record",
         "ask",
         "ioctl",
-        "buf"
+        "buf",
+        "rpc"
     ]
 }

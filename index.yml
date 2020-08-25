@@ -54,6 +54,9 @@ program:
     topology: topo_udp
     vars:
 
+  t_rpc:
+    src: program/demo/t_rpc.lua
+    
   t_cmd:
     src: program/t_cmd.lua
 

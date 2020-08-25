@@ -532,6 +532,19 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
     end
     ```
 
+## rpc库
+
+#### rpc.connect
+- `rpc.connect(ip, port)` 远程连接执行器
+- 输入参数：执行器ip地址、端口号
+- 返回值：连接句柄
+- 举例： `local conn = rpc.connect("127.0.0.1", 1211)`
+
+#### rpc.command
+- `rpc.command(conn, fn_name, params)` 向远程执行器发送命令
+- 输入参数：连接句柄、命令名称、命令参数（可选）
+- 举例: `rpc.command(conn, 'Fn1', {a=10, b=20})`
+
 
 ## string库
 
