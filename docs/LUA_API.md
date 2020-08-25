@@ -534,6 +534,8 @@ async库为异步编程api，async中的api执行时均会立即返回，并以�
 
 ## rpc库
 
+rpc库用于提供多个执行器之间的交互机制
+
 #### rpc.connect
 - `rpc.connect(ip, port)` 远程连接执行器
 - 输入参数：执行器ip地址、端口号
