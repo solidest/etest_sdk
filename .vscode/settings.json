@@ -16,6 +16,9 @@
         "async",
         "record",
         "before_record",
-        "buf"
+        "ask",
+        "ioctl",
+        "buf",
+        "rpc"
     ]
 }

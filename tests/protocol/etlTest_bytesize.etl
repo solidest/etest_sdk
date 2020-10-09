@@ -6,6 +6,10 @@
 
   }
 
+  protocol prot_byte_size {
+        segment seg1 {parser: 'uint16<', autovalue: 6}
+  }
+
 
 
   protocol prot31 {

@@ -172,10 +172,10 @@ protocol oneof_prot {
                             segment ww {parser: 'uint24', autovalue: 2}
                             segment ee {parser: 'uint40', autovalue: 0}
                             oneof(this.oneof_name.test.qs.ww == 24){
-                                segment tt[2] {parser:'string',endwith:"12",autovalue: ['qw',"er"]}
+                                segment tt[2] {parser:'string',endswith:"12",autovalue: ['qw',"er"]}
                             }
-                            oneof(this.oneof_name.test.qs.ww != 24){
-                                segment string {parser:'string',endwith:"@@",autovalue: '123'}
+                            oneof(this.oneof_name.test.qs.ww ~= 24){
+                                segment string {parser:'string',endswith:"@@",autovalue: '123'}
                             }
                         } 
                     }
@@ -186,7 +186,7 @@ protocol oneof_prot {
 }
 
 protocol one_prot {
-    segment str {parser: 'string', endwith: '#', autovalue: '3'}
+    segment str {parser: 'string', endswith: '#', autovalue: '3'}
     segment int {parser: 'uint64', autovalue: 0 }
     oneof(this.str == "123"){
         segment name {parser: 'int32',autovalue: 0}

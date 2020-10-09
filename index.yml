@@ -4,7 +4,7 @@ project:
   id: 72f6f124-d355-403f-9f8d-842a75b3b2dc  # 项目唯一id
   path: ./tests  # 项目文件根目录，绝对路径或相对路径
   lib_path: libs
-  xtras:
+  xtra:
     pack: xtras/pack.lua
     unpack: xtras/unpack.lua
     check: xtras/check.lua
@@ -15,7 +15,7 @@ project:
 # 批量执行设置
 runs:
   all: # 无依赖的全部用例
-  - t_primitive
+  - t_option_other
   - t_array_string
   - t_array
   - t_bytesize
@@ -44,23 +44,29 @@ runs:
   net: # 网络测试
   - t_udp
   - t_tcp
+  cmd: # 需要手动测试
+  - t_cmd
 
 # 执行程序设置
 program:
   demo:
-    src: program/demo.lua
+    src: program/demo/demo1.lua
     topology: topo_udp
     vars:
 
-  t_primitive:
-    src: program/t_primitive.lua
-    topology: topo_udp
-    vars:
+  t_rpc:
+    src: program/demo/t_rpc.lua
+    
+  t_cmd:
+    src: program/t_cmd.lua
+
+  t_option_other:
+    src: program/t_option_other.lua
 
   t_udp:
     src: program/t_udp.lua
     topology: topo_udp
-    vars:
+    vars: 
     # option:
     #   # 是否启用实时模式
     #   real_time: true 

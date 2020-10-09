@@ -1,6 +1,13 @@
 local helper = require 'helper'
 local test = {
     
+    _test_ByteSize0 = function ()
+        local msg1 = message(protocol.prot_byte_size)
+        local buff = pack(msg1)
+        print(string.buff2hex(buff))
+        local msg2 = unpack(protocol.prot_byte_size, buff)
+        print(msg2)
+    end,
 
     test_ByteSize1 = function ()
         local msg = {}
@@ -45,7 +52,7 @@ local test = {
 }
 
 function entry(vars)
-    local filter = "t"
+    local filter = "_"
     for k, t in pairs(test) do
         if string.sub(k, 1, 1) == filter then
             local t1 = now()

@@ -1,0 +1,41 @@
+protocol prot_real_scale {
+    segment seg1 {
+        parser: 'float',
+        autovalue: 0,
+        scale: 0.0001,
+        option: {
+            max: 10,
+            min: 100
+        },
+    }
+    segment seg2[3] {
+        parser: 'double',
+        autovalue: 0,
+        scale: 0.1,
+        option: {
+            max: 10,
+            min: 100
+        }
+    }
+}
+
+protocol prot_int_scale {
+    segment seg1 {
+        parser: 'int16',
+        autovalue: 0,
+        scale: 0.0001,
+        option: {
+            max: 10,
+            min: 100
+        },
+    }
+    segment seg2[3] {
+        parser: 'int8',
+        autovalue: 0,
+        scale: 0.1,
+        option: {
+            max: 10,
+            min: 100
+        }
+    }
+}
