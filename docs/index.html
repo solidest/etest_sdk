@@ -10,13 +10,11 @@
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
 </head>
 <body>
-  <div id="app"></div>
+  <div data-app id="main">正在加载...</div>
+
   <script>
     window.$docsify = {
-      name: '',
-      repo: '',
-      loadSidebar: false,
-      subMaxLevel: 3
+      el: '#main'
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
