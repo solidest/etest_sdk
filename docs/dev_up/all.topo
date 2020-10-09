@@ -1,0 +1,15 @@
+stateDiagram
+    ETL --> ETL运行器
+    state ETL {
+        设备接口描述 --> 连接拓扑描述
+        连接拓扑描述 --> 测试脚本
+        通信协议描述 --> 测试脚本
+        测试脚本 --> 监控面板描述
+        监控面板描述 --> 测试脚本
+    }
+    state ETL运行器 {
+        ETestUI --> ETestD : 命令
+        ETestD --> ETestUI : 记录
+        ETestD --> ETestX : 分发
+        ETestX --> ETestD : 缓存
+    }
