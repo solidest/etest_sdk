@@ -1,4 +1,4 @@
-* [ETestDev介绍](dev/#/README)
+* [ETestDev介绍](dev/README)
 * [ETL](dev/#/ETL)
 * [ETLua教程](dev/#/LUA)
 * [API手册](dev/#/LUA_API)
