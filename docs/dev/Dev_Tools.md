@@ -71,13 +71,13 @@ etl专用vscode插件
 #### 安装使用
 
 - 在vscode的插件市场搜索etl进行安装
-![vscode etl插件](https://solidest.github.io/etest_sdk/VSCODE.png)
+![vscode etl插件](https://solidest.github.io/etest_sdk/dev/VSCODE.png)
 
 ## etl-vue
 
 使用前端框架vue开发的etl ui专用组件库，源代码开放
-![ETL-VUE-监控组件](https://solidest.github.io/etest_sdk/VUE1.png)
-![ETL-VUE-数据分析组件](https://solidest.github.io/etest_sdk/VUE2.png)
+![ETL-VUE-监控组件](https://solidest.github.io/etest_sdk/dev/VUE1.png)
+![ETL-VUE-数据分析组件](https://solidest.github.io/etest_sdk/dev/VUE2.png)
 
 #### 安装使用
 
