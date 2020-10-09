@@ -1,7 +1,0 @@
-bitlr protocol prot32 {
-	segment seg_1 {
-		parser: 'string',
-		autovalue: CheckCode(SUM_8),
-		length: 3,
-	}
-}

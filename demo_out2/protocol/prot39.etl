@@ -1,6 +1,0 @@
-bitlr protocol prot39 {
-	segment seg_1 {
-		parser: 'int32 > &',
-		autovalue: CheckCode(CRC_40_GSM),
-	}
-}

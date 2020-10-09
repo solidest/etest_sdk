@@ -1,6 +1,0 @@
-bitlr protocol prot33 {
-	segment seg_1 {
-		parser: 'uint32',
-		autovalue: CheckCode(XOR_8),
-	}
-}

@@ -1,6 +1,0 @@
-bitlr protocol prot42 {
-	segment seg_1[2] {
-		parser: 'int16',
-		autovalue: CheckCode(CRC_15_MPT1327),
-	}
-}

@@ -1,8 +1,0 @@
-bitlr protocol send_1 {
-	segment seg1 {
-		parser: 'int8',
-	}
-	segment seg2[this.seg1] {
-		parser: 'int8',
-	}
-}
