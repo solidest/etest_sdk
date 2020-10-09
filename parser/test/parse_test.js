@@ -1,5 +1,4 @@
 
-// const parser = require('../dist/sdk_parser.js').parser;
 const parser = require('../src/index.js');
 
 const etl_codes = [
