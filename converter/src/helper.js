@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const parser = require("../../parser/src");
+const etl_parser = require('../../parser/src/etxParser');
 
 function _set_etl_props(obj, props) {
     if (!props) {
@@ -37,7 +37,7 @@ function _parse_etl(files, proj_apath) {
     let asts = [];
     for (let f of files) {
         let text = fs.readFileSync(f, "utf8");
-        let ast = parser.parseEtl(text);
+        let ast = etl_parser.parse(text);
         if (ast) {
             for (let a of ast) {
                 a.src = path.relative(proj_apath, f);
