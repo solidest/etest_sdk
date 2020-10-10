@@ -1,5 +1,6 @@
 
 const parser = require('../src/index.js');
+// const parser = require('../dist/sdk_parser').parser;
 
 const etl_codes = [
     "protocol prot1 { segment seg1 { parser: 'uint8>=', autovalue: 10 } }", 

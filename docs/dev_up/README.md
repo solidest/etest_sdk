@@ -5,5 +5,6 @@
 
 - ETestDev中的上位机程序支持二次开发，二次开发使用的接口程序包简称SDK
 - SDK包括以下内容：
-    - `parser`解析器模块
-    - `driver`下位机操作驱动模块
+    - `parser`解析器
+    - `converter`文件格式转换器
+    - `driver`下位机操作驱动器

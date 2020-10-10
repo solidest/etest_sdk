@@ -1,10 +1,9 @@
-
 {
-  "name": "parser",
+  "name": "converter",
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "dist/sdk_parser.js",
+  "main": "dist/sdk_converter.js",
   "directories": {
     "test": "tests"
   },
