@@ -127,6 +127,7 @@ class NetWork {
             } else {
                 console.error('_socket is null');
             }
+            return;
         }
         this._socket.write(Frame.pack(body));
     }
