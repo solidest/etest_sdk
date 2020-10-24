@@ -202,7 +202,7 @@ let lex_etx = {
     [["protocol"], "\\boneof\\b", "return 'ONEOF'"],
 
     [["*"], "\\bdevice\\b", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('device'); return 'DEVICE';"],
-    [["device"], "\\b(udp|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\\b", "return 'INTFTYPE'"],
+    [["device"], "\\b(udp|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ai|ao)\\b", "return 'INTFTYPE'"],
 
     [["*"], "\\btopology\\b", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('topology'); return 'TOPOLOGY';"],
     [["topology"], "\\blinking\\b", "return 'LINKING'"],
@@ -541,19 +541,19 @@ let operators = [
 /* ETX
 
   build
-  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g -o sdk/parser/etxParser.js --loc
+  node src/build.js && syntax-cli -m slr1 -g src/build/etx.g -o src/etxParser.js --loc
 
   语法验证
-  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g --validate
+  node src/build.js && syntax-cli -m slr1 -g src/build/etx.g --validate
 
   不包含语法时的词法检查
-  node sdk/parser/build.js && syntax-cli --lex sdk/parser/build/etx_lex.g --tokenize -f test/proj_dev_temp/etxTest.etx --loc
+  node src/build.js && syntax-cli --lex src/build/etx_lex.g --tokenize -f test/proj_dev_temp/etxTest.etx --loc
 
   包含语法时的词法检查
-  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g --tokenize -f test/proj_dev_temp/etxTest.etx --loc
+  node src/build.js && syntax-cli -m slr1 -g src/build/etx.g --tokenize -f test/proj_dev_temp/etxTest.etx --loc
 
   语法分析
-  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/etx.g -o sdk/parser/etxParser.js --loc && syntax-cli -m slr1 -g sdk/parser/build/etx.g -f test/proj_dev_temp/device/device.etl --loc
+  node src/build.js && syntax-cli -m slr1 -g src/build/etx.g -o src/etxParser.js --loc && syntax-cli -m slr1 -g src/build/etx.g -f test/proj_dev_temp/device/device.etl --loc
 
 */
 

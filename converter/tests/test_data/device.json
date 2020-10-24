@@ -1,0 +1,102 @@
+[{
+    "maxu": 5,
+    "id": "Y-fN3kDj-",
+    "name": "din",
+    "memo": "说明",
+    "kind": "di"
+}, {
+    "maxu": 5,
+    "id": "83rCRRn0m",
+    "name": "dout",
+    "memo": "",
+    "kind": "do"
+}, {
+    "ratio": 16,
+    "id": "ADIp093IU",
+    "name": "ain",
+    "memo": "",
+    "kind": "ai"
+}, {
+    "ratio": 16,
+    "id": "momAhgBbM",
+    "name": "aout",
+    "memo": "",
+    "kind": "ao"
+}, {
+    "baudrate": 115200,
+    "bytesize": 8,
+    "parity": "none",
+    "stopbits": 1,
+    "flowcontrol": "none",
+    "id": "FDN715MU9",
+    "name": "s232",
+    "memo": "",
+    "kind": "serial_232"
+}, {
+    "baudrate": 115200,
+    "bytesize": 8,
+    "parity": "none",
+    "stopbits": 1,
+    "flowcontrol": "none",
+    "id": "2kvvOtKsY",
+    "name": "s422",
+    "memo": "",
+    "kind": "serial_422"
+}, {
+    "baudrate": 115200,
+    "bytesize": 8,
+    "parity": "none",
+    "stopbits": 1,
+    "flowcontrol": "none",
+    "id": "Skz_WxTis",
+    "name": "s485",
+    "memo": "",
+    "kind": "serial_485"
+}, {
+    "baudrate": 115200,
+    "bytesize": 8,
+    "parity": "none",
+    "stopbits": 1,
+    "flowcontrol": "none",
+    "id": "VeaKFimSX",
+    "name": "uart",
+    "memo": "",
+    "kind": "serial_ttl"
+}, {
+    "baudrate": 115200,
+    "accept_mask": "0x000000",
+    "shield_mask": "0xFFFFFF",
+    "id": "G-qReBDvB",
+    "name": "can1",
+    "memo": "说明文字",
+    "kind": "can"
+}, {
+    "ip": "0.0.0.0",
+    "port": 0,
+    "ttl": 0,
+    "reuseaddr": true,
+    "id": "V9pYD6-j2",
+    "name": "udp1",
+    "memo": "",
+    "kind": "udp"
+}, {
+    "ip": "0.0.0.0",
+    "port": 0,
+    "keepalive": true,
+    "nodelay": true,
+    "autoconnect": true,
+    "id": "GtjfEDP4R",
+    "name": "tcpc1",
+    "memo": "",
+    "kind": "tcp_client"
+}, {
+    "ip": "0.0.0.0",
+    "port": 8080,
+    "keepalive": true,
+    "nodelay": true,
+    "acceptany": false,
+    "id": "-lxtg7Kt9",
+    "name": "tcps1",
+    "memo": "",
+    "kind": "tcp_server"
+}]

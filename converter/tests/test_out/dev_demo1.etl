@@ -1,0 +1,80 @@
+// 注释内容
+device dev_demo1 {
+	di din{
+		maxu: 5,
+		memo: '说明',
+	}
+	do dout{
+		maxu: 5,
+		memo: '',
+	}
+	ai ain{
+		ratio: 16,
+		memo: '',
+	}
+	ao aout{
+		ratio: 16,
+		memo: '',
+	}
+	serial_232 s232{
+		baudrate: 115200,
+		bytesize: 8,
+		parity: 'none',
+		stopbits: 1,
+		flowcontrol: 'none',
+		memo: '',
+	}
+	serial_422 s422{
+		baudrate: 115200,
+		bytesize: 8,
+		parity: 'none',
+		stopbits: 1,
+		flowcontrol: 'none',
+		memo: '',
+	}
+	serial_485 s485{
+		baudrate: 115200,
+		bytesize: 8,
+		parity: 'none',
+		stopbits: 1,
+		flowcontrol: 'none',
+		memo: '',
+	}
+	serial_ttl uart{
+		baudrate: 115200,
+		bytesize: 8,
+		parity: 'none',
+		stopbits: 1,
+		flowcontrol: 'none',
+		memo: '',
+	}
+	can can1{
+		baudrate: 115200,
+		accept_mask: '0x000000',
+		shield_mask: '0xFFFFFF',
+		memo: '说明文字',
+	}
+	udp udp1{
+		ip: '0.0.0.0',
+		port: 0,
+		ttl: 0,
+		reuseaddr: true,
+		memo: '',
+	}
+	tcp_client tcpc1{
+		ip: '0.0.0.0',
+		port: 0,
+		keepalive: true,
+		nodelay: true,
+		autoconnect: true,
+		memo: '',
+	}
+	tcp_server tcps1{
+		ip: '0.0.0.0',
+		port: 8080,
+		keepalive: true,
+		nodelay: true,
+		acceptany: false,
+		memo: '',
+	}
+}

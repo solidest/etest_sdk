@@ -213,7 +213,7 @@ const lexRules = [[/^\/\*[^*]*\*+([^\/][^*]*\*+)*\//, function() { /*return 'COM
 [/^\bsegment\b/, function() { return 'SEGMENT' }],
 [/^\boneof\b/, function() { return 'ONEOF' }],
 [/^\bdevice\b/, function() { if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('device'); return 'DEVICE'; }],
-[/^\b(udp|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ad|da)\b/, function() { return 'INTFTYPE' }],
+[/^\b(udp|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ai|ao)\b/, function() { return 'INTFTYPE' }],
 [/^\btopology\b/, function() { if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('topology'); return 'TOPOLOGY'; }],
 [/^\blinking\b/, function() { return 'LINKING' }],
 [/^\bmapping\b/, function() { return 'MAPPING' }],

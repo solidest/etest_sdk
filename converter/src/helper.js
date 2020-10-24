@@ -210,11 +210,14 @@ function append_codes_arr(codes, level, arr) {
     }
 }
 
-function append_codes_objprops(codes, level, obj) {
+function append_codes_objprops(codes, level, obj, ignore) {
     if (!obj) {
         return;
     }
     for(let k in obj) {
+        if(ignore && ignore.includes(k)) {
+            continue;
+        }
         let v = obj[k];
         let t = typeof v;
         switch (t) {
