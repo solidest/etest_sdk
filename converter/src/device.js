@@ -56,8 +56,8 @@ function _append_code_conn(codes, level, it) {
     _append_code(codes, level, '}');
 }
 
-function device_dev2etl(dev, name, memo) {
-    let content = dev || [];
+function device_dev2etl(content, name, memo) {
+    content = content || [];
     let codes = [];
     if (memo) {
         _append_code(codes, 0, `// ${memo}`);

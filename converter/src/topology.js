@@ -1,110 +1,104 @@
 
 const shortid = require("shortid");
+const KIND = 'topology';
 
-function _get_link(devs, items) {
-    if(!items) {
-        return null;
+
+function _fill_devs(devs, item) {
+    if(!item.value||item.value.length===0) {
+        return;
     }
-    let conns = [];
-    items.forEach(it => {
-        if(it.kind === 'dev_connector') {
-            let dev = devs.find(d => d.name === it.device);
-            if(dev && dev.ctx.content && dev.ctx.content.items) {
-                let conn = dev.ctx.content.items.find(c => c.name === it.connector);
-                if(conn) {
-                    conns.push(conn.id);
+    item.value.forEach(name =>{
+        devs.push({
+            kind: item.kind,
+            name: name
+        })
+    })
+}
+
+function _fill_binds(binds, item) {
+    binds.push({
+        bind_id: item.bind,
+        dev: {name: item.device},
+        conn: {name: item.connector},
+    })
+}
+
+function _fill_links(topo, item) {
+    if(!item.value) {
+        return;
+    }
+    let len = item.value.length;
+    if(len===2) {
+        topo.pp_links.push({
+            id: item.name,
+            name: item.name,
+            dc1: {
+                dev: {name: item.value[0].device},
+                conn: {name: item.value[0].connector}
+            },
+            dc2: {
+                dev: {name: item.value[1].device},
+                conn: {name: item.value[1].connector}
+            }
+        });
+    } else if(len>2) {
+        let bus_id = shortid.generate();
+        topo.buses.push({
+            id: bus_id
+        });
+        item.value.forEach(it => {
+            topo.bus_links.push({
+                id: item.name,
+                name: item.name,
+                bus_id: bus_id,
+                dc: {
+                    dev: {name: it.device},
+                    conn: {name: it.connector}
                 }
-            }
-        }
-    });
-    if(conns.length===0) {
-        return null;
-    }
-    return {
-        id: shortid.generate(),
-        conns: conns,
-    }
-}
-
-function _get_maps(devs, items, kind) {
-    if(!items) {
-        return null;
-    }
-    let maps = [];
-    items.forEach(it => {
-        let dev = devs.find(d => d.name === it);
-        if(dev) {
-            maps.push({
-                dev_id: dev.ctx.id,
-                used: kind,
             });
-        }
-    });
-    if(maps.length===0){
-        return null;
+        })
     }
-    return maps;
 }
 
-function _get_bind(devs, item) {
-    if(!item || !item.bind) {
-        return null;
+function topology_etl2dev(ast) {
+    let topo = {
+        devs: [],
+        buses: [],
+        binds: [],
+        bus_links: [],
+        pp_links: [],
+    };
+    if(!ast.value) {
+        return {
+            kind: KIND,
+            name: ast.name,
+            content: topo
+        };
     }
-    let dev = devs.find(d => d.name === item.device);
-    if(dev && dev.ctx.content && dev.ctx.content.items) {
-        let conn = dev.ctx.content.items.find(c => c.name === item.connector);
-        if(conn) {
-            return {
-                conn_id: conn.id,
-                uri: item.bind,
-            }
-        }
-    }
-    return null;
-}
-
-function topology_etl2dev(ast, proj_id, kind_id, memo, devs) {
-    let mapping = [];
-    let linking = [];
-    let binding = [];
-    if(!devs) {
-        devs = [];
-    }
-
     if(ast.value) {
         ast.value.forEach(item => {
-            if(item.kind === 'linking') {
-                let link = _get_link(devs, item.value);
-                if(link) {
-                    linking.push(link);
-                }
-            } else if(['etest', 'uut'].includes(item.kind)) {
-                let maps = _get_maps(devs, item.value, item.kind);
-                if(maps) {
-                    mapping.push(...maps);
-                }
-            } else if(item.kind === 'binding') {
-                let bind = _get_bind(devs, item);
-                if(bind) {
-                    binding.push(bind);
-                }
+            switch (item.kind) {
+                case 'linking':
+                    _fill_links(topo, item);
+                    break;
+                case 'uut':
+                case 'etest':
+                case 'simu':
+                    _fill_devs(topo.devs, item);
+                    break;
+                case 'binding':
+                    _fill_binds(topo.binds, item);
+                    break;
             }
         });
     }
-
-    let topo = {
-        id: kind_id,
-        proj_id: proj_id,
-        kind: 'topology',
-        content: {
-            mapping: mapping,
-            linking: linking,
-            binding: binding,
-            memo: memo,
-        }
-    };
-    return topo;
+    return {
+        kind: KIND,
+        name: ast.name,
+        content: topo
+    };;
 }
+
 
 function _append_code(codes, level, code) {
     if(code === undefined || code === null) {
@@ -116,99 +110,84 @@ function _append_code(codes, level, code) {
     });
 }
 
-function _append_code_mapping(codes, level, mapping, devs) {
-    if(!mapping || mapping.length === 0) {
+function _get_dc_name(dc) {
+    return `${dc.dev.name}.${dc.conn.name||'_'}`;
+}
+
+function _append_code_mapping(codes, level, devs) {
+    if(!devs) {
+        return;
+    }
+    
+    _append_code(codes, level, 'mapping: {');
+    let items = devs.filter(d => d.kind === 'uut');
+    if(items.length>0) {
+        let names = items.map(it=>it.name);
+        _append_code(codes, level+1, `uut: [${names.join(', ')}],`);
+    }
+
+    items = devs.filter(d => d.kind === 'etest');
+    if(items.length>0) {
+        let names = items.map(it=>it.name);
+        _append_code(codes, level+1, `etest: [${names.join(', ')}],`);
+    }
+
+    items = devs.filter(d => d.kind === 'simu');
+    if(items.length>0) {
+        let names = items.map(it=>it.name);
+        _append_code(codes, level+1, `simu: [${names.join(', ')}],`);
+    }
+
+    _append_code(codes, level, '}');
+}
+
+function _append_code_linking(codes, level, pplinks, buslinks) {
+    _append_code(codes, level, 'linking: {');
+    if(pplinks) {
+        pplinks.forEach(link => {
+            _append_code(codes, level+1, `${link.name} : [${_get_dc_name(link.dc1)}, ${_get_dc_name(link.dc2)}], `);
+        })
+    }
+    if(buslinks) {
+        let bus_ids = [];
+        buslinks.forEach(link => {
+            if(!bus_ids.includes(link.bus_id)) {
+                bus_ids.push(link.bus_id);
+                let ls = buslinks.filter(l => l.bus_id === link.bus_id);
+                if(ls.length>1) {
+                    conns = ls.map(l => _get_dc_name(l.dc));
+                    _append_code(codes, level+1, `${link.name} : [${conns.join(', ')}], `);
+                }
+            }
+        })
+    }
+    _append_code(codes, level, '}');
+}
+
+function _append_code_binding(codes, level, binds) {
+    if(!binds) {
         return;
     }
 
-    let res = {uut: [], etest: []}
-    _append_code(codes, level, 'mapping: {');
-    mapping.forEach(map => {
-        if(['uut', 'etest'].includes(map.used)) {
-            let dev = devs.find(d => d.ctx.id === map.dev_id);
-            if(dev) {
-                res[map.used].push(dev.name);
-            }
-        }
-    });
-    if(res.uut.length>0) {
-        _append_code(codes, level+1, `uut: [${res.uut.join(', ')}],`);
-    }
-    if(res.etest.length>0) {
-        _append_code(codes, level+1, `etest: [${res.etest.join(', ')}],`);
-    }
-    _append_code(codes, level, '}');
-}
-
-function _get_devconn_name(devs, conn_id) {
-    if(!devs) {
-        return null;
-    }
-
-    for(let d of devs) {
-        if(d.ctx && d.ctx.content && d.ctx.content.items) {
-            let c = d.ctx.content.items.find(it => it.id === conn_id);
-            if(c) {
-                return `${d.name}.${c.name}`;
-            }
-        }
-    }
-    return null;
-}
-
-function _append_code_linking(codes, level, linking, devs) {
-    if(!linking) {
-        linking = [];
-    }
-
-    _append_code(codes, level, 'linking: {');
-    linking.forEach(link => {
-        if(link.conns) {
-            let conns = [];
-            link.conns.forEach(c => {
-                let devconn_name = _get_devconn_name(devs, c);
-                if(devconn_name) {
-                    conns.push(devconn_name);
-                }
-            });
-            if(conns.length>0) {
-                _append_code(codes, level+1, `_ : [${conns.join(', ')}], `);
-            }
-        }
-    });
-    _append_code(codes, level, '}');
-}
-
-
-function _append_code_binding(codes, level, binding, devs) {
-    if(!binding) {
-        binding = [];
-    }
-
     _append_code(codes, level, 'binding: {');
-    binding.forEach(bind => {
-        _append_code(codes, level+1, `${_get_devconn_name(devs, bind.conn_id)}: '${bind.uri}',`)
+    binds.forEach(bind => {
+        _append_code(codes, level+1, `${_get_dc_name(bind)}: '${bind.bind_id}',`)
     });
     _append_code(codes, level, '}');
 }
 
 
-function topology_dev2etl(topo, name, devs) {
-    if (!topo || !topo.content) {
-        return `topology ${name} {\n}`;
-    }
-    if(!devs) {
-        devs = [];
-    }
-    let content = topo.content;
+function topology_dev2etl(content, name, memo) {
+    content = content || {};
     let codes = [];
-    if (content.memo) {
-        _append_code(codes, 0, `// ${content.memo}`);
+    if (memo) {
+        _append_code(codes, 0, `// ${memo}`);
     }
     _append_code(codes, 0, `topology ${name} {`);
-    _append_code_mapping(codes, 1, content.mapping, devs);
-    _append_code_linking(codes, 1, content.linking, devs);
-    _append_code_binding(codes, 1, content.binding, devs);
+    _append_code_mapping(codes, 1, content.devs);
+    _append_code_linking(codes, 1, content.pp_links, content.bus_links);
+    _append_code_binding(codes, 1, content.binds);
+
     _append_code(codes, 0, '}');
     let texts = codes.map(it => `${'\t'.repeat(it.level)}${it.code}`);
     return texts.join('\n');

@@ -142,6 +142,13 @@
             [
                 "topology"
             ],
+            "\\bsimu\\b",
+            "return 'SIMU'"
+        ],
+        [
+            [
+                "topology"
+            ],
             "\\buut\\b",
             "return 'UUT'"
         ],

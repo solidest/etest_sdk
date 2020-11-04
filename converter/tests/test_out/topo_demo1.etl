@@ -1,0 +1,17 @@
+// 注释内容
+topology topo_demo1 {
+	mapping: {
+		uut: [demo1],
+		etest: [dev2],
+		simu: [dev1],
+	}
+	linking: {
+		con_21 : [dev1.dout, demo1.din], 
+		con_15 : [dev1.aout, dev1.ain], 
+		con_50 : [dev2.s242, dev2.s247], 
+		con_213 : [dev2.s243, dev2.s245], 
+		con_50 : [dev1.tcps2, dev1.tcps17], 
+	}
+	binding: {
+	}
+}

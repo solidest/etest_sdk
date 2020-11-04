@@ -208,6 +208,7 @@ let lex_etx = {
     [["topology"], "\\blinking\\b", "return 'LINKING'"],
     [["topology"], "\\bmapping\\b", "return 'MAPPING'"],
     [["topology"], "\\bbinding\\b", "return 'BINDING'"],
+    [["topology"], "\\bsimu\\b", "return 'SIMU'"],
     [["topology"], "\\buut\\b", "return 'UUT'"],
     [["topology"], "\\betest\\b", "return 'ETEST'"],
     
@@ -331,6 +332,8 @@ let bnf_etx = {
     ["UUT : [ topology_devs ]", "$$ = {kind: 'uut', value: $topology_devs};"],
     ["ETEST : [ ]", "$$ = null;"],
     ["ETEST : [ topology_devs ]", "$$ = {kind: 'etest', value: $topology_devs};"],
+    ["SIMU : [ ]", "$$ = null;"],
+    ["SIMU : [ topology_devs ]", "$$ = {kind: 'simu', value: $topology_devs};"],
   ],
 
   topology_bindinging_elements: [
