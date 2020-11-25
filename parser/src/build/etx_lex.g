@@ -98,6 +98,20 @@
         ],
         [
             [
+                "protocol"
+            ],
+            "\\bwhen\\b",
+            "return 'WHEN'"
+        ],
+        [
+            [
+                "protocol"
+            ],
+            "\\bas\\b",
+            "return 'AS'"
+        ],
+        [
+            [
                 "*"
             ],
             "\\bdevice\\b",

@@ -200,6 +200,8 @@ let lex_etx = {
     [["protocol"], "\\bsegments\\b", "return 'SEGMENTS'"],
     [["protocol"], "\\bsegment\\b", "return 'SEGMENT'"],
     [["protocol"], "\\boneof\\b", "return 'ONEOF'"],
+    [["protocol"], "\\bwhen\\b", "return 'WHEN'"],
+    [["protocol"], "\\bas\\b", "return 'AS'"],
 
     [["*"], "\\bdevice\\b", "if(this.getCurrentState()!=='INITIAL') this.popState(); this.pushState('device'); return 'DEVICE';"],
     [["device"], "\\b(udp|tcp_server|tcp_client|serial_ttl|serial_232|serial_422|serial_485|serial_usb|can|di|do|ai|ao)\\b", "return 'INTFTYPE'"],
@@ -264,14 +266,14 @@ let bnf_etx = {
   // protocol
   protocol_element_list: [
     ["protocol_element", "$$ = newList($protocol_element);"],
-    ["protocol_element_list protocol_element", "$$ = joinList($protocol_element_list, $protocol_element)"]
+    ["protocol_element_list protocol_element", "$$ = joinList($protocol_element_list, $protocol_element);"]
   ],
 
   protocol_element: [
     ["SEGMENT ID object_like", "$$ = newElement('segment', $ID, 'props', $object_like, @ID);"],
     ["SEGMENT ID [ exp ] object_like", "$$ = newElement('segment', $ID, 'props', $object_like, @ID, $exp);"],
     ["segments", "$$ = $segments;"],
-    ["branch", "$$ = $branch;"],
+    ["ONEOF { branch_list }", "$$ = newOneof($branch_list);"],
   ],
 
   segments: [
@@ -280,10 +282,19 @@ let bnf_etx = {
     ["SEGMENTS ID [ exp ] { protocol_element_list }", "$$ = newProtSeggroup($ID, $protocol_element_list, @ID, $exp);"],
   ],
 
-  branch: [
-    ["ONEOF ( exp ) { }", "$$ = newProtBranch('oneof', $exp, null, @exp);"],
-    ["ONEOF ( exp ) { protocol_element_list }", "$$ = newProtBranch('oneof', $exp, $protocol_element_list, @exp);"],
+  branch_list: [
+    ["branch", "$$ = newList($branch);"],
+    ["branch_list branch", "$$ = joinList($branch_list, $branch);"]
   ],
+
+  branch: [
+    ["WHEN ( exp ) AS ID : protocol_element_list", "$$ = newBranch($ID, $exp, $protocol_element_list, @exp);"],
+  ],
+
+  // branch: [
+  //   ["ONEOF ( exp ) { }", "$$ = newProtBranch('oneof', $exp, null, @exp);"],
+  //   ["ONEOF ( exp ) { protocol_element_list }", "$$ = newProtBranch('oneof', $exp, $protocol_element_list, @exp);"],
+  // ],
 
   // device
   device_element_list: [
@@ -489,9 +500,17 @@ let include_etx = `
       }
     }
 
-    function newProtBranch(kind, exp, seglist, exp_loc) {
+    function newOneof(branch_list) {
       return {
-        kind: kind,
+        kind: 'oneof',
+        branch_list: branch_list
+      }
+    }
+
+    function newBranch(name, exp, seglist, exp_loc) {
+      return {
+        kind: 'branch',
+        name: name,
         exp: exp,
         seglist: seglist,
         exp_from: exp_loc.startOffset,
