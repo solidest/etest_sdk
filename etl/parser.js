@@ -9,11 +9,12 @@ const fwar = chalk.keyword('orange');
 const fok = chalk.green;
 const finfo = chalk.blueBright;
 const fcode = chalk.cyanBright;
+const fign = chalk.blackBright;
 
 function parse(file_etl, out_path, display)
 {
     if (!fs.existsSync(file_etl)) {
-        console.log(ferr('文件不存在'));
+        console.log(ferr('文件"%s"不存在'), file_etl);
         return;
     }
     try {
