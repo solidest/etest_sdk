@@ -1,6 +1,9 @@
 
 ## ETestDev SDK更新说明
 
+### V2.0
+- 更改打包方式 `npx webpack`
+
 ### 1.0.1
 - etl-cli 新增-v选项 查看当前版本
 - etl-cli 新增`ping`命令 用于测试和执行器的连接，连接正常返回`pong`
