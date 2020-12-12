@@ -28,7 +28,7 @@ const segtype_codes = [
 
 const exp_codes = [
     '"abcd"',
-    '1+2*this.seg5',
+    'this.seg1>0 and this.seg1==8',
     '{parser: a, pack: bc}',
 ];
 

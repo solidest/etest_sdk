@@ -1,6 +1,7 @@
 //pkg etl.js  --targets node8-win-x64 --out-path ./dist
 
-const parser = require('./parser');
+const parser = require('./parser.js');
+const license = require('./license.js');
 
 const {
     program
@@ -18,6 +19,13 @@ program
     .option('-d --display', '解析完成后在控制台显示结果')
     .action(function (file_etl, opt) {
         parser.parse(file_etl, opt.out, opt.display);
+    });
+
+program
+    .command('license <date>')
+    .description('生成试用版License')
+    .action(function (date) {
+        license.maketry(date);
     });
 
 program.parse(process.argv);

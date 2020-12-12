@@ -587,7 +587,8 @@ fs.writeFileSync(path.join(__dirname, 'build/segtype_lex.g'), JSON.stringify(lex
 fs.writeFileSync(path.join(__dirname, 'build/segtype.g'), JSON.stringify({lex: lex_segtype, bnf: bnf_segtype}, null, 4));
 
 
-let bnf_exp = { 
+let bnf_exp = {
+  root: [ ["exp", "$$ = @exp"] ],
   exp: bnf_etx.exp,
   gfn_call:bnf_etx.gfn_call,
   paramlist: bnf_etx.paramlist,
@@ -604,7 +605,7 @@ fs.writeFileSync(path.join(__dirname, 'build/exp.g'), JSON.stringify({lex: lex_e
 /* exp
 
   build
-  node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/exp.g -o sdk/parser/expParser.js --loc
+  node ./build.js && syntax-cli -m slr1 -g ./build/exp.g -o ./expParser.js --loc
 
   语法验证
   node sdk/parser/build.js && syntax-cli -m slr1 -g sdk/parser/build/exp.g --validate
