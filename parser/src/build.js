@@ -588,7 +588,7 @@ fs.writeFileSync(path.join(__dirname, 'build/segtype.g'), JSON.stringify({lex: l
 
 
 let bnf_exp = {
-  root: [ ["exp", "$$ = @exp"] ],
+  root: [ ["exp", "$$ = $exp"] ],
   exp: bnf_etx.exp,
   gfn_call:bnf_etx.gfn_call,
   paramlist: bnf_etx.paramlist,

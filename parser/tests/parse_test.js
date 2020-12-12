@@ -44,7 +44,7 @@ function test_parser(fn_name, codes)
             let ast = parser[fn_name](code);
             if(!ast) {
                 ok = false;
-            }
+            } 
         } catch (error) {
             console.error('error:', fn_name, error.message);
             ok = false;
