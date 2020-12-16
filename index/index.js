@@ -1,11 +1,9 @@
 
 const device = require('../converter/src/device');
-const etlParser = require('../parser/src/etxParser');
 const topology = require('../converter/src/topology');
-
-function parseEtl(code) {
-    return etlParser.parse(code);
-}
+const etlParser = require('../parser/src/etxParser');
+const segParser = require('../parser/src/segParser');
+const expParser = require('../parser/src/expParser');
 
 module.exports = {
     converter: {
@@ -15,7 +13,9 @@ module.exports = {
         topology_dev2etl: topology.topology_dev2etl,
     },
     parser: {
-        parse_etl: parseEtl,
+        parse_etl: etlParser.parse,
+        parse_seg: segParser.parse,
+        parse_exp: expParser.parse,
     }
 };
 

@@ -50,7 +50,7 @@ function _append_code(codes, level, code) {
 }
 
 function _append_code_conn(codes, level, it) {
-    _append_code(codes, level, `${it.kind} ${it.name}{`);
+    _append_code(codes, level, `${it.kind} ${it.name} {`);
     let ignore = ['name', 'kind', 'id']
     helper.append_codes_objprops(codes, level+1, it, ignore);
     _append_code(codes, level, '}');
