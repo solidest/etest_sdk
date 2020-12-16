@@ -9,8 +9,8 @@ topology topo1 {}
 
 device dev1 {}
 
-protocol prot2 {
-    segment seg1 {
+protocol 协议1 {
+    segment 协议段1 {
         parser: 'uint8',
         autovalue: 0
     }

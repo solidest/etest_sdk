@@ -233,7 +233,7 @@ const lexRules = [[/^\/\*[^*]*\*+([^\/][^*]*\*+)*\//, function() { /*return 'COM
 [/^not/, function() { return 'NOT' }],
 [/^0[xX][0-9a-fA-F]+/, function() { return 'NUMBER_HEX' }],
 [/^[0-9]+(?:\.[0-9]+)?/, function() { return 'NUMBER' }],
-[/^[a-zA-Z_$][a-zA-Z0-9_]*/, function() { return 'ID' }],
+[/^[a-zA-Z_$一-龥][a-zA-Z0-9_一-龥]*/, function() { return 'ID' }],
 [/^~=/, function() { return 'NOT_EQ' }],
 [/^==/, function() { return 'EQ_EQ' }],
 [/^>=/, function() { return 'GT_EQ' }],

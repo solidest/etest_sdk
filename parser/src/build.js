@@ -221,7 +221,7 @@ let lex_etx = {
     [["*"], "not", "return 'NOT'"],
     [["*"], "0[xX][0-9a-fA-F]+", "return 'NUMBER_HEX'"],
     [["*"], "[0-9]+(?:\\.[0-9]+)?", "return 'NUMBER'"],
-    [["*"], "[a-zA-Z_$][a-zA-Z0-9_]*", "return 'ID'"],
+    [["*"], "[a-zA-Z_$\u4e00-\u9fa5][a-zA-Z0-9_\u4e00-\u9fa5]*", "return 'ID'"],
     [["*"], "~=", "return 'NOT_EQ'"],
     [["*"], "==", "return 'EQ_EQ'"],
     [["*"], ">=", "return 'GT_EQ'"], 
