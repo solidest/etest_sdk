@@ -20,7 +20,7 @@ function prot2etl() {
     let code = fs.readFileSync('./test_out/prot_demo1.etl', {encoding: 'utf-8'});
     let ast = parser.parseEtl(code);
     let prot = cv.protocol_etl2dev(ast[0]);
-    let etl2 = cv.protocol_dev2etl(prot, 'prot_demo1', '注释内容');
+    let etl2 = cv.protocol_dev2etl(prot, 'prot_demo1');
     assert(etl1 == etl2)
 }
 
