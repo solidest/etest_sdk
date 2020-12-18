@@ -20,10 +20,25 @@ function parse(file_etl, out_path, display)
     try {
         let txt = fs.readFileSync(file_etl, 'utf8');
         let ast = sdk.parser.parse_etl(txt);
-        let outf = path.join(out_path || path.dirname(file_etl), path.basename(file_etl, '.etl') + '.json');
-        let str = JSON.stringify(ast, null, 4)
+        let outo = null;
+        switch(ast[0].kind) {
+            case 'protocol': {
+                let oprot = sdk.converter.protocol_etl2dev(ast[0]);
+                outo = sdk.converter.makeout_protocol(oprot);
+            }
+            break;
+            case 'topology': {
+
+            }
+            break;
+        }
+        if(!outo) {
+            throw new Error('生成失败');
+        }
+        let outf = path.join(out_path || path.dirname(file_etl), path.basename(file_etl, '.etl') + '_out.json');
+        let str = JSON.stringify(outo, null, 4)
         fs.writeFileSync(outf, str);
-        console.log(fok('解析成功，结果输出至：%s'), path.resolve(outf));
+        console.log(fok('生成成功，结果输出至：%s'), path.resolve(outf));
         if(display) {
             console.log(fcode(str));
         }

@@ -1,0 +1,19 @@
+{
+    "kind": "protocol",
+    "name": "prot1",
+    "seglist": [
+        {
+            "bitcount": 8,
+            "signed": false,
+            "encode": "primitive",
+            "order": "bigorder",
+            "kind": "integer",
+            "name": "seg1",
+            "autovalue": {
+                "kind": "number",
+                "value": 10
+            }
+        }
+    ],
+    "bittype": "lr"
+}

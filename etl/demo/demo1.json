@@ -9,8 +9,8 @@
             {
                 "kind": "segment",
                 "name": "seg1",
-                "name_from": 30,
-                "name_to": 34,
+                "name_from": 29,
+                "name_to": 33,
                 "name_line": 2,
                 "props": [
                     {
@@ -20,11 +20,11 @@
                             "kind": "string",
                             "value": "uint8>="
                         },
-                        "name_from": 46,
-                        "name_to": 52,
+                        "name_from": 44,
+                        "name_to": 50,
                         "name_line": 3,
-                        "value_from": 54,
-                        "value_to": 63,
+                        "value_from": 52,
+                        "value_to": 61,
                         "value_line": 3
                     },
                     {
@@ -34,11 +34,11 @@
                             "kind": "number",
                             "value": 10
                         },
-                        "name_from": 74,
-                        "name_to": 83,
+                        "name_from": 71,
+                        "name_to": 80,
                         "name_line": 4,
-                        "value_from": 85,
-                        "value_to": 87,
+                        "value_from": 82,
+                        "value_to": 84,
                         "value_line": 4
                     }
                 ]
@@ -58,15 +58,15 @@
     {
         "kind": "protocol",
         "name": "prot2",
-        "name_from": 149,
-        "name_to": 154,
+        "name_from": 138,
+        "name_to": 143,
         "name_line": 12,
         "seglist": [
             {
                 "kind": "segment",
                 "name": "seg1",
-                "name_from": 170,
-                "name_to": 174,
+                "name_from": 158,
+                "name_to": 162,
                 "name_line": 13,
                 "props": [
                     {
@@ -76,11 +76,11 @@
                             "kind": "string",
                             "value": "uint8"
                         },
-                        "name_from": 186,
-                        "name_to": 192,
+                        "name_from": 173,
+                        "name_to": 179,
                         "name_line": 14,
-                        "value_from": 194,
-                        "value_to": 201,
+                        "value_from": 181,
+                        "value_to": 188,
                         "value_line": 14
                     },
                     {
@@ -90,11 +90,11 @@
                             "kind": "number",
                             "value": 0
                         },
-                        "name_from": 212,
-                        "name_to": 221,
+                        "name_from": 198,
+                        "name_to": 207,
                         "name_line": 15,
-                        "value_from": 223,
-                        "value_to": 224,
+                        "value_from": 209,
+                        "value_to": 210,
                         "value_line": 15
                     }
                 ]
@@ -140,8 +140,8 @@
                             {
                                 "kind": "segment",
                                 "name": "o1",
-                                "name_from": 323,
-                                "name_to": 325,
+                                "name_from": 305,
+                                "name_to": 307,
                                 "name_line": 19,
                                 "props": [
                                     {
@@ -151,11 +151,11 @@
                                             "kind": "string",
                                             "value": "int8"
                                         },
-                                        "name_from": 345,
-                                        "name_to": 351,
+                                        "name_from": 326,
+                                        "name_to": 332,
                                         "name_line": 20,
-                                        "value_from": 353,
-                                        "value_to": 359,
+                                        "value_from": 334,
+                                        "value_to": 340,
                                         "value_line": 20
                                     }
                                 ]
@@ -163,8 +163,8 @@
                             {
                                 "kind": "segment",
                                 "name": "o2",
-                                "name_from": 396,
-                                "name_to": 398,
+                                "name_from": 375,
+                                "name_to": 377,
                                 "name_line": 22,
                                 "props": [
                                     {
@@ -174,18 +174,18 @@
                                             "kind": "string",
                                             "value": "int8"
                                         },
-                                        "name_from": 418,
-                                        "name_to": 424,
+                                        "name_from": 396,
+                                        "name_to": 402,
                                         "name_line": 23,
-                                        "value_from": 426,
-                                        "value_to": 432,
+                                        "value_from": 404,
+                                        "value_to": 410,
                                         "value_line": 23
                                     }
                                 ]
                             }
                         ],
-                        "exp_from": 259,
-                        "exp_to": 291,
+                        "exp_from": 242,
+                        "exp_to": 274,
                         "exp_line": 18
                     },
                     {
@@ -199,8 +199,8 @@
                             {
                                 "kind": "segment",
                                 "name": "o1",
-                                "name_from": 498,
-                                "name_to": 500,
+                                "name_from": 473,
+                                "name_to": 475,
                                 "name_line": 26,
                                 "props": [
                                     {
@@ -210,11 +210,11 @@
                                             "kind": "string",
                                             "value": "int8"
                                         },
-                                        "name_from": 520,
-                                        "name_to": 526,
+                                        "name_from": 494,
+                                        "name_to": 500,
                                         "name_line": 27,
-                                        "value_from": 528,
-                                        "value_to": 534,
+                                        "value_from": 502,
+                                        "value_to": 508,
                                         "value_line": 27
                                     }
                                 ]
@@ -222,8 +222,8 @@
                             {
                                 "kind": "segment",
                                 "name": "o2",
-                                "name_from": 571,
-                                "name_to": 573,
+                                "name_from": 543,
+                                "name_to": 545,
                                 "name_line": 29,
                                 "props": [
                                     {
@@ -233,18 +233,18 @@
                                             "kind": "string",
                                             "value": "int8"
                                         },
-                                        "name_from": 593,
-                                        "name_to": 599,
+                                        "name_from": 564,
+                                        "name_to": 570,
                                         "name_line": 30,
-                                        "value_from": 601,
-                                        "value_to": 607,
+                                        "value_from": 572,
+                                        "value_to": 578,
                                         "value_line": 30
                                     }
                                 ]
                             }
                         ],
-                        "exp_from": 462,
-                        "exp_to": 466,
+                        "exp_from": 438,
+                        "exp_to": 442,
                         "exp_line": 25
                     }
                 ]

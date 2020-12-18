@@ -1,0 +1,42 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Python.framework/Versions/3.6/bin
+
+Yarn version: 
+  1.16.0
+
+Node version: 
+  10.15.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/Users/baiyunxiang/Library/Caches/Yarn/v4/npm-has-flag-4.0.0-944771fd9c81c81265c4d6941860da06bb59479b/node_modules/has-flag/package.json' -> '/Users/baiyunxiang/Desktop/etest_sdk/index/node_modules/jest-worker/node_modules/has-flag/package.json'
+
+npm manifest: 
+  {
+    "name": "sdk",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "main": "dist/sdk.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "webpack": "^5.2.0",
+      "webpack-cli": "^4.2.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
