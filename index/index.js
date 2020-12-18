@@ -2,6 +2,7 @@
 const device = require('../converter/src/device');
 const topology = require('../converter/src/topology');
 const protocol = require('../converter/src/protocol');
+const makeout = require('../converter/src/makeout');
 const etlParser = require('../parser/src/etxParser');
 const segParser = require('../parser/src/segParser');
 const expParser = require('../parser/src/expParser');
@@ -27,6 +28,7 @@ module.exports = {
         topology_dev2etl: topology.topology_dev2etl,
         protocol_etl2dev: protocol.protocol_etl2dev,
         protocol_dev2etl: protocol.protocol_dev2etl,
+        makeout_protocol: makeout.make_prot,
     },
     parser: {
         parse_etl: parseEtl,
