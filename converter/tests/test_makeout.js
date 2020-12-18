@@ -8,7 +8,7 @@ function makeout_protocol(etl_file, out_file)
     let code = fs.readFileSync(etl_file, {encoding: 'utf-8'});
     let ast = parser.parseEtl(code);
     let oprot = cv.protocol_etl2dev(ast[0]);
-    let out = cv.makeout_protocol(oprot, oprot.name);
+    let out = cv.makeout_protocol(oprot);
     fs.writeFileSync(out_file, JSON.stringify(out));
 }
 

@@ -4,8 +4,8 @@ const MKPprotocol = require('./wrapper/Protocol');
 // const MKTopology = require('./wrapper/Topology');
 
 
-function make_prot(content, name) {
-    let mk = new MKPprotocol(content, name);
+function make_prot(oprot) {
+    let mk = new MKPprotocol(oprot);
     return mk.make_out();
 }
 

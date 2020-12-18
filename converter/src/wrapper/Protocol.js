@@ -4,9 +4,9 @@ const expparser = require('../../../parser/src/expParser');
 const utility = require('../../../helper/utility');
 
 class Protocol {
-    constructor(data, name) {
-        this.data = utility.deep_copy(data);
-        this.name = name;
+    constructor(oprot) {
+        this.data = utility.deep_copy(oprot);
+        this.name = oprot.name;
     }
 
     get id() {
