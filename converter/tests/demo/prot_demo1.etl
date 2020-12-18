@@ -1,0 +1,21 @@
+// 此代码由ETestDev自动生成
+// 请勿修改协议名称
+
+protocol prot_s
+{
+    segment 包头 { parser: 'uint8', autovalue: 0x55AA }
+    segment 数据 { parser: 'uint64', autovalue: 0 }
+    oneof {
+        when(this.数据==0) as prot1:
+            segment seg1 { parser: 'uint8', autovalue: 0x05 }
+        when(this.数据==2) as prot2:
+            segment seg1 { parser: 'uint8', autovalue: 0 }
+            segment seg2 { parser: 'uint8', autovalue: 0 }
+    }
+    segments 分组{
+        segment sub_seg1 { parser: 'uint8', autovalue: 0 }
+        segment sub_seg2 { parser: 'uint8', autovalue: 0 }
+    }
+    segment tail { parser: 'uint8', autovalue: 0 }
+    segment 包尾 { parser: 'uint8', autovalue: CheckCode('SUM_8', this.header, this.tail) }
+}

@@ -1,7 +1,6 @@
 const shortid = require('shortid');
 const helper = require('./helper');
 
-
 function _set_props(obj, props) {
     if (!props) {
         return;
@@ -69,26 +68,28 @@ function _append_segments(items, seg) {
 }
 
 function _append_oneof(items, seg) {
-    let exp = helper.exp2str(seg.exp, true);
-    let seg_oneof;
-    if (items.length > 0 && items[items.length - 1].kind === 'oneof') {
-        seg_oneof = items[items.length - 1];
-    } else {
-        seg_oneof = {
-            id: shortid.generate(),
-            kind: 'oneof',
-            items: [],
-        };
-        items.push(seg_oneof);
-    }
-    let seg_oneof_item = {
+
+    let seg_oneof = {
         id: shortid.generate(),
-        kind: 'oneofitem',
-        condition: exp,
+        kind: 'oneof',
         items: [],
+    };
+    items.push(seg_oneof);
+    
+    let branch_list = seg.branch_list || [];
+    for(const branch of branch_list) {
+        let exp = helper.exp2str(branch.exp, true);
+        let seg_oneof_item = {
+            id: shortid.generate(),
+            kind: 'oneofitem',
+            condition: exp,
+            items: [],
+            name: branch.name,
+        }
+        _append_seglist(seg_oneof_item.items, branch.seglist);
+        seg_oneof.items.push(seg_oneof_item);
     }
-    _append_seglist(seg_oneof_item.items, seg.seglist);
-    seg_oneof.items.push(seg_oneof_item);
+   
 }
 
 function _append_seglist(items, seglist) {
@@ -173,15 +174,16 @@ function _append_code_oneof(codes, level, it, last_kind) {
     if(!it.items || it.items.length === 0) {
         return;
     }
-    if(last_kind === 'oneof') {
-        _append_code(codes, level, `segment ${shortid.generate().replace('-', '_')} { }`);
-        last_kind = 'segment';
-    }
+    // if(last_kind === 'oneof') {
+    //     _append_code(codes, level, `segment ${shortid.generate().replace('-', '_')} { }`);
+    //     last_kind = 'segment';
+    // }
+    _append_code(codes, level, `oneof {`);
     it.items.forEach(it => {
-        _append_code(codes, level, `oneof(${it.condition||''}) {`);
-        _append_code_seglist(codes, level+1, it.items);
-        _append_code(codes, level, '}');
+        _append_code(codes, level+1, `when(${it.condition||''}) as ${it.name}:`);
+        _append_code_seglist(codes, level+2, it.items);
     });
+    _append_code(codes, level, '}');
 }
 
 function _append_code_seglist(codes, level, items) {

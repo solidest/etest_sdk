@@ -19,44 +19,41 @@ bitrl protocol prot_demo {
                   autovalue: CheckCode([0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true], this.seg_begin, this.seg_end)
             }
       }
+      oneof {
+            when(this.seg1 > -100 or true) as sub1:
+                  segment seg4 {
+                        parser: 'int16 ! <',
+                        autovalue: 0
+                  }
+                  segment seg5 {
+                        parser: 'int16 = >',
+                        autovalue: 0
+                  }
 
-      oneof(this.seg1 > -100 or true) {
-            segment seg4 {
-                  parser: 'int16 ! <',
-                  autovalue: 0
-            }
-            segment seg5 {
-                  parser: 'int16 = >',
-                  autovalue: 0
-            }
+            when(this.seg2 == 99) as sub2:
+                  segment seg6 {
+                        parser: 'int16',
+                        autovalue: 'abcdefg'
+                  }
+                  segment seg7 {
+                        parser: 'int16 & <',
+                        autovalue: ['aaa', 'bbb']
+                  }
       }
+      oneof{
+            when (this.a+10*9/this.g<9 and this.b or this.a~=-99) as sub3:
+                  segment seg6 {
+                        parser: 'int16',
+                        autovalue: 0
+                  }
 
-      oneof(this.seg2 == 99) {
-            segment seg6 {
-                  parser: 'int16',
-                  autovalue: 'abcdefg'
-            }
-            segment seg7 {
-                  parser: 'int16 & <',
-                  autovalue: ['aaa', 'bbb']
-            }
+                  segment seg7 {
+                        parser: 'int16 & <',
+                        autovalue: 0,
+                        endswith: '\0',
+                  }
       }
-
       segment _ {}
-
-      oneof(this.a+10*9/this.g<9 and this.b or this.a~=-99) {
-            segment seg6 {
-                  parser: 'int16',
-                  autovalue: 0
-            }
-
-            segment seg7 {
-                  parser: 'int16 & <',
-                  autovalue: 0,
-                  endswith: '\0',
-            }
-      }
-
       segment demo30 {
             parser: {pack: mypack, unpack: myunpack},
             autovalue: '\0',

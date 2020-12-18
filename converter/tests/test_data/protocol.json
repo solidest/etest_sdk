@@ -1,0 +1,160 @@
+{
+    "kind": "protocol",
+    "content": {
+        "items": [{
+            "id": "Ea0_LTFTzF",
+            "kind": "segment",
+            "name": "sega",
+            "parser": "int10",
+            "scale": 0.009,
+            "autovalue": "[1,2,3]"
+        }, {
+            "id": "XYcYIOVJaeq",
+            "kind": "segments",
+            "name": "segs",
+            "items": [{
+                "id": "n9NFHAp7RK",
+                "kind": "segment",
+                "name": "seg1",
+                "arrlen": "this.seg - 10",
+                "parser": "float ! >",
+                "autovalue": "this.seg3 + 10"
+            }, {
+                "id": "i2igpfC9S1",
+                "kind": "segment",
+                "name": "seg2",
+                "parser": "double & <",
+                "autovalue": "CheckCode(SUM_8, this.seg_begin, this.seg_end)"
+            }, {
+                "id": "Ffpig9tau26",
+                "kind": "segment",
+                "name": "seg3",
+                "parser": "int16 & >",
+                "autovalue": "CheckCode([79764919, 4294967295, 4294967295, true, true], this.seg_begin, this.seg_end)"
+            }],
+            "arrlen": "this.sega * 8"
+        }, {
+            "id": "Zl3r4AJGmAs",
+            "kind": "oneof",
+            "items": [{
+                "id": "f-pJqQGY5zx",
+                "kind": "oneofitem",
+                "condition": "(this.seg1 > -100) or true",
+                "items": [{
+                    "id": "HxVYk-VTP6k",
+                    "kind": "segment",
+                    "name": "seg4",
+                    "parser": "int16 ! <",
+                    "autovalue": 0
+                }, {
+                    "id": "lg2XX36pNTq",
+                    "kind": "segment",
+                    "name": "seg5",
+                    "parser": "int16 = >",
+                    "autovalue": 0
+                }],
+                "name": "sub1"
+            }, {
+                "id": "5k8spTdr7eQ",
+                "kind": "oneofitem",
+                "condition": "this.seg2 == 99",
+                "items": [{
+                    "id": "1Q2dlGEys2G",
+                    "kind": "segment",
+                    "name": "seg6",
+                    "parser": "int16",
+                    "autovalue": "'abcdefg'"
+                }, {
+                    "id": "BWzGtJu5B4I",
+                    "kind": "segment",
+                    "name": "seg7",
+                    "parser": "int16 & <",
+                    "autovalue": "[\"aaa\",\"bbb\"]"
+                }],
+                "name": "sub2"
+            }]
+        }, {
+            "id": "Dy_NWIcQu2A",
+            "kind": "oneof",
+            "items": [{
+                "id": "Vc0gOxfUmts",
+                "kind": "oneofitem",
+                "condition": "(((this.a + ((10 * 9) / this.g)) < 9) and this.b) or (this.a ~= -99)",
+                "items": [{
+                    "id": "O3Ii7XQAEEx",
+                    "kind": "segment",
+                    "name": "seg6",
+                    "parser": "int16",
+                    "autovalue": 0
+                }, {
+                    "id": "zqMnIK4Xil2",
+                    "kind": "segment",
+                    "name": "seg7",
+                    "parser": "int16 & <",
+                    "autovalue": 0,
+                    "endswith": "'\\0'"
+                }],
+                "name": "sub3"
+            }]
+        }, {
+            "id": "8Wwt7o2nSEl",
+            "kind": "segment",
+            "name": "_"
+        }, {
+            "id": "yfAamGe-PsI",
+            "kind": "segment",
+            "name": "demo30",
+            "parser": "{ pack: mypack, unpack: myunpack }",
+            "autovalue": "'\\0'"
+        }, {
+            "id": "ZzNLoXgkR_D",
+            "kind": "segment",
+            "name": "demo3",
+            "arrlen": 99,
+            "autovalue": "ByteSize(this.seg) + 20",
+            "endswith": "'\\0'",
+            "length": 99
+        }, {
+            "id": "GaLkkh9Xhmn",
+            "kind": "segment",
+            "name": "demo1",
+            "parser": "int16 ! <",
+            "autovalue": -100,
+            "option": {
+                "max": 10,
+                "min": 20,
+                "select": [1, 2, 3],
+                "reverse": true,
+                "label": "标题",
+                "tag": "sort1"
+            }
+        }, {
+            "id": "uYpJ85RU-8w",
+            "kind": "segment",
+            "name": "demo1",
+            "parser": "int16 ! <",
+            "autovalue": "'aaaa\\0'",
+            "endswith": "'\\0'",
+            "option": {
+                "max": 10,
+                "min": 20,
+                "select": [{
+                    "text": "aa",
+                    "value": 2
+                }, {
+                    "text": "bb",
+                    "value": 3
+                }],
+                "tag": ["sort1", "sort3"],
+                "test": [
+                    ["aa", "bbb"],
+                    [1, true, false, {
+                        "text": "adf"
+                    }]
+                ],
+                "memo": "协议段说明"
+            }
+        }],
+        "bitalign": "rl"
+    }
+}
