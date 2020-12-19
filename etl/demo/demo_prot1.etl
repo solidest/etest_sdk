@@ -59,6 +59,7 @@ bitrl protocol prot_demo {
       }
 
       segment demo3 [99] {
+            parser: 'string>',
             autovalue: ByteSize(this.seg)+20,
             endswith: '\0',
             length: 99,

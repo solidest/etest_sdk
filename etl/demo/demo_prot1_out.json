@@ -217,7 +217,8 @@
                             "kind": "bool",
                             "value": true
                         }
-                    }
+                    },
+                    "alias": "sub1"
                 },
                 {
                     "kind": "oneofitem",
@@ -267,7 +268,8 @@
                             "kind": "number",
                             "value": 99
                         }
-                    }
+                    },
+                    "alias": "sub2"
                 }
             ]
         },
@@ -368,7 +370,8 @@
                                 }
                             }
                         }
-                    }
+                    },
+                    "alias": "sub3"
                 }
             ]
         },
@@ -387,7 +390,8 @@
             }
         },
         {
-            "kind": "nil",
+            "order": "bigorder",
+            "kind": "string",
             "name": "demo3",
             "autovalue": {
                 "kind": "add",
@@ -412,8 +416,14 @@
                 "kind": "number",
                 "value": 99
             },
-            "length": 99,
-            "endswith": "'\\0'"
+            "length": {
+                "kind": "number",
+                "value": 99
+            },
+            "endswith": {
+                "kind": "string",
+                "value": "\u0000"
+            }
         },
         {
             "bitcount": 16,

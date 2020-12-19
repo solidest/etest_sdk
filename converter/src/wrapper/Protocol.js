@@ -110,7 +110,7 @@ class Protocol {
         let brs = [];
         oneof.items.forEach(br => {
             let segs = this.get_run_segments(br);
-            brs.push({kind: 'oneofitem', seglist: segs.seglist, exp: br.condition});
+            brs.push({kind: 'oneofitem', seglist: segs.seglist, exp: br.condition, alias: br.name});
         });
         return {
             kind: 'oneof',
