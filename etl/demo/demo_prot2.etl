@@ -1,0 +1,34 @@
+bitrl protocol prot_demo2 {
+      segment sega {
+            parser: 'int10',
+            scale: 0.009,
+            autovalue: [1, 2, 3]
+      }
+      segments segs [8]{
+            segment seg1 [10] {
+                  parser: 'float ! >',
+                  autovalue: this.seg3+10
+            }
+      }
+      oneof {
+            when(this.seg1 > -100 or true) as sub1:
+                  segment seg4 {
+                        parser: 'int16 ! <',
+                        autovalue: 0
+                  }
+                  segment seg5 {
+                        parser: 'int16 = >',
+                        autovalue: 0
+                  }
+
+            when(this.seg2 == 99) as sub2:
+                  segment seg6 {
+                        parser: 'int32',
+                        autovalue: 'abcdefg'
+                  }
+                  segment seg7 {
+                        parser: 'int32 & <',
+                        autovalue: ['aaa', 'bbb']
+                  }
+      }
+}
