@@ -105,14 +105,17 @@ class Protocol {
 
     get_run_oneof(oneof) {
         if (!oneof.items) {
-            return [];
+            return {kind: 'nil'};
         }
         let brs = [];
         oneof.items.forEach(br => {
             let segs = this.get_run_segments(br);
-            brs.push({kind: 'oneof', seglist: segs.seglist, exp: br.condition});
+            brs.push({kind: 'oneofitem', seglist: segs.seglist, exp: br.condition});
         });
-        return brs;
+        return {
+            kind: 'oneof',
+            seglist: brs,
+        };
     }
 
     get_run_segment(seg) {
@@ -163,12 +166,7 @@ class Protocol {
         } else if(seg.kind === 'segments') {
             seglist.push(this.get_run_segments(seg));
         } else if(seg.kind === 'oneof') {
-            if(seglist.length>0 && seglist[seglist.length-1].kind === 'oneof') {
-                seglist.push({kind: 'nil'})
-            }
-            let oneofs = this.get_run_oneof(seg);
-            if(oneofs.length > 0)
-            seglist.push(...oneofs);
+            seglist.push(this.get_run_oneof(seg));
         }
     }
 

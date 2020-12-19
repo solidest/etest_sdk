@@ -167,143 +167,192 @@
             "kind": "oneof",
             "seglist": [
                 {
-                    "bitcount": 16,
-                    "signed": true,
-                    "encode": "inversion",
-                    "order": "smallorder",
-                    "kind": "integer",
-                    "name": "seg4",
-                    "autovalue": {
-                        "kind": "number",
-                        "value": 0
-                    }
-                },
-                {
-                    "bitcount": 16,
-                    "signed": true,
-                    "encode": "primitive",
-                    "order": "bigorder",
-                    "kind": "integer",
-                    "name": "seg5",
-                    "autovalue": {
-                        "kind": "number",
-                        "value": 0
-                    }
-                }
-            ],
-            "exp": {
-                "kind": "or",
-                "left": {
-                    "kind": "gt",
-                    "left": {
-                        "kind": "pid",
-                        "list": [
-                            "this",
-                            "seg1"
-                        ]
-                    },
-                    "right": {
-                        "kind": "uminus",
-                        "exp": {
-                            "kind": "number",
-                            "value": 100
+                    "kind": "oneofitem",
+                    "seglist": [
+                        {
+                            "bitcount": 16,
+                            "signed": true,
+                            "encode": "inversion",
+                            "order": "smallorder",
+                            "kind": "integer",
+                            "name": "seg4",
+                            "autovalue": {
+                                "kind": "number",
+                                "value": 0
+                            }
+                        },
+                        {
+                            "bitcount": 16,
+                            "signed": true,
+                            "encode": "primitive",
+                            "order": "bigorder",
+                            "kind": "integer",
+                            "name": "seg5",
+                            "autovalue": {
+                                "kind": "number",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "exp": {
+                        "kind": "or",
+                        "left": {
+                            "kind": "gt",
+                            "left": {
+                                "kind": "pid",
+                                "list": [
+                                    "this",
+                                    "seg1"
+                                ]
+                            },
+                            "right": {
+                                "kind": "uminus",
+                                "exp": {
+                                    "kind": "number",
+                                    "value": 100
+                                }
+                            }
+                        },
+                        "right": {
+                            "kind": "bool",
+                            "value": true
                         }
                     }
                 },
-                "right": {
-                    "kind": "bool",
-                    "value": true
-                }
-            }
-        },
-        {
-            "kind": "oneof",
-            "seglist": [
                 {
-                    "bitcount": 16,
-                    "signed": true,
-                    "kind": "integer",
-                    "name": "seg6",
-                    "autovalue": {
-                        "kind": "string",
-                        "value": "abcdefg"
-                    }
-                },
-                {
-                    "bitcount": 16,
-                    "signed": true,
-                    "encode": "complement",
-                    "order": "smallorder",
-                    "kind": "integer",
-                    "name": "seg7",
-                    "autovalue": {
-                        "kind": "array",
-                        "list": [
-                            {
+                    "kind": "oneofitem",
+                    "seglist": [
+                        {
+                            "bitcount": 16,
+                            "signed": true,
+                            "kind": "integer",
+                            "name": "seg6",
+                            "autovalue": {
                                 "kind": "string",
-                                "value": "aaa"
-                            },
-                            {
-                                "kind": "string",
-                                "value": "bbb"
+                                "value": "abcdefg"
                             }
-                        ]
+                        },
+                        {
+                            "bitcount": 16,
+                            "signed": true,
+                            "encode": "complement",
+                            "order": "smallorder",
+                            "kind": "integer",
+                            "name": "seg7",
+                            "autovalue": {
+                                "kind": "array",
+                                "list": [
+                                    {
+                                        "kind": "string",
+                                        "value": "aaa"
+                                    },
+                                    {
+                                        "kind": "string",
+                                        "value": "bbb"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "exp": {
+                        "kind": "eq_eq",
+                        "left": {
+                            "kind": "pid",
+                            "list": [
+                                "this",
+                                "seg2"
+                            ]
+                        },
+                        "right": {
+                            "kind": "number",
+                            "value": 99
+                        }
                     }
                 }
-            ],
-            "exp": {
-                "kind": "eq_eq",
-                "left": {
-                    "kind": "pid",
-                    "list": [
-                        "this",
-                        "seg2"
-                    ]
-                },
-                "right": {
-                    "kind": "number",
-                    "value": 99
-                }
-            }
-        },
-        {
-            "kind": "nil"
+            ]
         },
         {
             "kind": "oneof",
             "seglist": [
                 {
-                    "bitcount": 16,
-                    "signed": true,
-                    "kind": "integer",
-                    "name": "seg6",
-                    "autovalue": {
-                        "kind": "number",
-                        "value": 0
-                    }
-                },
-                {
-                    "bitcount": 16,
-                    "signed": true,
-                    "encode": "complement",
-                    "order": "smallorder",
-                    "kind": "integer",
-                    "name": "seg7",
-                    "autovalue": {
-                        "kind": "number",
-                        "value": 0
-                    },
-                    "endswith": "'\\0'"
-                }
-            ],
-            "exp": {
-                "kind": "or",
-                "left": {
-                    "kind": "and",
-                    "left": {
-                        "kind": "lt",
+                    "kind": "oneofitem",
+                    "seglist": [
+                        {
+                            "bitcount": 16,
+                            "signed": true,
+                            "kind": "integer",
+                            "name": "seg6",
+                            "autovalue": {
+                                "kind": "number",
+                                "value": 0
+                            }
+                        },
+                        {
+                            "bitcount": 16,
+                            "signed": true,
+                            "encode": "complement",
+                            "order": "smallorder",
+                            "kind": "integer",
+                            "name": "seg7",
+                            "autovalue": {
+                                "kind": "number",
+                                "value": 0
+                            },
+                            "endswith": "'\\0'"
+                        }
+                    ],
+                    "exp": {
+                        "kind": "or",
                         "left": {
-                            "kind": "add",
+                            "kind": "and",
+                            "left": {
+                                "kind": "lt",
+                                "left": {
+                                    "kind": "add",
+                                    "left": {
+                                        "kind": "pid",
+                                        "list": [
+                                            "this",
+                                            "a"
+                                        ]
+                                    },
+                                    "right": {
+                                        "kind": "divide",
+                                        "left": {
+                                            "kind": "multiply",
+                                            "left": {
+                                                "kind": "number",
+                                                "value": 10
+                                            },
+                                            "right": {
+                                                "kind": "number",
+                                                "value": 9
+                                            }
+                                        },
+                                        "right": {
+                                            "kind": "pid",
+                                            "list": [
+                                                "this",
+                                                "g"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "right": {
+                                    "kind": "number",
+                                    "value": 9
+                                }
+                            },
+                            "right": {
+                                "kind": "pid",
+                                "list": [
+                                    "this",
+                                    "b"
+                                ]
+                            }
+                        },
+                        "right": {
+                            "kind": "not_eq",
                             "left": {
                                 "kind": "pid",
                                 "list": [
@@ -312,58 +361,16 @@
                                 ]
                             },
                             "right": {
-                                "kind": "divide",
-                                "left": {
-                                    "kind": "multiply",
-                                    "left": {
-                                        "kind": "number",
-                                        "value": 10
-                                    },
-                                    "right": {
-                                        "kind": "number",
-                                        "value": 9
-                                    }
-                                },
-                                "right": {
-                                    "kind": "pid",
-                                    "list": [
-                                        "this",
-                                        "g"
-                                    ]
+                                "kind": "uminus",
+                                "exp": {
+                                    "kind": "number",
+                                    "value": 99
                                 }
                             }
-                        },
-                        "right": {
-                            "kind": "number",
-                            "value": 9
-                        }
-                    },
-                    "right": {
-                        "kind": "pid",
-                        "list": [
-                            "this",
-                            "b"
-                        ]
-                    }
-                },
-                "right": {
-                    "kind": "not_eq",
-                    "left": {
-                        "kind": "pid",
-                        "list": [
-                            "this",
-                            "a"
-                        ]
-                    },
-                    "right": {
-                        "kind": "uminus",
-                        "exp": {
-                            "kind": "number",
-                            "value": 99
                         }
                     }
                 }
-            }
+            ]
         },
         {
             "kind": "nil",
