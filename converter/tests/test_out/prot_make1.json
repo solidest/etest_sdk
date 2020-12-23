@@ -1,1 +1,144 @@
-{"kind":"protocol","name":"prot_s","seglist":[{"bitcount":8,"signed":false,"kind":"integer","name":"包头","autovalue":{"kind":"number","value":21930}},{"bitcount":64,"signed":false,"kind":"integer","name":"数据","autovalue":{"kind":"number","value":0}},{"kind":"oneof","seglist":[{"kind":"oneofitem","seglist":[{"bitcount":8,"signed":false,"kind":"integer","name":"seg1","autovalue":{"kind":"number","value":5}}],"exp":{"kind":"eq_eq","left":{"kind":"pid","list":["this","数据"]},"right":{"kind":"number","value":0}},"alias":"prot1"},{"kind":"oneofitem","seglist":[{"bitcount":8,"signed":false,"kind":"integer","name":"seg1","autovalue":{"kind":"number","value":0}},{"bitcount":8,"signed":false,"kind":"integer","name":"seg2","autovalue":{"kind":"number","value":0}}],"exp":{"kind":"eq_eq","left":{"kind":"pid","list":["this","数据"]},"right":{"kind":"number","value":2}},"alias":"prot2"}]},{"kind":"seggroup","name":"分组","seglist":[{"bitcount":8,"signed":false,"kind":"integer","name":"sub_seg1","autovalue":{"kind":"number","value":0}},{"bitcount":8,"signed":false,"kind":"integer","name":"sub_seg2","autovalue":{"kind":"number","value":0}}]},{"bitcount":8,"signed":false,"kind":"integer","name":"tail","autovalue":{"kind":"number","value":0}},{"bitcount":8,"signed":false,"kind":"integer","name":"包尾","autovalue":{"kind":"CheckCode","params":[{"kind":"pid","list":["SUM_8"]},{"kind":"pid","list":["this","header"]},{"kind":"pid","list":["this","tail"]}]}}],"bittype":"lr"}
+{
+    "kind": "protocol",
+    "name": "prot_s",
+    "seglist": [{
+        "bitcount": 8,
+        "signed": false,
+        "kind": "integer",
+        "name": "包头",
+        "autovalue": {
+            "kind": "number",
+            "value": 21930
+        }
+    }, {
+        "bitcount": 64,
+        "signed": false,
+        "kind": "integer",
+        "name": "数据",
+        "autovalue": {
+            "kind": "number",
+            "value": 0
+        }
+    }, {
+        "kind": "oneof",
+        "seglist": [{
+            "kind": "oneofitem",
+            "seglist": [{
+                "bitcount": 8,
+                "signed": false,
+                "kind": "integer",
+                "name": "seg1",
+                "autovalue": {
+                    "kind": "number",
+                    "value": 5
+                }
+            }],
+            "exp": {
+                "kind": "eq_eq",
+                "left": {
+                    "kind": "pid",
+                    "list": ["this", "数据"]
+                },
+                "right": {
+                    "kind": "number",
+                    "value": 0
+                }
+            },
+            "alias": "prot1"
+        }, {
+            "kind": "oneofitem",
+            "seglist": [{
+                "bitcount": 8,
+                "signed": false,
+                "kind": "integer",
+                "name": "seg1",
+                "autovalue": {
+                    "kind": "number",
+                    "value": 0
+                }
+            }, {
+                "bitcount": 8,
+                "signed": false,
+                "kind": "integer",
+                "name": "seg2",
+                "autovalue": {
+                    "kind": "number",
+                    "value": 0
+                }
+            }],
+            "exp": {
+                "kind": "eq_eq",
+                "left": {
+                    "kind": "pid",
+                    "list": ["this", "数据"]
+                },
+                "right": {
+                    "kind": "number",
+                    "value": 2
+                }
+            },
+            "alias": "prot2"
+        }]
+    }, {
+        "kind": "seggroup",
+        "name": "分组",
+        "seglist": [{
+            "bitcount": 8,
+            "signed": false,
+            "kind": "integer",
+            "name": "sub_seg1",
+            "autovalue": {
+                "kind": "number",
+                "value": 0
+            }
+        }, {
+            "bitcount": 8,
+            "signed": false,
+            "kind": "integer",
+            "name": "sub_seg2",
+            "autovalue": {
+                "kind": "number",
+                "value": 0
+            }
+        }, {
+            "kind": "string",
+            "name": "sub_seg3",
+            "autovalue": {
+                "kind": "number",
+                "value": 0
+            },
+            "endswith": {
+                "kind": "string",
+                "value": "\u0000"
+            }
+        }]
+    }, {
+        "bitcount": 8,
+        "signed": false,
+        "kind": "integer",
+        "name": "tail",
+        "autovalue": {
+            "kind": "number",
+            "value": 0
+        }
+    }, {
+        "bitcount": 8,
+        "signed": false,
+        "kind": "integer",
+        "name": "包尾",
+        "autovalue": {
+            "kind": "CheckCode",
+            "params": [{
+                "kind": "pid",
+                "list": ["SUM_8"]
+            }, {
+                "kind": "pid",
+                "list": ["this", "header"]
+            }, {
+                "kind": "pid",
+                "list": ["this", "tail"]
+            }]
+        }
+    }],
+    "bittype": "lr"
+}

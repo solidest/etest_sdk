@@ -53,7 +53,6 @@ function makeprot(file_etl, out_path, display)
                     continue;
                 }
                 let oprot = sdk.converter.protocol_etl2dev(ast);
-                fs.writeFileSync('err.json', JSON.stringify(oprot));
                 let outo = sdk.converter.makeout_protocol(oprot);
                 res.push(outo);
             }
