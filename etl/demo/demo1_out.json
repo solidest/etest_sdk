@@ -1,19 +1,114 @@
-{
-    "kind": "protocol",
-    "name": "prot1",
-    "seglist": [
-        {
-            "bitcount": 8,
-            "signed": false,
-            "encode": "primitive",
-            "order": "bigorder",
-            "kind": "integer",
-            "name": "seg1",
-            "autovalue": {
-                "kind": "number",
-                "value": 10
+[
+    {
+        "kind": "protocol",
+        "name": "prot1",
+        "seglist": [
+            {
+                "bitcount": 8,
+                "signed": false,
+                "encode": "primitive",
+                "order": "bigorder",
+                "kind": "integer",
+                "name": "seg1",
+                "autovalue": {
+                    "kind": "number",
+                    "value": 10
+                }
             }
-        }
-    ],
-    "bittype": "lr"
-}
+        ],
+        "bittype": "lr"
+    },
+    {
+        "kind": "protocol",
+        "name": "prot2",
+        "seglist": [
+            {
+                "bitcount": 8,
+                "signed": false,
+                "kind": "integer",
+                "name": "seg1",
+                "autovalue": {
+                    "kind": "number",
+                    "value": 0
+                }
+            },
+            {
+                "kind": "oneof",
+                "seglist": [
+                    {
+                        "kind": "oneofitem",
+                        "seglist": [
+                            {
+                                "bitcount": 8,
+                                "signed": true,
+                                "kind": "integer",
+                                "name": "o1"
+                            },
+                            {
+                                "bitcount": 8,
+                                "signed": true,
+                                "kind": "integer",
+                                "name": "o2"
+                            }
+                        ],
+                        "exp": {
+                            "kind": "and",
+                            "left": {
+                                "kind": "gt",
+                                "left": {
+                                    "kind": "pid",
+                                    "list": [
+                                        "this",
+                                        "seg1"
+                                    ]
+                                },
+                                "right": {
+                                    "kind": "number",
+                                    "value": 0
+                                }
+                            },
+                            "right": {
+                                "kind": "eq_eq",
+                                "left": {
+                                    "kind": "pid",
+                                    "list": [
+                                        "this",
+                                        "seg1"
+                                    ]
+                                },
+                                "right": {
+                                    "kind": "number",
+                                    "value": 8
+                                }
+                            }
+                        },
+                        "alias": "sub1"
+                    },
+                    {
+                        "kind": "oneofitem",
+                        "seglist": [
+                            {
+                                "bitcount": 8,
+                                "signed": true,
+                                "kind": "integer",
+                                "name": "o1"
+                            },
+                            {
+                                "bitcount": 8,
+                                "signed": true,
+                                "kind": "integer",
+                                "name": "o2"
+                            }
+                        ],
+                        "exp": {
+                            "kind": "bool",
+                            "value": true
+                        },
+                        "alias": "sub2"
+                    }
+                ]
+            }
+        ],
+        "bittype": "lr"
+    }
+]

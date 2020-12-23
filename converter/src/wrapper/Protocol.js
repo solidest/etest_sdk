@@ -87,12 +87,15 @@ class Protocol {
         if (!oneof.items) {
             return;
         }
-        oneof.items.forEach(br => {
+        for(let br of oneof.items) {
+            if (typeof br.condition !== 'string') {
+                br.condition = JSON.stringify(br.condition);
+            }
             br.condition = expparser.parse(br.condition);
             if (br.items) {
                 br.items.forEach(seg => this['make_' + seg.kind](seg));
-            }
-        });
+            }            
+        }
     }
 
     make() {

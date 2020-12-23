@@ -23,12 +23,12 @@ program
     });
 
 program
-    .command('make <file_etl>')
-    .description('生成运行时ETL文件')
+    .command('makeprot <file_etl>')
+    .description('生成运行时协议文件')
     .option('-o --out <path>', '指定输出文件存放位置')
     .option('-d --display', '生成完成后在控制台显示结果')
     .action(function (file_etl, opt) {
-        maker.parse(file_etl, opt.out, opt.display);
+        maker.makeprot(file_etl, opt.out, opt.display);
     });
     
 program

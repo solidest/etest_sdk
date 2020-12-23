@@ -11,45 +11,72 @@ const finfo = chalk.blueBright;
 const fcode = chalk.cyanBright;
 const fign = chalk.blackBright;
 
-function parse(file_etl, out_path, display)
-{
-    if (!fs.existsSync(file_etl)) {
-        console.log(ferr('文件"%s"不存在'), file_etl);
+function _get_etl_files(pf, results) {
+    if (!fs.existsSync(pf)) {
         return;
     }
-    try {
-        let txt = fs.readFileSync(file_etl, 'utf8');
-        let ast = sdk.parser.parse_etl(txt);
-        let outo = null;
-        switch(ast[0].kind) {
-            case 'protocol': {
-                let oprot = sdk.converter.protocol_etl2dev(ast[0]);
-                outo = sdk.converter.makeout_protocol(oprot);
-            }
-            break;
-            case 'topology': {
 
+    let st = fs.statSync(pf);
+    if (st.isFile()) {
+        if (path.extname(pf) !== '.etl') {
+            return;
+        }
+        results.push(pf);
+        return;
+    }
+
+    if (st.isDirectory()) {
+        let dir = fs.readdirSync(pf);
+        for (let p of dir) {
+            _get_etl_files(path.join(pf, p), results);
+        }
+    }
+}
+
+
+function makeprot(file_etl, out_path, display)
+{
+    let etls = [];
+    _get_etl_files(file_etl, etls);
+    if (etls.length === 0) {
+        console.log(ferr('"%s"中未找到ETL文件'), file_etl);
+        return;
+    }
+
+    let res = [];
+    try {
+        for(let f of etls) {
+            let txt = fs.readFileSync(f, 'utf8');
+            let asts = sdk.parser.parse_etl(txt);
+            for(let ast of asts) {
+                if(ast.kind !== 'protocol') {
+                    continue;
+                }
+                let oprot = sdk.converter.protocol_etl2dev(ast);
+                fs.writeFileSync('err.json', JSON.stringify(oprot));
+                let outo = sdk.converter.makeout_protocol(oprot);
+                res.push(outo);
             }
-            break;
         }
-        if(!outo) {
-            throw new Error('生成失败');
+        if(res.length === 0) {
+            throw new Error('生成失败，没有解析到ETL协议代码');
         }
+        
         let outf = path.join(out_path || path.dirname(file_etl), path.basename(file_etl, '.etl') + '_out.json');
-        let str = JSON.stringify(outo, null, 4)
+        let str = JSON.stringify(res, null, 4)
         fs.writeFileSync(outf, str);
-        console.log(fok('生成成功，结果输出至：%s'), path.resolve(outf));
+        console.log(fok('生成%s项协议，结果输出至：%s'), res.length, path.resolve(outf));
         if(display) {
             console.log(fcode(str));
-        }
+        }        
     } catch (error) {
         console.log(ferr(error.message));
     }
 }
 
-
 module.exports = {
-    parse
+    makeprot,
+
 };
 
 
